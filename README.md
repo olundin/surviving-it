@@ -4,23 +4,30 @@
 
 ### 1. Introduktion till projektet
 Vi ska utveckla ett spel som handlar om överlevnad. Spelet ska vara i 2D, tile-baserat, och ritas “top-down”, ovanifrån spelaren.
+
 Spelaren rör sig runt i en värld med piltangenterna och interagerar med sin omgivning på olika sätt. Målet med spelet är att utforska och överleva. Det sistnämnda görs genom att hitta mat att äta och vapen att döda fiender med. Spelaren har från början endast hp som går ner när spelaren tar skada, sedan läggs till hunger som går ner konstant och som går upp när spelaren äter. När hunger går ner till noll så börjar man ta hp skada. Sedan läggs även till värme som går ner långsamt och som man tar skada av när den når noll, värmen går upp när man sitter nära en lägereld.
+
 Grunden blir att implementera spelar rörelse, kollisionshantering och en enklare värld för spelaren att rör sig i. I mån av tid lägger vi till fiender, föremål, ett stridssystem med mera.
+
 Det ska finnas både fiender som försöker döda spelaren och passiva djur som inte attackerar spelaren. Exempel på fiender som spelaren kan möta på är en björn eller en varg och exempel på passiva djur är en älg. De dödade djuren ska ge spelaren mat.
+
 Exempel på vapen är svärd, pilbåge och pinne.
+
 Om vi får tid vill vi även implementera slumpmässig terrain generation med Perlin Noise algoritm.
 
 ### 2. Ytterligare bakgrundsinformation
 Som sagt är spelet top-down och tile-baserat. Detta innebär att allting ritas ovanifrån. Att det är tile-baserat innebär att spelvärlden är uppbyggd av mindre fyrkantiga brickor. Fördelen med detta är att man kan återanvända samma bilder flera gånger.
+
 Ett exempel på ett sådant spel är The Legend of Zelda: A Link to the Past.
 Se bild:
 
 ![Zelda top down example](http://application.denofgeek.com/pics/games/zeldastyle/03.jpg)
 
 Mer info om Perlin noise algoritmen som vi vill använda för slumpmässig terrain generation finns här: https://www.redblobgames.com/maps/terrain-from-noise/
-Vi har också tänkt använda A* search algoritm för hur djuren ska kunna hitta runt i världen, mer info om det finns här: https://www.redblobgames.com/pathfinding/a-star/introduction.html
-Vi har också tänkt modella djuren som simpla finite statemachines, mer info om det finns här: https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
 
+Vi har också tänkt använda A* search algoritm för hur djuren ska kunna hitta runt i världen, mer info om det finns här: https://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+Vi har också tänkt modella djuren som simpla finite statemachines, mer info om det finns här: https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
 
 ### 3. Milstolpar
 
@@ -49,12 +56,18 @@ Vi har också tänkt modella djuren som simpla finite statemachines, mer info om
 
 ### 4. Övriga implementationsförberedelser
 Vi tänker ha en spelklass, som innehåller spelloopen. Denna har fält för allting som hör till spelet och uppdaterar dessa. Spelklassen har en fönsterklass, som hanterar fönstret där allting syns.
+
 Allting ritas med hjälp av en ritarklass, som har färdiga funktioner för att rita bilder, text o.s.v. Denna samarbetar med fönsterklassen, förslagsvis genom att allting ritas till fönstret via ritarklassen. För att rita saker skickas ritarklassen till ritafunktionen hos allt som ska ritas.
+
 Spelklassen har också en scenklass som innehåller det som ska synas på skärmen. En scen innehåller en array av Tiles, som motsvarar banan, samt en lista av spelobjekt. Ett spelobjekt är en så kallad aktör i spelet. Det kan vara ett djur, en blomma eller spelaren - allting som kräver mer avancerad funktionalitet och interagerar med saker lite mer än bara genom kollisioner.
+
 För kommunikation mellan olika spelobjekt använder vi oss av ett slags meddelandesystem. Alla spelobjekt har en funktion för att ta emot ett meddelande. Ett meddelande är en klass som har en typ och data. Funktionen receive kan sedan hantera meddelandet som skickas på lämpligt sätt.
 
 ### 5. Utveckling och samarbete
 Vi tänker använda oss av Git för versionshantering. För att ha koll på vad som behöver göras använder vi Trello.
+
 I början av projektet tänker vi göra allting tillsammans, för att båda ska få en förståelse för hur allting fungerar. När vi sedan kommer till mer specifika saker kan vi börja dela upp arbetet.
+
 Vi träffas på alla schemalagda tider för att arbeta tillsammans och uppdatera varandra. Annars jobbar vi lite som vi vill. Vi bestämmer vissa tider som vi kör “hackathons” då vi träffas utanför schemalagd tid.
+
 Vi siktar på betyg 5.
