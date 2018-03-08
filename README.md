@@ -15,6 +15,8 @@ Som sagt är spelet top-down och tile-baserat. Detta innebär att allting ritas 
 Ett exempel på ett sådant spel är The Legend of Zelda: A Link to the Past.
 Se bild:
 
+![Zelda top down example](http://application.denofgeek.com/pics/games/zeldastyle/03.jpg)
+
 Mer info om Perlin noise algoritmen som vi vill använda för slumpmässig terrain generation finns här: https://www.redblobgames.com/maps/terrain-from-noise/
 Vi har också tänkt använda A* search algoritm för hur djuren ska kunna hitta runt i världen, mer info om det finns här: https://www.redblobgames.com/pathfinding/a-star/introduction.html
 Vi har också tänkt modella djuren som simpla finite statemachines, mer info om det finns här: https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
