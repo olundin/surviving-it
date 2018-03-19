@@ -5,6 +5,11 @@ public abstract class GameObject {
     private float x;
     private float y;
 
+    public GameObject() {
+        this.x = 0;
+        this.y = 0;
+    }
+
     public GameObject(final float x, final float y) {
 	this.x = x;
 	this.y = y;
