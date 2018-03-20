@@ -1,9 +1,7 @@
 package survivingit;
 
-import survivingit.gameobjects.Player;
 import survivingit.graphics.Camera;
 import survivingit.graphics.Renderer;
-import survivingit.graphics.Sprite;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.scene.Scene;
