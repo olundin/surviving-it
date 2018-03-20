@@ -8,6 +8,7 @@ import java.util.List;
 public abstract class Scene {
 
     private List<GameObject> gameObjects;
+    //private Tile[][] tiles;
 
     public Scene() {
         this.gameObjects = new ArrayList<>();

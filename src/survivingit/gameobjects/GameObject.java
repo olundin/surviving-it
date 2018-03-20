@@ -2,24 +2,24 @@ package survivingit.gameobjects;
 
 public abstract class GameObject {
 
-    private float x;
-    private float y;
+    private double x;
+    private double y;
 
     public GameObject() {
         this.x = 0;
         this.y = 0;
     }
 
-    public GameObject(final float x, final float y) {
+    public GameObject(final double x, final double y) {
 	this.x = x;
 	this.y = y;
     }
 
-    public float getX() {
+    public double getX() {
 	return x;
     }
 
-    public float getY() {
+    public double getY() {
 	return y;
     }
 

@@ -5,21 +5,21 @@ import survivingit.scene.Scene;
 
 public class Camera {
 
-    private float x;
-    private float y;
-    private float width;
-    private float height;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
 
     private GameObject target;
 
     public Camera() {
-        this.x = 0.0f;
-        this.y = 0.0f;
-        this.width = 10.0f;
-        this.height = 5.0f;
+        this.x = 0;
+        this.y = 0;
+        this.width = 10;
+        this.height = 5;
     }
 
-    public Camera(final float x, final float y, final float width, final float height) {
+    public Camera(final double x, final double y, final double width, final double height) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
@@ -30,7 +30,7 @@ public class Camera {
         this.target = target;
     }
 
-    public void moveTo(float x, float y) {
+    public void moveTo(double x, double y) {
         this.x = x;
         this.y = y;
     }

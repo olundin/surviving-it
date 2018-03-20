@@ -6,7 +6,7 @@ public abstract class GameVisibleObject extends GameObject implements Drawable {
 
     private Sprite sprite;
 
-    public GameVisibleObject(final float x, final float y, final Sprite sprite) {
+    public GameVisibleObject(final double x, final double y, final Sprite sprite) {
 	super(x, y);
 	this.sprite = sprite;
     }
