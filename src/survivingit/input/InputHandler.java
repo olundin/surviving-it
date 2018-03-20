@@ -1,5 +1,12 @@
 package survivingit.input;
 
-public class InputHandler
-{
+import survivingit.gameobjects.Player;
+
+public class InputHandler {
+
+    private Player playe;
+
+    public InputHandler(final Player playe) {
+	this.playe = playe;
+    }
 }
