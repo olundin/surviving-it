@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 public class Sprite {
 
     public static final Sprite FOX = new Sprite(0, 0,46,57, SpriteSheet.FOXES);
+    public static final Sprite MEME_MAN = new Sprite(0,0, 17, 23, SpriteSheet.MEME_MAN);
 
     private int x;
     private int y;

@@ -2,7 +2,7 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
 
-public abstract class GameVisibleObject extends GameObject implements Drawable {
+public abstract class GameVisibleObject extends GameObject {
 
     private Sprite sprite;
 

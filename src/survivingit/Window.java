@@ -20,6 +20,7 @@ public class Window extends Frame {
         this.setSize(width, height);
         this.setResizable(false);
         this.setVisible(true);
+        this.requestFocus();
 
 	this.addWindowListener(new WindowAdapter(){
 	    public void windowClosing(WindowEvent we){

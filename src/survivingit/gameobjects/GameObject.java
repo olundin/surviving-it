@@ -1,6 +1,6 @@
 package survivingit.gameobjects;
 
-public abstract class GameObject {
+public abstract class GameObject implements Updateable {
 
     private double x;
     private double y;
@@ -30,4 +30,5 @@ public abstract class GameObject {
     public void setY(final float y) {
 	this.y = y;
     }
+
 }

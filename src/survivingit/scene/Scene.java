@@ -23,4 +23,17 @@ public abstract class Scene {
             gameObject.update();
 	}
     }
+
+    public List<GameObject> getObjectsInArea(double startX, double startY, double width, double height) {
+        List<GameObject> inArea = new ArrayList<>();
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.getX() >= startX &&
+                gameObject.getY() >= startY &&
+                gameObject.getX() <= startX + width &&
+                gameObject.getY() <= startY + height) {
+                inArea.add(gameObject);
+            }
+        }
+        return inArea;
+    }
 }

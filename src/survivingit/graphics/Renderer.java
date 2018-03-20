@@ -1,9 +1,13 @@
 package survivingit.graphics;
 
+import survivingit.gameobjects.GameVisibleObject;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
+
+    public static final int STANDARD_TILE_SIZE = 64; // Tile size in pixels when 1:1 scale (represents one unit in game)
 
     private int width;
     private int height;
@@ -31,9 +35,7 @@ public class Renderer extends Canvas {
     public void clear() {
 	graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, width, height);
-
 	drawSprite(100, 100, Sprite.FOX);
-
     }
 
     public void display() {
@@ -53,5 +55,22 @@ public class Renderer extends Canvas {
 			   sprite.getX() + sprite.getWidth(),
 			   sprite.getY() + sprite.getHeight(),
 			   null);
+    }
+
+    public void drawVisibleObject(GameVisibleObject gameObject, double tileX, double tileY, double scale) {
+	double currentTileSize = scale * STANDARD_TILE_SIZE;
+        Sprite sprite = gameObject.getSprite();
+        int startX = (int) (tileX * currentTileSize);
+        int startY = (int) (tileY * currentTileSize);
+        graphics.drawImage(sprite.getImage(),
+        			   startX,
+        			   startY,
+        			   startX + (int) (sprite.getWidth() * scale),
+        			   startY + (int) (sprite.getHeight() * scale),
+        			   sprite.getX(),
+        			   sprite.getY(),
+        			   sprite.getX() + sprite.getWidth(),
+        			   sprite.getY() + sprite.getHeight(),
+        			   null);
     }
 }
