@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
-public interface Updatable {
+public interface Updateable
+{
 
     public void update();
 

@@ -6,7 +6,7 @@ public class InputHandler {
 
     private Player playe;
 
-    public InputHandler(final Player playe) {
-	this.playe = playe;
+    public InputHandler() {
+
     }
 }

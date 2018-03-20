@@ -4,6 +4,7 @@ import survivingit.gameobjects.Player;
 import survivingit.graphics.Renderer;
 import survivingit.graphics.Sprite;
 import survivingit.input.InputHandler;
+import survivingit.scene.Scene;
 
 public class Game {
 
@@ -14,7 +15,8 @@ public class Game {
     private Renderer renderer;
     private Window window;
     private InputHandler inputHandler;
-    private Player player;
+
+    private Scene currentScene;
 
     private static final int UPDATE_LIMIT = 60; // Max updates per second
 
@@ -24,10 +26,11 @@ public class Game {
     private Game() {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
-        this.player = new Player(0, 0, Sprite.FOX, 10, 1);
-        this.inputHandler = new InputHandler(this.player);
+        this.inputHandler = new InputHandler();
     	window.add(renderer);
 	renderer.createBufferStrategy(3);
+
+	this.currentScene = new Scene();
     }
 
     private void start() {
@@ -37,6 +40,8 @@ public class Game {
             update();
             render();
 	}
+
+	currentScene.add(new Player(0, 0, Sprite.FOX, 100, 1.0f));
     }
 
     private void stop() {
@@ -44,7 +49,6 @@ public class Game {
     }
 
     private void update() {
-        inputHandler.update();
     }
 
     private void render() {
