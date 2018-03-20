@@ -17,6 +17,8 @@ public class Camera {
     private double centerX;
     private double centerY;
 
+    private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
+
     private GameObject target;
 
     public Camera(final double scale, final double centerX, final double centerY) {
@@ -29,7 +31,7 @@ public class Camera {
         this.target = target;
     }
 
-    public void moveTo(double centerX, double centerY) {
+    public void setPosition(double centerX, double centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
     }
@@ -37,10 +39,11 @@ public class Camera {
     public void render(Renderer renderer, Scene scene) {
         double currentWidth = calcWidth();
         double currentHeight = calcHeight();
-        List<GameObject> objectsInArea = scene.getObjectsInArea(this.centerX - currentWidth/2,
-                                                                this.centerY - currentHeight/2,
-                                                                this.centerX + currentWidth/2,
-                                                                this.centerY + currentHeight/2);
+        List<GameObject> objectsInArea = scene.getObjectsInArea(this.centerX - currentWidth/2 - EDGE_PADDING,
+                                                                this.centerY - currentHeight/2 - EDGE_PADDING,
+                                                                currentWidth + EDGE_PADDING,
+                                                                currentHeight + EDGE_PADDING);
+
         for (GameObject gameObject : objectsInArea) {
             if (gameObject instanceof GameVisibleObject) {
                 renderer.drawVisibleObject((GameVisibleObject)gameObject, gameObject.getX() - this.centerX + currentWidth/2,
@@ -59,5 +62,13 @@ public class Camera {
 
     public double calcHeight() {
         return STANDARD_HEIGHT * scale;
+    }
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public double getCenterY() {
+        return centerY;
     }
 }

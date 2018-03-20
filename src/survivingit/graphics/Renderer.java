@@ -43,6 +43,15 @@ public class Renderer extends Canvas {
 	bufferStrategy.show();
     }
 
+    public void drawRenderBox(double startX, double startY, double endX, double endY, double scale) {
+	double currentTileSize = STANDARD_TILE_SIZE / scale;
+	int x = (int) (startX*currentTileSize);
+	int y = (int) (startY*currentTileSize);
+	int width = x +(int) (endX*currentTileSize);
+	int height = y + (int) (endY*currentTileSize);
+	graphics.setColor(Color.WHITE);
+        graphics.drawRect(x, y, width, height);
+    }
 
     public void drawSprite(int x, int y, Sprite sprite) {
 	graphics.drawImage(sprite.getImage(),

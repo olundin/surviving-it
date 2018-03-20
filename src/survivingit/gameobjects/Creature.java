@@ -20,7 +20,6 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     }
 
 
-
     public int getHealth() {
 	return health;
     }

@@ -2,8 +2,8 @@ package survivingit.gameobjects;
 
 public abstract class GameObject implements Updateable {
 
-    private double x;
-    private double y;
+    protected double x;
+    protected double y;
 
     public GameObject() {
         this.x = 0;
