@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 
 public class Sprite {
 
+    public static final Sprite SNOW_1 = new Sprite(80,80, 16, 16, SpriteSheet.TILES);
+    public static final Sprite SNOW_2 = new Sprite(128,80, 16, 16, SpriteSheet.TILES);
+
     public static final Sprite FOX = new Sprite(0, 0,46,57, SpriteSheet.FOXES);
     public static final Sprite MEME_MAN = new Sprite(0,0, 17, 23, SpriteSheet.MEME_MAN);
 

@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
 
-    public static final int STANDARD_TILE_SIZE = 64; // Tile size in pixels when 1:1 scale (represents one unit in game)
+    public static final int UNIT_SIZE = 16; // Size of 1 game unit in pixels
 
     private int width;
     private int height;
@@ -36,7 +36,6 @@ public class Renderer extends Canvas {
     public void clear() {
 	graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, width, height);
-	drawSprite(100, 100, Sprite.FOX);
     }
 
     public void display() {
@@ -44,43 +43,22 @@ public class Renderer extends Canvas {
 	bufferStrategy.show();
     }
 
-    public void drawRenderBox(double startX, double startY, double endX, double endY, double scale) {
-	double currentTileSize = STANDARD_TILE_SIZE / scale;
-	int x = (int) (startX*currentTileSize);
-	int y = (int) (startY*currentTileSize);
-	int width = x +(int) (endX*currentTileSize);
-	int height = y + (int) (endY*currentTileSize);
-	graphics.setColor(Color.WHITE);
-        graphics.drawRect(x, y, width, height);
-    }
+    public void drawSprite(double x, double y, Sprite sprite, double cameraWidth, double cameraHeight) {
+	// Pixels per unit (ppu)
+	double ppuWidth = this.width / cameraWidth;
+	double ppuHeight = this.height / cameraHeight;
 
-    public void drawSprite(int x, int y, Sprite sprite) {
-	graphics.drawImage(sprite.getImage(),
-			   x,
-			   y,
-			   x + sprite.getWidth(),
-			   y + sprite.getHeight(),
-			   sprite.getX(),
-			   sprite.getY(),
-			   sprite.getX() + sprite.getWidth(),
-			   sprite.getY() + sprite.getHeight(),
+	// Position and size on screen
+	int dX = (int)Math.floor(x * ppuWidth);
+	int dY = (int)Math.floor(y * ppuHeight);
+	int dWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE);
+	int dHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE);
+
+
+	graphics.drawImage(sprite.getImage(), dX, dY, dX + dWidth, dY + dHeight,
+			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
 			   null);
-    }
 
 
-    public void drawSprite(Sprite sprite, double tileX, double tileY, double scale) {
-	double currentTileSize = STANDARD_TILE_SIZE / scale;
-	int startX = (int) (tileX * currentTileSize);
-	int startY = (int) (tileY * currentTileSize);
-	graphics.drawImage(sprite.getImage(),
-	        			   startX,
-	        			   startY,
-	        			   startX + (int) (sprite.getWidth() * scale),
-	        			   startY + (int) (sprite.getHeight() * scale),
-	        			   sprite.getX(),
-	        			   sprite.getY(),
-	        			   sprite.getX() + sprite.getWidth(),
-	        			   sprite.getY() + sprite.getHeight(),
-	        			   null);
     }
 }

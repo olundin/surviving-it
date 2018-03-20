@@ -3,6 +3,7 @@ package survivingit.graphics;
 import survivingit.Game;
 import survivingit.gameobjects.GameObject;
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.gameobjects.Player;
 import survivingit.scene.Scene;
 import survivingit.scene.Tile;
 
@@ -10,87 +11,85 @@ import java.util.List;
 
 public class Camera {
 
-    private static final double STANDARD_WIDTH = Game.WIDTH / Renderer.STANDARD_TILE_SIZE; // Camera tile width when scale is 1:1
-    private static final double STANDARD_HEIGHT = Game.HEIGHT / Renderer.STANDARD_TILE_SIZE; // Camera tile height when scale is 1:1
+    private double width;
+    private double height;
 
-    private double scale; // Scale of camera in current:standard of the camera dimensions
-
-    private double centerX;
-    private double centerY;
+    private double x;
+    private double y;
 
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
     private GameObject target;
 
-    public Camera(final double scale, final double centerX, final double centerY) {
-        this.scale = scale;
-	this.centerX = centerX;
-	this.centerY = centerY;
+    public Camera(final double x, final double y, final double width, final double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
     public void setTarget(GameObject target) {
         this.target = target;
     }
 
-    public void setPosition(double centerX, double centerY) {
-        this.centerX = centerX;
-        this.centerY = centerY;
+    public double getWidth() {
+        return this.width;
+    }
+    public double getHeight() {
+        return this.height;
+    }
+
+
+    public void move(double dx, double dy) {
+        this.x += dx;
+        this.y += dy;
+    }
+
+    public void zoom(double delta) {
+        double relation = this.height / this.width;
+        this.width -= delta;
+        this.height -= (delta * relation);
+        this.x += delta / 2;
+        this.y += (delta * relation) / 2;
     }
 
     public void render(Renderer renderer, Scene scene) {
-        double currentWidth = calcWidth();
-        double currentHeight = calcHeight();
+        // Make sure target is being followed if it exists
+        if(target != null) {
+            this.x = target.getX() - this.width / 2;
+            this.y = target.getY() - this.height / 2;
+        }
 
-        // Camera area
-        // Top left
-        double startX = this.centerX - currentWidth/2 - EDGE_PADDING;
-        double startY = this.centerY - currentHeight/2 - EDGE_PADDING;
-        // Bottom right
-        double width = currentWidth + EDGE_PADDING;
-        double height = currentHeight + EDGE_PADDING;
-
-        // Render Tile
-        for (int y = (int)Math.floor(startY); y < startY + height; y++) {
-            for (int x = (int)Math.floor(startX); x < startX + width; x++) {
-                Tile tile = scene.getTileAt(x, y);
+        // Render visible Tiles
+        for (int tileY = (int)Math.floor(this.y); tileY < this.y + this.height; tileY++) {
+            for (int tileX = (int)Math.floor(this.x); tileX < this.x + this.width; tileX++) {
+                Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
-                    renderer.drawSprite(tile.getSprite(), x - this.centerX + currentWidth/2, y - this.centerY + currentHeight/2, scale);
+                    // Draw sprite at position relative to camera
+                    renderer.drawSprite(tileX - this.x,
+                                        tileY - this.y,
+                                        tile.getSprite(), this.width, this.height);
                 }
             }
         }
 
-        // Get visible GameObjects
-        List<GameObject> objectsInArea = scene.getObjectsInArea(startX,
-                                                                startY,
-                                                                width,
-                                                                height);
+        // Render visible GameObjects
+        List<GameObject> objectsInArea = scene.getObjectsInArea(this.x, this.y, this.width, this.height);
 
-        // Render GameObjects
         for (GameObject gameObject : objectsInArea) {
             if (gameObject instanceof GameVisibleObject) {
-                renderer.drawSprite(((GameVisibleObject)gameObject).getSprite(), gameObject.getX() - this.centerX + currentWidth/2,
-                                           gameObject.getY() - this.centerY + currentHeight/2, scale);
+                // Draw sprite at position relative to camera
+                renderer.drawSprite(gameObject.getX() - this.x,
+                                    gameObject.getY() - this.y,
+                                    ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
             }
+
+            /*
+            // Make sure to target player if it is found. TODO: Remove this
+            if (gameObject instanceof Player && this.target == null) {
+                this.target = gameObject;
+            }
+            */
         }
-    }
-
-    public void setScale(double scale) {
-        this.scale = scale;
-    }
-
-    public double calcWidth() {
-        return STANDARD_WIDTH * scale;
-    }
-
-    public double calcHeight() {
-        return STANDARD_HEIGHT * scale;
-    }
-
-    public double getCenterX() {
-        return centerX;
-    }
-
-    public double getCenterY() {
-        return centerY;
     }
 }

@@ -23,7 +23,7 @@ public abstract class Scene {
 
         for(int y = 0; y < this.height; y++) {
             for(int x = 0; x < this.height; x++) {
-                this.tiles[y][x] = new Tile(Sprite.FOX, true);
+                this.tiles[y][x] = Tile.SNOW_1;
             }
         }
     }
@@ -40,7 +40,7 @@ public abstract class Scene {
 
     public Tile getTileAt(int x, int y) {
         if(x < 0 || x >= width || y < 0 || y >= height) {
-            return new Tile(Sprite.FOX, true);
+            return Tile.SNOW_2;
         } else {
             return tiles[y][x];
         }

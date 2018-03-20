@@ -10,6 +10,6 @@ public class Player extends Creature {
     }
 
     public void update() {
-
+	this.x += 0.001;
     }
 }
