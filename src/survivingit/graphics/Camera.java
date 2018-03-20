@@ -4,6 +4,7 @@ import survivingit.Game;
 import survivingit.gameobjects.GameObject;
 import survivingit.gameobjects.GameVisibleObject;
 import survivingit.scene.Scene;
+import survivingit.scene.Tile;
 
 import java.util.List;
 
@@ -39,14 +40,35 @@ public class Camera {
     public void render(Renderer renderer, Scene scene) {
         double currentWidth = calcWidth();
         double currentHeight = calcHeight();
-        List<GameObject> objectsInArea = scene.getObjectsInArea(this.centerX - currentWidth/2 - EDGE_PADDING,
-                                                                this.centerY - currentHeight/2 - EDGE_PADDING,
-                                                                currentWidth + EDGE_PADDING,
-                                                                currentHeight + EDGE_PADDING);
 
+        // Camera area
+        // Top left
+        double startX = this.centerX - currentWidth/2 - EDGE_PADDING;
+        double startY = this.centerY - currentHeight/2 - EDGE_PADDING;
+        // Bottom right
+        double width = currentWidth + EDGE_PADDING;
+        double height = currentHeight + EDGE_PADDING;
+
+        // Render Tile
+        for (int y = (int)Math.floor(startY); y < startY + height; y++) {
+            for (int x = (int)Math.floor(startX); x < startX + width; x++) {
+                Tile tile = scene.getTileAt(x, y);
+                if (tile != null) {
+                    renderer.drawSprite(tile.getSprite(), x - this.centerX + currentWidth/2, y - this.centerY + currentHeight/2, scale);
+                }
+            }
+        }
+
+        // Get visible GameObjects
+        List<GameObject> objectsInArea = scene.getObjectsInArea(startX,
+                                                                startY,
+                                                                width,
+                                                                height);
+
+        // Render GameObjects
         for (GameObject gameObject : objectsInArea) {
             if (gameObject instanceof GameVisibleObject) {
-                renderer.drawVisibleObject((GameVisibleObject)gameObject, gameObject.getX() - this.centerX + currentWidth/2,
+                renderer.drawSprite(((GameVisibleObject)gameObject).getSprite(), gameObject.getX() - this.centerX + currentWidth/2,
                                            gameObject.getY() - this.centerY + currentHeight/2, scale);
             }
         }

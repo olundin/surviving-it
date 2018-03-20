@@ -37,7 +37,7 @@ public class Game {
 	renderer.createBufferStrategy(3);
 
 	this.currentScene = new TestScene();
-	this.camera = new Camera(5, 0, 0);
+	this.camera = new Camera(1, 0, 0);
     }
 
     private void start() {
@@ -57,16 +57,16 @@ public class Game {
         currentScene.update();
 
         if(keyboard.getKey(65)) {
-            camera.setPosition(camera.getCenterX() - 0.001, camera.getCenterY());
+            camera.setPosition(camera.getCenterX() - 0.01, camera.getCenterY());
 	}
 	if(keyboard.getKey(87)) {
-	    camera.setPosition(camera.getCenterX(), camera.getCenterY() - 0.001);
+	    camera.setPosition(camera.getCenterX(), camera.getCenterY() - 0.01);
 	}
 	if(keyboard.getKey(68)) {
-	    camera.setPosition(camera.getCenterX() + 0.001, camera.getCenterY());
+	    camera.setPosition(camera.getCenterX() + 0.01, camera.getCenterY());
 	}
 	if(keyboard.getKey(83)) {
-	    camera.setPosition(camera.getCenterX(), camera.getCenterY() + 0.001);
+	    camera.setPosition(camera.getCenterX(), camera.getCenterY() + 0.01);
         }
     }
 

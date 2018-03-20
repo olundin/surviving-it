@@ -1,6 +1,7 @@
 package survivingit.graphics;
 
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.scene.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -66,20 +67,20 @@ public class Renderer extends Canvas {
 			   null);
     }
 
-    public void drawVisibleObject(GameVisibleObject gameObject, double tileX, double tileY, double scale) {
+
+    public void drawSprite(Sprite sprite, double tileX, double tileY, double scale) {
 	double currentTileSize = STANDARD_TILE_SIZE / scale;
-        Sprite sprite = gameObject.getSprite();
-        int startX = (int) (tileX * currentTileSize);
-        int startY = (int) (tileY * currentTileSize);
-        graphics.drawImage(sprite.getImage(),
-        			   startX,
-        			   startY,
-        			   startX + (int) (sprite.getWidth() * scale),
-        			   startY + (int) (sprite.getHeight() * scale),
-        			   sprite.getX(),
-        			   sprite.getY(),
-        			   sprite.getX() + sprite.getWidth(),
-        			   sprite.getY() + sprite.getHeight(),
-        			   null);
+	int startX = (int) (tileX * currentTileSize);
+	int startY = (int) (tileY * currentTileSize);
+	graphics.drawImage(sprite.getImage(),
+	        			   startX,
+	        			   startY,
+	        			   startX + (int) (sprite.getWidth() * scale),
+	        			   startY + (int) (sprite.getHeight() * scale),
+	        			   sprite.getX(),
+	        			   sprite.getY(),
+	        			   sprite.getX() + sprite.getWidth(),
+	        			   sprite.getY() + sprite.getHeight(),
+	        			   null);
     }
 }
