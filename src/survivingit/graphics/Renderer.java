@@ -58,7 +58,7 @@ public class Renderer extends Canvas {
     }
 
     public void drawVisibleObject(GameVisibleObject gameObject, double tileX, double tileY, double scale) {
-	double currentTileSize = scale * STANDARD_TILE_SIZE;
+	double currentTileSize = STANDARD_TILE_SIZE / scale;
         Sprite sprite = gameObject.getSprite();
         int startX = (int) (tileX * currentTileSize);
         int startY = (int) (tileY * currentTileSize);

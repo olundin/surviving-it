@@ -12,7 +12,7 @@ public class Camera {
     private static final double STANDARD_WIDTH = Game.WIDTH / Renderer.STANDARD_TILE_SIZE; // Camera tile width when scale is 1:1
     private static final double STANDARD_HEIGHT = Game.HEIGHT / Renderer.STANDARD_TILE_SIZE; // Camera tile height when scale is 1:1
 
-    private double scale; // Scale of camera in current/standard of the camera dimensions
+    private double scale; // Scale of camera in current:standard of the camera dimensions
 
     private double centerX;
     private double centerY;
