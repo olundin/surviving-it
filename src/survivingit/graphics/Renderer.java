@@ -2,6 +2,7 @@ package survivingit.graphics;
 
 import survivingit.gameobjects.GameVisibleObject;
 import survivingit.scene.Tile;
+import survivingit.util.Vec2;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -43,14 +44,14 @@ public class Renderer extends Canvas {
 	bufferStrategy.show();
     }
 
-    public void drawSprite(double x, double y, Sprite sprite, double cameraWidth, double cameraHeight) {
+    public void drawSprite(Vec2 pos, Sprite sprite, double cameraWidth, double cameraHeight) {
 	// Pixels per unit (ppu)
-	double ppuWidth = this.width / cameraWidth;
-	double ppuHeight = this.height / cameraHeight;
+	int ppuWidth = (int) (this.width / cameraWidth);
+	int ppuHeight = (int) (this.height / cameraHeight);
 
 	// Position and size on screen
-	int dX = (int)Math.floor(x * ppuWidth);
-	int dY = (int)Math.floor(y * ppuHeight);
+	int dX = (int)Math.floor(pos.x * ppuWidth);
+	int dY = (int)Math.floor(pos.y * ppuHeight);
 	int dWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE);
 	int dHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE);
 
@@ -58,7 +59,6 @@ public class Renderer extends Canvas {
 	graphics.drawImage(sprite.getImage(), dX, dY, dX + dWidth, dY + dHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
 			   null);
-
-
     }
+
 }

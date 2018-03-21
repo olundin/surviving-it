@@ -9,7 +9,7 @@ import survivingit.scene.Tile;
 
 import java.util.List;
 
-public class Camera {
+public class Camera  {
 
     private double width;
     private double height;
