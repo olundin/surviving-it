@@ -1,9 +1,7 @@
 package survivingit;
 
-import survivingit.gameobjects.Player;
-import survivingit.graphics.Camera;
+import survivingit.gameobjects.Camera;
 import survivingit.graphics.Renderer;
-import survivingit.graphics.Sprite;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.scene.Scene;
@@ -31,12 +29,12 @@ public class Game {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
         this.keyboard = new Keyboard();
-        this.inputHandler = new InputHandler();
+        this.inputHandler = new InputHandler(keyboard);
     	window.add(renderer);
     	window.addKeyListener(keyboard);
 	renderer.createBufferStrategy(3);
 
-	this.currentScene = new TestScene();
+	this.currentScene = new TestScene(camera);
 	this.camera = new Camera(0, 0, 16, 9);
     }
 
@@ -54,17 +52,7 @@ public class Game {
     }
 
     private void update() {
-        // Zoom in/out with z/x
-        if(keyboard.getKey(65)) camera.move(-0.001, 0);
-        if(keyboard.getKey(68)) camera.move(0.001, 0);
-        if(keyboard.getKey(87)) camera.move(0, -0.001);
-        if(keyboard.getKey(83)) camera.move(0, 0.001);
-
-        // Zoom in/out with z/x
-        if(keyboard.getKey(90)) camera.zoom(0.001);
-        if(keyboard.getKey(88)) camera.zoom(-0.001);
-
-
+        inputHandler.handleInput(currentScene.getPlayer(), camera);
         currentScene.update();
     }
 

@@ -1,34 +1,34 @@
 package survivingit.gameobjects;
 
+import survivingit.util.Vec2;
+
 public abstract class GameObject implements Updateable {
 
-    protected double x;
-    protected double y;
+    protected Vec2 pos;
 
     public GameObject() {
-        this.x = 0;
-        this.y = 0;
+        this.pos = new Vec2(0, 0);
     }
 
     public GameObject(final double x, final double y) {
-	this.x = x;
-	this.y = y;
+        this.pos = new Vec2(x, y);
     }
 
-    public double getX() {
-	return x;
+    public Vec2 getPos() {
+        return this.pos;
     }
 
-    public double getY() {
-	return y;
+    public void setPos(final double x, final double y) {
+	this.pos.x = x;
+	this.pos.y = y;
     }
 
-    public void setX(final float x) {
-	this.x = x;
+    public void setPos(final Vec2 pos) {
+	this.pos = pos;
     }
 
-    public void setY(final float y) {
-	this.y = y;
+    public void update() {
+        // lol
     }
 
 }

@@ -1,7 +1,8 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.*;
-import survivingit.graphics.Sprite;
+import survivingit.gameobjects.Camera;
+import survivingit.util.Vec2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +12,13 @@ public abstract class Scene {
     private int width;
     private int height;
 
+    private Player player;
+    private Camera currentCamera;
+
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
 
-    public Scene() {
+    public Scene(Camera camera) {
         this.width = 32;
         this.height = 32;
 
@@ -28,11 +32,22 @@ public abstract class Scene {
         }
     }
 
+    public void addPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
     public void add(GameObject gameObject) {
         gameObjects.add(gameObject);
     }
 
     public void update() {
+        if (player != null) {
+            player.update();
+        }
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
 	}
@@ -46,16 +61,25 @@ public abstract class Scene {
         }
     }
 
-    public List<GameObject> getObjectsInArea(double startX, double startY, double width, double height) {
+    public List<GameObject> getObjectsInArea(Vec2 start, Vec2 end) {
         List<GameObject> inArea = new ArrayList<>();
+        if (hasPlayer() && isObjectInArea(player, start, end)) {
+            inArea.add(player);
+        }
         for (GameObject gameObject : gameObjects) {
-            if (gameObject.getX() >= startX &&
-                gameObject.getY() >= startY &&
-                gameObject.getX() <= startX + width &&
-                gameObject.getY() <= startY + height) {
+            if (isObjectInArea(gameObject, start, end)) {
                 inArea.add(gameObject);
             }
         }
         return inArea;
+    }
+
+    private boolean isObjectInArea(GameObject gameObject, Vec2 start, Vec2 end) {
+        Vec2 pos = gameObject.getPos();
+        return Vec2.between(pos, start, end);
+    }
+
+    public boolean hasPlayer() {
+        return player != null;
     }
 }
