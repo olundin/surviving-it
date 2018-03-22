@@ -43,7 +43,7 @@ public class Game {
 
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, 16, 9);
+        this.camera = new Camera(0, 0, 16, 9, renderer);
         this.currentScene = new TestScene(camera);
     }
 
@@ -78,8 +78,6 @@ public class Game {
     private void update(double dt) {
         inputHandler.handleInput(currentScene.getPlayer(), camera);
 
-        System.out.println(mouse.getWorldX(renderer, camera) + ", " + mouse.getWorldY(renderer, camera));
-
         keyboard.update();
         mouse.update();
         currentScene.update(dt);
@@ -88,7 +86,7 @@ public class Game {
     private void render() {
         renderer.prepare();
         renderer.clear();
-        camera.render(renderer, currentScene);
+        camera.render(currentScene);
         renderer.display();
     }
 

@@ -5,6 +5,10 @@ import java.awt.image.BufferedImage;
 
 public class Sprite {
 
+    public static final Sprite HERO_DOWN = new Sprite(0, 0, 32, 64, SpriteSheet.HERO);
+    public static final Sprite HERO_RIGHT = new Sprite(0, 64, 32, 64, SpriteSheet.HERO);
+    public static final Sprite HERO_UP = new Sprite(0, 128, 32, 64, SpriteSheet.HERO);
+
     public static final Sprite SNOW_1 = new Sprite(80,80, 16, 16, SpriteSheet.TILES);
     public static final Sprite SNOW_2 = new Sprite(128,80, 16, 16, SpriteSheet.TILES);
 

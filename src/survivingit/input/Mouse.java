@@ -53,16 +53,6 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
         return this.y;
     }
 
-    public double getWorldX(Renderer renderer, Camera camera) {
-        double ppu = renderer.getWidth() / camera.getWidth();
-        return camera.getX() + this.x / ppu;
-    }
-
-    public double getWorldY(Renderer renderer, Camera camera) {
-        double ppu = renderer.getHeight() / camera.getHeight();
-        return camera.getY() + this.y / ppu;
-    }
-
     public int getScroll() {
         return this.scroll;
     }

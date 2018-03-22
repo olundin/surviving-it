@@ -43,10 +43,10 @@ public class InputHandler {
             camera.zoom(mouse.getScroll());
         }
 
-        // Move camera with arrow keys
-        if(keyboard.getKey(Input.KEY_LEFT)) camera.move(-0.001, 0);
-        if(keyboard.getKey(Input.KEY_UP)) camera.move(0, -0.001);
-        if(keyboard.getKey(Input.KEY_RIGHT)) camera.move(0.001, 0);
-        if(keyboard.getKey(Input.KEY_DOWN)) camera.move(0, 0.001);
+        // Set camera position to be between player and mouse
+        camera.setPos(
+                Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.25) - camera.getWidth()/2,
+                Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.25) - camera.getHeight()/2
+        );
     }
 }

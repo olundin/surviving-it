@@ -13,13 +13,15 @@ public class Camera extends GameObject {
 
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
+    private Renderer renderer;
+
     private GameObject target;
 
-    public Camera(final double x, final double y, final double width, final double height) {
+    public Camera(final double x, final double y, final double width, final double height, final Renderer renderer) {
         super(x, y);
-        //this.setCenterPos(x, y);
         this.width = width;
         this.height = height;
+        this.renderer = renderer;
     }
 
     public void setTarget(GameObject target) {
@@ -37,7 +39,7 @@ public class Camera extends GameObject {
         this.y += (delta * relation) / 2;
     }
 
-    public void render(Renderer renderer, Scene scene) {
+    public void render(Scene scene) {
         // Make sure target is being followed if it exists
         if (hasTarget()) {
             this.setCenterPos(target.getX(), target.getY());
@@ -49,7 +51,7 @@ public class Camera extends GameObject {
                 Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
-                    renderer.drawSprite(tileX - this.x, tileY - this.y, tile.getSprite(), this.width, this.height);
+                    this.renderer.drawSprite(tileX - this.x, tileY - this.y, tile.getSprite(), this.width, this.height);
                 }
             }
         }
@@ -66,13 +68,10 @@ public class Camera extends GameObject {
 
             if (gameObject instanceof GameVisibleObject) {
                 // Draw sprite at position relative to camera
-                renderer.drawSprite(gameObject.getX() - this.x, gameObject.getY() - this.y,
+                this.renderer.drawSprite(gameObject.getX() - this.x, gameObject.getY() - this.y,
                         ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
             }
         }
-
-        //System.out.println(this.x + ", " + this.y + ", " + this.width + ", " + this.height);
-        //System.out.println(getCenterX());
     }
 
     private boolean hasTarget() {
@@ -95,4 +94,15 @@ public class Camera extends GameObject {
     public double getCenterX() {
         return this.x + this.width / 2;
     }
+
+    public double screenToWorldX(double screenX) {
+        double ppu = renderer.getWidth() / this.width; // Screen pixels per unit
+        return this.x + screenX / ppu;
+    }
+
+    public double screenToWorldY(double screenY) {
+        double ppu = renderer.getHeight() / this.height; // Screen pixels per unit
+        return this.y + screenY / ppu;
+    }
+
 }
