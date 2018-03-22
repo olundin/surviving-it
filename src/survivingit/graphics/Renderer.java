@@ -30,33 +30,33 @@ public class Renderer extends Canvas {
     }
 
     public void prepare() {
-	bufferStrategy = this.getBufferStrategy();
-	graphics = bufferStrategy.getDrawGraphics();
+	    bufferStrategy = this.getBufferStrategy();
+	    graphics = bufferStrategy.getDrawGraphics();
     }
 
     public void clear() {
-	graphics.setColor(Color.BLACK);
+	    graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, width, height);
     }
 
     public void display() {
         graphics.dispose(); // Release system resources
-	bufferStrategy.show();
+	    bufferStrategy.show();
     }
 
     public void drawSprite(Vec2 pos, Sprite sprite, double cameraWidth, double cameraHeight) {
-	// Pixels per unit (ppu)
-	int ppuWidth = (int) (this.width / cameraWidth);
-	int ppuHeight = (int) (this.height / cameraHeight);
 
-	// Position and size on screen
-	int dX = (int)Math.floor(pos.x * ppuWidth);
-	int dY = (int)Math.floor(pos.y * ppuHeight);
-	int dWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE);
-	int dHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE);
+	    // Pixels per unit (ppu)
+	    int ppuWidth = (int) (this.width / cameraWidth);
+	    int ppuHeight = (int) (this.height / cameraHeight);
 
+	    // Position and size on screen
+	    int drawX = (int)Math.floor(pos.x * ppuWidth);
+	    int drawY = (int)Math.floor(pos.y * ppuHeight);
+	    int drawWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE);
+	    int drawHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE);
 
-	graphics.drawImage(sprite.getImage(), dX, dY, dX + dWidth, dY + dHeight,
+        graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
 			   null);
     }

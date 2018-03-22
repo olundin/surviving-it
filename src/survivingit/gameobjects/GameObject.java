@@ -19,12 +19,11 @@ public abstract class GameObject implements Updateable {
     }
 
     public void setPos(final double x, final double y) {
-	this.pos.x = x;
-	this.pos.y = y;
+	    this.pos = new Vec2(x, y);
     }
 
     public void setPos(final Vec2 pos) {
-	this.pos = pos;
+	    this.pos = pos;
     }
 
     public void update() {

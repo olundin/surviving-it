@@ -32,10 +32,10 @@ public class Game {
         this.inputHandler = new InputHandler(keyboard);
     	window.add(renderer);
     	window.addKeyListener(keyboard);
-	renderer.createBufferStrategy(3);
+	    renderer.createBufferStrategy(3);
 
-	this.currentScene = new TestScene(camera);
-	this.camera = new Camera(0, 0, 16, 9);
+        this.camera = new Camera(1, 1, 16, 9);
+        this.currentScene = new TestScene(camera);
     }
 
     private void start() {
@@ -44,6 +44,11 @@ public class Game {
         while (running) {
             update();
             render();
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                // lol
+            }
         }
     }
 
@@ -64,7 +69,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-	Game game = new Game();
-	game.start();
+	    Game game = new Game();
+	    game.start();
     }
 }

@@ -12,8 +12,8 @@ public abstract class Scene {
     private int width;
     private int height;
 
-    private Player player;
-    private Camera currentCamera;
+    protected Player player;
+    protected Camera camera;
 
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
@@ -21,6 +21,8 @@ public abstract class Scene {
     public Scene(Camera camera) {
         this.width = 32;
         this.height = 32;
+
+        this.camera = camera;
 
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
@@ -45,12 +47,12 @@ public abstract class Scene {
     }
 
     public void update() {
-        if (player != null) {
+        if (hasPlayer()) {
             player.update();
         }
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
-	}
+	    }
     }
 
     public Tile getTileAt(int x, int y) {
@@ -62,21 +64,22 @@ public abstract class Scene {
     }
 
     public List<GameObject> getObjectsInArea(Vec2 start, Vec2 end) {
-        List<GameObject> inArea = new ArrayList<>();
+        List<GameObject> objectsInArea = new ArrayList<>();
+        System.out.println(hasPlayer() + " " + isObjectInArea(player, start, end));
         if (hasPlayer() && isObjectInArea(player, start, end)) {
-            inArea.add(player);
+            objectsInArea.add(player);
+            System.out.println("Added player");
         }
         for (GameObject gameObject : gameObjects) {
             if (isObjectInArea(gameObject, start, end)) {
-                inArea.add(gameObject);
+                objectsInArea.add(gameObject);
             }
         }
-        return inArea;
+        return objectsInArea;
     }
 
     private boolean isObjectInArea(GameObject gameObject, Vec2 start, Vec2 end) {
-        Vec2 pos = gameObject.getPos();
-        return Vec2.between(pos, start, end);
+        return Vec2.between(gameObject.getPos(), start, end);
     }
 
     public boolean hasPlayer() {
