@@ -41,8 +41,8 @@ public class Camera extends GameObject {
         }
 
         // Render visible Tiles
-        for (int tileY = (int)Math.floor(this.y); tileY < this.y + this.height; tileY++) {
-            for (int tileX = (int)Math.floor(this.x); tileX < this.x + this.width; tileX++) {
+        for (int tileY = (int)Math.floor(this.y - EDGE_PADDING); tileY < this.y + this.height + EDGE_PADDING; tileY++) {
+            for (int tileX = (int)Math.floor(this.x - EDGE_PADDING); tileX < this.x + this.width + EDGE_PADDING; tileX++) {
                 Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
@@ -69,6 +69,7 @@ public class Camera extends GameObject {
         }
 
         //System.out.println(this.x + ", " + this.y + ", " + this.width + ", " + this.height);
+        //System.out.println(getCenterX());
     }
 
     private boolean hasTarget() {
@@ -80,7 +81,7 @@ public class Camera extends GameObject {
         this.y = y - this.height/2;
     }
 
-    public double getCenterX(double x, double y) {
+    public double getCenterX() {
         return this.x + this.width / 2;
     }
 }

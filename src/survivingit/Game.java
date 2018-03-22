@@ -38,7 +38,7 @@ public class Game {
     	renderer.addMouseListener(mouse);
 	    renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(1, 1, 16, 9);
+        this.camera = new Camera(0, 0, 16, 9);
         this.currentScene = new TestScene(camera);
     }
 

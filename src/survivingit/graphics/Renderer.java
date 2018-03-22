@@ -48,11 +48,13 @@ public class Renderer extends Canvas {
 	    int ppuWidth = (int) (this.width / cameraWidth);
 	    int ppuHeight = (int) (this.height / cameraHeight);
 
+        System.out.println(ppuWidth);
+
 	    // Position and size on screen
-	    int drawX = (int)Math.floor(x * ppuWidth) - SPRITE_PADDING;
-	    int drawY = (int)Math.floor(y * ppuHeight) - SPRITE_PADDING;
-	    int drawWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
-	    int drawHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
+	    int drawX = (int)(x * ppuWidth) - SPRITE_PADDING;
+	    int drawY = (int)(y * ppuHeight) - SPRITE_PADDING;
+	    int drawWidth = (ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
+	    int drawHeight = (ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
 
         graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
