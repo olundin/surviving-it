@@ -15,19 +15,9 @@ public class Vec2 {
         this.y = y;
     }
 
-    public static void main(String[] args) {
-        Vec2 zeros = new Vec2(0, 0);
-        Vec2 oneZero = new Vec2(1, 0);
-        Vec2 zeroOne = new Vec2(0, 1);
-        Vec2 twoZero = new Vec2(2, 0);
-        Vec2 zeroTwo = new Vec2(0, 2);
-
-        Vec2 negativePos = new Vec2(-1, 1);
-        Vec2 posNegative = new Vec2(1, -1);
-        Vec2 negativeNegative = new Vec2(-1, -1);
-        Vec2 posPos = new Vec2(1, 1);
-
-        System.out.println(Vec2.sub(zeros, oneZero));
+    public Vec2(final int x, final int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public static Vec2 add(Vec2 vec2a, Vec2 Vec2b) {
@@ -43,7 +33,7 @@ public class Vec2 {
     }
 
     public static Vec2 subConst(Vec2 vec2, double c) {
-        return new Vec2(vec2.x - c, vec2.x - c);
+        return new Vec2(vec2.x - c, vec2.y - c);
     }
 
     public static Vec2 mult(double scalar, Vec2 vec2) {
