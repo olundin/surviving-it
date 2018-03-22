@@ -1,17 +1,17 @@
 package survivingit.gameobjects;
 
-import survivingit.util.Math;
+import survivingit.util.Maths;
 
 public enum Direction {
 
     LEFT(-1, 0),
-    UP_LEFT(-Math.DIAGONAL_LENGTH, -Math.DIAGONAL_LENGTH),
+    UP_LEFT(-Maths.DIAGONAL_LENGTH, -Maths.DIAGONAL_LENGTH),
     UP(0, -1),
-    UP_RIGHT(Math.DIAGONAL_LENGTH, -Math.DIAGONAL_LENGTH),
+    UP_RIGHT(Maths.DIAGONAL_LENGTH, -Maths.DIAGONAL_LENGTH),
     RIGHT(1, 0),
-    DOWN_RIGHT(Math.DIAGONAL_LENGTH, Math.DIAGONAL_LENGTH),
+    DOWN_RIGHT(Maths.DIAGONAL_LENGTH, Maths.DIAGONAL_LENGTH),
     DOWN(0, 1),
-    DOWN_LEFT(-Math.DIAGONAL_LENGTH, Math.DIAGONAL_LENGTH),
+    DOWN_LEFT(-Maths.DIAGONAL_LENGTH, Maths.DIAGONAL_LENGTH),
     NONE(0, 0);
 
     public final double x;

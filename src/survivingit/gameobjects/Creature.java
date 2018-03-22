@@ -23,6 +23,10 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
 	    return moveSpeed;
     }
 
+    public Direction getDirection() {
+        return this.direction;
+    }
+
     public void setHealth(final int health) {
 	this.health = health;
     }

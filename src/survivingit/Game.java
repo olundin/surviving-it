@@ -32,11 +32,16 @@ public class Game {
         this.renderer = new Renderer(WIDTH, HEIGHT);
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
-        this.inputHandler = new InputHandler(keyboard);
-    	window.add(renderer);
-    	window.addKeyListener(keyboard);
+        this.inputHandler = new InputHandler(keyboard, mouse);
+
+        window.add(renderer);
+
+        window.addKeyListener(keyboard);
     	renderer.addMouseListener(mouse);
-	    renderer.createBufferStrategy(3);
+    	renderer.addMouseWheelListener(mouse);
+    	renderer.addMouseMotionListener(mouse);
+
+    	renderer.createBufferStrategy(3);
 
         this.camera = new Camera(0, 0, 16, 9);
         this.currentScene = new TestScene(camera);
@@ -71,8 +76,12 @@ public class Game {
     }
 
     private void update(double dt) {
-        mouse.update();
         inputHandler.handleInput(currentScene.getPlayer(), camera);
+
+        System.out.println(mouse.getWorldX(renderer, camera) + ", " + mouse.getWorldY(renderer, camera));
+
+        keyboard.update();
+        mouse.update();
         currentScene.update(dt);
     }
 

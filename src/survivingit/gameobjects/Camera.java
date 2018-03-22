@@ -27,6 +27,9 @@ public class Camera extends GameObject {
     }
 
     public void zoom(double delta) {
+        if(width - delta <= 0) {
+            return;
+        }
         double relation = this.height / this.width;
         this.width -= delta;
         this.height -= (delta * relation);
@@ -74,6 +77,14 @@ public class Camera extends GameObject {
 
     private boolean hasTarget() {
         return target != null;
+    }
+
+    public double getWidth() {
+        return this.width;
+    }
+
+    public double getHeight() {
+        return this.height;
     }
 
     public void setCenterPos(double x, double y) {
