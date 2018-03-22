@@ -1,9 +1,9 @@
 package survivingit.items;
 
-import survivingit.gameobjects.GameObject;
+import survivingit.gameobjects.Creature;
 
 public interface ConsumableItem {
 
-    public void consume(GameObject consumer);
+    public void consume(Creature consumer);
 
 }

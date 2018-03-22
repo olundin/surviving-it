@@ -1,9 +1,10 @@
 package survivingit.items;
 
-import survivingit.gameobjects.GameObject;
+
+import survivingit.gameobjects.Creature;
 
 public interface UsableItem {
 
-    public void use(GameObject user);
+    public void use(Creature user);
 
 }
