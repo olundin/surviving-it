@@ -11,6 +11,8 @@ public class Renderer extends Canvas {
 
     public static final int UNIT_SIZE = 16; // Size of 1 game unit in pixels
 
+    private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
+
     private int width;
     private int height;
 
@@ -51,10 +53,10 @@ public class Renderer extends Canvas {
 	    int ppuHeight = (int) (this.height / cameraHeight);
 
 	    // Position and size on screen
-	    int drawX = (int)Math.floor(pos.x * ppuWidth);
-	    int drawY = (int)Math.floor(pos.y * ppuHeight);
-	    int drawWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE);
-	    int drawHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE);
+	    int drawX = (int)Math.floor(pos.x * ppuWidth) - SPRITE_PADDING;
+	    int drawY = (int)Math.floor(pos.y * ppuHeight) - SPRITE_PADDING;
+	    int drawWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
+	    int drawHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
 
         graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),

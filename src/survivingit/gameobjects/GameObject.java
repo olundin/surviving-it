@@ -26,7 +26,7 @@ public abstract class GameObject implements Updateable {
 	    this.pos = pos;
     }
 
-    public void update() {
+    public void update(double dt) {
         // lol
     }
 

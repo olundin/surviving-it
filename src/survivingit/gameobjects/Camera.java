@@ -1,6 +1,5 @@
 package survivingit.gameobjects;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import survivingit.graphics.Renderer;
 import survivingit.scene.Scene;
 import survivingit.scene.Tile;
@@ -57,15 +56,10 @@ public class Camera extends GameObject {
         Vec2 sizeVec2 = this.getSizeVec2();
         Vec2 start = Vec2.subConst(this.pos, EDGE_PADDING);
         Vec2 end = Vec2.addConst(Vec2.add(this.pos, sizeVec2), EDGE_PADDING);
-        System.out.println("start, end: " + start + ", " + end);
 
         // Render visible GameObjects
         List<GameObject> objectsInArea = scene.getObjectsInArea(Vec2.subConst(this.pos, EDGE_PADDING),
                                                                 Vec2.addConst(Vec2.add(this.pos, sizeVec2), EDGE_PADDING));
-        System.out.println(objectsInArea);
-
-        System.out.println("Camera pos: " + this.pos);
-        System.out.println("Camera centerPos: " + getCenterPos());
 
         for (GameObject gameObject : objectsInArea) {
 
@@ -73,9 +67,6 @@ public class Camera extends GameObject {
                 // Draw sprite at position relative to camera
                 Vec2 drawPos = Vec2.sub(gameObject.getPos(), this.pos);
                 renderer.drawSprite(drawPos, ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
-
-                System.out.println("Object pos: " +  gameObject.pos);
-                System.out.println("Drawing object at : " + drawPos);
             }
         }
     }

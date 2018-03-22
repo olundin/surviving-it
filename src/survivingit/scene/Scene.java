@@ -46,12 +46,12 @@ public abstract class Scene {
         gameObjects.add(gameObject);
     }
 
-    public void update() {
+    public void update(double dt) {
         if (hasPlayer()) {
-            player.update();
+            player.update(dt);
         }
         for (GameObject gameObject : gameObjects) {
-            gameObject.update();
+            gameObject.update(dt);
 	    }
     }
 
@@ -65,10 +65,8 @@ public abstract class Scene {
 
     public List<GameObject> getObjectsInArea(Vec2 start, Vec2 end) {
         List<GameObject> objectsInArea = new ArrayList<>();
-        System.out.println(hasPlayer() + " " + isObjectInArea(player, start, end));
         if (hasPlayer() && isObjectInArea(player, start, end)) {
             objectsInArea.add(player);
-            System.out.println("Added player");
         }
         for (GameObject gameObject : gameObjects) {
             if (isObjectInArea(gameObject, start, end)) {

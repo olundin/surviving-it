@@ -20,8 +20,8 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
 	    this.moveSpeed = moveSpeed;
     }
 
-    public void move(final Direction dir) {
-	    this.setPos(Vec2.add(this.pos, Vec2.mult(moveSpeed, dir.vec2)));
+    public void move(double dt, final Direction dir) {
+	    this.setPos(Vec2.add(this.pos, Vec2.mult(moveSpeed * dt, dir.vec2)));
     }
 
     public int getHealth() {

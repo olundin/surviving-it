@@ -9,7 +9,8 @@ public class Player extends Creature {
 	    super(x, y, sprite, health, moveSpeed);
     }
 
-    public void update() {
-        System.out.println("player pos: " + this.pos);
+    @Override
+    public void update(double dt) {
+
     }
 }
