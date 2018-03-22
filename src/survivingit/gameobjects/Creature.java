@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
+import survivingit.util.Vec2;
 
 public abstract class Creature extends GameVisibleObject implements Updateable {
 
@@ -8,24 +9,27 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     private double moveSpeed; // Tiles per second
 
     public Creature(final double x, final double y, final Sprite sprite, final int health, final double moveSpeed) {
-	super(x, y, sprite);
-	this.health = health;
-	this.moveSpeed = moveSpeed;
+	    super(x, y, sprite);
+	    this.health = health;
+	    this.moveSpeed = moveSpeed;
     }
 
     public Creature(final Sprite sprite, final int health, final double moveSpeed) {
-	super(sprite);
-	this.health = health;
-	this.moveSpeed = moveSpeed;
+	    super(sprite);
+	    this.health = health;
+	    this.moveSpeed = moveSpeed;
     }
 
+    public void move(double dt, final Direction dir) {
+	    this.setPos(Vec2.add(this.pos, Vec2.mult(moveSpeed * dt, dir.vec2)));
+    }
 
     public int getHealth() {
-	return health;
+	    return health;
     }
 
     public double getMoveSpeed() {
-	return moveSpeed;
+	    return moveSpeed;
     }
 
     public void setHealth(final int health) {

@@ -1,7 +1,8 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.*;
-import survivingit.graphics.Sprite;
+import survivingit.gameobjects.Camera;
+import survivingit.util.Vec2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,51 +12,75 @@ public abstract class Scene {
     private int width;
     private int height;
 
+    protected Player player;
+    protected Camera camera;
+
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
 
-    public Scene() {
+    public Scene(Camera camera) {
         this.width = 32;
         this.height = 32;
+
+        this.camera = camera;
 
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
 
         for(int y = 0; y < this.height; y++) {
             for(int x = 0; x < this.height; x++) {
-                this.tiles[y][x] = new Tile(Sprite.FOX, true);
+                this.tiles[y][x] = Tile.SNOW_1;
             }
         }
+    }
+
+    public void addPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 
     public void add(GameObject gameObject) {
         gameObjects.add(gameObject);
     }
 
-    public void update() {
+    public void update(double dt) {
+        if (hasPlayer()) {
+            player.update(dt);
+        }
         for (GameObject gameObject : gameObjects) {
-            gameObject.update();
-	}
+            gameObject.update(dt);
+	    }
     }
 
     public Tile getTileAt(int x, int y) {
         if(x < 0 || x >= width || y < 0 || y >= height) {
-            return new Tile(Sprite.FOX, true);
+            return Tile.SNOW_2;
         } else {
             return tiles[y][x];
         }
     }
 
-    public List<GameObject> getObjectsInArea(double startX, double startY, double width, double height) {
-        List<GameObject> inArea = new ArrayList<>();
+    public List<GameObject> getObjectsInArea(Vec2 start, Vec2 end) {
+        List<GameObject> objectsInArea = new ArrayList<>();
+        if (hasPlayer() && isObjectInArea(player, start, end)) {
+            objectsInArea.add(player);
+        }
         for (GameObject gameObject : gameObjects) {
-            if (gameObject.getX() >= startX &&
-                gameObject.getY() >= startY &&
-                gameObject.getX() <= startX + width &&
-                gameObject.getY() <= startY + height) {
-                inArea.add(gameObject);
+            if (isObjectInArea(gameObject, start, end)) {
+                objectsInArea.add(gameObject);
             }
         }
-        return inArea;
+        return objectsInArea;
+    }
+
+    private boolean isObjectInArea(GameObject gameObject, Vec2 start, Vec2 end) {
+        return Vec2.between(gameObject.getPos(), start, end);
+    }
+
+    public boolean hasPlayer() {
+        return player != null;
     }
 }

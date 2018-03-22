@@ -1,9 +1,10 @@
 package survivingit;
 
-import survivingit.graphics.Camera;
+import survivingit.gameobjects.Camera;
 import survivingit.graphics.Renderer;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
+import survivingit.input.Mouse;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 
@@ -15,6 +16,7 @@ public class Game {
     private Renderer renderer;
     private Window window;
     private Keyboard keyboard;
+    private Mouse mouse;
     private InputHandler inputHandler;
 
     private Scene currentScene;
@@ -29,43 +31,48 @@ public class Game {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
         this.keyboard = new Keyboard();
-        this.inputHandler = new InputHandler();
+        this.mouse = new Mouse();
+        this.inputHandler = new InputHandler(keyboard);
     	window.add(renderer);
     	window.addKeyListener(keyboard);
-	renderer.createBufferStrategy(3);
+    	renderer.addMouseListener(mouse);
+	    renderer.createBufferStrategy(3);
 
-	this.currentScene = new TestScene();
-	this.camera = new Camera(1, 0, 0);
+        this.camera = new Camera(1, 1, 16, 9);
+        this.currentScene = new TestScene(camera);
     }
 
     private void start() {
         running = true;
 
+        double t = 0.0; // Game time
+        double dt = 1 / 60.0;
+
+        double currentTime = System.currentTimeMillis() / 1000.0;
+
         while (running) {
-            update();
+            double newTime =  System.currentTimeMillis() / 1000.0;
+            double frameTime = newTime - currentTime;
+            currentTime = newTime;
+
+            while(frameTime > 0.0) {
+                double deltaTime = Math.min(frameTime, dt); // Make sure that deltaTime is never greater than dt
+                update(deltaTime);
+                frameTime -= deltaTime;
+                t += deltaTime;
+            }
             render();
         }
     }
+
 
     private void stop() {
         running = false;
     }
 
-    private void update() {
-        currentScene.update();
-
-        if(keyboard.getKey(65)) {
-            camera.setPosition(camera.getCenterX() - 0.01, camera.getCenterY());
-	}
-	if(keyboard.getKey(87)) {
-	    camera.setPosition(camera.getCenterX(), camera.getCenterY() - 0.01);
-	}
-	if(keyboard.getKey(68)) {
-	    camera.setPosition(camera.getCenterX() + 0.01, camera.getCenterY());
-	}
-	if(keyboard.getKey(83)) {
-	    camera.setPosition(camera.getCenterX(), camera.getCenterY() + 0.01);
-        }
+    private void update(double dt) {
+        inputHandler.handleInput(dt, currentScene.getPlayer(), camera);
+        currentScene.update(dt);
     }
 
     private void render() {
@@ -76,7 +83,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-	Game game = new Game();
-	game.start();
+	    Game game = new Game();
+	    game.start();
     }
 }
