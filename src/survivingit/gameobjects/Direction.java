@@ -1,15 +1,25 @@
 package survivingit.gameobjects;
 
-import survivingit.util.Vec2;
+import survivingit.util.Math;
 
 public enum Direction {
 
-    UP(Vec2.UP), DOWN(Vec2.DOWN), LEFT(Vec2.LEFT), RIGHT(Vec2.RIGHT);
+    LEFT(-1, 0),
+    UP_LEFT(-Math.DIAGONAL_LENGTH, -Math.DIAGONAL_LENGTH),
+    UP(0, -1),
+    UP_RIGHT(Math.DIAGONAL_LENGTH, -Math.DIAGONAL_LENGTH),
+    RIGHT(1, 0),
+    DOWN_RIGHT(Math.DIAGONAL_LENGTH, Math.DIAGONAL_LENGTH),
+    DOWN(0, 1),
+    DOWN_LEFT(-Math.DIAGONAL_LENGTH, Math.DIAGONAL_LENGTH),
+    NONE(0, 0);
 
-    public final Vec2 vec2;
+    public final double x;
+    public final double y;
 
-    Direction(final Vec2 deltaPos) {
-	this.vec2 = deltaPos;
+    Direction(final double x, final double y) {
+        this.x = x;
+        this.y = y;
     }
 
 }

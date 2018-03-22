@@ -26,7 +26,7 @@ public class Window extends Frame {
 	    public void windowClosing(WindowEvent we){
 		System.exit(0);
 	    }
-	});
+	}); // TODO: Make this call Game.stop(), which in turn calls for System.exit(0);
     }
 
 }

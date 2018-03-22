@@ -1,33 +1,37 @@
 package survivingit.gameobjects;
 
-import survivingit.util.Vec2;
-
 public abstract class GameObject implements Updateable {
 
-    protected Vec2 pos;
+    protected double x;
+    protected double y;
 
     public GameObject() {
-        this.pos = new Vec2(0, 0);
+        this.x = 0;
+        this.y = 0;
     }
 
     public GameObject(final double x, final double y) {
-        this.pos = new Vec2(x, y);
+        this.x = x;
+        this.y = y;
     }
 
-    public Vec2 getPos() {
-        return this.pos;
+    public double getX() {
+        return this.x;
+    }
+
+    public double getY() {
+        return this.y;
     }
 
     public void setPos(final double x, final double y) {
-	    this.pos = new Vec2(x, y);
+        this.x = x;
+        this.y = y;
     }
 
-    public void setPos(final Vec2 pos) {
-	    this.pos = pos;
+    public void move(final double dx, final double dy) {
+        this.x += dx;
+        this.y += dy;
     }
 
-    public void update(double dt) {
-        // lol
-    }
-
+    public void update(double dt) {}; // TODO: Remove
 }

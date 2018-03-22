@@ -11,6 +11,6 @@ public class Player extends Creature {
 
     @Override
     public void update(double dt) {
-
+        this.move(this.direction.x * this.moveSpeed * dt, this.direction.y * this.moveSpeed * dt);
     }
 }

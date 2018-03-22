@@ -1,7 +1,6 @@
 package survivingit.input;
 
-import survivingit.util.Vec2;
-
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,14 +12,21 @@ public class Mouse implements MouseListener {
     private boolean scrollDown;
     private int scroll;
 
-    private Vec2 position;
+    private double x;
+    private double y;
 
     public Mouse() {
-
+        this.x = 0;
+        this.y = 0;
     }
 
+    public void update() {
+        this.x = MouseInfo.getPointerInfo().getLocation().getX();
+        this.y = MouseInfo.getPointerInfo().getLocation().getY();
+    }
+
+
     public void mousePressed(MouseEvent e) {
-        System.out.println(e.getX() + ", " + e.getY());
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -28,7 +34,7 @@ public class Mouse implements MouseListener {
     }
 
     public void mouseEntered(MouseEvent e) {
-        System.out.println("hej");
+
     }
 
     public void mouseExited(MouseEvent e) {
@@ -38,5 +44,7 @@ public class Mouse implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
     }
+
+
 
 }

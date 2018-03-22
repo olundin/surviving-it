@@ -2,7 +2,6 @@ package survivingit.scene;
 
 import survivingit.gameobjects.*;
 import survivingit.gameobjects.Camera;
-import survivingit.util.Vec2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,21 +62,23 @@ public abstract class Scene {
         }
     }
 
-    public List<GameObject> getObjectsInArea(Vec2 start, Vec2 end) {
+    public List<GameObject> getObjectsInArea(double startX, double startY, double endX, double endY) {
         List<GameObject> objectsInArea = new ArrayList<>();
-        if (hasPlayer() && isObjectInArea(player, start, end)) {
+        if (hasPlayer() && isObjectInArea(player, startX, startY, endX, endY)) {
             objectsInArea.add(player);
         }
         for (GameObject gameObject : gameObjects) {
-            if (isObjectInArea(gameObject, start, end)) {
+            if (isObjectInArea(gameObject, startX, startY, endX, endY)) {
                 objectsInArea.add(gameObject);
             }
         }
         return objectsInArea;
     }
 
-    private boolean isObjectInArea(GameObject gameObject, Vec2 start, Vec2 end) {
-        return Vec2.between(gameObject.getPos(), start, end);
+    private boolean isObjectInArea(GameObject gameObject, double startX, double startY, double endX, double endY) {
+        double x = gameObject.getX();
+        double y = gameObject.getY();
+        return startX <= x && x <= endX && startY <= y && y <= endY;
     }
 
     public boolean hasPlayer() {

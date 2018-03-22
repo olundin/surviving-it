@@ -3,7 +3,6 @@ package survivingit.gameobjects;
 import survivingit.graphics.Renderer;
 import survivingit.scene.Scene;
 import survivingit.scene.Tile;
-import survivingit.util.Vec2;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class Camera extends GameObject {
 
     public Camera(final double x, final double y, final double width, final double height) {
         super(x, y);
-        this.setCenterPos(this.pos);
+        //this.setCenterPos(x, y);
         this.width = width;
         this.height = height;
     }
@@ -31,60 +30,57 @@ public class Camera extends GameObject {
         double relation = this.height / this.width;
         this.width -= delta;
         this.height -= (delta * relation);
-        this.pos.x += delta / 2;
-        this.pos.y += (delta * relation) / 2;
+        this.x += delta / 2;
+        this.y += (delta * relation) / 2;
     }
 
     public void render(Renderer renderer, Scene scene) {
         // Make sure target is being followed if it exists
         if (hasTarget()) {
-            this.setCenterPos(target.getPos());
+            this.setCenterPos(target.getX(), target.getY());
         }
 
         // Render visible Tiles
-        for (int tileY = (int)Math.floor(this.pos.y); tileY < this.pos.y + this.height; tileY++) {
-            for (int tileX = (int)Math.floor(this.pos.x); tileX < this.pos.x + this.width; tileX++) {
+        for (int tileY = (int)Math.floor(this.y); tileY < this.y + this.height; tileY++) {
+            for (int tileX = (int)Math.floor(this.x); tileX < this.x + this.width; tileX++) {
                 Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
-                    renderer.drawSprite(Vec2.sub(new Vec2(tileX, tileY), this.pos), tile.getSprite(),
-                                        this.width, this.height);
+                    renderer.drawSprite(tileX - this.x, tileY - this.y, tile.getSprite(), this.width, this.height);
                 }
             }
         }
 
-        Vec2 sizeVec2 = this.getSizeVec2();
-        Vec2 start = Vec2.subConst(this.pos, EDGE_PADDING);
-        Vec2 end = Vec2.addConst(Vec2.add(this.pos, sizeVec2), EDGE_PADDING);
-
         // Render visible GameObjects
-        List<GameObject> objectsInArea = scene.getObjectsInArea(Vec2.subConst(this.pos, EDGE_PADDING),
-                                                                Vec2.addConst(Vec2.add(this.pos, sizeVec2), EDGE_PADDING));
+        List<GameObject> objectsInArea = scene.getObjectsInArea(
+                this.x - EDGE_PADDING,
+                this.y - EDGE_PADDING,
+                this.x + this.width + EDGE_PADDING,
+                this.y + this.height + EDGE_PADDING
+        );
 
         for (GameObject gameObject : objectsInArea) {
 
             if (gameObject instanceof GameVisibleObject) {
                 // Draw sprite at position relative to camera
-                Vec2 drawPos = Vec2.sub(gameObject.getPos(), this.pos);
-                renderer.drawSprite(drawPos, ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
+                renderer.drawSprite(gameObject.getX() - this.x, gameObject.getY() - this.y,
+                        ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
             }
         }
+
+        //System.out.println(this.x + ", " + this.y + ", " + this.width + ", " + this.height);
     }
 
     private boolean hasTarget() {
         return target != null;
     }
 
-    public void setCenterPos(Vec2 centerPos) {
-        this.pos = Vec2.sub(centerPos, new Vec2(this.width/2, this.height/2));
+    public void setCenterPos(double x, double y) {
+        this.x = x - this.width/2;
+        this.y = y - this.height/2;
     }
 
-    public Vec2 getCenterPos() {
-        return Vec2.add(this.pos, new Vec2(this.width/2, this.height/2));
+    public double getCenterX(double x, double y) {
+        return this.x + this.width / 2;
     }
-
-    private Vec2 getSizeVec2() {
-        return new Vec2(this.width, this.height);
-    }
-
 }

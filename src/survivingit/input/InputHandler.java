@@ -12,27 +12,27 @@ public class InputHandler {
         this.keyboard = keyboard;
     }
 
-    public void handleInput(double dt, final Player player, final Camera camera) {
+    public void handleInput(final Player player, final Camera camera) {
         // Zoom in/out with z/x
         if(keyboard.getKey(65)) {
-            player.move(dt, Direction.LEFT);
+            player.setDirection(Direction.LEFT);
         }
         if(keyboard.getKey(68)) {
-            player.move(dt, Direction.RIGHT);
+            player.setDirection(Direction.RIGHT);
         }
         if(keyboard.getKey(87)) {
-            player.move(dt, Direction.UP);
+            player.setDirection(Direction.UP);
         }
         if(keyboard.getKey(83)) {
-            player.move(dt, Direction.DOWN);
+            player.setDirection(Direction.DOWN);
         }
 
         // Zoom in/out with z/x
         if(keyboard.getKey(90)) {
-            camera.zoom(1 * dt);
+            camera.zoom(0.1);
         }
         if(keyboard.getKey(88)) {
-            camera.zoom(-1 * dt);
+            camera.zoom(-0.1);
         }
     }
 }

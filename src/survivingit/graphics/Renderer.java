@@ -1,9 +1,5 @@
 package survivingit.graphics;
 
-import survivingit.gameobjects.GameVisibleObject;
-import survivingit.scene.Tile;
-import survivingit.util.Vec2;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -46,15 +42,15 @@ public class Renderer extends Canvas {
 	    bufferStrategy.show();
     }
 
-    public void drawSprite(Vec2 pos, Sprite sprite, double cameraWidth, double cameraHeight) {
+    public void drawSprite(double x, double y, Sprite sprite, double cameraWidth, double cameraHeight) {
 
 	    // Pixels per unit (ppu)
 	    int ppuWidth = (int) (this.width / cameraWidth);
 	    int ppuHeight = (int) (this.height / cameraHeight);
 
 	    // Position and size on screen
-	    int drawX = (int)Math.floor(pos.x * ppuWidth) - SPRITE_PADDING;
-	    int drawY = (int)Math.floor(pos.y * ppuHeight) - SPRITE_PADDING;
+	    int drawX = (int)Math.floor(x * ppuWidth) - SPRITE_PADDING;
+	    int drawY = (int)Math.floor(y * ppuHeight) - SPRITE_PADDING;
 	    int drawWidth = (int)Math.ceil(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
 	    int drawHeight = (int)Math.ceil(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
 
