@@ -5,11 +5,15 @@ import survivingit.graphics.Sprite;
 
 public class Food extends Item implements ConsumableItem {
 
+
+
+    private static final boolean stackable = true;
+
     private int healAmount;
     private boolean cookable;
 
-    public Food(String description, Sprite sprite, int healAmount, boolean cookable) {
-        super(description, sprite);
+    public Food(int healAmount, boolean cookable, String description, Sprite sprite) {
+        super(description, sprite, stackable);
         this.healAmount = healAmount;
         this.cookable = cookable;
     }

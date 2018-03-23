@@ -15,4 +15,7 @@ public abstract class Container {
         this.size = size;
     }
 
+    public void addItem(Item item) {
+        items.
+    }
 }
