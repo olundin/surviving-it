@@ -1,9 +1,13 @@
 package survivingit.gameobjects;
 
+import survivingit.scene.Scene;
+
 public abstract class GameObject implements Updateable {
 
     protected double x;
     protected double y;
+
+    protected Scene scene;
 
     public GameObject() {
         this.x = 0;
@@ -34,4 +38,8 @@ public abstract class GameObject implements Updateable {
     }
 
     public void update(double dt) {}; // TODO: Remove
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
 }

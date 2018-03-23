@@ -15,6 +15,16 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
 	    this.direction = Direction.NONE;
     }
 
+    public void update(double dt) {
+        // Check if horizontal movement is okay
+        if(this.scene.getTileAt(this.x + this.direction.x * this.moveSpeed * dt, this.y).isPassable()) {
+            this.move(this.direction.x * this.moveSpeed * dt, 0);
+        }
+        if(this.scene.getTileAt(this.x, this.y + this.direction.y * this.moveSpeed * dt).isPassable()) {
+            this.move(0, this.direction.y * this.moveSpeed * dt);
+        }
+    }
+
     public int getHealth() {
 	    return health;
     }

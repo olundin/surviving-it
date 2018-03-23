@@ -9,8 +9,4 @@ public class Player extends Creature {
 	    super(x, y, sprite, health, moveSpeed);
     }
 
-    @Override
-    public void update(double dt) {
-        this.move(this.direction.x * this.moveSpeed * dt, this.direction.y * this.moveSpeed * dt);
-    }
 }
