@@ -1,11 +1,13 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
+import survivingit.physics.Collider;
 
 public class Fox extends Creature {
 
-    public Fox(final double x, final double y, final Sprite sprite, final int health, final double moveSpeed) {
-        super(x, y, sprite, health, moveSpeed);
+    public Fox(final double x, final double y) {
+        super(x, y, Sprite.FOX, 20, 3.0);
+        this.setCollider(new Collider(1, 1.5, 1, 1.5, false, this));
     }
 
 }

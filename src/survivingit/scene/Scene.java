@@ -2,6 +2,8 @@ package survivingit.scene;
 
 import survivingit.gameobjects.*;
 import survivingit.gameobjects.Camera;
+import survivingit.graphics.Sprite;
+import survivingit.physics.Collider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,24 +59,31 @@ public abstract class Scene {
     }
 
     public Tile getTileAt(double x, double y) {
-        if (x < 0 || x >= width || y < 0 || y >= height) {
+        int xInt = (int)Math.floor(x);
+        int yInt = (int)Math.floor(y);
+        if (xInt < 0 || xInt >= width || yInt < 0 || yInt >= height) {
             return Tile.SNOW_2;
         } else {
-            return tiles[(int)Math.floor(y)][(int)Math.floor(x)];
+            return tiles[yInt][xInt];
         }
     }
 
     public List<Tile> getTilesInArea(double startX, double startY, double endX, double endY) {
         List<Tile> tilesInArea = new ArrayList<>();
-        for(double y = startY; y <= endY; y++) {
-            for(double x = startX; x <= endX; x++) {
-                tilesInArea.add(this.getTileAt(x, y));
+        //System.out.println(startX + "; " + startY + "; " + endX + "; " + endY);
+        for(int y = (int)Math.floor(startY); y < (int)Math.floor(endY) + 1; y++) {
+            for(int x = (int)Math.floor(startX); x < (int)Math.floor(endX) + 1; x++) {
+                tilesInArea.add(getTileAt(x, y));
+                setTileAt(x, y, Tile.TEST);
             }
         }
+        System.out.println(tilesInArea.size());
+
         return tilesInArea;
     }
 
     public List<GameObject> getObjectsInArea(double startX, double startY, double endX, double endY) {
+        // Find all return all objects whose colliders intersect with given rect
         List<GameObject> objectsInArea = new ArrayList<>();
         if (hasPlayer() && isObjectInArea(player, startX, startY, endX, endY)) {
             objectsInArea.add(player);
@@ -88,12 +97,23 @@ public abstract class Scene {
     }
 
     private boolean isObjectInArea(GameObject gameObject, double startX, double startY, double endX, double endY) {
-        double x = gameObject.getX();
-        double y = gameObject.getY();
-        return startX <= x && x <= endX && startY <= y && y <= endY;
+        // Returns true if object's collider is within area
+        Collider col = gameObject.getCollider();
+        double x1 = col.getWorldX();
+        double y1 = col.getWorldY();
+        double x2 = x1 + col.getWidth();
+        double y2 = y1 + col.getHeight();
+
+        return x1 <= endX && startX <= x2 && y1 <= endY && startY <= y2;
     }
 
     public boolean hasPlayer() {
         return player != null;
+    }
+
+    public void setTileAt(double x, double y, Tile tile) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            tiles[(int) Math.floor(y)][(int) Math.floor(x)] = tile;
+        }
     }
 }

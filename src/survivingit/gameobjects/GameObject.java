@@ -20,7 +20,7 @@ public abstract class GameObject implements Updateable {
     public GameObject(final double x, final double y) {
         this.x = x;
         this.y = y;
-        this.collider = new Collider(0, 0, 1.0, 1.0, false, this);
+        this.collider = new Collider(0, 0, 0.0, 0.0, true, this);
     }
 
     public double getX() {
@@ -59,5 +59,9 @@ public abstract class GameObject implements Updateable {
 
     public Collider getCollider() {
         return this.collider;
+    }
+
+    public void setCollider(Collider col) {
+        this.collider = col;
     }
 }

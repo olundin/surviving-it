@@ -41,7 +41,7 @@ public class Collider {
     public boolean hasTileCollision(Scene scene) {
         List<Tile> collidingTiles = scene.getTilesInArea(
                 this.getWorldX(), this.getWorldY(),
-                this.getWorldX() + this.height, this.getWorldY() + this.width
+                this.getWorldX() + this.width, this.getWorldY() + this.height
         );
         for(Tile tile : collidingTiles) {
             if(!tile.isPassable()) {
@@ -52,11 +52,10 @@ public class Collider {
     }
 
     public boolean hasObjectCollision(Scene scene) {
-        // TODO: Make getObjectsInArea consider width and height of objects
        List<GameObject> collidingObjects = scene.getObjectsInArea(
-               this.getWorldX() - this.width, this.getWorldY() - this.height,
-               this.getWorldX() + 2*this.width,
-               this.getWorldY() + 2*this.height
+               this.getWorldX(), this.getWorldY(),
+               this.getWorldX() + this.width,
+               this.getWorldY() + this.height
        );
        for(GameObject gameObject : collidingObjects) {
            if(!gameObject.equals(owner)) {

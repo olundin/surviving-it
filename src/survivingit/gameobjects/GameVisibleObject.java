@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
+import survivingit.physics.Collider;
 
 public abstract class GameVisibleObject extends GameObject {
 
