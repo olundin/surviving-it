@@ -35,8 +35,8 @@ Vi har också tänkt modella djuren som simpla finite statemachines, mer info om
 |-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | 1 | Det finns en spelloop där vi uppdaterar logik och ritar saker. Vi kan rita en bild på skärmen på vald position. Vi har en fönsterklass, en ritarklass och en spelklass som hanterar dessa. | ✅ |
 | 2 | Den grundläggande klasshierarkin är klar med scener, spelobjekt och tiles. Alla dessa kan ritas på olika positioner. Vi har ett objekt för spelaren som kan styras av tangentbordet och en pekar input som styrs av musen. | ✅ |
-| 3 | Spelet har kollisionshantering för tiles. Till exempel finns det vissa tiles som man inte kan gå över. Vi testar med hål tiles som spelaren inte kan gå över. | In progress |
-| 4 | Spelet har kollisionshantering för spelobjekt med hitboxes. Vi testar detta genom att skapa ett trädobjekt som spelaren inte kan gå över. |  |
+| 3 | Spelet har kollisionshantering för tiles. Till exempel finns det vissa tiles som man inte kan gå över. Vi testar med hål tiles som spelaren inte kan gå över. | ✅ |
+| 4 | Spelet har kollisionshantering för spelobjekt med hitboxes. Vi testar detta genom att skapa ett trädobjekt som spelaren inte kan gå över. | ✅ |
 | 5 | Items finns i spelet. Dessa kan ligga i “containers” som kistor eller i spelarens ryggsäck. |  |
 | 6 | Andra spelobjekt, såsom djur och fiender, finns i världen som rör sig omkring fritt. Djuren är programmerade som simpla finite statemachines och de använder A* search algoritm för att ta sig runt i världen. |  |
 | 7 | Grundläggande interaktion mellan spelobjekt finns genom meddelande delande. Testas genom att ta skada från något. |  |

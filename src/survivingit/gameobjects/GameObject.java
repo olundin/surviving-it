@@ -20,7 +20,7 @@ public abstract class GameObject implements Updateable {
     public GameObject(final double x, final double y) {
         this.x = x;
         this.y = y;
-        this.collider = new Collider(0, 0, 1.0, 1.0, this);
+        this.collider = new Collider(0, 0, 1.0, 1.0, false, this);
     }
 
     public double getX() {
@@ -37,12 +37,16 @@ public abstract class GameObject implements Updateable {
     }
 
     public void move(final double dx, final double dy) {
+        // Try horizontal movement
         this.x += dx;
+        if(this.collider.hasCollision(this.scene)) {
+            // Revert movement if collision was detected
+            this.x -= dx;
+        }
+        // Try horizontal movement
         this.y += dy;
         if(this.collider.hasCollision(this.scene)) {
             // Revert movement if collision was detected
-            System.out.println("GameObject collision detected");
-            this.x -= dx;
             this.y -= dy;
         }
     }

@@ -2,6 +2,7 @@ package survivingit.physics;
 
 import survivingit.gameobjects.GameObject;
 import survivingit.scene.Scene;
+import survivingit.scene.Tile;
 
 import java.util.List;
 
@@ -17,37 +18,55 @@ public class Collider {
 
     private boolean passable; // Determines if collider can be trespassed or not
 
-    public Collider(double x, double y, double width, double height, GameObject owner) {
+    public Collider(double x, double y, double width, double height, boolean passable, GameObject owner) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-
+        this.passable = passable;
         this.owner = owner;
     }
 
     public boolean collidesWith(Collider other) {
-        return  this.x > other.getX() &&
-                this.x <= other.getX() + other.getWidth() &&
-                this.y > other.getY() &&
-                this.y < other.getY() + other.getWidth();
+        return  this.getWorldX() <= other.getWorldX() + other.width &&
+                other.getWorldX() <= this.getWorldX() + this.width &&
+                this.getWorldY() <= other.getWorldY() + other.height &&
+                other.getWorldY() <= this.getWorldY() + this.height;
     }
 
     public boolean hasCollision(Scene scene) {
-        List<GameObject> collidingObjects = scene.getObjectsInArea(
-                owner.getX() + this.x, owner.getY() + this.y,
-                owner.getX() + this.x + this.width,
-                owner.getY() + this.y + this.height
+        return this.hasTileCollision(scene) || this.hasObjectCollision(scene);
+    }
+
+    public boolean hasTileCollision(Scene scene) {
+        List<Tile> collidingTiles = scene.getTilesInArea(
+                this.getWorldX(), this.getWorldY(),
+                this.getWorldX() + this.height, this.getWorldY() + this.width
         );
-        for(GameObject gameObject : collidingObjects) {
-            if(!gameObject.equals(owner)) {
-                Collider other = gameObject.getCollider();
-                if(this.collidesWith(other) && !other.isPassable()) {
-                    return true;
-                }
+        for(Tile tile : collidingTiles) {
+            if(!tile.isPassable()) {
+                return true;
             }
         }
         return false;
+    }
+
+    public boolean hasObjectCollision(Scene scene) {
+        // TODO: Make getObjectsInArea consider width and height of objects
+       List<GameObject> collidingObjects = scene.getObjectsInArea(
+               this.getWorldX() - this.width, this.getWorldY() - this.height,
+               this.getWorldX() + 2*this.width,
+               this.getWorldY() + 2*this.height
+       );
+       for(GameObject gameObject : collidingObjects) {
+           if(!gameObject.equals(owner)) {
+               Collider other = gameObject.getCollider();
+               if(this.collidesWith(other) && !other.passable) {
+                   return true;
+               }
+           }
+       }
+       return false;
     }
 
 

@@ -64,6 +64,16 @@ public abstract class Scene {
         }
     }
 
+    public List<Tile> getTilesInArea(double startX, double startY, double endX, double endY) {
+        List<Tile> tilesInArea = new ArrayList<>();
+        for(double y = startY; y <= endY; y++) {
+            for(double x = startX; x <= endX; x++) {
+                tilesInArea.add(this.getTileAt(x, y));
+            }
+        }
+        return tilesInArea;
+    }
+
     public List<GameObject> getObjectsInArea(double startX, double startY, double endX, double endY) {
         List<GameObject> objectsInArea = new ArrayList<>();
         if (hasPlayer() && isObjectInArea(player, startX, startY, endX, endY)) {

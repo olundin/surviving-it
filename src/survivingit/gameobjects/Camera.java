@@ -11,6 +11,9 @@ public class Camera extends GameObject {
     private double width;
     private double height;
 
+    private static final double ZOOM_MIN = 1.0;
+    private static final double ZOOM_MAX = 64.0;
+
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
     private Renderer renderer;
@@ -29,7 +32,7 @@ public class Camera extends GameObject {
     }
 
     public void zoom(double delta) {
-        if(width - delta <= 0) {
+        if(width - delta < ZOOM_MIN || width - delta > ZOOM_MAX) {
             return;
         }
         double relation = this.height / this.width;
