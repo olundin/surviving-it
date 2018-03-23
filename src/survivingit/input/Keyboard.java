@@ -17,7 +17,7 @@ public class Keyboard implements KeyListener {
         keyReleased = new boolean[KEYBOARD_SIZE];
     }
 
-    public void update() {
+    public void clear() {
         // Reset temporary variable values
         for(int k = 0; k < KEYBOARD_SIZE; k++) {
             keyPressed[k] = false;

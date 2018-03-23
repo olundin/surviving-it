@@ -35,6 +35,7 @@ public abstract class Scene {
 
     public void addPlayer(Player player) {
         this.player = player;
+        player.setScene(this);
     }
 
     public Player getPlayer() {
@@ -43,6 +44,7 @@ public abstract class Scene {
 
     public void add(GameObject gameObject) {
         gameObjects.add(gameObject);
+        gameObject.setScene(this);
     }
 
     public void update(double dt) {
@@ -54,11 +56,11 @@ public abstract class Scene {
 	    }
     }
 
-    public Tile getTileAt(int x, int y) {
-        if(x < 0 || x >= width || y < 0 || y >= height) {
+    public Tile getTileAt(double x, double y) {
+        if (x < 0 || x >= width || y < 0 || y >= height) {
             return Tile.SNOW_2;
         } else {
-            return tiles[y][x];
+            return tiles[(int)Math.floor(y)][(int)Math.floor(x)];
         }
     }
 

@@ -35,7 +35,7 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
         this.scroll = 0;
     }
 
-    public void update() {
+    public void clear() {
         // Reset temporary variable values
         for(int b = 0; b < MOUSE_SIZE; b++) {
             buttonPressed[b] = false;

@@ -1,5 +1,8 @@
 package survivingit.graphics;
 
+import survivingit.gameobjects.GameVisibleObject;
+import survivingit.scene.Tile;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -46,16 +49,16 @@ public class Renderer extends Canvas {
 
     public void drawSprite(double x, double y, Sprite sprite, double cameraWidth, double cameraHeight) {
 
-	// Pixels per unit (ppu)
-	double ppuWidth = this.width / cameraWidth;
-	double ppuHeight = this.height / cameraHeight;
+        // Pixels per unit (ppu)
+        double ppuWidth = this.width / cameraWidth;
+        double ppuHeight = this.height / cameraHeight;
 
 
-	// Position and size on screen
-	int drawX = (int)(x * ppuWidth) - SPRITE_PADDING;
-	int drawY = (int)(y * ppuHeight) - SPRITE_PADDING;
-	int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
-	int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
+        // Position and size on screen
+        int drawX = (int)(x * ppuWidth) - SPRITE_PADDING;
+        int drawY = (int)(y * ppuHeight) - SPRITE_PADDING;
+        int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
+        int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
 
         graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
@@ -64,7 +67,7 @@ public class Renderer extends Canvas {
         if(DEBUG) {
             graphics.setColor(Color.black);
             graphics.drawRect(drawX, drawY, drawWidth, drawHeight);
-	}
+	    }
     }
 
 }

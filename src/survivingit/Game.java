@@ -78,8 +78,8 @@ public class Game {
     private void update(double dt) {
         inputHandler.handleInput(currentScene.getPlayer(), camera);
 
-        keyboard.update();
-        mouse.update();
+        keyboard.clear();
+        mouse.clear();
         currentScene.update(dt);
     }
 
