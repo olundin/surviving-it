@@ -1,5 +1,6 @@
 package survivingit.gameobjects;
 
+import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 public abstract class GameObject implements Updateable {
@@ -9,6 +10,8 @@ public abstract class GameObject implements Updateable {
 
     protected Scene scene;
 
+    protected Collider collider;
+
     public GameObject() {
         this.x = 0;
         this.y = 0;
@@ -17,6 +20,7 @@ public abstract class GameObject implements Updateable {
     public GameObject(final double x, final double y) {
         this.x = x;
         this.y = y;
+        this.collider = new Collider(0, 0, 1.0, 1.0, this);
     }
 
     public double getX() {
@@ -35,11 +39,21 @@ public abstract class GameObject implements Updateable {
     public void move(final double dx, final double dy) {
         this.x += dx;
         this.y += dy;
+        if(this.collider.hasCollision(this.scene)) {
+            // Revert movement if collision was detected
+            System.out.println("GameObject collision detected");
+            this.x -= dx;
+            this.y -= dy;
+        }
     }
 
     public void update(double dt) {}; // TODO: Remove
 
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    public Collider getCollider() {
+        return this.collider;
     }
 }

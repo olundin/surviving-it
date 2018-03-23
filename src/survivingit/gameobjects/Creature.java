@@ -8,14 +8,12 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     protected int health;
     protected double moveSpeed; // Tiles per second
     protected Direction direction;
-    protected Collider collider;
 
     public Creature(final double x, final double y, final Sprite sprite, final int health, final double moveSpeed) {
 	    super(x, y, sprite);
 	    this.health = health;
 	    this.moveSpeed = moveSpeed;
 	    this.direction = Direction.NONE;
-	    this.collider = new Collider(x, y, 1.0, 1.0);
     }
 
     public void update(double dt) {
@@ -40,9 +38,6 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         if ((canMoveUp && this.direction.y < 0) || (canMoveDown && this.direction.y > 0)) {
             this.move(0, this.direction.y * this.moveSpeed * dt);
         }
-
-        this.collider.setX(this.x);
-        this.collider.setY(this.y);
     }
 
     public int getHealth() {
@@ -55,10 +50,6 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
 
     public Direction getDirection() {
         return this.direction;
-    }
-
-    public Collider getCollider() {
-        return this.collider;
     }
 
     public void setHealth(final int health) {

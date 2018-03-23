@@ -95,7 +95,7 @@ public class Renderer extends Canvas {
             // Draw hitbox
             if(object instanceof Creature) {
                 Collider col = ((Creature)object).getCollider();
-                this.drawRect(col.getX(), col.getY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
+                this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
             }
         }
     }
