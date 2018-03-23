@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
 
     public static final int UNIT_SIZE = 16; // Size of 1 game unit in pixels

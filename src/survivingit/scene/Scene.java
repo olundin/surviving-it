@@ -6,6 +6,7 @@ import survivingit.graphics.Sprite;
 import survivingit.physics.Collider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Scene {
@@ -18,6 +19,8 @@ public abstract class Scene {
 
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
+
+    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
     public Scene(Camera camera) {
         this.width = 32;
@@ -33,11 +36,13 @@ public abstract class Scene {
                 this.tiles[y][x] = Tile.SNOW_1;
             }
         }
+
+        this.gameObjectComparator = new GameObjectComparator();
     }
 
     public void addPlayer(Player player) {
         this.player = player;
-        player.setScene(this);
+        this.add(player);
     }
 
     public Player getPlayer() {
@@ -50,9 +55,8 @@ public abstract class Scene {
     }
 
     public void update(double dt) {
-        if (hasPlayer()) {
-            player.update(dt);
-        }
+        gameObjects.sort(this.gameObjectComparator);
+
         for (GameObject gameObject : gameObjects) {
             gameObject.update(dt);
 	    }
@@ -74,7 +78,6 @@ public abstract class Scene {
         for(int y = (int)Math.floor(startY); y < (int)Math.floor(endY) + 1; y++) {
             for(int x = (int)Math.floor(startX); x < (int)Math.floor(endX) + 1; x++) {
                 tilesInArea.add(getTileAt(x, y));
-                setTileAt(x, y, Tile.TEST);
             }
         }
         System.out.println(tilesInArea.size());
@@ -85,9 +88,6 @@ public abstract class Scene {
     public List<GameObject> getObjectsInArea(double startX, double startY, double endX, double endY) {
         // Find all return all objects whose colliders intersect with given rect
         List<GameObject> objectsInArea = new ArrayList<>();
-        if (hasPlayer() && isObjectInArea(player, startX, startY, endX, endY)) {
-            objectsInArea.add(player);
-        }
         for (GameObject gameObject : gameObjects) {
             if (isObjectInArea(gameObject, startX, startY, endX, endY)) {
                 objectsInArea.add(gameObject);
