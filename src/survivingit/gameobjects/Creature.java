@@ -2,6 +2,7 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
 
+
 public abstract class Creature extends GameVisibleObject implements Updateable {
 
     protected int health;
@@ -37,11 +38,11 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         this.direction = direction;
     }
 
+    /**
+     * Heals the creature with healAmount up to the creatures maxHealth.
+     * @param healAmount to heal the creature with
+     */
     public void heal(int healAmount) {
-        this.health += healAmount;
-        if (this.health > this.maxHealth) {
-            this.health = maxHealth;
-        }
+	this.health += healAmount - Math.max(health + healAmount - maxHealth, 0);
     }
-
 }

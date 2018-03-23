@@ -7,15 +7,28 @@ import survivingit.items.Item;
  */
 public abstract class Container {
 
-    private Item[] items;
-    private int size;
+    private ItemSlot[] itemSlots;
+    private final int size;
+    private int usedSlots;
 
-    public Container(int size) {
-        this.items = new Item[size];
+    public Container(final int size) {
+        this.itemSlots = new Item[size];
         this.size = size;
+        this.usedSlots = 0;
     }
 
     public void addItem(Item item) {
-        items.
+        if (this.isFull()) {
+            throw new IllegalStateException("Container already full.");
+        }
+        itemSlots[this.getFirstEmptyIndex()] =
+    }
+
+    private int getFirstEmptyIndex() {
+        return 0;
+    }
+
+    private boolean isFull() {
+        return this.usedSlots == this.size;
     }
 }

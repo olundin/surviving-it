@@ -6,12 +6,12 @@ public abstract class Item {
 
     protected final String description;
     protected final Sprite sprite;
-    protected final boolean stackable;
+    protected final int stackSize;
 
-    public Item(String description, Sprite sprite, boolean stackable) {
+    public Item(final String description, final Sprite sprite, final int stackSize) {
         this.description = description;
         this.sprite = sprite;
-        this.stackable = stackable;
+        this.stackSize = stackSize;
     }
 
     public String getDescription() {
@@ -22,7 +22,7 @@ public abstract class Item {
         return sprite;
     }
 
-    public boolean isStackable() {
-        return stackable;
+    public int getStackSize() {
+        return stackSize;
     }
 }
