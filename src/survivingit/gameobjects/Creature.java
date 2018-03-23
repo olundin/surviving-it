@@ -19,9 +19,6 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     }
 
     public void update(double dt) {
-        this.collider.setX(this.x);
-        this.collider.setY(this.y);
-
         // TODO: Move away from here
         // Check if horizontal movement is okay
         boolean canMoveLeft = this.scene.getTileAt(
@@ -40,9 +37,12 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         if ((canMoveLeft && this.direction.x < 0) || (canMoveRight && this.direction.x > 0)) {
             this.move(this.direction.x * this.moveSpeed * dt, 0);
         }
-        if((canMoveUp && this.direction.y < 0) || (canMoveDown && this.direction.y > 0)) {
+        if ((canMoveUp && this.direction.y < 0) || (canMoveDown && this.direction.y > 0)) {
             this.move(0, this.direction.y * this.moveSpeed * dt);
         }
+
+        this.collider.setX(this.x);
+        this.collider.setY(this.y);
     }
 
     public int getHealth() {
@@ -57,12 +57,16 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         return this.direction;
     }
 
+    public Collider getCollider() {
+        return this.collider;
+    }
+
     public void setHealth(final int health) {
-	this.health = health;
+	    this.health = health;
     }
 
     public void setMoveSpeed(final float moveSpeed) {
-	this.moveSpeed = moveSpeed;
+	    this.moveSpeed = moveSpeed;
     }
 
     public void setDirection(Direction direction) {

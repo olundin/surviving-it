@@ -1,6 +1,8 @@
 package survivingit.graphics;
 
+import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.physics.Collider;
 import survivingit.scene.Tile;
 
 import java.awt.*;
@@ -47,16 +49,16 @@ public class Renderer extends Canvas {
 	bufferStrategy.show();
     }
 
-    public void drawSprite(double x, double y, Sprite sprite, double cameraWidth, double cameraHeight) {
+    public void drawSprite(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight) {
 
         // Pixels per unit (ppu)
-        double ppuWidth = this.width / cameraWidth;
-        double ppuHeight = this.height / cameraHeight;
+        double ppuWidth = this.width / camWidth;
+        double ppuHeight = this.height / camHeight;
 
 
         // Position and size on screen
-        int drawX = (int)(x * ppuWidth) - SPRITE_PADDING;
-        int drawY = (int)(y * ppuHeight) - SPRITE_PADDING;
+        int drawX = (int)((x - camX) * ppuWidth) - SPRITE_PADDING;
+        int drawY = (int)((y - camY) * ppuHeight) - SPRITE_PADDING;
         int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
         int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
 
@@ -65,9 +67,36 @@ public class Renderer extends Canvas {
 			   null);
 
         if(DEBUG) {
+            // Draw sprite borders
             graphics.setColor(Color.black);
             graphics.drawRect(drawX, drawY, drawWidth, drawHeight);
 	    }
     }
 
+    public void drawRect(double x, double y, double width, double height, Color color, double camX, double camY, double camWidth, double camHeight) {
+        // Pixels per unit (ppu)
+        double ppuWidth = this.width / camWidth;
+        double ppuHeight = this.height / camHeight;
+
+        int drawX = (int)((x - camX) * ppuWidth);
+        int drawY = (int)((y - camY) * ppuHeight);
+        int drawWidth = (int)(ppuWidth * width);
+        int drawHeight = (int)(ppuHeight * height);
+
+        graphics.setColor(color);
+        graphics.drawRect(drawX, drawY, drawWidth, drawHeight);
+    }
+
+    public void drawVisibleObject(GameVisibleObject object, double camX, double camY, double camWidth, double camHeight) {
+        // Draw sprite of GameObject
+        this.drawSprite(object.getX(), object.getY(), object.getSprite(), camX, camY, camWidth, camHeight);
+
+        if(DEBUG) {
+            // Draw hitbox
+            if(object instanceof Creature) {
+                Collider col = ((Creature)object).getCollider();
+                this.drawRect(col.getX(), col.getY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
+            }
+        }
+    }
 }

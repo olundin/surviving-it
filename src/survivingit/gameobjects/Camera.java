@@ -51,7 +51,7 @@ public class Camera extends GameObject {
                 Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
-                    this.renderer.drawSprite(tileX - this.x, tileY - this.y, tile.getSprite(), this.width, this.height);
+                    this.renderer.drawSprite(tileX, tileY, tile.getSprite(), this.x, this.y, this.width, this.height);
                 }
             }
         }
@@ -68,8 +68,7 @@ public class Camera extends GameObject {
 
             if (gameObject instanceof GameVisibleObject) {
                 // Draw sprite at position relative to camera
-                this.renderer.drawSprite(gameObject.getX() - this.x, gameObject.getY() - this.y,
-                        ((GameVisibleObject)gameObject).getSprite(), this.width, this.height);
+                this.renderer.drawVisibleObject((GameVisibleObject)gameObject, this.x, this.y, this.width, this.height);
             }
         }
     }
