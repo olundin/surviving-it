@@ -13,7 +13,7 @@ public class Renderer extends Canvas {
     private static final boolean DEBUG = false;
 
 
-    public static final int UNIT_SIZE = 16; // Size of 1 game unit in pixels
+    public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels
     private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
 
     private int width;

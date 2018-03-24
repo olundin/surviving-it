@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class SpriteSheet {
 
-    public static final SpriteSheet HERO = new SpriteSheet("hero.png");
-    public static final SpriteSheet TILES = new SpriteSheet("tiles.png");
+    public static final SpriteSheet HERO = new SpriteSheet("hero_clothed.png");
+    public static final SpriteSheet SNOW_TILES = new SpriteSheet("snow_tiles.png");
     public static final SpriteSheet FOXES = new SpriteSheet("foxes.png");
     public static final SpriteSheet MEME_MAN = new SpriteSheet("mememan.png");
 

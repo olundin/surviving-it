@@ -2,12 +2,11 @@ package survivingit.scene;
 
 import survivingit.gameobjects.*;
 import survivingit.gameobjects.Camera;
-import survivingit.graphics.Sprite;
 import survivingit.physics.Collider;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Scene {
 
@@ -21,6 +20,7 @@ public abstract class Scene {
     private Tile[][] tiles;
 
     private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
+    private Random random;
 
     public Scene(Camera camera) {
         this.width = 32;
@@ -31,13 +31,14 @@ public abstract class Scene {
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
 
+        this.gameObjectComparator = new GameObjectComparator();
+        this.random = new Random();
+
         for(int y = 0; y < this.height; y++) {
             for(int x = 0; x < this.height; x++) {
-                this.tiles[y][x] = Tile.SNOW_1;
+                this.tiles[y][x] = Tile.getTile(random.nextInt(16)); // Higher bound -> less obstacles
             }
         }
-
-        this.gameObjectComparator = new GameObjectComparator();
     }
 
     public void addPlayer(Player player) {
@@ -55,6 +56,7 @@ public abstract class Scene {
     }
 
     public void update(double dt) {
+        // Sort gameObjects by y position. Makes them render correctly
         gameObjects.sort(this.gameObjectComparator);
 
         for (GameObject gameObject : gameObjects) {
@@ -66,7 +68,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (xInt < 0 || xInt >= width || yInt < 0 || yInt >= height) {
-            return Tile.SNOW_2;
+            return Tile.SNOW_PLAIN;
         } else {
             return tiles[yInt][xInt];
         }
@@ -74,14 +76,11 @@ public abstract class Scene {
 
     public List<Tile> getTilesInArea(double startX, double startY, double endX, double endY) {
         List<Tile> tilesInArea = new ArrayList<>();
-        //System.out.println(startX + "; " + startY + "; " + endX + "; " + endY);
         for(int y = (int)Math.floor(startY); y < (int)Math.floor(endY) + 1; y++) {
             for(int x = (int)Math.floor(startX); x < (int)Math.floor(endX) + 1; x++) {
                 tilesInArea.add(getTileAt(x, y));
             }
         }
-        System.out.println(tilesInArea.size());
-
         return tilesInArea;
     }
 

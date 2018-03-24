@@ -43,6 +43,10 @@ public class InputHandler {
             camera.zoom(mouse.getScroll());
         }
 
+        if(mouse.getButtonPressed(Input.BUTTON_LEFT)) {
+            System.out.println(camera.screenToWorldX(mouse.getX()) + ", " + camera.screenToWorldY(mouse.getY()));
+        }
+
         // Set camera position to be between player and mouse
         camera.setPos(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1) - camera.getWidth()/2,
