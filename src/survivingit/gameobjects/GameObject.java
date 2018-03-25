@@ -51,7 +51,7 @@ public abstract class GameObject implements Updateable {
         }
     }
 
-    public void update(double dt) {}; // TODO: Remove
+    public void update(double dt) {} // TODO: Remove
 
     public void setScene(Scene scene) {
         this.scene = scene;

@@ -12,7 +12,6 @@ public class Renderer extends Canvas {
 
     private static final boolean DEBUG = false;
 
-
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels
     private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
 
@@ -93,10 +92,8 @@ public class Renderer extends Canvas {
 
         if(DEBUG) {
             // Draw hitbox
-            if(object instanceof Creature) {
-                Collider col = ((Creature)object).getCollider();
-                this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
-            }
+            Collider col = (object).getCollider();
+            this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
         }
     }
 }

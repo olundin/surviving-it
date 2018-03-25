@@ -26,7 +26,6 @@ public class Game {
 
     private boolean running = false;
 
-
     private Game() {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);

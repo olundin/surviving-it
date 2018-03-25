@@ -107,4 +107,14 @@ public class Camera extends GameObject {
         return this.y + screenY / ppu;
     }
 
+    public double worldToScreenX(double worldX) {
+        double ppu = renderer.getWidth() / this.width; // Screen pixels per unit
+        return (worldX - this.x) * ppu;
+    }
+
+    public double worldToScreenY(double worldY) {
+        double ppu = renderer.getHeight() / this.height; // Screen pixels per unit
+        return (worldY - this.y) * ppu;
+    }
+
 }

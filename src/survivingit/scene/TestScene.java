@@ -1,10 +1,6 @@
 package survivingit.scene;
 
-import survivingit.gameobjects.Camera;
-import survivingit.gameobjects.Creature;
-import survivingit.gameobjects.Fox;
-import survivingit.gameobjects.Player;
-import survivingit.graphics.Sprite;
+import survivingit.gameobjects.*;
 
 public class TestScene extends Scene {
 
@@ -12,6 +8,7 @@ public class TestScene extends Scene {
         super(camera);
         this.addPlayer(new Player(-1, -1));
         this.add(new Fox(5, 5));
+        this.add(new Campfire(-3, -3));
     }
 
 }

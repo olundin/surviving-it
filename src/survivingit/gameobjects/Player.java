@@ -13,8 +13,8 @@ public class Player extends Creature {
     private Sprite[] sprites;
 
     public Player(final double x, final double y) {
-	    super(x, y, Sprite.HERO_UP[0], 50, 2);
-	    this.setCollider(new Collider(0.15, 1.25, 0.325, 0.35, false, this));
+	    super(x, y, Sprite.HERO_DOWN[0], 50, 2);
+	    this.setCollider(new Collider(0.2, 1.25, 0.35, 0.35, false, this));
 
 	    this.secondTimer = 0.0;
 	    this.lastX = this.x;
@@ -53,10 +53,10 @@ public class Player extends Creature {
             }
             setSprite(sprites[frame]);
         } else {
-            if(secondTimer >= 2) {
+            if(secondTimer >= 3) {
                 this.setSprite(sprites[4]);
             }
-            if(secondTimer >= 2.5) {
+            if(secondTimer >= 4) {
                 this.setSprite(sprites[0]);
                 secondTimer = 0.0;
             }

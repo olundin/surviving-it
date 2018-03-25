@@ -4,6 +4,7 @@ import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.Player;
 import survivingit.gameobjects.Camera;
 
+import survivingit.scene.Scene;
 import survivingit.util.Maths;
 
 public class InputHandler {
@@ -41,10 +42,6 @@ public class InputHandler {
         // Zoom in/out with scroll wheel (!)
         if(mouse.getScroll() != 0) {
             camera.zoom(mouse.getScroll());
-        }
-
-        if(mouse.getButtonPressed(Input.BUTTON_LEFT)) {
-            System.out.println(camera.screenToWorldX(mouse.getX()) + ", " + camera.screenToWorldY(mouse.getY()));
         }
 
         // Set camera position to be between player and mouse

@@ -33,9 +33,6 @@ public class Sprite {
         new Sprite(72, 156, 24, 52, SpriteSheet.HERO),
         new Sprite(96, 156, 24, 52, SpriteSheet.HERO)
     };
-    public static final Sprite HERO_1 = new Sprite(20, 0, 20, 52, SpriteSheet.HERO);
-    public static final Sprite HERO_2 = new Sprite(40, 0, 20, 52, SpriteSheet.HERO);
-    public static final Sprite HERO_3 = new Sprite(60, 0, 20, 52, SpriteSheet.HERO);
 
     public static final Sprite SNOW_PLAIN = new Sprite(0, 0, 32, 32, SpriteSheet.SNOW_TILES);
     public static final Sprite SNOW_BUMPY = new Sprite(32, 0, 32, 32, SpriteSheet.SNOW_TILES);

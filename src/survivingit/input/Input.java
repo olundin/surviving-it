@@ -14,6 +14,7 @@ public enum Input
 
     KEY_SPACE(32),
     KEY_RETURN(10),
+    KEY_SHIFT(16),
 
 
     BUTTON_LEFT(1),
