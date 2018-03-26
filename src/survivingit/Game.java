@@ -5,6 +5,7 @@ import survivingit.graphics.Renderer;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
+import survivingit.scene.CampfireScene;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 
@@ -43,7 +44,7 @@ public class Game {
     	renderer.createBufferStrategy(3);
 
         this.camera = new Camera(0, 0, 16, 9, renderer);
-        this.currentScene = new TestScene(camera);
+        this.currentScene = new CampfireScene(camera);
     }
 
     private void start() {

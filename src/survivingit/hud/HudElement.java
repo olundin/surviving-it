@@ -1,0 +1,17 @@
+package survivingit.hud;
+
+public class HudElement {
+
+    private double x; // 0 - 100 (percentage of window width)
+    private double y;  // 0 - 100 (percentage of window width)
+
+    private double width;
+    private double height;
+
+    public HudElement(final double x, final double y, final double width, final double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+}

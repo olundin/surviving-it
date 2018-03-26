@@ -7,7 +7,7 @@ import survivingit.physics.Collider;
 
 public class Campfire extends GameVisibleObject {
 
-    private AnimatedSprite animatedSprite;
+    private static AnimatedSprite animatedSprite;
 
     public Campfire(double x, double y) {
         super(x, y, Sprite.MEME_MAN);

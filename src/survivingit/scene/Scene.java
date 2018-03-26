@@ -5,6 +5,7 @@ import survivingit.gameobjects.Camera;
 import survivingit.physics.Collider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -57,7 +58,8 @@ public abstract class Scene {
 
     public void update(double dt) {
         // Sort gameObjects by y position. Makes them render correctly
-        gameObjects.sort(this.gameObjectComparator);
+        //gameObjects.sort(this.gameObjectComparator);
+        Collections.sort(gameObjects, gameObjectComparator);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.update(dt);

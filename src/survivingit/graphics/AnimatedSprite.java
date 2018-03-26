@@ -2,9 +2,21 @@ package survivingit.graphics;
 
 public class AnimatedSprite {
 
+    private enum AnimationDirection {
+        FORWARDS(1),
+        BACKWARDS(-1);
+
+        public final int step;
+
+        AnimationDirection(int step) {
+            this.step = step;
+        }
+
+    }
+
     private int frameIndex; // Current frame
     private double frameLength; // Length in seconds of each frame
-    private int direction; // Direction to play in, forwards = 1, backwards = -1
+    private AnimationDirection direction; // Direction to play in, forwards = 1, backwards = -1
     private boolean paused; // If true, pause animation at current frame
     private double timer; // Keep track of time, in seconds
 
@@ -13,7 +25,7 @@ public class AnimatedSprite {
     public AnimatedSprite(final Sprite[] frames, final double frameLength) {
         this.frameIndex = 0;
         this.frameLength = frameLength;
-        this.direction = 1;
+        this.direction = AnimationDirection.FORWARDS;
         this.paused = false;
         this.timer = 0.0;
 
@@ -23,7 +35,7 @@ public class AnimatedSprite {
     public AnimatedSprite(final SpriteSheet spriteSheet, final int width, final int height, final double frameLength) {
         this.frameIndex = 0;
         this.frameLength = frameLength;
-        this.direction = 1;
+        this.direction = AnimationDirection.FORWARDS;
         this.paused = false;
         this.timer = 0.0;
 
@@ -43,7 +55,7 @@ public class AnimatedSprite {
 
         if(timer >= frameLength) {
             timer = 0.0;
-            frameIndex += direction;
+            frameIndex += direction.step;
 
             if(frameIndex > frames.length - 1) {
                 frameIndex = 0;
@@ -66,9 +78,8 @@ public class AnimatedSprite {
         this.frameIndex = 0;
     }
 
-    public void setDirection(int d) {
-        // TODO: Make sure direction is valid (-1 or 1)
-        this.direction = d;
+    public void setDirection(boolean forwards) {
+        this.direction = forwards ? AnimationDirection.FORWARDS : AnimationDirection.BACKWARDS;
     }
 
     public Sprite getSprite() {
