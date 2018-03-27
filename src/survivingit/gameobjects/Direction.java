@@ -2,6 +2,11 @@ package survivingit.gameobjects;
 
 import survivingit.util.Maths;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public enum Direction {
 
     LEFT(-1, 0),
@@ -20,6 +25,14 @@ public enum Direction {
     Direction(final double x, final double y) {
         this.x = x;
         this.y = y;
+    }
+
+    private static final List<Direction> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final int SIZE = VALUES.size();
+    private static final Random RANDOM = new Random();
+
+    public static Direction randomDirection() {
+        return VALUES.get(RANDOM.nextInt(SIZE));
     }
 
 }

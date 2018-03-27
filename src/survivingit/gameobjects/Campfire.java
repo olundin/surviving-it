@@ -7,12 +7,20 @@ import survivingit.physics.Collider;
 
 public class Campfire extends GameVisibleObject {
 
-    private static AnimatedSprite animatedSprite;
+    private AnimatedSprite animatedSprite;
 
     public Campfire(double x, double y) {
         super(x, y, Sprite.CAMPFIRE);
         this.setCollider(new Collider(0.1, 0.5, 0.8, 0.75, false, this));
-        this.animatedSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE, 32, 32, 0.1);
+
+        this.animatedSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE,
+                                                 0,
+                                                 0,
+                                                 32,
+                                                 32,
+                                                 5,
+                                                 1,
+                                                 0.1);
     }
 
     public void update(double dt) {
