@@ -10,10 +10,11 @@ public class Hud {
 
     private List<HudElement> elements;
 
-    public Hud(int width, int height, Player player) {
+    public Hud(Player player) {
         this.elements = new ArrayList<>();
 
-        this.add(new HealthBar(50, 50, 5, 1, player));
+
+        this.add(new HealthBar(2.0, 90.0, 10, 3, player));
     }
 
     private void add(HudElement element) {

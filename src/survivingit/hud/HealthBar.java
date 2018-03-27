@@ -12,6 +12,8 @@ public class HealthBar extends ProgressBar implements PlayerObserver {
         this.min = 0;
         this.max = player.getMaxHealth();
         this.current = player.getCurrentHealth();
+
+        player.setHealthObserver(this);
     }
 
     public void onNotify(Player player) {

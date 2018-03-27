@@ -47,6 +47,14 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         this.maxHealth = maxHealth;
     }
 
+    public void takeDamage(int amount) {
+        this.setCurrentHealth(currentHealth - amount);
+        if(currentHealth < 0) {
+            // Player dead
+            this.setCurrentHealth(0);
+        }
+    }
+
     public void setMoveSpeed(final float moveSpeed) {
 	    this.moveSpeed = moveSpeed;
     }
@@ -54,4 +62,5 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
+
 }

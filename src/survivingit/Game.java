@@ -2,6 +2,7 @@ package survivingit;
 
 import survivingit.gameobjects.Camera;
 import survivingit.graphics.Renderer;
+import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
@@ -22,6 +23,7 @@ public class Game {
 
     private Scene currentScene;
     private Camera camera;
+    private Hud hud;
 
     private static final int UPDATE_LIMIT = 60; // Max updates per second
 
@@ -45,6 +47,7 @@ public class Game {
 
         this.camera = new Camera(0, 0, 16, 9, renderer);
         this.currentScene = new TestScene(camera);
+        this.hud = new Hud(currentScene.getPlayer());
     }
 
     private void start() {
@@ -86,7 +89,9 @@ public class Game {
     private void render() {
         renderer.prepare();
         renderer.clear();
+
         camera.render(currentScene);
+        hud.render(renderer);
 
         renderer.display();
     }
