@@ -44,7 +44,7 @@ public class Game {
     	renderer.createBufferStrategy(3);
 
         this.camera = new Camera(0, 0, 16, 9, renderer);
-        this.currentScene = new CampfireScene(camera);
+        this.currentScene = new TestScene(camera);
     }
 
     private void start() {
@@ -87,6 +87,7 @@ public class Game {
         renderer.prepare();
         renderer.clear();
         camera.render(currentScene);
+
         renderer.display();
     }
 

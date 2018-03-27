@@ -47,6 +47,9 @@ public class Sprite {
     public static final Sprite FOX = new Sprite(0, 0,46,57, SpriteSheet.FOXES);
     public static final Sprite MEME_MAN = new Sprite(0,0, 17, 23, SpriteSheet.MEME_MAN);
 
+
+    public static final Sprite CAMPFIRE = new Sprite(0, 0, 32, 32, SpriteSheet.CAMP_FIRE);
+
     private int x;
     private int y;
     private int width;

@@ -1,17 +1,18 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
-import survivingit.physics.Collider;
 
 public abstract class Creature extends GameVisibleObject implements Updateable {
 
-    protected int health;
+    protected int currentHealth;
+    protected int maxHealth;
     protected double moveSpeed; // Tiles per second
     protected Direction direction;
 
-    public Creature(final double x, final double y, final Sprite sprite, final int health, final double moveSpeed) {
+    public Creature(final double x, final double y, final Sprite sprite, final int maxHealth, final double moveSpeed) {
 	    super(x, y, sprite);
-	    this.health = health;
+	    this.currentHealth = maxHealth;
+	    this.maxHealth = maxHealth;
 	    this.moveSpeed = moveSpeed;
 	    this.direction = Direction.NONE;
     }
@@ -22,8 +23,12 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         }
     }
 
-    public int getHealth() {
-	    return health;
+    public int getCurrentHealth() {
+	    return currentHealth;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
     }
 
     public double getMoveSpeed() {
@@ -34,8 +39,12 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         return this.direction;
     }
 
-    public void setHealth(final int health) {
-	    this.health = health;
+    public void setCurrentHealth(final int currentHealth) {
+	    this.currentHealth = currentHealth;
+    }
+
+    public void setMaxHealth(final int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public void setMoveSpeed(final float moveSpeed) {

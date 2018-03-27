@@ -8,7 +8,7 @@ import survivingit.gameobjects.Player;
 public class CampfireScene extends Scene {
 
     public CampfireScene(Camera camera) {
-        super(camera);
+        super(32, 32, camera);
         this.addPlayer(new Player(-1, -1));
         this.add(new Fox(5, 5));
         for(double x = 0.0; x < 50; x += 0.25) {

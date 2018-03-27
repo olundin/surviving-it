@@ -2,6 +2,8 @@ package survivingit.graphics;
 
 import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.hud.Hud;
+import survivingit.hud.ProgressBar;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
 
@@ -34,8 +36,8 @@ public class Renderer extends Canvas {
     }
 
     public void prepare() {
-	bufferStrategy = this.getBufferStrategy();
-	graphics = bufferStrategy.getDrawGraphics();
+        bufferStrategy = this.getBufferStrategy();
+        graphics = bufferStrategy.getDrawGraphics();
     }
 
     public void clear() {
@@ -45,8 +47,12 @@ public class Renderer extends Canvas {
 
     public void display() {
         graphics.dispose(); // Release system resources
-	bufferStrategy.show();
+	    bufferStrategy.show();
     }
+
+    /*
+     WORLD - Takes world coordinates
+    */
 
     public void drawSprite(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight) {
 
@@ -95,5 +101,23 @@ public class Renderer extends Canvas {
             Collider col = (object).getCollider();
             this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
         }
+    }
+
+
+    /*
+     HUD - takes screen coordinates
+      */
+
+    public void drawHud(Hud hud) {
+        for
+    }
+
+    public void drawProgressBar(ProgressBar progressBar) {
+        int drawX = (int)(progressBar.getX() * this.width);
+        int drawY = (int)(progressBar.getY() * this.height);
+        int drawWidth = (int)(progressBar.getWidth() * this.width);
+        int drawHeight = (int)(progressBar.getHeight() * this.height);
+        graphics.setColor(progressBar.getColor());
+
     }
 }

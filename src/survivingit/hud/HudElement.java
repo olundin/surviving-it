@@ -1,6 +1,8 @@
 package survivingit.hud;
 
-public class HudElement {
+import survivingit.graphics.Renderer;
+
+public abstract class HudElement {
 
     private double x; // 0 - 100 (percentage of window width)
     private double y;  // 0 - 100 (percentage of window width)
@@ -14,4 +16,22 @@ public class HudElement {
         this.width = width;
         this.height = height;
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public abstract void render(Renderer renderer);
 }

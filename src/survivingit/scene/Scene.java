@@ -20,26 +20,19 @@ public abstract class Scene {
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
 
-    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
     private Random random;
 
-    public Scene(Camera camera) {
-        this.width = 32;
-        this.height = 32;
+    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
+    public Scene(final int width, final int height, Camera camera) {
+        this.width = width;
+        this.height = height;
         this.camera = camera;
-
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
-
-        this.gameObjectComparator = new GameObjectComparator();
         this.random = new Random();
-
-        for(int y = 0; y < this.height; y++) {
-            for(int x = 0; x < this.height; x++) {
-                this.tiles[y][x] = Tile.getTile(random.nextInt(16)); // Higher bound -> less obstacles
-            }
-        }
+        this.gameObjectComparator = new GameObjectComparator();
+        this.randomizeTiles();
     }
 
     public void addPlayer(Player player) {
@@ -116,5 +109,14 @@ public abstract class Scene {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             tiles[(int) Math.floor(y)][(int) Math.floor(x)] = tile;
         }
+    }
+
+    private Tile[][] randomizeTiles() {
+        for(int y = 0; y < this.height; y++) {
+            for(int x = 0; x < this.width; x++) {
+                this.tiles[y][x] = Tile.getTile(random.nextInt(16)); // Higher bound -> less obstacles
+            }
+        }
+        return tiles;
     }
 }
