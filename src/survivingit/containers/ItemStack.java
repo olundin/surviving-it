@@ -14,6 +14,12 @@ public class ItemStack {
         this.numberOfItems = 1;
     }
 
+    public ItemStack(final ItemType itemType, final int stackLimit, final int numberOfItems) {
+        this.itemType = itemType;
+        this.stackLimit = stackLimit;
+        this.numberOfItems = numberOfItems;
+    }
+
     /**
      * Adds the entered number of items to the itemStack and returns the number of items that couldn't fit in the stack.
      * @param amount of items to be added to the stack.
@@ -22,7 +28,13 @@ public class ItemStack {
     public int addItems(int amount) {
         int excessAmount = Math.max(this.numberOfItems + amount - this.stackLimit, 0);
         this.numberOfItems += amount - excessAmount;
-        return excessAmount;
+        return excessAmount;    
+    }
+
+    public ItemStack addItemStack(ItemStack itemStack) {
+        if (this.itemType != itemStack.getItemType()) {
+
+        }
     }
 
     public ItemType getItemType() {

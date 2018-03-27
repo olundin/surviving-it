@@ -12,20 +12,45 @@ public abstract class Container {
     private int usedSlots;
 
     public Container(final int size) {
-        this.itemSlots = new Item[size];
+        this.itemSlots = new ItemSlot[size];
         this.size = size;
         this.usedSlots = 0;
     }
 
-    public void addItem(Item item) {
-        if (this.isFull()) {
-            throw new IllegalStateException("Container already full.");
+    public ItemSlot getItemAt(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Illegal index entered");
         }
-        itemSlots[this.getFirstEmptyIndex()] =
+        return this.itemSlots[index];
     }
 
-    private int getFirstEmptyIndex() {
-        return 0;
+    public ItemStack addItemStackToFirstAvailableSpot(ItemStack itemStack) {
+        ItemSlot existingSlot = this.getFirstExistingSlot(itemStack);
+        if (existingSlot != null) {
+            return existingSlot.addItemStack(itemStack);
+        } else if (!this.isFull()) {
+            return getFirstEmptySlot().addItemStack(itemStack);
+        } else {
+            throw new IllegalStateException("Container already full");
+        }
+    }
+
+    private ItemSlot getFirstExistingSlot(ItemStack itemStack) {
+        for (ItemSlot itemSlot : itemSlots) {
+            if (!itemSlot.isEmpty() && itemSlot.getItemType() == itemStack.getItemType()) {
+                return itemSlot;
+            }
+        }
+        return null;
+    }
+
+    private ItemSlot getFirstEmptySlot() {
+        for (ItemSlot itemSlot : itemSlots) {
+            if (itemSlot.isEmpty()) {
+                return itemSlot;
+            }
+        }
+        return null;
     }
 
     private boolean isFull() {
