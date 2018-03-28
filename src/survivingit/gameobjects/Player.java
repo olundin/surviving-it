@@ -14,9 +14,9 @@ public class Player extends Creature {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              1);
+              3);
 
-	    this.setCollider(new Collider(0.2, 1.25, 0.35, 0.35, false, this));
+	    this.setCollider(new Collider(-0.2, 0.2, 0.4, 0.6, false, this));
     }
 
     @Override

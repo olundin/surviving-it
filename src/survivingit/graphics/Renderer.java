@@ -9,7 +9,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels
     private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
@@ -52,7 +52,7 @@ public class Renderer extends Canvas {
      WORLD - Takes world coordinates
     */
 
-    public void drawSprite(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight) {
+    public void drawSprite(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight, boolean centered) {
 
         // Pixels per unit (ppu)
         double ppuWidth = this.width / camWidth;
@@ -64,6 +64,12 @@ public class Renderer extends Canvas {
         int drawY = (int)((y - camY) * ppuHeight) - SPRITE_PADDING;
         int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
         int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
+
+
+        if(centered) {
+            drawX -= (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE)/2;
+            drawY -= (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE)/2;
+        }
 
         graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
@@ -92,7 +98,7 @@ public class Renderer extends Canvas {
 
     public void drawVisibleObject(GameVisibleObject object, double camX, double camY, double camWidth, double camHeight) {
         // Draw sprite of GameObject
-        this.drawSprite(object.getX(), object.getY(), object.getSprite(), camX, camY, camWidth, camHeight);
+        this.drawSprite(object.getX(), object.getY(), object.getSprite(), camX, camY, camWidth, camHeight, true);
 
         if(DEBUG) {
             // Draw hitbox

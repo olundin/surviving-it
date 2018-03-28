@@ -10,18 +10,17 @@ import java.util.Random;
 public class Fox extends Creature {
 
     private double timer; // Used when randomizing direction;
-    private Random random;
+    private static Random random = new Random();
 
     public Fox(final double x, final double y) {
         super(x,
               y,
-              new CreatureSprite(SpriteSheet.FOXES, 0, 0, 48, 48),
+              new CreatureSprite(SpriteSheet.FOXES, random.nextInt(8) * 129, 0, 43, 40),
               20,
               2.5);
 
-        this.setCollider(new Collider(0.4, 0.6, 0.7, 0.9, false, this));
+        this.setCollider(new Collider(-0.2, 0, 0.4, 0.5, false, this));
         this.timer = 0.0;
-        this.random = new Random();
     }
 
     @Override

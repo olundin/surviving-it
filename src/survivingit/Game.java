@@ -72,10 +72,7 @@ public class Game {
                 // Make sure we aren't updating too often
                 frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
             }
-
         }
-
-
     }
 
 
