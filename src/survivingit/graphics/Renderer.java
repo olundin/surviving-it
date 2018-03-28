@@ -6,17 +6,13 @@ import survivingit.physics.Collider;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Renderer extends Canvas {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels
     private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
-
-    private static final Font FONT = loadFont("8bit.ttf");
 
     private int width;
     private int height;
@@ -112,45 +108,17 @@ public class Renderer extends Canvas {
 
     public void drawProgressBar(ProgressBar progressBar) {
         final int padding = 2;
-        int drawX = (int)(progressBar.getX()/100 * this.width);
-        int drawY = (int)(progressBar.getY()/100 * this.height);
-        int drawWidth = (int)(progressBar.getWidth()/100 * this.width);
-        int drawHeight = (int)(progressBar.getHeight()/100 * this.height);
+        int drawX = (int) (progressBar.getX() / 100 * this.width);
+        int drawY = (int) (progressBar.getY() / 100 * this.height);
+        int drawWidth = (int) (progressBar.getWidth() / 100 * this.width);
+        int drawHeight = (int) (progressBar.getHeight() / 100 * this.height);
 
         // Draw rect behind bar
         graphics.setColor(Color.black);
-        graphics.fillRect(drawX - padding, drawY - padding, drawWidth + 2*padding, drawHeight + 2*padding);
+        graphics.fillRect(drawX - padding, drawY - padding, drawWidth + 2 * padding, drawHeight + 2 * padding);
 
         // Draw bar itself, with current progress
         graphics.setColor(progressBar.getColor());
         graphics.fillRect(drawX, drawY, drawWidth * progressBar.getCurrent() / progressBar.getMax(), drawHeight);
-
-        // Draw health text
-        drawText("Health" + progressBar.getCurrent(), drawX, drawY + drawHeight, FONT, Color.black, 42);
-    }
-
-    public void drawText(String text, int x, int y, Font font, Color color, int size) {
-        //
-        //
-        //  System.out.println(font.getAttributes());
-        graphics.setColor(color);
-        graphics.setFont(font);
-        graphics.drawString(text, x, y);
-    }
-
-    /*
-     MISC.
-     */
-
-    private static Font loadFont(String name) {
-        // TODO: REMOVE THIS RETARDED SOLUTION
-        Font font = null;
-        try {
-            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("res/fonts/" + name);
-            font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(48f);
-        } catch (IOException |FontFormatException e) {
-            System.out.println("Error reading image " + name);
-        }
-        return font;
     }
 }

@@ -1,7 +1,6 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
-import survivingit.graphics.Sprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.messaging.PlayerObserver;
 import survivingit.physics.Collider;
@@ -15,7 +14,7 @@ public class Player extends Creature {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              5);
+              1);
 
 	    this.setCollider(new Collider(0.2, 1.25, 0.35, 0.35, false, this));
     }

@@ -1,7 +1,6 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Renderer;
-import survivingit.scene.Scene;
 import survivingit.scene.Tile;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class Camera extends GameObject {
         this.y += (delta * relation) / 2;
     }
 
-    public void render(Scene scene) {
+    public void render(Renderer renderer) {
         // Make sure target is being followed if it exists
         if (hasTarget()) {
             this.setCenterPos(target.getX(), target.getY());
@@ -51,16 +50,16 @@ public class Camera extends GameObject {
         // Render visible Tiles
         for (int tileY = (int)Math.floor(this.y - EDGE_PADDING); tileY < this.y + this.height + EDGE_PADDING; tileY++) {
             for (int tileX = (int)Math.floor(this.x - EDGE_PADDING); tileX < this.x + this.width + EDGE_PADDING; tileX++) {
-                Tile tile = scene.getTileAt(tileX, tileY);
+                Tile tile = this.scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
-                    this.renderer.drawSprite(tileX, tileY, tile.getSprite(), this.x, this.y, this.width, this.height);
+                    renderer.drawSprite(tileX, tileY, tile.getSprite(), this.x, this.y, this.width, this.height);
                 }
             }
         }
 
         // Render visible GameObjects
-        List<GameObject> objectsInArea = scene.getObjectsInArea(
+        List<GameObject> objectsInArea = this.scene.getObjectsInArea(
                 this.x - EDGE_PADDING,
                 this.y - EDGE_PADDING,
                 this.x + this.width + EDGE_PADDING,
@@ -71,7 +70,7 @@ public class Camera extends GameObject {
 
             if (gameObject instanceof GameVisibleObject) {
                 // Draw sprite at position relative to camera
-                this.renderer.drawVisibleObject((GameVisibleObject)gameObject, this.x, this.y, this.width, this.height);
+                renderer.drawVisibleObject((GameVisibleObject)gameObject, this.x, this.y, this.width, this.height);
             }
         }
     }
@@ -93,28 +92,13 @@ public class Camera extends GameObject {
         this.y = y - this.height/2;
     }
 
-    public double getCenterX() {
-        return this.x + this.width / 2;
-    }
-
     public double screenToWorldX(double screenX) {
-        double ppu = renderer.getWidth() / this.width; // Screen pixels per unit
+        double ppu = this.renderer.getWidth() / this.width; // Screen pixels per unit
         return this.x + screenX / ppu;
     }
 
     public double screenToWorldY(double screenY) {
-        double ppu = renderer.getHeight() / this.height; // Screen pixels per unit
+        double ppu = this.renderer.getHeight() / this.height; // Screen pixels per unit
         return this.y + screenY / ppu;
     }
-
-    public double worldToScreenX(double worldX) {
-        double ppu = renderer.getWidth() / this.width; // Screen pixels per unit
-        return (worldX - this.x) * ppu;
-    }
-
-    public double worldToScreenY(double worldY) {
-        double ppu = renderer.getHeight() / this.height; // Screen pixels per unit
-        return (worldY - this.y) * ppu;
-    }
-
 }

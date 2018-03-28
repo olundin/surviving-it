@@ -83,7 +83,7 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     }
 
     public boolean isMoving() {
-        return Math.abs(this.x - this.lastX) > 0.001 || Math.abs(this.y - this.lastY) > 0.001;
+        return Math.abs(this.x - this.lastX) > 0.00001 || Math.abs(this.y - this.lastY) > 0.00001;
     }
 
 }

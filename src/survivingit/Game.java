@@ -6,7 +6,6 @@ import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
-import survivingit.scene.CampfireScene;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 
@@ -24,8 +23,6 @@ public class Game {
     private Scene currentScene;
     private Camera camera;
     private Hud hud;
-
-    private static final int UPDATE_LIMIT = 60; // Max updates per second
 
     private boolean running = false;
 
@@ -45,32 +42,40 @@ public class Game {
 
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, 16, 9, renderer);
+        this.camera = new Camera(0, 0, 24, 13.5, renderer);
         this.currentScene = new TestScene(camera);
+        this.currentScene.add(this.camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
 
     private void start() {
         running = true;
 
-        double t = 0.0; // Game time
-        double dt = 1 / 60.0;
+        final double targetDelta = 1.0/60.0;
+        final double maxDelta = 0.05;
+        long previousTime = System.nanoTime();
+        final double nanosPerSec = 1_000_000_000.0;
 
-        double currentTime = System.currentTimeMillis() / 1000.0;
+        while(running) {
+            long currentTime = System.nanoTime();
+            double deltaTime = (currentTime - previousTime) / nanosPerSec;
 
-        while (running) {
-            double newTime =  System.currentTimeMillis() / 1000.0;
-            double frameTime = newTime - currentTime;
-            currentTime = newTime;
+            deltaTime = Math.min(deltaTime, maxDelta);   // Set a cap to deltaTime
 
-            while(frameTime > 0.0) {
-                double deltaTime = Math.min(frameTime, dt); // Make sure that deltaTime is never greater than dt
-                update(deltaTime);
-                frameTime -= deltaTime;
-                t += deltaTime;
+            this.update(deltaTime);
+            this.render();
+
+            previousTime = currentTime;
+
+            double frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
+            while(targetDelta - frameTime > 0) {
+                // Make sure we aren't updating too often
+                frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
             }
-            render();
+
         }
+
+
     }
 
 
@@ -80,17 +85,17 @@ public class Game {
 
     private void update(double dt) {
         inputHandler.handleInput(currentScene.getPlayer(), camera);
+        currentScene.update(dt);
 
         keyboard.clear();
         mouse.clear();
-        currentScene.update(dt);
     }
 
     private void render() {
         renderer.prepare();
         renderer.clear();
 
-        camera.render(currentScene);
+        camera.render(renderer);
         hud.render(renderer);
 
         renderer.display();

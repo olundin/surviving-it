@@ -45,6 +45,7 @@ public class InputHandler {
         }
 
         // Set camera position to be between player and mouse
+
         camera.setPos(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1) - camera.getWidth()/2,
                 Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1) - camera.getHeight()/2
