@@ -11,18 +11,18 @@ public class Item {
     private final Sprite sprite;
     private final int stackSize;
     private final String name;
-    private List<AbstractEffect> abstractEffects;
+    private List<AbstractEffect> effects;
 
     public Item(final String name, final String description, final Sprite sprite, final int stackSize) {
         this.name = name;
         this.description = description;
         this.sprite = sprite;
         this.stackSize = stackSize;
-        this.abstractEffects = new ArrayList<>();
+        this.effects = new ArrayList<>();
     }
 
     public void addEffect(AbstractEffect abstractEffect) {
-        this.abstractEffects.add(abstractEffect);
+        this.effects.add(abstractEffect);
     }
 
     public String getDescription() {
