@@ -97,7 +97,7 @@ public class Renderer extends Canvas {
         if(DEBUG) {
             // Draw hitbox
             Collider col = (object).getCollider();
-            this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.cyan, camX, camY, camWidth, camHeight);
+            this.drawRect(col.getWorldX(), col.getWorldY(), col.getWidth(), col.getHeight(), Color.RED, camX, camY, camWidth, camHeight);
         }
     }
 
