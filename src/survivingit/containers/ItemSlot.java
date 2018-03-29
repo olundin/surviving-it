@@ -27,4 +27,10 @@ public class ItemSlot {
         return this.itemStack.isEmpty();
     }
 
+<<<<<<< HEAD
+=======
+    public ItemStack addItemStack(ItemStack itemStack) {
+        return this.itemStack.addItemStack(itemStack);
+    }
+>>>>>>> 20ea7516ec0cf62b80f760a5d58596d09ba630c6
 }
