@@ -6,11 +6,11 @@ package survivingit.containers;
 public class PlayerInventory {
 
     private ItemContainer passiveStorage;
-    private PlayerActiveInventory activeStorage;
+    private EquippableInventory equippableInventory;
 
     public PlayerInventory(int passiveStorageSize, int activeStorageSize) {
         this.passiveStorage = new ItemContainer(passiveStorageSize);
-        this.activeStorage = new PlayerActiveInventory(activeStorageSize);
+        this.equippableInventory = new EquippableInventory(activeStorageSize);
     }
 
 

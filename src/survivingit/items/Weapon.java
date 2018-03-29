@@ -2,10 +2,13 @@ package survivingit.items;
 
 import survivingit.graphics.Sprite;
 
-public abstract class Weapon extends Tool implements UsableItem {
+public abstract class Weapon extends Tool {
 
-    public Weapon(String description, Sprite sprite) {
+    private final int damage;
+
+    public Weapon(final int damage, final String description, final Sprite sprite) {
         super(description, sprite);
+        this.damage = damage;
     }
 
 
