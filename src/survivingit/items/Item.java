@@ -2,16 +2,27 @@ package survivingit.items;
 
 import survivingit.graphics.Sprite;
 
-public abstract class Item {
+import java.util.ArrayList;
+import java.util.List;
 
-    protected final String description;
-    protected final Sprite sprite;
-    protected final int stackSize;
+public class Item {
 
-    public Item(final String description, final Sprite sprite, final int stackSize) {
+    private final String description;
+    private final Sprite sprite;
+    private final int stackSize;
+    private final String name;
+    private List<AbstractEffect> abstractEffects;
+
+    public Item(final String name, final String description, final Sprite sprite, final int stackSize) {
+        this.name = name;
         this.description = description;
         this.sprite = sprite;
         this.stackSize = stackSize;
+        this.abstractEffects = new ArrayList<>();
+    }
+
+    public void addEffect(AbstractEffect abstractEffect) {
+        this.abstractEffects.add(abstractEffect);
     }
 
     public String getDescription() {
@@ -24,5 +35,9 @@ public abstract class Item {
 
     public int getStackSize() {
         return stackSize;
+    }
+
+    public String getName() {
+        return name;
     }
 }

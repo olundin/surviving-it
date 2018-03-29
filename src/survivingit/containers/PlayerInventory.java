@@ -13,6 +13,4 @@ public class PlayerInventory {
         this.equippableInventory = new EquippableInventory(activeStorageSize);
     }
 
-
-
 }

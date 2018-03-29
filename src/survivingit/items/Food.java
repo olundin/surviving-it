@@ -9,7 +9,7 @@ public class Food extends Item implements ConsumableItem {
     private final boolean cookable;
 
     public Food(final int healAmount, final boolean cookable, final String description, final Sprite sprite, final int stackSize) {
-        super(description, sprite, stackSize);
+        super(description, sprite, stackSize, "");
         this.healAmount = healAmount;
         this.cookable = cookable;
     }
