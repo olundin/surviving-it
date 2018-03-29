@@ -1,19 +1,30 @@
 package survivingit.containers;
 
+import survivingit.items.ItemType;
+
 public class ItemSlot {
 
     private final ItemSlotType itemSlotType;
     private ItemStack itemStack;
 
     public ItemSlot() {
-        this.itemSlotType = ItemSlotType.ALL;
+        this.itemSlotType = ItemSlotType.ANY;
     }
 
     public ItemSlot(final ItemSlotType itemSlotType) {
         this.itemSlotType = itemSlotType;
     }
 
+    public ItemType getItemType() {
+        return this.itemStack.getItemType();
+    }
+
     public ItemSlotType getItemSlotType() {
         return itemSlotType;
     }
+
+    public boolean isEmpty() {
+        return this.itemStack.isEmpty();
+    }
+
 }
