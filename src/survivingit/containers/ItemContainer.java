@@ -1,6 +1,7 @@
 package survivingit.containers;
 
 import survivingit.items.Item;
+import survivingit.items.ItemType;
 
 /**
  * Created by AngusLothian on 2018-03-23.
@@ -17,11 +18,23 @@ public class ItemContainer {
         this.usedSlots = 0;
     }
 
-    public void addItemStack(ItemStack itemStack) {
-        ItemSlot firstSharedSlot = this.getFirstSharedSlot(itemStack);
-        if (this.isFull()) {
-            throw new IllegalStateException("ItemContainer already full.");
+    public ItemStack addItemStackToFirstAvailableSpot(ItemStack itemStack) {
+            ItemSlot existingSlot = this.getFirstSharedSlot(itemStack);
+            if (existingSlot != null) {
+                return existingSlot.addItemStack(itemStack);
+            } else if (!this.isFull()) {
+                return getFirstEmptySlot().addItemStack(itemStack);
+            } else {
+                throw new IllegalStateException("Container already full");
+            }
         }
+
+
+    public ItemType getItemTypeAt(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        return this.itemSlots[index].getItemType();
     }
 
     public int getSize() {
@@ -39,20 +52,14 @@ public class ItemContainer {
 
     private ItemSlot getFirstSharedSlot(ItemStack itemStack) {
         for (ItemSlot itemSlot : itemSlots) {
-            if (!itemSlot.isEmpty() && itemSlot.get)
+            if (!itemSlot.isEmpty() && itemSlot.getItemType() == itemStack.getItemType()) {
+                return itemSlot;
+            }
         }
+        return null;
     }
 
     private boolean isFull() {
         return this.usedSlots == this.size;
-    }
-
-    public Item getItemAt(int index) {
-        if (index < 0 || index >= this.size) {
-            throw new IllegalArgumentException("Index out of bounds.");
-        }
-
-        
-
     }
 }

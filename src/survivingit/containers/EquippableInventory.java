@@ -1,13 +1,13 @@
 package survivingit.containers;
 
-import survivingit.items.Item;
+import survivingit.items.ItemType;
 
 public class EquippableInventory {
 
-    private Container container;
+    private ItemContainer container;
     private int equipIndex;
 
-    public Item getEquippedItem() {
-        return this.container.getItemAt(equipIndex);
+    public ItemType getEquippedItemType() {
+        return this.container.getItemTypeAt(equipIndex);
     }
 }

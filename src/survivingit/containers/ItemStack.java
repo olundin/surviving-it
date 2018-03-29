@@ -4,7 +4,7 @@ import survivingit.items.ItemType;
 
 public class ItemStack {
 
-    private ItemType itemType;
+    private final ItemType itemType;
     private final int stackLimit;
     private int numberOfItems;
 
@@ -23,17 +23,32 @@ public class ItemStack {
     /**
      * Adds the entered number of items to the itemStack and returns the number of items that couldn't fit in the stack.
      * @param amount of items to be added to the stack.
-     * @return the amount of items that couldn't fit in the stack.
      */
-    public int addItems(int amount) {
-        int excessAmount = Math.max(this.numberOfItems + amount - this.stackLimit, 0);
-        this.numberOfItems += amount - excessAmount;
-        return excessAmount;    
+    public void addAmount(int amount) {
+        if (amount < 0 || this.getSizeLeft() < amount) {
+            throw new IllegalArgumentException("Illegal amount entered");
+        }
+        this.numberOfItems += amount;
     }
 
-    public ItemStack addItemStack(ItemStack itemStack) {
-        if (this.itemType != itemStack.getItemType()) {
+    public void removeAmount(int amount) {
+        if (amount < 0 || this.getNumberOfItems() < amount) {
+            throw new IllegalArgumentException("Illegal amount entered");
+        }
+        this.numberOfItems -= amount;
+    }
 
+    public ItemStack addItemStack(ItemStack itemStackToAdd) {
+        if (this.itemType != itemStackToAdd.getItemType()) {
+            return itemStackToAdd;
+        } else if (itemStackToAdd.getSizeLeft() < this.getSizeLeft()){
+            this.addAmount(itemStackToAdd.getSizeLeft());
+            return new ItemStack(ItemType.NONE, 0);
+        } else {
+            int amountToAdd = this.getSizeLeft();
+            this.addAmount(amountToAdd);
+            itemStackToAdd.removeAmount(amountToAdd);
+            return itemStackToAdd;
         }
     }
 
@@ -50,6 +65,10 @@ public class ItemStack {
     }
 
     public boolean isEmpty() {
-        return this.numberOfItems == 0;
+        return this.itemType == ItemType.NONE;
+    }
+
+    private int getSizeLeft() {
+        return this.stackLimit - this.numberOfItems;
     }
 }
