@@ -45,4 +45,9 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
     public void heal(int healAmount) {
 	this.health += healAmount - Math.max(health + healAmount - maxHealth, 0);
     }
+
+    public void performAttack(int damage, int range) {
+        //TODO: Implement this
+        System.out.println("Creature attack: " + damage + ", " + range);
+    }
 }
