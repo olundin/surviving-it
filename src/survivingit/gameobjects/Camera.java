@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Renderer;
+import survivingit.graphics.WorldRenderer;
 import survivingit.scene.Tile;
 
 import java.util.List;
@@ -10,20 +11,27 @@ public class Camera extends GameObject {
     private double width;
     private double height;
 
+    private int screenX;
+    private int screenY;
+    private int screenWidth;
+    private int screenHeight;
+
     private static final double ZOOM_MIN = 1.0;
     private static final double ZOOM_MAX = 64.0;
 
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
-    private Renderer renderer;
-
     private GameObject target;
 
-    public Camera(final double x, final double y, final double width, final double height, final Renderer renderer) {
+    public Camera(double x, double y, double width, double height, int screenX, int screenY, int screenWidth, int screenHeight) {
         super(x, y);
         this.width = width;
         this.height = height;
-        this.renderer = renderer;
+
+        this.screenX = screenX;
+        this.screenY = screenY;
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
     }
 
     public void setTarget(GameObject target) {
@@ -41,7 +49,7 @@ public class Camera extends GameObject {
         this.y += (delta * relation) / 2;
     }
 
-    public void render(Renderer renderer) {
+    public void render(WorldRenderer renderer) {
         // Make sure target is being followed if it exists
         if (hasTarget()) {
             this.setCenterPos(target.getX(), target.getY());
@@ -53,7 +61,7 @@ public class Camera extends GameObject {
                 Tile tile = this.scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
-                    renderer.drawSpriteWorld(tileX, tileY, tile.getSprite(), this.x, this.y, this.width, this.height);
+                    renderer.drawTile(tileX, tileY, tile, this);
                 }
             }
         }
@@ -70,7 +78,7 @@ public class Camera extends GameObject {
 
             if (gameObject instanceof GameVisibleObject) {
                 // Draw sprite at position relative to camera
-                renderer.drawVisibleObject((GameVisibleObject)gameObject, this.x, this.y, this.width, this.height);
+                renderer.drawObject((GameVisibleObject)gameObject, this);
             }
         }
     }
@@ -92,13 +100,43 @@ public class Camera extends GameObject {
         this.y = y - this.height/2;
     }
 
-    public double screenToWorldX(double screenX) {
-        double ppu = this.renderer.getWidth() / this.width; // Screen pixels per unit
-        return this.x + screenX / ppu;
+    public double screenToWorldX(int x) {
+        return (x - this.screenX) / this.pixelsPerUnitX() + this.x;
     }
 
-    public double screenToWorldY(double screenY) {
-        double ppu = this.renderer.getHeight() / this.height; // Screen pixels per unit
-        return this.y + screenY / ppu;
+    public double screenToWorldY(int y) {
+        return (y - this.screenY) / this.pixelsPerUnitY() + this.y;
+    }
+
+    public int worldToScreenX(double x) {
+        return (int)((x - this.x) * this.pixelsPerUnitX()) + this.screenX;
+    }
+
+    public int worldToScreenY(double y) {
+        return (int)((y - this.y) * this.pixelsPerUnitY()) + this.screenY;
+    }
+
+    public int getScreenX() {
+        return screenX;
+    }
+
+    public int getScreenY() {
+        return screenY;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public double pixelsPerUnitX() {
+        return this.screenWidth / this.width;
+    }
+
+    public double pixelsPerUnitY() {
+        return this.screenHeight / this.height;
     }
 }

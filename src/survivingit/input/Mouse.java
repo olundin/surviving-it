@@ -18,9 +18,8 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     private boolean[] buttonPressed;
     private boolean[] buttonReleased;
 
-
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
     private int scroll;
 
@@ -45,11 +44,11 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
         this.scroll = 0;
     }
 
-    public double getX() {
+    public int getX() {
         return this.x;
     }
 
-    public double getY() {
+    public int getY() {
         return this.y;
     }
 

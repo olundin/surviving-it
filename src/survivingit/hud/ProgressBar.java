@@ -1,9 +1,8 @@
 package survivingit.hud;
 
-import survivingit.graphics.Renderer;
+import survivingit.graphics.HudRenderer;
 import survivingit.graphics.Sprite;
 
-import java.awt.*;
 
 public class ProgressBar extends HudElement {
 
@@ -40,7 +39,7 @@ public class ProgressBar extends HudElement {
         return this.current;
     }
 
-    public void render(Renderer renderer) {
+    public void render(HudRenderer renderer) {
         renderer.drawProgressBar(this);
     }
 

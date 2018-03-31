@@ -1,6 +1,7 @@
 package survivingit.hud;
 
 import survivingit.gameobjects.Player;
+import survivingit.graphics.HudRenderer;
 import survivingit.graphics.Renderer;
 import survivingit.graphics.Sprite;
 
@@ -21,7 +22,7 @@ public class Hud {
         this.elements.add(element);
     }
 
-    public void render(Renderer renderer) {
+    public void render(HudRenderer renderer) {
         for (HudElement element : elements) {
             element.render(renderer);
         }

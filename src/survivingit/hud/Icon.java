@@ -1,6 +1,6 @@
 package survivingit.hud;
 
-import survivingit.graphics.Renderer;
+import survivingit.graphics.HudRenderer;
 import survivingit.graphics.Sprite;
 
 public class Icon extends HudElement {
@@ -12,7 +12,7 @@ public class Icon extends HudElement {
         this.sprite = sprite;
     }
 
-    public void render(Renderer renderer) {
+    public void render(HudRenderer renderer) {
         renderer.drawIcon(this);
     }
 

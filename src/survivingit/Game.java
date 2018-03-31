@@ -46,8 +46,8 @@ public class Game implements Observer<Window> {
 
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, 24, 13.5, renderer);
-        this.currentScene = new TestScene(camera);
+        this.camera = new Camera(0, 0, 24, 13.5, 0, 0, WIDTH, HEIGHT);
+        this.currentScene = new TestScene();
         this.currentScene.add(this.camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
@@ -76,10 +76,7 @@ public class Game implements Observer<Window> {
                 // Make sure we aren't updating too often
                 frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
             }
-
         }
-
-
     }
 
 

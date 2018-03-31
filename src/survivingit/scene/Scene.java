@@ -24,7 +24,7 @@ public abstract class Scene {
 
     private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
-    public Scene(final int width, final int height, Camera camera) {
+    public Scene(final int width, final int height) {
         this.width = width;
         this.height = height;
         this.camera = camera;
