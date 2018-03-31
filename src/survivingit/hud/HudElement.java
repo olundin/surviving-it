@@ -1,6 +1,7 @@
 package survivingit.hud;
 
 import survivingit.graphics.Renderer;
+import survivingit.graphics.Sprite;
 
 public abstract class HudElement {
 

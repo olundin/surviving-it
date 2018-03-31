@@ -2,12 +2,18 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
-import survivingit.messaging.PlayerObserver;
+import survivingit.messaging.Observable;
+import survivingit.messaging.Observer;
 import survivingit.physics.Collider;
 
-public class Player extends Creature {
+import java.util.ArrayList;
+import java.util.List;
 
-    private PlayerObserver healthObserver;
+public class Player extends Creature implements Observable<Player> {
+
+    private List<Observer<Player>> observers;
+
+    private double timer = 0.0;
 
     public Player(final double x, final double y) {
 	    super(x,
@@ -17,11 +23,17 @@ public class Player extends Creature {
               1);
 
 	    this.setCollider(new Collider(0.2, 1.25, 0.35, 0.35, false, this));
+	    observers = new ArrayList<>();
     }
 
     @Override
     public void update(double dt) {
         super.update(dt);
+        timer += dt;
+        if(timer >= 1.0) {
+            timer = 0.0;
+            this.takeDamage(1);
+        }
     }
 
 
@@ -29,18 +41,23 @@ public class Player extends Creature {
     @Override
     public void setCurrentHealth(final int currentHealth) {
         super.setCurrentHealth(currentHealth);
-        this.healthObserver.onNotify(this);
+        this.notifyObservers(this);
     }
 
     @Override
     public void setMaxHealth(final int maxHealth) {
         super.setMaxHealth(maxHealth);
-        this.healthObserver.onNotify(this);
+        this.notifyObservers(this);
     }
 
-    public void setHealthObserver(PlayerObserver observer) {
-        this.healthObserver = observer;
+    public void attach(Observer<Player> observer) {
+        this.observers.add(observer);
     }
 
+    public void notifyObservers(Player data) {
+        for(Observer<Player> o : observers) {
+            o.onNotify(this, data);
+        }
+    }
 
 }

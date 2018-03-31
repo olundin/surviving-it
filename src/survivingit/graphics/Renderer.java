@@ -1,6 +1,7 @@
 package survivingit.graphics;
 
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.hud.Icon;
 import survivingit.hud.ProgressBar;
 import survivingit.physics.Collider;
 
@@ -9,9 +10,9 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
-    public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels
+    public static final int UNIT_SCALE = 32; // Size of 1 game unit in pixels
     private static final int SPRITE_PADDING = 1; // Extra padding to be added to sprite size when rendering
 
     private int width;
@@ -19,8 +20,6 @@ public class Renderer extends Canvas {
 
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
-
-    private GraphicsEnvironment graphicsEnvironment;
 
     public Renderer(int width, int height) {
         super();
@@ -52,7 +51,7 @@ public class Renderer extends Canvas {
      WORLD - Takes world coordinates
     */
 
-    public void drawSprite(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight) {
+    public void drawSpriteWorld(double x, double y, Sprite sprite, double camX, double camY, double camWidth, double camHeight) {
 
         // Pixels per unit (ppu)
         double ppuWidth = this.width / camWidth;
@@ -62,8 +61,8 @@ public class Renderer extends Canvas {
         // Position and size on screen
         int drawX = (int)((x - camX) * ppuWidth) - SPRITE_PADDING;
         int drawY = (int)((y - camY) * ppuHeight) - SPRITE_PADDING;
-        int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SIZE) + SPRITE_PADDING * 2;
-        int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SIZE) + SPRITE_PADDING * 2;
+        int drawWidth = (int)(ppuWidth * sprite.getWidth() / UNIT_SCALE) + SPRITE_PADDING * 2;
+        int drawHeight = (int)(ppuHeight * sprite.getHeight() / UNIT_SCALE) + SPRITE_PADDING * 2;
 
         graphics.drawImage(sprite.getImage(), drawX, drawY, drawX + drawWidth, drawY + drawHeight,
 			   sprite.getX(), sprite.getY(), sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight(),
@@ -92,7 +91,7 @@ public class Renderer extends Canvas {
 
     public void drawVisibleObject(GameVisibleObject object, double camX, double camY, double camWidth, double camHeight) {
         // Draw sprite of GameObject
-        this.drawSprite(object.getX(), object.getY(), object.getSprite(), camX, camY, camWidth, camHeight);
+        this.drawSpriteWorld(object.getX(), object.getY(), object.getSprite(), camX, camY, camWidth, camHeight);
 
         if(DEBUG) {
             // Draw hitbox
@@ -106,19 +105,56 @@ public class Renderer extends Canvas {
      HUD - takes screen coordinates
       */
 
+    public void drawSpriteScreen(int x, int y, int width, int height, Sprite sprite) {
+        graphics.drawImage(sprite.getImage(),
+                           x, y,
+                           x + width,
+                           y + height,
+                           sprite.getX(),
+                           sprite.getY(),
+                           sprite.getX() + sprite.getWidth(),
+                           sprite.getY() + sprite.getHeight(),
+                           null);
+    }
+
     public void drawProgressBar(ProgressBar progressBar) {
-        final int padding = 2;
+        // Convert element position and size (percentage 0 - 100) to screen position and size
         int drawX = (int) (progressBar.getX() / 100 * this.width);
         int drawY = (int) (progressBar.getY() / 100 * this.height);
         int drawWidth = (int) (progressBar.getWidth() / 100 * this.width);
         int drawHeight = (int) (progressBar.getHeight() / 100 * this.height);
 
-        // Draw rect behind bar
-        graphics.setColor(Color.black);
-        graphics.fillRect(drawX - padding, drawY - padding, drawWidth + 2 * padding, drawHeight + 2 * padding);
+        int pixelsPerStep = drawWidth / progressBar.getMax();
 
-        // Draw bar itself, with current progress
-        graphics.setColor(progressBar.getColor());
-        graphics.fillRect(drawX, drawY, drawWidth * progressBar.getCurrent() / progressBar.getMax(), drawHeight);
+        // Draw left edge
+        this.drawSpriteScreen(drawX - progressBar.getLeftEdge().getWidth() * pixelsPerStep,
+                              drawY,
+                              progressBar.getLeftEdge().getWidth() * pixelsPerStep,
+                              drawHeight,
+                              progressBar.getLeftEdge());
+
+        // Draw fill
+        double filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
+        double emptyWidth = drawWidth - filledWidth;
+        this.drawSpriteScreen(drawX, drawY, (int)filledWidth, drawHeight, progressBar.getFilled());
+        this.drawSpriteScreen(drawX + (int)filledWidth, drawY, (int)emptyWidth, drawHeight, progressBar.getEmpty());
+
+        // Draw right edge
+        this.drawSpriteScreen(drawX + drawWidth,
+                              drawY,
+                              progressBar.getRightEdge().getWidth() * pixelsPerStep,
+                              drawHeight,
+                              progressBar.getRightEdge());
+    }
+
+    public void drawIcon(Icon icon) {
+        // Convert element position and size (percentage 0 - 100) to screen position and size
+        int drawX = (int) (icon.getX() / 100 * this.width);
+        int drawY = (int) (icon.getY() / 100 * this.height);
+        int drawWidth = (int) (icon.getWidth() / 100 * this.width);
+        int drawHeight = (int) (icon.getHeight() / 100 * this.height);
+
+        // Draw icon
+        this.drawSpriteScreen(drawX, drawY, drawWidth, drawHeight, icon.getSprite());
     }
 }
