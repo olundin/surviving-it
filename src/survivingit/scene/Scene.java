@@ -32,7 +32,7 @@ public abstract class Scene {
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
         this.gameObjectComparator = new GameObjectComparator();
-        this.astar = new AStar<>(this.toGraph(), new ChebyshevDistance());
+        this.astar = new AStar<>(this.toGraph(), new ManhattanDistance());
     }
 
     public void addPlayer(Player player) {
