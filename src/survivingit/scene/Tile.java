@@ -14,6 +14,8 @@ public class Tile {
     public static final Tile SNOW_BRANCH = new Tile(Sprite.SNOW_BRANCH, true);
     public static final Tile SNOW_PEBBLES = new Tile(Sprite.SNOW_PEBBLES, true);
 
+    public static final Tile TRANSPARENT = new Tile(Sprite.TRANSPARENT, true);
+
     private Sprite sprite;
     private boolean passable;
 

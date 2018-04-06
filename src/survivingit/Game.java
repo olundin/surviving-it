@@ -11,8 +11,8 @@ import survivingit.scene.TestScene;
 
 public class Game {
 
-    public static final int WIDTH = 1600;
-    public static final int HEIGHT = 900;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
 
     private Renderer renderer;
     private Window window;

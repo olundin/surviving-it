@@ -1,7 +1,6 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
-import survivingit.graphics.Sprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
 
