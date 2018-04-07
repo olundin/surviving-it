@@ -21,7 +21,6 @@ public abstract class Scene {
 
     private Random random;
 
-    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
     private AStar<Point> astar;
 
     public Scene(final int width, final int height) {
@@ -31,7 +30,6 @@ public abstract class Scene {
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
-        this.gameObjectComparator = new GameObjectComparator();
         this.astar = new AStar<>(this.toGraph(), new ManhattanDistance());
     }
 
@@ -50,10 +48,6 @@ public abstract class Scene {
     }
 
     public void update(double dt) {
-        // Sort gameObjects by y position. Makes them render correctly
-        //gameObjects.sort(this.gameObjectComparator);
-        Collections.sort(gameObjects, gameObjectComparator);
-
         for (GameObject gameObject : gameObjects) {
             gameObject.update(dt);
 	    }

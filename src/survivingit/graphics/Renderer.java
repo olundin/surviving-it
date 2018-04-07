@@ -1,6 +1,7 @@
 package survivingit.graphics;
 
 import survivingit.gameobjects.Camera;
+import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.GameVisibleObject;
 import survivingit.hud.Icon;
 import survivingit.hud.ProgressBar;
@@ -68,9 +69,16 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         );
     }
 
-    private void drawRect(int x, int y, int width, int height, Color color) {
+    private void drawRect(int x, int y, int width, int height, Color color, boolean fill) {
         graphics.setColor(color);
-        graphics.drawRect(x, y, width, height);
+        if(fill) graphics.fillRect(x, y, width, height);
+        else graphics.drawRect(x, y, width, height);
+    }
+
+    private void drawText(int x, int y, String text, int size, Color color) {
+        graphics.setFont(new Font(graphics.getFont().getFontName(), Font.PLAIN, size));
+        graphics.setColor(color);
+        graphics.drawString(text, x, y);
     }
 
     /*
@@ -83,6 +91,15 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int drawWidth = (int)(camera.pixelsPerUnitX() * tile.getSprite().getWidth() / UNIT_SIZE) + 2*TILE_PADDING;
         int drawHeight = (int)(camera.pixelsPerUnitY() * tile.getSprite().getHeight() / UNIT_SIZE) + 2*TILE_PADDING;
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, tile.getSprite());
+
+        if(DEBUG) {
+            // Draw tile edges if it is not passable
+            if(!tile.isPassable()) {
+                this.drawRect(drawX, drawY,
+                         drawWidth - 2*TILE_PADDING, drawHeight - 2*TILE_PADDING,
+                         Color.red, false);
+            }
+        }
     }
 
     public void drawObject(GameVisibleObject object, Camera camera) {
@@ -104,12 +121,19 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, sprite);
 
         if(DEBUG) {
+            // Draw object collider
             Collider col = object.getCollider();
-            drawRect(camera.worldToScreenX(col.getWorldX()),
+            this.drawRect(camera.worldToScreenX(col.getWorldX()),
                      camera.worldToScreenY(col.getWorldY()),
                      (int)(col.getWidth() * ppuX),
                      (int)(col.getHeight() * ppuY),
-                     Color.green);
+                     Color.green, false);
+
+            if(object instanceof Creature) {
+                this.drawText(drawX, drawY,
+                              ((Creature)object).getCurrentHealth() + "/" + ((Creature)object).getMaxHealth(),
+                              10, Color.black);
+            }
         }
     }
 

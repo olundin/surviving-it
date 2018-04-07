@@ -4,6 +4,7 @@ import survivingit.graphics.Renderer;
 import survivingit.graphics.WorldRenderer;
 import survivingit.scene.Tile;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Camera extends GameObject {
@@ -22,6 +23,7 @@ public class Camera extends GameObject {
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
     private GameObject target;
+    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
     public Camera(double x, double y, double width, double height, int screenX, int screenY, int screenWidth, int screenHeight) {
         super(x, y);
@@ -32,6 +34,8 @@ public class Camera extends GameObject {
         this.screenY = screenY;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+
+        this.gameObjectComparator = new GameObjectComparator();
     }
 
     public void setTarget(GameObject target) {
@@ -66,13 +70,16 @@ public class Camera extends GameObject {
             }
         }
 
-        // Render visible GameObjects
+        // Get objects visible to camera
         List<GameObject> objectsInArea = this.scene.getObjectsInArea(
                 this.x - EDGE_PADDING,
                 this.y - EDGE_PADDING,
                 this.x + this.width + EDGE_PADDING,
                 this.y + this.height + EDGE_PADDING
         );
+
+        // Sort gameObjects by y position. Makes them render correctly
+        objectsInArea.sort(this.gameObjectComparator);
 
         for (GameObject gameObject : objectsInArea) {
 
