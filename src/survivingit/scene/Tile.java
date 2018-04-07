@@ -1,7 +1,6 @@
 package survivingit.scene;
 
 import survivingit.graphics.Sprite;
-import survivingit.graphics.SpriteSheet;
 
 public class Tile {
 
@@ -13,8 +12,7 @@ public class Tile {
     public static final Tile SNOW_TRACKS = new Tile(Sprite.SNOW_TRACKS, true);
     public static final Tile SNOW_BRANCH = new Tile(Sprite.SNOW_BRANCH, true);
     public static final Tile SNOW_PEBBLES = new Tile(Sprite.SNOW_PEBBLES, true);
-
-    public static final Tile TRANSPARENT = new Tile(Sprite.TRANSPARENT, true);
+    public static final Tile WATER = new Tile(Sprite.WATER, false);
 
     private Sprite sprite;
     private boolean passable;

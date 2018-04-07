@@ -63,7 +63,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (!this.inBounds(x, y) || tiles[xInt][yInt] == null) {
-            return Tile.SNOW_PLAIN;
+            return Tile.WATER;
         } else {
             return tiles[yInt][xInt];
         }
