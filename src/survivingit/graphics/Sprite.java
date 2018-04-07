@@ -14,9 +14,15 @@ public class Sprite {
     public static final Sprite SNOW_BRANCH = new Sprite(64, 32, 32, 32, SpriteSheet.SNOW_TILES);
     public static final Sprite SNOW_PEBBLES = new Sprite(96, 32, 32, 32, SpriteSheet.SNOW_TILES);
 
-
-    public static final Sprite FOX = new Sprite(0, 0,46,57, SpriteSheet.FOXES);
-    public static final Sprite MEME_MAN = new Sprite(0,0, 17, 23, SpriteSheet.MEME_MAN);
+    public static final Sprite WATER_LEFT           = new Sprite(0, 96, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_TOP_LEFT       = new Sprite(0, 64, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_TOP            = new Sprite(32, 64, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_TOP_RIGHT      = new Sprite(64, 64, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_RIGHT          = new Sprite(96, 96, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_BOTTOM_RIGHT   = new Sprite(96, 128, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_BOTTOM         = new Sprite(32, 128, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER_BOTTOM_LEFT    = new Sprite(0, 128, 32, 32, SpriteSheet.SNOW_TILES);
+    public static final Sprite WATER                = new Sprite(32, 96, 32, 32, SpriteSheet.SNOW_TILES);
 
     public static final Sprite CAMPFIRE = new Sprite(0, 0, 32, 32, SpriteSheet.CAMP_FIRE);
 

@@ -20,10 +20,9 @@ public class Player extends Creature implements Observable<Player> {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              5);
-
-	    this.setCollider(new Collider(0.2, 1.25, 0.35, 0.35, false, this));
+              3);
 	    observers = new ArrayList<>();
+	    this.setCollider(new Collider(-0.2, 0.2, 0.4, 0.6, false, this));
     }
 
     @Override

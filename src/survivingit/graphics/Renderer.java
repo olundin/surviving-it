@@ -74,10 +74,8 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     public void drawTile(int x, int y, Tile tile, Camera camera) {
         int drawX = camera.worldToScreenX(x) - TILE_PADDING;
         int drawY = camera.worldToScreenY(y) - TILE_PADDING;
-
         int drawWidth = (int)(camera.pixelsPerUnitX() * tile.getSprite().getWidth() / UNIT_SIZE) + 2*TILE_PADDING;
         int drawHeight = (int)(camera.pixelsPerUnitY() * tile.getSprite().getHeight() / UNIT_SIZE) + 2*TILE_PADDING;
-
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, tile.getSprite());
     }
 

@@ -1,6 +1,8 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.*;
+import survivingit.graph.AStar;
+import survivingit.graph.ChebyshevDistance;
 
 public class TestScene extends Scene {
 
@@ -17,5 +19,4 @@ public class TestScene extends Scene {
             }
         }
     }
-
 }

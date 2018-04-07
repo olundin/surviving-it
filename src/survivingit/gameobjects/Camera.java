@@ -17,7 +17,7 @@ public class Camera extends GameObject {
     private int screenHeight;
 
     private static final double ZOOM_MIN = 1.0;
-    private static final double ZOOM_MAX = 64.0;
+    private static final double ZOOM_MAX = 128.0;
 
     private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
 
