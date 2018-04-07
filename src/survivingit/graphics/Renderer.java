@@ -4,6 +4,7 @@ import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.GameVisibleObject;
 import survivingit.hud.Icon;
 import survivingit.hud.ProgressBar;
+import survivingit.physics.Collider;
 import survivingit.scene.Tile;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
     private static final int TILE_PADDING = 1; // Extra padding to be added to sprite size when rendering tiles
@@ -67,6 +68,11 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         );
     }
 
+    private void drawRect(int x, int y, int width, int height, Color color) {
+        graphics.setColor(color);
+        graphics.drawRect(x, y, width, height);
+    }
+
     /*
      *  WORLD RENDERER
      */
@@ -83,10 +89,28 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
 
-        int drawWidth = (int)(camera.pixelsPerUnitX() * object.getSprite().getWidth() / UNIT_SIZE);
-        int drawHeight = (int)(camera.pixelsPerUnitY() * object.getSprite().getHeight() / UNIT_SIZE);
+        double ppuX = camera.pixelsPerUnitX();
+        double ppuY = camera.pixelsPerUnitY();
+        Sprite sprite = object.getSprite();
 
-        this.drawSprite(drawX, drawY, drawWidth, drawHeight, object.getSprite());
+        // Object sprites are rendered centered in x and the sprite's bottom is as the objects y
+        drawX -= (int)(ppuX * sprite.getWidth() / UNIT_SIZE)/2;
+        drawY -= (int)(ppuY * sprite.getHeight() / UNIT_SIZE);
+
+
+        int drawWidth = (int)(ppuX * sprite.getWidth() / UNIT_SIZE);
+        int drawHeight = (int)(ppuY * sprite.getHeight() / UNIT_SIZE);
+
+        this.drawSprite(drawX, drawY, drawWidth, drawHeight, sprite);
+
+        if(DEBUG) {
+            Collider col = object.getCollider();
+            drawRect(camera.worldToScreenX(col.getWorldX()),
+                     camera.worldToScreenY(col.getWorldY()),
+                     (int)(col.getWidth() * ppuX),
+                     (int)(col.getHeight() * ppuY),
+                     Color.green);
+        }
     }
 
     /*

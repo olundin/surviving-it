@@ -22,7 +22,7 @@ public class Player extends Creature implements Observable<Player> {
               50,
               3);
 	    observers = new ArrayList<>();
-	    this.setCollider(new Collider(-0.2, 0.2, 0.4, 0.6, false, this));
+	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
     }
 
     @Override

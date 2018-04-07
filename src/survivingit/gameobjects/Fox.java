@@ -19,7 +19,7 @@ public class Fox extends Creature {
               20,
               2.5);
 
-        this.setCollider(new Collider(-0.2, 0, 0.4, 0.5, false, this));
+        this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
         this.timer = 0.0;
     }
 
