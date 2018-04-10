@@ -6,13 +6,15 @@ import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
+import survivingit.messaging.Observable;
+import survivingit.messaging.Observer;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 
-public class Game {
+public class Game implements Observer<Window> {
 
-    public static final int WIDTH = 1600;
-    public static final int HEIGHT = 900;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
 
     private Renderer renderer;
     private Window window;
@@ -40,10 +42,12 @@ public class Game {
     	renderer.addMouseWheelListener(mouse);
     	renderer.addMouseMotionListener(mouse);
 
+    	window.attach(this); // Observe window (to know when it's closed)
+
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, 24, 13.5, renderer);
-        this.currentScene = new TestScene(camera);
+        this.camera = new Camera(0, 0, 24, 13.5, 0, 0, WIDTH, HEIGHT);
+        this.currentScene = new TestScene();
         this.currentScene.add(this.camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
@@ -72,15 +76,13 @@ public class Game {
                 // Make sure we aren't updating too often
                 frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
             }
-
         }
-
-
     }
 
 
     private void stop() {
         running = false;
+        System.exit(0);
     }
 
     private void update(double dt) {
@@ -99,6 +101,12 @@ public class Game {
         hud.render(renderer);
 
         renderer.display();
+    }
+
+    public void onNotify(Observable<Window> object, Window data) {
+        if(!data.isOpen()) {
+            this.stop();
+        }
     }
 
     public static void main(String[] args) {

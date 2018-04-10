@@ -1,6 +1,6 @@
 package survivingit.hud;
 
-import survivingit.graphics.Renderer;
+import survivingit.graphics.HudRenderer;
 
 public class EquippableItemsHud extends HudElement {
 
@@ -11,7 +11,7 @@ public class EquippableItemsHud extends HudElement {
         super(0, 0, 0, 0);
     }
 
-    public void render(Renderer renderer) {
+    public void render(HudRenderer hudRenderer) {
 
     }
 

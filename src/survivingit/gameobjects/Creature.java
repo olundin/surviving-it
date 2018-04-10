@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.Sprite;
 
+
 public abstract class Creature extends GameVisibleObject implements Updateable {
 
     protected int currentHealth;
@@ -86,4 +87,13 @@ public abstract class Creature extends GameVisibleObject implements Updateable {
         return Math.abs(this.x - this.lastX) > 0.00001 || Math.abs(this.y - this.lastY) > 0.00001;
     }
 
+    public void performAttack(int damage, int range) {
+        //TODO:
+    }
+
+
+    public void heal(int healAmount) {
+        // Don't set health to higher to than max.
+        this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0));
+    }
 }

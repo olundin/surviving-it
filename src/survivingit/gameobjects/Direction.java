@@ -10,13 +10,13 @@ import java.util.Random;
 public enum Direction {
 
     LEFT(-1, 0),
-    UP_LEFT(-Maths.DIAGONAL_LENGTH, -Maths.DIAGONAL_LENGTH),
+    UP_LEFT(-Maths.DIAGONAL_SPEED, -Maths.DIAGONAL_SPEED),
     UP(0, -1),
-    UP_RIGHT(Maths.DIAGONAL_LENGTH, -Maths.DIAGONAL_LENGTH),
+    UP_RIGHT(Maths.DIAGONAL_SPEED, -Maths.DIAGONAL_SPEED),
     RIGHT(1, 0),
-    DOWN_RIGHT(Maths.DIAGONAL_LENGTH, Maths.DIAGONAL_LENGTH),
+    DOWN_RIGHT(Maths.DIAGONAL_SPEED, Maths.DIAGONAL_SPEED),
     DOWN(0, 1),
-    DOWN_LEFT(-Maths.DIAGONAL_LENGTH, Maths.DIAGONAL_LENGTH),
+    DOWN_LEFT(-Maths.DIAGONAL_SPEED, Maths.DIAGONAL_SPEED),
     NONE(0, 0);
 
     public final double x;

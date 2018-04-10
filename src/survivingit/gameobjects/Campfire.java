@@ -11,7 +11,7 @@ public class Campfire extends GameVisibleObject {
 
     public Campfire(double x, double y) {
         super(x, y, Sprite.CAMPFIRE);
-        this.setCollider(new Collider(0.1, 0.5, 0.8, 0.75, false, this));
+        this.setCollider(new Collider(-0.4, -0.4, 0.8, 0.4, false, this));
 
         this.animatedSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE,
                                                  0,

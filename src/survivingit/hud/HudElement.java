@@ -1,6 +1,6 @@
 package survivingit.hud;
 
-import survivingit.graphics.Renderer;
+import survivingit.graphics.HudRenderer;
 
 public abstract class HudElement {
 
@@ -33,5 +33,5 @@ public abstract class HudElement {
         return height;
     }
 
-    public abstract void render(Renderer renderer);
+    public abstract void render(HudRenderer renderer);
 }

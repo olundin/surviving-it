@@ -12,6 +12,7 @@ public class SpriteSheet {
     public static final SpriteSheet FOXES = new SpriteSheet("foxes.png");
     public static final SpriteSheet MEME_MAN = new SpriteSheet("mememan.png");
     public static final SpriteSheet CAMP_FIRE = new SpriteSheet("campfire.png");
+    public static final SpriteSheet HUD = new SpriteSheet("hud.png");
 
     private int width;
     private int height;
