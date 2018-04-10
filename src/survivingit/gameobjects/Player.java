@@ -2,7 +2,7 @@ package survivingit.gameobjects;
 
 import survivingit.containers.PlayerInventory;
 import survivingit.graphics.Sprite;
-import survivingit.items.ItemType;
+import survivingit.items.Item;
 
 public class Player extends Creature {
 
@@ -21,7 +21,7 @@ public class Player extends Creature {
         this.move(this.direction.x * this.moveSpeed * dt, this.direction.y * this.moveSpeed * dt);
     }
 
-    public void addItem(ItemType itemType) {
-        this.inventory.addItemType(itemType);
+    public void addItemToFirstAvilable(Item item) {
+        this.inventory.addItemToFirstAvailable(item);
     }
 }

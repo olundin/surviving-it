@@ -59,7 +59,7 @@ public class ItemContainer {
 
     public void removeItemTypeAt(int index) {
         if (index < 0 || index >= this.size) {
-            throw new IllegalArgumentException("Index ouut of bounds");
+            throw new IllegalArgumentException("Index out of bounds");
         }
         if (itemSlots[index].isEmpty()) {
             throw new IllegalStateException("Attempt to remove item from empty itemslot");

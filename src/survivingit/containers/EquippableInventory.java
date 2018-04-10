@@ -1,5 +1,6 @@
 package survivingit.containers;
 
+import survivingit.items.Item;
 import survivingit.items.ItemType;
 
 public class EquippableInventory {
@@ -16,11 +17,11 @@ public class EquippableInventory {
         return this.container.getItemTypeAt(equipIndex);
     }
 
-    public boolean canFitItemType(ItemType itemType) {
-        return this.container.canFitItemType(itemType);
+    public boolean hasSpace() {
+        return this.container.hasSpace();
     }
 
-    public void addItemType(ItemType itemType) {
-        this.container.addItemType(itemType);
+    public void addItemToFirstAvailable(Item item) {
+        this.container.addItemToFirstAvailable(item);
     }
 }
