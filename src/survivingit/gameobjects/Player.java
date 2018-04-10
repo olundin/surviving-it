@@ -1,27 +1,62 @@
 package survivingit.gameobjects;
 
-import survivingit.containers.PlayerInventory;
-import survivingit.graphics.Sprite;
-import survivingit.items.Item;
+import survivingit.graphics.CreatureSprite;
+import survivingit.graphics.SpriteSheet;
+import survivingit.messaging.Observable;
+import survivingit.messaging.Observer;
+import survivingit.physics.Collider;
 
-public class Player extends Creature {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static final int PASSIVE_INVENTORY_SIZE = 10;
-    private static final int EQUIPPABLE_INVENTORY_SIZE = 4;
+public class Player extends Creature implements Observable<Player> {
 
-    private PlayerInventory inventory;
+    private List<Observer<Player>> observers;
 
-    public Player(final double x, final double y, final Sprite sprite, final int health, final double moveSpeed) {
-	    super(x, y, sprite, health, moveSpeed);
-	    this.inventory = new PlayerInventory(PASSIVE_INVENTORY_SIZE, EQUIPPABLE_INVENTORY_SIZE);
+    private double timer = 0.0;
+
+    public Player(final double x, final double y) {
+	    super(x,
+              y,
+              new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
+              50,
+              3);
+	    observers = new ArrayList<>();
+	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
     }
 
     @Override
     public void update(double dt) {
-        this.move(this.direction.x * this.moveSpeed * dt, this.direction.y * this.moveSpeed * dt);
+        super.update(dt);
+        timer += dt;
+        if(timer >= 1.0) {
+            timer = 0.0;
+            this.takeDamage(1);
+        }
     }
 
-    public void addItemToFirstAvilable(Item item) {
-        this.inventory.addItemToFirstAvailable(item);
+
+    // Functions manipulating health are overridden to update observers
+    @Override
+    public void setCurrentHealth(final int currentHealth) {
+        super.setCurrentHealth(currentHealth);
+        this.notifyObservers(this);
     }
+
+    @Override
+    public void setMaxHealth(final int maxHealth) {
+        super.setMaxHealth(maxHealth);
+        this.notifyObservers(this);
+    }
+
+    public void attach(Observer<Player> observer) {
+        this.observers.add(observer);
+    }
+
+    public void notifyObservers(Player data) {
+        for(Observer<Player> o : observers) {
+            o.onNotify(this, data);
+        }
+    }
+
 }
