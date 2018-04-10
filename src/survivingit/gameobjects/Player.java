@@ -1,7 +1,9 @@
 package survivingit.gameobjects;
 
+import survivingit.containers.PlayerInventory;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
+import survivingit.items.Item;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.physics.Collider;
@@ -11,7 +13,11 @@ import java.util.List;
 
 public class Player extends Creature implements Observable<Player> {
 
+    private static final int PASSIVE_STORAGE_SIZE = 20;
+    private static final int EQUIPPABLE_STORAGE_SIZE = 5;
+
     private List<Observer<Player>> observers;
+    private PlayerInventory playerInventory;
 
     private double timer = 0.0;
 
@@ -23,6 +29,7 @@ public class Player extends Creature implements Observable<Player> {
               3);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
+	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);
     }
 
     @Override
@@ -35,7 +42,6 @@ public class Player extends Creature implements Observable<Player> {
         }
     }
 
-
     // Functions manipulating health are overridden to update observers
     @Override
     public void setCurrentHealth(final int currentHealth) {
@@ -47,6 +53,10 @@ public class Player extends Creature implements Observable<Player> {
     public void setMaxHealth(final int maxHealth) {
         super.setMaxHealth(maxHealth);
         this.notifyObservers(this);
+    }
+
+    public void addItemToFirstAvilable(Item item) {
+        this.playerInventory.addItemToFirstAvailable(item);
     }
 
     public void attach(Observer<Player> observer) {

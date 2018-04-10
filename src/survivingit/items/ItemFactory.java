@@ -4,17 +4,17 @@ import survivingit.graphics.Sprite;
 
 public abstract class ItemFactory {
 
-	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.FOX, 1);
+	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.SNOW_ROCK);
 
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {
 			case KNIFE: {
-				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.MEME_MAN, 1);
+				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.BELT);
 				knife.addEffect(new AttackEffect(10, 10, knife));
 				return knife;
 			}
 			case BERRIES: {
-				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.FOX, 100);
+				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
 				return berries;
 			}
 			case NONE: {

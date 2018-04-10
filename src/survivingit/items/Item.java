@@ -11,16 +11,14 @@ public class Item {
 
     private final String description;
     private final Sprite sprite;
-    private final int stackSize;
     private final String name;
     private List<AbstractEffect> effects;
 
-    public Item(final ItemType itemType, final String name, final String description, final Sprite sprite, final int stackSize) {
+    public Item(final ItemType itemType, final String name, final String description, final Sprite sprite) {
         this.itemType = itemType;
         this.name = name;
         this.description = description;
         this.sprite = sprite;
-        this.stackSize = stackSize;
         this.effects = new ArrayList<>();
     }
 
