@@ -16,10 +16,10 @@ public class ItemContainer {
         this.itemSlots = new ItemSlot[size];
         this.size = size;
         this.usedSlots = 0;
-        clearItemSlots();
+        initialiseItemSlots();
     }
 
-    private void clearItemSlots() {
+    private void initialiseItemSlots() {
         for (int i = 0; i < size; i++) {
             itemSlots[i] = new ItemSlot();
         }
@@ -45,6 +45,28 @@ public class ItemContainer {
         usedSlots++;
     }
 
+    public Item popItemTypeAt(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new IllegalArgumentException("Index ouut of bounds");
+        }
+        if (itemSlots[index].isEmpty()) {
+            throw new IllegalStateException("Attempt to remove item from empty itemslot");
+        }
+        Item item = itemSlots[index].getItem();
+        itemSlots[index].clearItem();
+        return item;
+    }
+
+    public void removeItemTypeAt(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new IllegalArgumentException("Index ouut of bounds");
+        }
+        if (itemSlots[index].isEmpty()) {
+            throw new IllegalStateException("Attempt to remove item from empty itemslot");
+        }
+        itemSlots[index].clearItem();
+    }
+
     public ItemType getItemTypeAt(int index) {
         if (index < 0 || index >= this.size) {
             throw new IllegalArgumentException("Index out of bounds.");
@@ -61,6 +83,10 @@ public class ItemContainer {
             throw new IllegalArgumentException("Index out of bounds.");
         }
         return this.itemSlots[index].isEmpty();
+    }
+
+    public boolean hasSpace() {
+        return this.usedSlots < this.size;
     }
 
     private ItemSlot getFirstEmptySlot() {

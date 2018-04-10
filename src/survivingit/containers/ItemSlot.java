@@ -12,11 +12,15 @@ public class ItemSlot {
 
     public ItemSlot() {
         this.itemSlotType = ItemSlotType.ANY;
-        this.item = ItemFactory.NONE_ITEM;
+        this.clearItem();
     }
 
     public ItemSlot(final ItemSlotType itemSlotType) {
         this.itemSlotType = itemSlotType;
+        this.clearItem();
+    }
+
+    public void clearItem() {
         this.item = ItemFactory.NONE_ITEM;
     }
 
