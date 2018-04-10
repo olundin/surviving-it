@@ -31,8 +31,21 @@ public enum Direction {
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
-    public static Direction randomDirection() {
+    public static Direction random() {
         return VALUES.get(RANDOM.nextInt(SIZE));
+    }
+
+    public static Direction fromAngle(double angle) {
+        angle %= 2 * Math.PI;
+        double maxDiff = Math.PI / 8; // 2 * pi / (8 * 2)
+        for(int d = 0; d < SIZE; d++) {
+            Direction dir = VALUES.get(d);
+            if(dir == NONE) continue;
+            double dirAngle = Math.atan2(dir.x, dir.y);
+            if(Math.abs(angle - dirAngle) <= maxDiff) return dir;
+        }
+        return NONE;
+
     }
 
 }

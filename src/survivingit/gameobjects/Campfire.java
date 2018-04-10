@@ -5,7 +5,7 @@ import survivingit.graphics.Sprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
 
-public class Campfire extends GameVisibleObject {
+public class Campfire extends VisibleObject {
 
     private AnimatedSprite animatedSprite;
 

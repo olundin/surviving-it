@@ -4,33 +4,38 @@ import java.util.Objects;
 
 public class Point {
 
-    private int x;
-    private int y;
+    private static final double RANGE = 0.25; // Range in with two points are considered close
 
-    public Point(int x, int y) {
+    private double x;
+    private double y;
+
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Point(double x, double y) {
-        this.x = (int)Math.floor(x);
-        this.y = (int)Math.floor(y);
-    }
-
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public static double getAngle(Point from, Point to) {
+        return Math.atan2(to.x - from.x, to.y - from.y);
+    }
+
+    public static boolean areClose(Point p1, Point p2) {
+        return Math.abs(p1.x - p2.x) <= RANGE && Math.abs(p1.y - p2.y) <= RANGE;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return x == point.x && y == point.y;
+        return Double.compare(this.x, point.x) == 0 && Double.compare(this.y, point.y) == 0;
     }
 
     @Override

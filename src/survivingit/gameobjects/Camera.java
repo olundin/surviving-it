@@ -1,10 +1,8 @@
 package survivingit.gameobjects;
 
-import survivingit.graphics.Renderer;
 import survivingit.graphics.WorldRenderer;
 import survivingit.scene.Tile;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Camera extends GameObject {
@@ -83,9 +81,9 @@ public class Camera extends GameObject {
 
         for (GameObject gameObject : objectsInArea) {
 
-            if (gameObject instanceof GameVisibleObject) {
+            if (gameObject instanceof VisibleObject) {
                 // Draw sprite at position relative to camera
-                renderer.drawObject((GameVisibleObject)gameObject, this);
+                renderer.drawObject((VisibleObject)gameObject, this);
             }
         }
     }

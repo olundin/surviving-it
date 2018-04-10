@@ -1,5 +1,7 @@
 package survivingit.graph;
 
+import survivingit.util.Point;
+
 /**
  * Interface for heuristics usable by A* implementation.
  *
@@ -9,5 +11,7 @@ package survivingit.graph;
 public interface AStarHeuristic<T> {
 
     public double calculate(T n1, T n2);
+
+    public boolean reached(T src, T dst);
 
 }

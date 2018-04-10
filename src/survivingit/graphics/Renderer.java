@@ -1,12 +1,14 @@
 package survivingit.graphics;
 
+import survivingit.gameobjects.Animal;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.Creature;
-import survivingit.gameobjects.GameVisibleObject;
+import survivingit.gameobjects.VisibleObject;
 import survivingit.hud.Icon;
 import survivingit.hud.ProgressBar;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
+import survivingit.util.Point;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -75,6 +77,12 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         else graphics.drawRect(x, y, width, height);
     }
 
+    private void drawCircle(int x, int y, int r, Color color, boolean fill) {
+        graphics.setColor(color);
+        if(fill) graphics.fillOval(x - r, y - r, r * 2, r * 2);
+        else graphics.drawOval(x - r, y - r, r * 2, r * 2);
+    }
+
     private void drawText(int x, int y, String text, int size, Color color) {
         graphics.setFont(new Font(graphics.getFont().getFontName(), Font.PLAIN, size));
         graphics.setColor(color);
@@ -97,12 +105,12 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
             if(!tile.isPassable()) {
                 this.drawRect(drawX, drawY,
                          drawWidth - 2*TILE_PADDING, drawHeight - 2*TILE_PADDING,
-                         Color.red, false);
+                         Color.blue, false);
             }
         }
     }
 
-    public void drawObject(GameVisibleObject object, Camera camera) {
+    public void drawObject(VisibleObject object, Camera camera) {
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
 
@@ -129,10 +137,30 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                      (int)(col.getHeight() * ppuY),
                      Color.green, false);
 
+            // Draw creature position
+            this.drawText(drawX, drawY,
+                          "pos=(" + Math.floor(object.getX()) + "," + Math.floor(object.getY()) + ")",
+                          10, Color.black);
+
             if(object instanceof Creature) {
-                this.drawText(drawX, drawY,
-                              ((Creature)object).getCurrentHealth() + "/" + ((Creature)object).getMaxHealth(),
-                              10, Color.black);
+                // Draw creature health
+                this.drawText(drawX, drawY + 10,
+                              "health=" + ((Creature)object).getCurrentHealth() + "/" + ((Creature)object).getMaxHealth(),
+                              10, Color.red);
+            }
+
+            if(object instanceof Animal) {
+                // Draw animal path
+                for(Point p : ((Animal)object).getPath()) {
+                    int sx = camera.worldToScreenX(p.getX());
+                    int sy = camera.worldToScreenY(p.getY());
+                    this.drawCircle(sx, sy, 4, Color.orange, true);
+                }
+                // Draw view distance
+                double viewDistance = ((Animal)object).getViewDistance();
+                int sx = camera.worldToScreenX(object.getX() - viewDistance/2);
+                int sy = camera.worldToScreenY(object.getY() - viewDistance/2);
+                this.drawRect(sx, sy, (int)(viewDistance*ppuX), (int)(viewDistance*ppuY), Color.gray, false);
             }
         }
     }
@@ -158,10 +186,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getLeftEdge());
 
         // Draw fill
-        double filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
-        double emptyWidth = drawWidth - filledWidth;
-        this.drawSprite(drawX, drawY, (int)filledWidth, drawHeight, progressBar.getFilled());
-        this.drawSprite(drawX + (int)filledWidth, drawY, (int)emptyWidth, drawHeight, progressBar.getEmpty());
+        int filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
+        int emptyWidth = drawWidth - filledWidth;
+        this.drawSprite(drawX, drawY, filledWidth, drawHeight, progressBar.getFilled());
+        this.drawSprite(drawX + filledWidth, drawY, emptyWidth, drawHeight, progressBar.getEmpty());
 
         // Draw right edge
         this.drawSprite(drawX + drawWidth,

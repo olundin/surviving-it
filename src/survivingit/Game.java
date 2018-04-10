@@ -13,8 +13,8 @@ import survivingit.scene.TestScene;
 
 public class Game implements Observer<Window> {
 
-    public static final int WIDTH = 1280;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1600;
+    public static final int HEIGHT = 900;
 
     private Renderer renderer;
     private Window window;
@@ -63,7 +63,6 @@ public class Game implements Observer<Window> {
         while(running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
-
             deltaTime = Math.min(deltaTime, maxDelta);   // Set a cap to deltaTime
 
             this.update(deltaTime);
