@@ -16,19 +16,34 @@ public class ItemContainer {
         this.itemSlots = new ItemSlot[size];
         this.size = size;
         this.usedSlots = 0;
+        clearItemSlots();
     }
 
-    public ItemStack addItemStackToFirstAvailableSpot(ItemStack itemStack) {
-            ItemSlot existingSlot = this.getFirstSharedSlot(itemStack);
-            if (existingSlot != null) {
-                return existingSlot.addItemStack(itemStack);
-            } else if (!this.isFull()) {
-                return getFirstEmptySlot().addItemStack(itemStack);
-            } else {
-                throw new IllegalStateException("Container already full");
-            }
+    private void clearItemSlots() {
+        for (int i = 0; i < size; i++) {
+            itemSlots[i] = new ItemSlot();
         }
+    }
 
+    public void addItemToFirstAvailable(Item item) {
+        if (this.isFull()) {
+            throw new IllegalStateException("Attempted add item to full inventory");
+        }
+        ItemSlot emptySlot = this.getFirstEmptySlot();
+        emptySlot.setItem(item);
+        usedSlots++;
+    }
+
+    public void addItemToIndex(Item item, int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        if (!itemSlots[index].isEmpty()) {
+            throw new IllegalStateException("Attempted to add item to none empty slot");
+        }
+        itemSlots[index].setItem(item);
+        usedSlots++;
+    }
 
     public ItemType getItemTypeAt(int index) {
         if (index < 0 || index >= this.size) {
@@ -41,18 +56,16 @@ public class ItemContainer {
         return this.size;
     }
 
+    public  boolean isSlotEmpty(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        return this.itemSlots[index].isEmpty();
+    }
+
     private ItemSlot getFirstEmptySlot() {
         for (ItemSlot itemSlot : itemSlots) {
             if (itemSlot.isEmpty()) {
-                return itemSlot;
-            }
-        }
-        return null;
-    }
-
-    private ItemSlot getFirstSharedSlot(ItemStack itemStack) {
-        for (ItemSlot itemSlot : itemSlots) {
-            if (!itemSlot.isEmpty() && itemSlot.getItemType() == itemStack.getItemType()) {
                 return itemSlot;
             }
         }
@@ -63,11 +76,5 @@ public class ItemContainer {
         return this.usedSlots == this.size;
     }
 
-    public void addItemType(ItemType itemType) {
-    }
-
-    public boolean canFitItemType(ItemType itemType) {
-        return false;
-    }
 }
 
