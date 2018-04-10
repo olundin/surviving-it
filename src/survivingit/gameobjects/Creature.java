@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.Sprite;
 
+
 public abstract class Creature extends GameVisibleObject implements Updateable {
 
     protected int currentHealth;
