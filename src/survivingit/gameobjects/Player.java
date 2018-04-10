@@ -14,7 +14,7 @@ import java.util.List;
 public class Player extends Creature implements Observable<Player> {
 
     private static final int PASSIVE_STORAGE_SIZE = 20;
-    private static final int EQUIPPABLE_STORAGE_SIZE = 5;
+    private static final int EQUIPPABLE_STORAGE_SIZE = 4;
 
     private List<Observer<Player>> observers;
     private PlayerInventory playerInventory;
