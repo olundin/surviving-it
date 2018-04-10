@@ -7,13 +7,16 @@ import java.util.List;
 
 public class Item {
 
+    private final ItemType itemType;
+
     private final String description;
     private final Sprite sprite;
     private final int stackSize;
     private final String name;
     private List<AbstractEffect> effects;
 
-    public Item(final String name, final String description, final Sprite sprite, final int stackSize) {
+    public Item(final ItemType itemType, final String name, final String description, final Sprite sprite, final int stackSize) {
+        this.itemType = itemType;
         this.name = name;
         this.description = description;
         this.sprite = sprite;
@@ -25,19 +28,15 @@ public class Item {
         this.effects.add(abstractEffect);
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public Sprite getSprite() {
         return sprite;
     }
 
-    public int getStackSize() {
-        return stackSize;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public ItemType getItemType() {
+        return this.itemType;
     }
 }

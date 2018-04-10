@@ -62,4 +62,12 @@ public class ItemContainer {
     private boolean isFull() {
         return this.usedSlots == this.size;
     }
+
+    public void addItemType(ItemType itemType) {
+    }
+
+    public boolean canFitItemType(ItemType itemType) {
+        return false;
+    }
 }
+

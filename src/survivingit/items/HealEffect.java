@@ -9,9 +9,9 @@ public class HealEffect extends AbstractEffect implements Usable {
     public HealEffect(int healAmount, Item source) {
         super(source);
         if (healAmount < 0 ) {
-            throw new IllegalArgumentException("Negative healamount not allowed");
-	}
-	this.healAmount = healAmount;
+            throw new IllegalArgumentException("Negative heal amount not allowed");
+	    }
+	    this.healAmount = healAmount;
     }
 
     public void use(Creature creature) {

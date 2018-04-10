@@ -2,6 +2,7 @@ package survivingit.containers;
 
 import survivingit.items.ItemType;
 
+@Deprecated
 public class ItemStack {
 
     private final ItemType itemType;

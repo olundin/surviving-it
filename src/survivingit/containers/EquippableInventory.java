@@ -15,4 +15,12 @@ public class EquippableInventory {
     public ItemType getEquippedItemType() {
         return this.container.getItemTypeAt(equipIndex);
     }
+
+    public boolean canFitItemType(ItemType itemType) {
+        return this.container.canFitItemType(itemType);
+    }
+
+    public void addItemType(ItemType itemType) {
+        this.container.addItemType(itemType);
+    }
 }

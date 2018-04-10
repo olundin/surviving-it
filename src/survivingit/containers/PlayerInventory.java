@@ -1,5 +1,7 @@
 package survivingit.containers;
 
+import survivingit.items.ItemType;
+
 /**
  * Created by AngusLothian on 2018-03-24.
  */
@@ -13,4 +15,13 @@ public class PlayerInventory {
         this.equippableInventory = new EquippableInventory(activeStorageSize);
     }
 
+    public void addItemType(ItemType itemType) {
+        if (equippableInventory.canFitItemType(itemType)) {
+            equippableInventory.addItemType(itemType);
+        } else if (passiveStorage.canFitItemType(itemType)) {
+            passiveStorage.addItemType(itemType);
+        } else {
+            System.out.println("Item doesn't fit");
+        }
+    }
 }
