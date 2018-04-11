@@ -2,6 +2,8 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
 import survivingit.scene.Tile;
+import survivingit.states.IdleState;
+import survivingit.states.StateMachine;
 import survivingit.util.Point;
 
 import java.util.List;
@@ -13,32 +15,21 @@ public abstract class Animal extends Creature {
     private Stack<Point> path;
     private GameObject target;
 
+    private StateMachine<Animal> behaviour;
+
     private static final double IN_POINT_RANGE = 0.25; // Used for determining whether animal is in tile or not
 
     public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int alphaLevel, final double viewDistance) {
         super(x, y, sprites, maxHealth, moveSpeed, alphaLevel);
         this.path = new Stack<>();
         this.viewDistance = viewDistance;
+        this.behaviour = new StateMachine<>(this, new IdleState());
     }
 
     @Override
     public void update(double dt) {
         super.update(dt);
-
-        // Try to find target
-        this.target = findTarget();
-
-        // Calculate path based on target
-        if (this.target != null && this.path.size() <= 1) {
-            this.path = this.scene.findPath(new Point(this.x, this.y), new Point(target.x, target.y));
-        }
-
-        // Follow path if it exists
-        if (!this.path.isEmpty()) {
-            this.followPath();
-        } else {
-            this.setDirection(Direction.NONE);
-        }
+        behaviour.update(dt);
     }
 
     private void followPath() {

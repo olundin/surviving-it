@@ -21,7 +21,7 @@ public class AStar<T> {
     private Map<T, Double> gCosts = new HashMap<>();
     private Map<T, Double> hCosts = new HashMap<>();
 
-    private Comparator<T> comparator = new Comparator<>() {
+    private Comparator<T> comparator = new Comparator<T>() {
         @Override
         public int compare(T n1, T n2) {
             return Double.compare(gCosts.get(n1) + hCosts.get(n1), gCosts.get(n2) + hCosts.get(n2));

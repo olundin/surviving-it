@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.WorldRenderer;
 import survivingit.scene.Tile;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Camera extends GameObject {
@@ -77,7 +78,8 @@ public class Camera extends GameObject {
         );
 
         // Sort gameObjects by y position. Makes them render correctly
-        objectsInArea.sort(this.gameObjectComparator);
+        //objectsInArea.sort(this.gameObjectComparator);
+        Collections.sort(objectsInArea, gameObjectComparator);
 
         for (GameObject gameObject : objectsInArea) {
 
