@@ -1,8 +1,10 @@
 package survivingit.graphics;
 
+import survivingit.containers.ItemContainer;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.GameVisibleObject;
 import survivingit.hud.Icon;
+import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
@@ -53,7 +55,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  PRIMITIVE DRAWING FUNCTIONS
      */
 
-    private void drawSprite(int x, int y, int width, int height, Sprite sprite) {
+    private void drawSprite(int x, int y, int width, int height, final Sprite sprite) {
         graphics.drawImage(
                 sprite.getImage(),
                 x,
@@ -78,7 +80,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      */
 
     @Override
-    public void drawTile(int x, int y, Tile tile, Camera camera) {
+    public void drawTile(int x, int y, final Tile tile, final Camera camera) {
         int drawX = camera.worldToScreenX(x) - TILE_PADDING;
         int drawY = camera.worldToScreenY(y) - TILE_PADDING;
         int drawWidth = (int)(camera.pixelsPerUnitX() * tile.getSprite().getWidth() / UNIT_SIZE) + 2*TILE_PADDING;
@@ -87,7 +89,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     }
 
     @Override
-    public void drawObject(GameVisibleObject object, Camera camera) {
+    public void drawObject(final GameVisibleObject object, final Camera camera) {
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
 
@@ -120,7 +122,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      */
 
     @Override
-    public void drawProgressBar(ProgressBar progressBar) {
+    public void drawProgressBar(final ProgressBar progressBar) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
         int drawX = (int) (progressBar.getX() / 100 * this.width);
         int drawY = (int) (progressBar.getY() / 100 * this.height);
@@ -151,7 +153,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     }
 
     @Override
-    public void drawIcon(Icon icon) {
+    public void drawIcon(final Icon icon) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
         int drawX = (int) (icon.getX() / 100 * this.width);
         int drawY = (int) (icon.getY() / 100 * this.height);
@@ -163,7 +165,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     }
 
     @Override
-    public void drawInventoryBoxes(double x, double y, int fullRows, int itemsPerColumn, int extraBoxes) {
+    public void drawItemContainer(final ItemContainerHud itemContainerHud) {
 
     }
 }

@@ -5,18 +5,20 @@ import survivingit.graphics.HudRenderer;
 
 public class ItemContainerHud extends HudElement {
 
+    protected static final double SLOT_SIZE = 4;
+
     private ItemContainer itemContainer;
-    private int itemsPerColumn;
+    private int itemsPerRow;
 
     public ItemContainerHud(double x, double y, double width, double height, ItemContainer itemContainer,
-                            int itemsPerColumn) {
+                            int itemsPerRow) {
         super(x, y, width, height);
         this.itemContainer = itemContainer;
-        this.itemsPerColumn = itemsPerColumn;
+        this.itemsPerRow = itemsPerRow;
     }
 
     public void render(HudRenderer hudRenderer) {
-        // TODO:
+        hudRenderer.drawItemContainer(this);
     }
 
 
