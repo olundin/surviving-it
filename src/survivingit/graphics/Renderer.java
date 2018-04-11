@@ -77,6 +77,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  WORLD RENDERER
      */
 
+    @Override
     public void drawTile(int x, int y, Tile tile, Camera camera) {
         int drawX = camera.worldToScreenX(x) - TILE_PADDING;
         int drawY = camera.worldToScreenY(y) - TILE_PADDING;
@@ -85,6 +86,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, tile.getSprite());
     }
 
+    @Override
     public void drawObject(GameVisibleObject object, Camera camera) {
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
@@ -117,6 +119,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  HUD RENDERER
      */
 
+    @Override
     public void drawProgressBar(ProgressBar progressBar) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
         int drawX = (int) (progressBar.getX() / 100 * this.width);
@@ -147,6 +150,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getRightEdge());
     }
 
+    @Override
     public void drawIcon(Icon icon) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
         int drawX = (int) (icon.getX() / 100 * this.width);
@@ -156,5 +160,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
         // Draw icon
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, icon.getSprite());
+    }
+
+    @Override
+    public void drawInventoryBoxes(double x, double y, int fullRows, int itemsPerColumn, int extraBoxes) {
+
     }
 }
