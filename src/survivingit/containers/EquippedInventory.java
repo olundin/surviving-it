@@ -2,12 +2,12 @@ package survivingit.containers;
 
 import survivingit.items.Item;
 
-public class EquippableInventory {
+public class EquippedInventory {
 
     private ItemContainer container;
     private int equipIndex;
 
-    public EquippableInventory(int size) {
+    public EquippedInventory(int size) {
         this.container = new ItemContainer(size);
         this.equipIndex = 0;
     }

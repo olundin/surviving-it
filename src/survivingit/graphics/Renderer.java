@@ -3,6 +3,7 @@ package survivingit.graphics;
 import survivingit.containers.ItemContainer;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.GameVisibleObject;
+import survivingit.hud.EquippedInventoryHud;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
@@ -195,7 +196,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
             iX++;
             drawX += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
-            if (iX > itemsPerColumn) {
+            if (iX >= itemsPerColumn) {
                 // next row
                 iY++;
                 drawY += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
@@ -203,6 +204,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                 drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
             }
         }
+    }
+
+    public void drawEquippedInventory(EquippedInventoryHud equippedInventoryHud) {
+
     }
 
     private int drawValFromHudVal(double hudVal, double rendererVal) {

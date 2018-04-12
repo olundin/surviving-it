@@ -9,8 +9,11 @@ public class TestScene extends Scene {
     public TestScene() {
         super(32, 32);
         Player player = new Player(0.5, 0.5);
-        player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
-        player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
+        for (int i = 0; i < 10; i++) {
+            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
+            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
+        }
+
         this.addPlayer(player);
 
         this.add(new Campfire(5, 5));
