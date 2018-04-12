@@ -40,7 +40,7 @@ public class Window extends Frame implements Observable<Window> {
             public void windowClosing(WindowEvent we) {
                 onClose();
             }
-        }); // TODO: Make this call Game.stop(), which in turn calls for System.exit(0);
+        });
     }
 
     public void attach(Observer<Window> observer) {

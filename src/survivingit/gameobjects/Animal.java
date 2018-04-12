@@ -1,7 +1,8 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
-import survivingit.scene.Tile;
+import survivingit.messaging.Message;
+import survivingit.messaging.MessageType;
 import survivingit.states.IdleState;
 import survivingit.states.StateMachine;
 import survivingit.util.Point;
@@ -16,8 +17,8 @@ public abstract class Animal extends Creature {
 
     private StateMachine<Animal> behaviour;
 
-    public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int alphaLevel, final double viewDistance) {
-        super(x, y, sprites, maxHealth, moveSpeed, alphaLevel);
+    public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double viewDistance) {
+        super(x, y, sprites, maxHealth, moveSpeed, damage, alphaLevel);
         this.path = new Stack<>();
         this.viewDistance = viewDistance;
         this.behaviour = new StateMachine<>(this, new IdleState());
@@ -69,6 +70,18 @@ public abstract class Animal extends Creature {
 
     public double getViewDistance() {
         return this.viewDistance;
+    }
+
+    public void receiveMessage(Message msg) {
+        MessageType type = msg.getType();
+        int data = msg.getData();
+        switch(type) {
+            case ATTACK:
+                this.takeDamage(data);
+                break;
+            default:
+                break;
+        }
     }
 
 }

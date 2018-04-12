@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.WorldRenderer;
+import survivingit.messaging.Message;
 import survivingit.scene.Tile;
 
 import java.util.Collections;
@@ -146,4 +147,7 @@ public class Camera extends GameObject {
     public double pixelsPerUnitY() {
         return this.screenHeight / this.height;
     }
+
+    public void receiveMessage(Message msg) {}
+
 }

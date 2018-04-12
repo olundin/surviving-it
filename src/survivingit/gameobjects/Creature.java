@@ -7,6 +7,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
     protected int currentHealth;
     protected int maxHealth;
     protected double moveSpeed; // Tiles per second
+    protected int damage; // Attack damage
     protected Direction direction;
     protected int alphaLevel; // Creatures will flee from creatures with higher level and attack creatures with lower alpha level
 
@@ -15,11 +16,12 @@ public abstract class Creature extends VisibleObject implements Updateable {
 
     private CreatureSprite sprites;
 
-    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int alphaLevel) {
+    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel) {
 	    super(x, y, sprites.getSprite());
 	    this.currentHealth = maxHealth;
 	    this.maxHealth = maxHealth;
 	    this.moveSpeed = moveSpeed;
+	    this.damage = damage;
 	    this.direction = Direction.NONE;
 	    this.alphaLevel = alphaLevel;
 
@@ -75,7 +77,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
         }
     }
 
-    public void setMoveSpeed(final float moveSpeed) {
+    public void setMoveSpeed(final double moveSpeed) {
 	    this.moveSpeed = moveSpeed;
     }
 
@@ -85,6 +87,10 @@ public abstract class Creature extends VisibleObject implements Updateable {
 
     public boolean isMoving() {
         return Math.abs(this.x - this.lastX) > 0.00001 || Math.abs(this.y - this.lastY) > 0.00001;
+    }
+
+    public int getDamage() {
+        return this.damage;
     }
 
     public int getAlphaLevel() {

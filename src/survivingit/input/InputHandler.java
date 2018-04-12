@@ -40,6 +40,11 @@ public class InputHandler {
             player.setDirection(Direction.NONE);
         }
 
+        // Player attack with left mouse button
+        if(mouse.getButtonPressed(Input.BUTTON_LEFT)) {
+            player.attack();
+        }
+
         // Zoom in/out with scroll wheel (!)
         if(mouse.getScroll() != 0) {
             camera.zoom(mouse.getScroll());

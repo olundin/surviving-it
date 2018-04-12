@@ -18,7 +18,7 @@ public class IdleState implements State<Animal> {
     }
 
     public void enter(Animal object) {
-
+        object.setDirection(Direction.NONE);
     }
 
     public State<Animal> update(double dt, Animal object) {

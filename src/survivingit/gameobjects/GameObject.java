@@ -1,9 +1,11 @@
 package survivingit.gameobjects;
 
+import survivingit.messaging.Messagable;
+import survivingit.messaging.Message;
 import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
-public abstract class GameObject implements Updateable {
+public abstract class GameObject implements Updateable, Messagable {
 
     protected double x;
     protected double y;

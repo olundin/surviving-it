@@ -33,6 +33,12 @@ public class FollowState implements State<Animal> {
                 object.setPath(object.getScene().findPath(pos, dst));
             }
             object.followPath();
+
+            // Check if attack should be performed
+            if(object.getPath().isEmpty()) {
+                // Target reached
+                return new AttackState(target);
+            }
         }
         return this;
     }
