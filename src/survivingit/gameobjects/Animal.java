@@ -13,11 +13,8 @@ public abstract class Animal extends Creature {
 
     private double viewDistance; // Distance animal can see other gameobjects in
     private Stack<Point> path;
-    private GameObject target;
 
     private StateMachine<Animal> behaviour;
-
-    private static final double IN_POINT_RANGE = 0.25; // Used for determining whether animal is in tile or not
 
     public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int alphaLevel, final double viewDistance) {
         super(x, y, sprites, maxHealth, moveSpeed, alphaLevel);
@@ -32,12 +29,14 @@ public abstract class Animal extends Creature {
         behaviour.update(dt);
     }
 
-    private void followPath() {
+    public void followPath() {
+        if(path.isEmpty()) return;
         Point next = path.peek();
         Point current = new Point(this.x, this.y);
         if (Point.areClose(next, current)) {
             // Reached target
             path.pop();
+            return;
         }
         // Set direction to best direction to find target
         this.direction = Direction.fromAngle(Point.getAngle(new Point(this.x, this.y), next));
@@ -47,7 +46,11 @@ public abstract class Animal extends Creature {
         return this.path;
     }
 
-    private GameObject findTarget() {
+    public void setPath(Stack<Point> path){
+        this.path = path;
+    }
+
+    public GameObject findTarget() {
         List<GameObject> inRange = this.scene.getObjectsInArea(this.x - viewDistance/2,
                                                                this.y - viewDistance/2,
                                                                this.x + viewDistance/2,

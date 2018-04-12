@@ -77,6 +77,7 @@ public class AStar<T> {
         }
 
         // If this return is reached, no path was found
+        System.out.println("no path found");
         return new Stack<>();
     }
 

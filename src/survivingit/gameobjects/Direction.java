@@ -37,15 +37,20 @@ public enum Direction {
 
     public static Direction fromAngle(double angle) {
         angle %= 2 * Math.PI;
-        double maxDiff = Math.PI / 8; // 2 * pi / (8 * 2)
-        for(int d = 0; d < SIZE; d++) {
-            Direction dir = VALUES.get(d);
-            if(dir == NONE) continue;
-            double dirAngle = Math.atan2(dir.x, dir.y);
-            if(Math.abs(angle - dirAngle) <= maxDiff) return dir;
+        if(angle >= 0) {
+            if(angle < Math.PI/16) return DOWN;
+            else if(angle < 3*Math.PI/16) return DOWN_RIGHT;
+            else if(angle < 5*Math.PI/16) return RIGHT;
+            else if(angle < 7*Math.PI/16) return UP_RIGHT;
+            else return UP;
+        } else if(angle < 0){
+            if(angle >= -Math.PI/16) return DOWN;
+            else if(angle >= -3*Math.PI/16) return DOWN_LEFT;
+            else if(angle >= -5*Math.PI/16) return LEFT;
+            else if(angle >= -7*Math.PI/16) return UP_LEFT;
+            else return UP;
         }
         return NONE;
-
     }
 
 }

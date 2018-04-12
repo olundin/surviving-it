@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Point {
 
-    private static final double RANGE = 0.25; // Range in with two points are considered close
+    private static final double RANGE = 0.5; // Range in with two points are considered close
 
     private double x;
     private double y;

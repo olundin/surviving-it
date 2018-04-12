@@ -57,6 +57,10 @@ public abstract class GameObject implements Updateable {
         this.scene = scene;
     }
 
+    public Scene getScene() {
+        return this.scene;
+    }
+
     public Collider getCollider() {
         return this.collider;
     }

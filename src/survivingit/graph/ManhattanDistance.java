@@ -22,6 +22,6 @@ public class ManhattanDistance implements AStarHeuristic<Point> {
     }
 
     public boolean reached(Point src, Point dst) {
-        return this.calculate(src, dst) <= 0.5;
+        return Point.areClose(src, dst);
     }
 }

@@ -28,6 +28,10 @@ public class Collider {
     }
 
     public boolean collidesWith(Collider other) {
+        return !this.passable && overlaps(other);
+    }
+
+    public boolean overlaps(Collider other) {
         return  this.getWorldX() <= other.getWorldX() + other.width &&
                 other.getWorldX() <= this.getWorldX() + this.width &&
                 this.getWorldY() <= other.getWorldY() + other.height &&
@@ -39,6 +43,7 @@ public class Collider {
     }
 
     public boolean hasTileCollision(Scene scene) {
+        if(this.passable) return false;
         List<Tile> collidingTiles = scene.getTilesInArea(
                 this.getWorldX(), this.getWorldY(),
                 this.getWorldX() + this.width, this.getWorldY() + this.height
