@@ -28,6 +28,10 @@ public class PlayerInventory {
         }
     }
 
+    public EquippableInventory getEquippableInventory() {
+        return this.equippableInventory;
+    }
+
     public boolean hasSpace() {
         return this.equippableInventory.hasSpace() || this.passiveStorage.hasSpace();
     }

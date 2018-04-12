@@ -55,6 +55,10 @@ public class Player extends Creature implements Observable<Player> {
         this.notifyObservers(this);
     }
 
+    public PlayerInventory getPlayerInventory() {
+        return this.playerInventory;
+    }
+
     public void addItemToFirstAvilable(Item item) {
         this.playerInventory.addItemToFirstAvailable(item);
     }

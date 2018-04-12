@@ -6,7 +6,11 @@ import survivingit.graphics.Sprite;
 
 public class ItemContainerHud extends HudElement {
 
-    public static final double SLOT_SIZE = 4;
+    public static final int SLOT_PADDING = 8;
+    public static final int SLOT_SIZE = 56;
+
+    public static final int ITEM_PADDING = 4;
+    public static final int ITEM_SIZE = 48;
 
     private ItemContainer itemContainer;
     private int itemsPerRow;
@@ -14,8 +18,8 @@ public class ItemContainerHud extends HudElement {
     private Sprite itemSlotSprite;
 
     public ItemContainerHud(double x, double y, double width, double height, ItemContainer itemContainer,
-                            int itemsPerRow) {
-        super(x, y, width, height);
+                            int itemsPerRow, boolean visible) {
+        super(x, y, width, height, visible);
         this.itemContainer = itemContainer;
         this.itemsPerRow = itemsPerRow;
 

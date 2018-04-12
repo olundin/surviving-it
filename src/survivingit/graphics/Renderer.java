@@ -6,6 +6,8 @@ import survivingit.gameobjects.GameVisibleObject;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
+import survivingit.items.Item;
+import survivingit.items.ItemType;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
 
@@ -124,9 +126,9 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     @Override
     public void drawProgressBar(final ProgressBar progressBar) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
-        int drawX = (int) (progressBar.getX() / 100 * this.width);
-        int drawY = (int) (progressBar.getY() / 100 * this.height);
-        int drawWidth = (int) (progressBar.getWidth() / 100 * this.width);
+        int drawX = drawValFromHudVal(progressBar.getX(), this.width);
+        int drawY = drawValFromHudVal(progressBar.getY(), this.height);
+        int drawWidth = drawValFromHudVal(progressBar.getWidth(), this.width);
         int drawHeight = (int) (progressBar.getHeight() / 100 * this.height);
 
         int pixelsPerStep = drawWidth / progressBar.getMax();
@@ -155,10 +157,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     @Override
     public void drawIcon(final Icon icon) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
-        int drawX = (int) (icon.getX() / 100 * this.width);
-        int drawY = (int) (icon.getY() / 100 * this.height);
-        int drawWidth = (int) (icon.getWidth() / 100 * this.width);
-        int drawHeight = (int) (icon.getHeight() / 100 * this.height);
+        int drawX = drawValFromHudVal(icon.getX(), this.width);
+        int drawY = drawValFromHudVal(icon.getY(), this.height);
+        int drawWidth = drawValFromHudVal(icon.getWidth(), this.width);
+        int drawHeight = drawValFromHudVal(icon.getHeight(), this.height);
 
         // Draw icon
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, icon.getSprite());
@@ -166,6 +168,45 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
     @Override
     public void drawItemContainer(final ItemContainerHud itemContainerHud) {
+        final ItemContainer itemContainer = itemContainerHud.getItemContainer();
+        final int itemsPerColumn = itemContainerHud.getItemsPerRow();
+        int size = itemContainer.getSize();
+        int drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
+        int drawY = drawValFromHudVal(itemContainerHud.getY(), this.height);
+        int fullRows = (int) Math.floor(size / itemsPerColumn);
+        int extraBoxes = size % itemsPerColumn;
 
+        Sprite itemSlotSprite = itemContainerHud.getItemSlotSprite();
+
+        this.drawRect(drawX, drawY, drawValFromHudVal(itemContainerHud.getWidth(), this.width),
+                drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED);
+
+        int iX = 0;
+        int iY = 0;
+        for (int i = 0; i < size; i++) {
+            // draw itemslot
+            this.drawSprite(drawX, drawY, ItemContainerHud.SLOT_SIZE, ItemContainerHud.SLOT_SIZE, itemSlotSprite);
+            // draw item
+            Item item = itemContainer.getItemAt(i);
+            if (item.getItemType() != ItemType.NONE) {
+                this.drawSprite(drawX + ItemContainerHud.ITEM_PADDING, drawY + ItemContainerHud.ITEM_PADDING,
+                        ItemContainerHud.ITEM_SIZE, ItemContainerHud.ITEM_SIZE, item.getSprite());
+            }
+
+            iX++;
+            drawX += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
+            if (iX > itemsPerColumn) {
+                // next row
+                iY++;
+                drawY += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
+                iX = 0;
+                drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
+            }
+        }
     }
+
+    private int drawValFromHudVal(double hudVal, double rendererVal) {
+        return (int) (hudVal / 100 * rendererVal);
+    }
+
 }
