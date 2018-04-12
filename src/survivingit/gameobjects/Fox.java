@@ -19,7 +19,7 @@ public class Fox extends Animal {
               1,
               5.0);
 
-        this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
+        this.setCollider(new Collider(-0.2, -0.35, 0.4, 0.35, false, this));
     }
 
 }

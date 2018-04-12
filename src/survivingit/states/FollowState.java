@@ -27,10 +27,9 @@ public class FollowState implements State<Animal> {
             // Target exists, move towards it
             Point pos = new Point(object.getX(), object.getY());
             Point dst = new Point(target.getX(), target.getY());
-            // Make sure path points towards target
+            // Update path if necessary
             Stack<Point> path = object.getPath();
-            if(path.isEmpty() || !Point.areClose(path.firstElement(), dst)) {
-                System.out.println("changing path");
+            if(path.isEmpty() || !Point.areWithin(path.firstElement(), dst, 1)) {
                 object.setPath(object.getScene().findPath(pos, dst));
             }
             object.followPath();

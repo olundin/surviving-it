@@ -47,6 +47,15 @@ public abstract class Scene {
         gameObject.setScene(this);
     }
 
+    public boolean tryAdd(GameObject gameObject) {
+        // Makes sure gameObject won't get stuck in tile
+        if(this.getTileAt(gameObject.getX(), gameObject.getY()).isPassable()) {
+            this.add(gameObject);
+            return true;
+        }
+        return false;
+    }
+
     public void update(double dt) {
         for (GameObject gameObject : gameObjects) {
             gameObject.update(dt);

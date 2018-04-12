@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class SceneGraph implements Graph<Point> {
 
+    private static final double NODE_OFFSET = 0.5;
+
     private Scene scene;
     private final Point[] adjacent = {
         new Point(-1, 0),   // west
@@ -29,8 +31,8 @@ public class SceneGraph implements Graph<Point> {
         Set<Point> neighbors = new HashSet<>();
 
         for(Point n : adjacent) {
-            Point neighbor = new Point(Math.floor(node.getX()) + n.getX() + 0.5,
-                                       Math.floor(node.getY()) + n.getY() + 0.5);
+            Point neighbor = new Point(Math.floor(node.getX()) + n.getX() + NODE_OFFSET,
+                                       Math.floor(node.getY()) + n.getY() + NODE_OFFSET);
             // Make sure the neighbor itself is passable
             if(!scene.getTileAt(neighbor.getX(), neighbor.getY()).isPassable()) continue;
 

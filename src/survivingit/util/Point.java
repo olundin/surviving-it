@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Point {
 
-    private static final double RANGE = 0.5; // Range in with two points are considered close
-
     private double x;
     private double y;
 
@@ -34,8 +32,8 @@ public class Point {
         return Math.atan2(to.x - from.x, to.y - from.y);
     }
 
-    public static boolean areClose(Point p1, Point p2) {
-        return Math.abs(p1.x - p2.x) <= RANGE && Math.abs(p1.y - p2.y) <= RANGE;
+    public static boolean areWithin(Point p1, Point p2, double range) {
+        return Math.abs(Math.hypot(p1.x - p2.x, p1.y - p2.y)) <= range;
     }
 
     @Override

@@ -33,13 +33,13 @@ public abstract class Animal extends Creature {
         if(path.isEmpty()) return;
         Point next = path.peek();
         Point current = new Point(this.x, this.y);
-        if (Point.areClose(next, current)) {
-            // Reached target
+        if (!Point.areWithin(next, current, 0.1)) {
+            // Set direction to best direction to find target
+            this.direction = Direction.fromAngle(Point.getAngle(new Point(this.x, this.y), next));
+        } else {
+            // Target reached
             path.pop();
-            return;
         }
-        // Set direction to best direction to find target
-        this.direction = Direction.fromAngle(Point.getAngle(new Point(this.x, this.y), next));
     }
 
     public Stack<Point> getPath() {

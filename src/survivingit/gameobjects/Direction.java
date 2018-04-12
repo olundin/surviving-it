@@ -38,16 +38,16 @@ public enum Direction {
     public static Direction fromAngle(double angle) {
         angle %= 2 * Math.PI;
         if(angle >= 0) {
-            if(angle < Math.PI/16) return DOWN;
-            else if(angle < 3*Math.PI/16) return DOWN_RIGHT;
-            else if(angle < 5*Math.PI/16) return RIGHT;
-            else if(angle < 7*Math.PI/16) return UP_RIGHT;
+            if(angle < Math.PI*(1.0)/16) return DOWN;
+            else if(angle < Math.PI*(7.0/16)) return DOWN_RIGHT;
+            else if(angle < Math.PI*(9.0/16)) return RIGHT;
+            else if(angle < Math.PI*(15.0/16)) return UP_RIGHT;
             else return UP;
         } else if(angle < 0){
-            if(angle >= -Math.PI/16) return DOWN;
-            else if(angle >= -3*Math.PI/16) return DOWN_LEFT;
-            else if(angle >= -5*Math.PI/16) return LEFT;
-            else if(angle >= -7*Math.PI/16) return UP_LEFT;
+            if(angle >= -Math.PI*(-1.0)/16) return DOWN;
+            else if(angle >= Math.PI*(-7.0/16)) return DOWN_LEFT;
+            else if(angle >= Math.PI*(-9.0/16)) return LEFT;
+            else if(angle >= Math.PI*(-15.0/16)) return UP_LEFT;
             else return UP;
         }
         return NONE;
