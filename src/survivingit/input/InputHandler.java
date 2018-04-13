@@ -38,20 +38,19 @@ public class InputHandler {
             player.setDirection(Direction.NONE);
         }
 
-        // Switch equipped item
-        if (keyboard.getKey(Input.KEY_LEFT)) {
-            player.changeEquippedItem(-1);
-        } else if (keyboard.getKey(Input.KEY_RIGHT)) {
-            player.changeEquippedItem(1);
+        // Switch equipped item with scroll wheel
+        if (mouse.getScroll() != 0) {
+            player.changeEquippedItem(mouse.getScroll());
         }
 
-        // Zoom in/out with scroll wheel (!)
-        if(mouse.getScroll() != 0) {
-            camera.zoom(mouse.getScroll());
+        // Zoom in/out with up/down key press
+        if (keyboard.getKey(Input.KEY_UP)) {
+            camera.zoom(0.5);
+        } else if (keyboard.getKey(Input.KEY_DOWN)) {
+            camera.zoom(-0.5);
         }
 
         // Set camera position to be between player and mouse
-
         camera.setCenterPos(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1),
                 Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)
