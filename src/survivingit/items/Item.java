@@ -3,10 +3,8 @@ package survivingit.items;
 import survivingit.gameobjects.Updateable;
 import survivingit.graphics.Sprite;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Item {
 
