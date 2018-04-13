@@ -3,7 +3,7 @@ package survivingit.graphics;
 import survivingit.containers.ItemContainer;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.GameVisibleObject;
-import survivingit.hud.EquippedInventoryHud;
+import survivingit.hud.EquippedItemContainerHud;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
@@ -17,7 +17,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
     private static final int TILE_PADDING = 1; // Extra padding to be added to sprite size when rendering tiles
@@ -174,19 +174,19 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int size = itemContainer.getSize();
         int drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
         int drawY = drawValFromHudVal(itemContainerHud.getY(), this.height);
-        int fullRows = (int) Math.floor(size / itemsPerColumn);
-        int extraBoxes = size % itemsPerColumn;
 
         Sprite itemSlotSprite = itemContainerHud.getItemSlotSprite();
 
-        this.drawRect(drawX, drawY, drawValFromHudVal(itemContainerHud.getWidth(), this.width),
-                drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED);
+        if (DEBUG) {
+            this.drawRect(drawX, drawY, drawValFromHudVal(itemContainerHud.getWidth(), this.width),
+                    drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED);
+        }
 
         int iX = 0;
-        int iY = 0;
         for (int i = 0; i < size; i++) {
             // draw itemslot
             this.drawSprite(drawX, drawY, ItemContainerHud.SLOT_SIZE, ItemContainerHud.SLOT_SIZE, itemSlotSprite);
+
             // draw item
             Item item = itemContainer.getItemAt(i);
             if (item.getItemType() != ItemType.NONE) {
@@ -198,7 +198,6 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
             drawX += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
             if (iX >= itemsPerColumn) {
                 // next row
-                iY++;
                 drawY += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
                 iX = 0;
                 drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
@@ -206,8 +205,17 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         }
     }
 
-    public void drawEquippedInventory(EquippedInventoryHud equippedInventoryHud) {
+    public void drawEquippedInventory(EquippedItemContainerHud equippedItemContainerHud) {
+        int drawX = drawValFromHudVal(equippedItemContainerHud.getX(), this.width) +
+                equippedItemContainerHud.getEquippedItemContainer().getEquippedIndex() *
+                        (ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING);
+        int drawY = drawValFromHudVal(equippedItemContainerHud.getY(), this.height);
 
+
+        this.drawSprite(drawX, drawY, ItemContainerHud.SLOT_SIZE, ItemContainerHud.SLOT_SIZE,
+                equippedItemContainerHud.getEquippedItemSlotSprite());
+
+        this.drawItemContainer(equippedItemContainerHud);
     }
 
     private int drawValFromHudVal(double hudVal, double rendererVal) {

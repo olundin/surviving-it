@@ -12,6 +12,7 @@ public class HealthBar extends ProgressBar implements Observer<Player> {
         player.attach(this);
     }
 
+    @Override
     public void onNotify(Observable<Player> object, Player data) {
         this.max = data.getMaxHealth();
         this.current = data.getCurrentHealth();

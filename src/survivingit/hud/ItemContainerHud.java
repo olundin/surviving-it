@@ -26,6 +26,7 @@ public class ItemContainerHud extends HudElement {
         this.itemSlotSprite = Sprite.ITEM_SLOT;
     }
 
+    @Override
     public void render(HudRenderer hudRenderer) {
         hudRenderer.drawItemContainer(this);
     }

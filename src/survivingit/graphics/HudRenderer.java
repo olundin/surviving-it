@@ -1,6 +1,6 @@
 package survivingit.graphics;
 
-import survivingit.hud.EquippedInventoryHud;
+import survivingit.hud.EquippedItemContainerHud;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
@@ -13,6 +13,6 @@ public interface HudRenderer {
 
     public void drawItemContainer(ItemContainerHud itemContainerHud);
 
-    public void drawEquippedInventory(EquippedInventoryHud equippedInventoryHud);
+    public void drawEquippedInventory(EquippedItemContainerHud equippedItemContainerHud);
 
 }

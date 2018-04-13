@@ -62,6 +62,7 @@ public class ProgressBar extends HudElement {
     public Sprite getEmpty() {
         return this.empty;
     }
+
     public Sprite getFilled() {
         return this.filled;
     }

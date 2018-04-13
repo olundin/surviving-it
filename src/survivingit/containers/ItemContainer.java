@@ -8,9 +8,9 @@ import survivingit.items.ItemType;
  */
 public class ItemContainer {
 
-    private ItemSlot[] itemSlots;
-    private final int size;
-    private int usedSlots;
+    protected ItemSlot[] itemSlots;
+    protected final int size;
+    protected int usedSlots;
 
     public ItemContainer(final int size) {
         this.itemSlots = new ItemSlot[size];
