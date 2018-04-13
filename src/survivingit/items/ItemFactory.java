@@ -9,7 +9,7 @@ public abstract class ItemFactory {
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {
 			case KNIFE: {
-				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.BELT);
+				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.CAMPFIRE);
 				knife.addEffect(new AttackEffect(10, 10, knife));
 				return knife;
 			}

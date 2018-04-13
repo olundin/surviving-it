@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Player extends Creature implements Observable<Player> {
 
-    private static final int PASSIVE_STORAGE_SIZE = 20;
+    private static final int PASSIVE_STORAGE_SIZE = 15;
     private static final int EQUIPPABLE_STORAGE_SIZE = 5;
 
     private List<Observer<Player>> observers;
@@ -26,7 +26,7 @@ public class Player extends Creature implements Observable<Player> {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              3);
+              5);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
 	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);
@@ -55,6 +55,10 @@ public class Player extends Creature implements Observable<Player> {
         this.notifyObservers(this);
     }
 
+    public PlayerInventory getPlayerInventory() {
+        return this.playerInventory;
+    }
+
     public void addItemToFirstAvilable(Item item) {
         this.playerInventory.addItemToFirstAvailable(item);
     }
@@ -69,4 +73,7 @@ public class Player extends Creature implements Observable<Player> {
         }
     }
 
+    public void changeEquippedItem(int i) {
+        this.playerInventory.changeEquippedItem(i);
+    }
 }

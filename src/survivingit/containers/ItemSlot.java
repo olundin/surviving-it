@@ -24,10 +24,6 @@ public class ItemSlot {
         this.item = ItemFactory.NONE_ITEM;
     }
 
-    public ItemType getItemType() {
-        return this.item.getItemType();
-    }
-
     public Item getItem() {
         return this.item;
     }
@@ -44,6 +40,6 @@ public class ItemSlot {
     }
 
     public boolean isEmpty() {
-        return this.getItemType() == ItemType.NONE;
+        return this.getItem().getItemType() == ItemType.NONE;
     }
 }

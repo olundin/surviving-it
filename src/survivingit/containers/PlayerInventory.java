@@ -7,7 +7,7 @@ import survivingit.items.Item;
  */
 public class PlayerInventory {
 
-    private EquippableInventory equippableInventory;
+    private EquippedItemContainer equippedItemContainer;
     private ItemContainer passiveStorage;
 
     public PlayerInventory(int passiveStorageSize, int equippableStorageSize) {
@@ -15,20 +15,32 @@ public class PlayerInventory {
             throw new IllegalArgumentException("Negative passive or equippable storage size.");
         }
         this.passiveStorage = new ItemContainer(passiveStorageSize);
-        this.equippableInventory = new EquippableInventory(equippableStorageSize);
+        this.equippedItemContainer = new EquippedItemContainer(equippableStorageSize);
     }
 
     public void addItemToFirstAvailable(Item item) {
         if (!this.hasSpace()) {
             throw new IllegalStateException("Attempt to add item to full inventory");
-        } else if (equippableInventory.hasSpace()) {
-            equippableInventory.addItemToFirstAvailable(item);
+        } else if (equippedItemContainer.hasSpace()) {
+            equippedItemContainer.addItemToFirstAvailable(item);
         } else if (passiveStorage.hasSpace()) {
             passiveStorage.addItemToFirstAvailable(item);
         }
     }
 
+    public EquippedItemContainer getEquippedItemContainer() {
+        return this.equippedItemContainer;
+    }
+
+    public ItemContainer getPassiveStorage() {
+        return this.passiveStorage;
+    }
+
     public boolean hasSpace() {
-        return this.equippableInventory.hasSpace() || this.passiveStorage.hasSpace();
+        return this.equippedItemContainer.hasSpace() || this.passiveStorage.hasSpace();
+    }
+
+    public void changeEquippedItem(int i) {
+        this.equippedItemContainer.changeEquippedItem(i);
     }
 }

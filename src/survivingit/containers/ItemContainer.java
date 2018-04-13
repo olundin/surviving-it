@@ -8,9 +8,9 @@ import survivingit.items.ItemType;
  */
 public class ItemContainer {
 
-    private ItemSlot[] itemSlots;
-    private final int size;
-    private int usedSlots;
+    protected ItemSlot[] itemSlots;
+    protected final int size;
+    protected int usedSlots;
 
     public ItemContainer(final int size) {
         this.itemSlots = new ItemSlot[size];
@@ -45,7 +45,7 @@ public class ItemContainer {
         usedSlots++;
     }
 
-    public Item popItemTypeAt(int index) {
+    public Item popItemAt(int index) {
         if (index < 0 || index >= this.size) {
             throw new IllegalArgumentException("Index ouut of bounds");
         }
@@ -57,7 +57,7 @@ public class ItemContainer {
         return item;
     }
 
-    public void removeItemTypeAt(int index) {
+    public void removeItemAt(int index) {
         if (index < 0 || index >= this.size) {
             throw new IllegalArgumentException("Index out of bounds");
         }
@@ -67,11 +67,11 @@ public class ItemContainer {
         itemSlots[index].clearItem();
     }
 
-    public ItemType getItemTypeAt(int index) {
+    public Item getItemAt(int index) {
         if (index < 0 || index >= this.size) {
             throw new IllegalArgumentException("Index out of bounds.");
         }
-        return this.itemSlots[index].getItemType();
+        return this.itemSlots[index].getItem();
     }
 
     public int getSize() {

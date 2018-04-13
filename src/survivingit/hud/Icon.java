@@ -8,7 +8,7 @@ public class Icon extends HudElement {
     private Sprite sprite;
 
     public Icon(final double x, final double y, final double width, final double height, Sprite sprite) {
-        super(x, y, width, height);
+        super(x, y, width, height, true);
         this.sprite = sprite;
     }
 
