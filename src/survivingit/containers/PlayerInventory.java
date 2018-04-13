@@ -39,4 +39,8 @@ public class PlayerInventory {
     public boolean hasSpace() {
         return this.equippedItemContainer.hasSpace() || this.passiveStorage.hasSpace();
     }
+
+    public void changeEquippedItem(int i) {
+        this.equippedItemContainer.changeEquippedItem(i);
+    }
 }

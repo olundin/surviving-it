@@ -19,4 +19,7 @@ public class EquippedItemContainer extends ItemContainer {
         return this.equippedIndex;
     }
 
+    public void changeEquippedItem(int i) {
+        this.equippedIndex = ((this.equippedIndex + i) + this.size) % this.size;
+    }
 }

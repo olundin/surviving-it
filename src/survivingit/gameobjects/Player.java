@@ -73,4 +73,7 @@ public class Player extends Creature implements Observable<Player> {
         }
     }
 
+    public void changeEquippedItem(int i) {
+        this.playerInventory.changeEquippedItem(i);
+    }
 }

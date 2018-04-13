@@ -4,8 +4,6 @@ import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.Player;
 import survivingit.gameobjects.Camera;
 
-import survivingit.graphics.Renderer;
-import survivingit.scene.Scene;
 import survivingit.util.Maths;
 
 public class InputHandler {
@@ -38,6 +36,13 @@ public class InputHandler {
             player.setDirection(Direction.DOWN);
         } else {
             player.setDirection(Direction.NONE);
+        }
+
+        // Switch equipped item
+        if (keyboard.getKey(Input.KEY_LEFT)) {
+            player.changeEquippedItem(-1);
+        } else if (keyboard.getKey(Input.KEY_RIGHT)) {
+            player.changeEquippedItem(1);
         }
 
         // Zoom in/out with scroll wheel (!)
