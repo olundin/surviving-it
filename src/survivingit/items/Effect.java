@@ -1,12 +1,12 @@
 package survivingit.items;
 
-public abstract class AbstractEffect {
+public abstract class Effect {
 
     private EffectType effectType;
 
     private final Item source;
 
-    public AbstractEffect(Item source, EffectType effectType) {
+    public Effect(Item source, EffectType effectType) {
        this.source = source;
        this.effectType = effectType;
     }

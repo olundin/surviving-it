@@ -2,15 +2,13 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
-public class AttackEffect extends AbstractEffect implements Usable {
-
-    private static EffectType EFFECT_TYPE = EffectType.ATTACK;
+public class AttackEffect extends UsableEffect {
 
     private int damage;
     private int range;
 
     public AttackEffect(final int damage, final int range, final Item source) {
-        super(source, EFFECT_TYPE);
+        super(source);
         this.damage = damage;
         this.range = range;
     }

@@ -4,7 +4,7 @@ import survivingit.graphics.Sprite;
 
 public abstract class ItemFactory {
 
-	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.SNOW_ROCK);
+	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.WATER);
 
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {

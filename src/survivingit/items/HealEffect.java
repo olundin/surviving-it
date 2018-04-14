@@ -2,14 +2,12 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
-public class HealEffect extends AbstractEffect implements Usable {
-
-    private static EffectType EFFECT_TYPE = EffectType.HEAL;
+public class HealEffect extends UsableEffect {
 
     private int healAmount;
 
     public HealEffect(int healAmount, Item source) {
-        super(source, EFFECT_TYPE);
+        super(source);
         if (healAmount < 0 ) {
             throw new IllegalArgumentException("Negative heal amount not allowed");
 	    }
