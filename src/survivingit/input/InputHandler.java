@@ -45,7 +45,7 @@ public class InputHandler {
         }
 
         // Toggle HUD elements
-        if (keyboard.getKey(Input.KEY_I)) {
+        if (keyboard.getKey(Input.KEY_I) && keyboard.getKeyPressed(Input.KEY_I)) {
             hud.toggleInvetory();
             System.out.println("toggle");
         }
