@@ -1,5 +1,6 @@
 package survivingit.containers;
 
+import survivingit.gameobjects.Creature;
 import survivingit.items.Item;
 
 public class EquippedItemContainer extends ItemContainer {
@@ -21,5 +22,9 @@ public class EquippedItemContainer extends ItemContainer {
 
     public void changeEquippedItem(int i) {
         this.equippedIndex = ((this.equippedIndex + i) + this.size) % this.size;
+    }
+
+    public void useEquippedItem(Creature creature) {
+        Item equippedItem = this.getEquippedItem();
     }
 }

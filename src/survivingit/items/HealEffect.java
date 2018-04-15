@@ -2,7 +2,7 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
-public class HealEffect extends AbstractEffect implements Usable {
+public class HealEffect extends UsableEffect {
 
     private int healAmount;
 

@@ -2,7 +2,7 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
-public class AttackEffect extends AbstractEffect implements Usable {
+public class AttackEffect extends UsableEffect {
 
     private int damage;
     private int range;

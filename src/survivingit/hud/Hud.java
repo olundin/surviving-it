@@ -10,6 +10,7 @@ import java.util.List;
 public class Hud {
 
     private List<HudElement> elements;
+    private ItemContainerHud inventoryHud;
 
     public Hud(Player player) {
         this.elements = new ArrayList<>();
@@ -17,8 +18,8 @@ public class Hud {
         this.add(new Icon(21, 90, 2.5, 5, Sprite.ICON_HEART));
         this.add(new EquippedItemContainerHud(80, 90, 15, 5,
                 player.getPlayerInventory().getEquippedItemContainer(), 5));
-        this.add(new ItemContainerHud(80, 70, 15, 20,
-                player.getPlayerInventory().getPassiveStorage(), 5, true));
+        this.inventoryHud = new ItemContainerHud(80, 70, 15, 20,
+                player.getPlayerInventory().getPassiveStorage(), 5, true);
     }
 
     private void add(HudElement element) {
@@ -31,5 +32,12 @@ public class Hud {
                 element.render(renderer);
             }
         }
+        if (inventoryHud.isVisible()) {
+            inventoryHud.render(renderer);
+        }
+    }
+
+    public void toggleInvetory() {
+        this.inventoryHud.toggleVisible();
     }
 }
