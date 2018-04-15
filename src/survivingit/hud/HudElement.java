@@ -40,6 +40,10 @@ public abstract class HudElement {
         return this.visible;
     }
 
+    public void toggleVisible() {
+        this.visible = !this.visible;
+    }
+
     public abstract void render(HudRenderer renderer);
 
 }
