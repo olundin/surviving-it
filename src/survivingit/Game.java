@@ -4,7 +4,7 @@ import survivingit.gameobjects.Camera;
 import survivingit.graphics.Renderer;
 import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
-import survivingit.input.Keyboard;
+import survivingit.input.KeyboardListener;
 import survivingit.input.Mouse;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
@@ -19,7 +19,7 @@ public class Game implements Observer<Window> {
 
     private Renderer renderer;
     private Window window;
-    private Keyboard keyboard;
+    private KeyboardListener keyboardListener;
     private Mouse mouse;
     private InputHandler inputHandler;
 
@@ -32,13 +32,13 @@ public class Game implements Observer<Window> {
     private Game() {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
-        this.keyboard = new Keyboard();
+        this.keyboardListener = new KeyboardListener();
         this.mouse = new Mouse();
-        this.inputHandler = new InputHandler(keyboard, mouse);
+        this.inputHandler = new InputHandler(keyboardListener, mouse);
 
         window.add(renderer);
 
-        window.addKeyListener(keyboard);
+        window.addKeyListener(keyboardListener);
     	renderer.addMouseListener(mouse);
     	renderer.addMouseWheelListener(mouse);
     	renderer.addMouseMotionListener(mouse);
@@ -90,7 +90,7 @@ public class Game implements Observer<Window> {
         inputHandler.handleInput(currentScene.getPlayer(), camera, hud);
         currentScene.update(dt);
 
-        keyboard.clear();
+        keyboardListener.clear();
         mouse.clear();
     }
 

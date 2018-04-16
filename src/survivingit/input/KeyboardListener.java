@@ -8,20 +8,20 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Keyboard implements KeyListener, Observable<Keyboard> {
+public class KeyboardListener implements KeyListener, Observable<KeyboardListener> {
 
-    private List<Observer<Keyboard>> observers;
+    private List<Observer<KeyboardListener>> observers;
 
-    public Keyboard() {
+    public KeyboardListener() {
         this.observers = new ArrayList<>();
     }
 
-    public void attach(Observer<Keyboard> observer) {
+    public void attach(Observer<KeyboardListener> observer) {
         this.observers.add(observer)
     }
 
     public void notifyObservers() {
-        for (Observer<Keyboard> observer : this.observers) {
+        for (Observer<KeyboardListener> observer : this.observers) {
             observer.notify();
         }
     }

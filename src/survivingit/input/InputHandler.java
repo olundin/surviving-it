@@ -9,31 +9,31 @@ import survivingit.util.Maths;
 
 public class InputHandler {
 
-    private Keyboard keyboard;
+    private KeyboardListener keyboardListener;
     private Mouse mouse;
 
-    public InputHandler(Keyboard keyboard, Mouse mouse) {
-        this.keyboard = keyboard;
+    public InputHandler(KeyboardListener keyboardListener, Mouse mouse) {
+        this.keyboardListener = keyboardListener;
         this.mouse = mouse;
     }
 
     public void handleInput(final Player player, final Camera camera, final Hud hud) {
         // Move with WASD. Allow diagonal movement
-        if (keyboard.getKey(Input.KEY_A) && keyboard.getKey(Input.KEY_W)) {
+        if (keyboardListener.getKey(Input.KEY_A) && keyboardListener.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP_LEFT);
-        } else if (keyboard.getKey(Input.KEY_W) && keyboard.getKey(Input.KEY_D)) {
+        } else if (keyboardListener.getKey(Input.KEY_W) && keyboardListener.getKey(Input.KEY_D)) {
             player.setDirection(Direction.UP_RIGHT);
-        } else if (keyboard.getKey(Input.KEY_S) && keyboard.getKey(Input.KEY_A)) {
+        } else if (keyboardListener.getKey(Input.KEY_S) && keyboardListener.getKey(Input.KEY_A)) {
             player.setDirection(Direction.DOWN_LEFT);
-        } else if (keyboard.getKey(Input.KEY_S) && keyboard.getKey(Input.KEY_D)) {
+        } else if (keyboardListener.getKey(Input.KEY_S) && keyboardListener.getKey(Input.KEY_D)) {
             player.setDirection(Direction.DOWN_RIGHT);
-        } else if (keyboard.getKey(Input.KEY_A)) {
+        } else if (keyboardListener.getKey(Input.KEY_A)) {
             player.setDirection(Direction.LEFT);
-        } else if (keyboard.getKey(Input.KEY_W)) {
+        } else if (keyboardListener.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP);
-        } else if (keyboard.getKey(Input.KEY_D)) {
+        } else if (keyboardListener.getKey(Input.KEY_D)) {
             player.setDirection(Direction.RIGHT);
-        } else if (keyboard.getKey(Input.KEY_S)) {
+        } else if (keyboardListener.getKey(Input.KEY_S)) {
             player.setDirection(Direction.DOWN);
         } else {
             player.setDirection(Direction.NONE);
@@ -45,15 +45,15 @@ public class InputHandler {
         }
 
         // Toggle HUD elements
-        if (keyboard.getKey(Input.KEY_I)) {
+        if (keyboardListener.getKey(Input.KEY_I)) {
             hud.toggleInvetory();
             System.out.println("toggle");
         }
 
         // Zoom in/out with up/down key press
-        if (keyboard.getKey(Input.KEY_UP)) {
+        if (keyboardListener.getKey(Input.KEY_UP)) {
             camera.zoom(0.5);
-        } else if (keyboard.getKey(Input.KEY_DOWN)) {
+        } else if (keyboardListener.getKey(Input.KEY_DOWN)) {
             camera.zoom(-0.5);
         }
 
