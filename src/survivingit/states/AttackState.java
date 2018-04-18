@@ -7,8 +7,6 @@ import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.util.Point;
 
-import java.util.Stack;
-
 public class AttackState implements State<Animal> {
 
     public GameObject target; // Setting this is optional. When set, the attack will be performed to this object only
@@ -40,15 +38,15 @@ public class AttackState implements State<Animal> {
         if(targetAttacked) {
             // Target has already been attacked. Back off a bit.
             object.setDirection(Direction.fromAngle(Point.getAngle(targetPos, objectPos)));
-            if(!Point.areWithin(objectPos, targetPos, 1.0)) {
+            if(!Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Distance between target and object is enough. Go back to following
                 return new FollowState(target);
             }
-        } else if(Point.areWithin(objectPos, targetPos, 3.0)) {
+        } else if(Point.areWithin(objectPos, targetPos, object.getRange()*3.0)) {
             // Target close enough set direction to towards it
             object.setDirection(Direction.fromAngle(Point.getAngle(objectPos, targetPos)));
 
-            if(Point.areWithin(objectPos, targetPos, 1.0)) {
+            if(Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Target almost reached. Perform attack. Then back off
                 target.receiveMessage(new Message(MessageType.ATTACK, object.getDamage()));
                 targetAttacked = true;
@@ -57,8 +55,6 @@ public class AttackState implements State<Animal> {
             // Target is too far away, go back to following it
             return new FollowState(target);
         }
-
-        // The attack has a designated target
 
         // No state change required
         return this;

@@ -13,14 +13,16 @@ import java.util.Stack;
 public abstract class Animal extends Creature {
 
     private double viewDistance; // Distance animal can see other gameobjects in
+    private double range;
     private Stack<Point> path;
 
     private StateMachine<Animal> behaviour;
 
-    public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double viewDistance) {
+    public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double viewDistance, final double range) {
         super(x, y, sprites, maxHealth, moveSpeed, damage, alphaLevel);
         this.path = new Stack<>();
         this.viewDistance = viewDistance;
+        this.range = range;
         this.behaviour = new StateMachine<>(this, new IdleState());
     }
 
@@ -70,6 +72,10 @@ public abstract class Animal extends Creature {
 
     public double getViewDistance() {
         return this.viewDistance;
+    }
+
+    public double getRange() {
+        return this.range;
     }
 
     public void receiveMessage(Message msg) {
