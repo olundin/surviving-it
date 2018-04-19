@@ -29,6 +29,12 @@ public class Window extends Frame implements Observable<Window> {
 
         this.setSize(width, height);
         this.setResizable(false);
+
+        if (Game.FULLSCREEN) {
+            this.setExtendedState(Frame.MAXIMIZED_BOTH);
+            this.setUndecorated(true);
+        }
+
         this.setVisible(true);
         this.requestFocus();
 

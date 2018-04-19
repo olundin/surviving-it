@@ -10,11 +10,14 @@ public abstract class HudElement {
     private double width;
     private double height;
 
-    public HudElement(final double x, final double y, final double width, final double height) {
+    private boolean visible;
+
+    public HudElement(final double x, final double y, final double width, final double height, final boolean visible) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.visible = visible;
     }
 
     public double getX() {
@@ -33,5 +36,14 @@ public abstract class HudElement {
         return height;
     }
 
+    public boolean isVisible() {
+        return this.visible;
+    }
+
+    public void toggleVisible() {
+        this.visible = !this.visible;
+    }
+
     public abstract void render(HudRenderer renderer);
+
 }

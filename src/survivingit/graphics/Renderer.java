@@ -4,8 +4,15 @@ import survivingit.gameobjects.Animal;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.VisibleObject;
+import survivingit.containers.ItemContainer;
+import survivingit.gameobjects.Camera;
+import survivingit.gameobjects.GameVisibleObject;
+import survivingit.hud.EquippedItemContainerHud;
 import survivingit.hud.Icon;
+import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
+import survivingit.items.Item;
+import survivingit.items.ItemType;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
 import survivingit.util.Point;
@@ -15,7 +22,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
     private static final int TILE_PADDING = 1; // Extra padding to be added to sprite size when rendering tiles
@@ -56,7 +63,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  PRIMITIVE DRAWING FUNCTIONS
      */
 
-    private void drawSprite(int x, int y, int width, int height, Sprite sprite) {
+    private void drawSprite(int x, int y, int width, int height, final Sprite sprite) {
         graphics.drawImage(
                 sprite.getImage(),
                 x,
@@ -93,7 +100,8 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  WORLD RENDERER
      */
 
-    public void drawTile(int x, int y, Tile tile, Camera camera) {
+    @Override
+    public void drawTile(int x, int y, final Tile tile, final Camera camera) {
         int drawX = camera.worldToScreenX(x) - TILE_PADDING;
         int drawY = camera.worldToScreenY(y) - TILE_PADDING;
         int drawWidth = (int)(camera.pixelsPerUnitX() * tile.getSprite().getWidth() / UNIT_SIZE) + 2*TILE_PADDING;
@@ -111,6 +119,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     }
 
     public void drawObject(VisibleObject object, Camera camera) {
+        
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
 
@@ -169,11 +178,12 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  HUD RENDERER
      */
 
-    public void drawProgressBar(ProgressBar progressBar) {
+    @Override
+    public void drawProgressBar(final ProgressBar progressBar) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
-        int drawX = (int) (progressBar.getX() / 100 * this.width);
-        int drawY = (int) (progressBar.getY() / 100 * this.height);
-        int drawWidth = (int) (progressBar.getWidth() / 100 * this.width);
+        int drawX = drawValFromHudVal(progressBar.getX(), this.width);
+        int drawY = drawValFromHudVal(progressBar.getY(), this.height);
+        int drawWidth = drawValFromHudVal(progressBar.getWidth(), this.width);
         int drawHeight = (int) (progressBar.getHeight() / 100 * this.height);
 
         int pixelsPerStep = drawWidth / progressBar.getMax();
@@ -199,14 +209,71 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getRightEdge());
     }
 
-    public void drawIcon(Icon icon) {
+    @Override
+    public void drawIcon(final Icon icon) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
-        int drawX = (int) (icon.getX() / 100 * this.width);
-        int drawY = (int) (icon.getY() / 100 * this.height);
-        int drawWidth = (int) (icon.getWidth() / 100 * this.width);
-        int drawHeight = (int) (icon.getHeight() / 100 * this.height);
+        int drawX = drawValFromHudVal(icon.getX(), this.width);
+        int drawY = drawValFromHudVal(icon.getY(), this.height);
+        int drawWidth = drawValFromHudVal(icon.getWidth(), this.width);
+        int drawHeight = drawValFromHudVal(icon.getHeight(), this.height);
 
         // Draw icon
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, icon.getSprite());
     }
+
+    @Override
+    public void drawItemContainer(final ItemContainerHud itemContainerHud) {
+        final ItemContainer itemContainer = itemContainerHud.getItemContainer();
+        final int itemsPerColumn = itemContainerHud.getItemsPerRow();
+        int size = itemContainer.getSize();
+        int drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
+        int drawY = drawValFromHudVal(itemContainerHud.getY(), this.height);
+
+        Sprite itemSlotSprite = itemContainerHud.getItemSlotSprite();
+
+        if (DEBUG) {
+            this.drawRect(drawX, drawY, drawValFromHudVal(itemContainerHud.getWidth(), this.width),
+                    drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED);
+        }
+
+        int iX = 0;
+        for (int i = 0; i < size; i++) {
+            // draw itemslot
+            this.drawSprite(drawX, drawY, ItemContainerHud.SLOT_SIZE, ItemContainerHud.SLOT_SIZE, itemSlotSprite);
+
+            // draw item
+            Item item = itemContainer.getItemAt(i);
+            if (item.getItemType() != ItemType.NONE) {
+                this.drawSprite(drawX + ItemContainerHud.ITEM_PADDING, drawY + ItemContainerHud.ITEM_PADDING,
+                        ItemContainerHud.ITEM_SIZE, ItemContainerHud.ITEM_SIZE, item.getSprite());
+            }
+
+            iX++;
+            drawX += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
+            if (iX >= itemsPerColumn) {
+                // next row
+                drawY += ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING;
+                iX = 0;
+                drawX = drawValFromHudVal(itemContainerHud.getX(), this.width);
+            }
+        }
+    }
+
+    public void drawEquippedInventory(EquippedItemContainerHud equippedItemContainerHud) {
+        int drawX = drawValFromHudVal(equippedItemContainerHud.getX(), this.width) +
+                equippedItemContainerHud.getEquippedItemContainer().getEquippedIndex() *
+                        (ItemContainerHud.SLOT_SIZE + ItemContainerHud.SLOT_PADDING);
+        int drawY = drawValFromHudVal(equippedItemContainerHud.getY(), this.height);
+
+
+        this.drawSprite(drawX, drawY, ItemContainerHud.SLOT_SIZE, ItemContainerHud.SLOT_SIZE,
+                equippedItemContainerHud.getEquippedItemSlotSprite());
+
+        this.drawItemContainer(equippedItemContainerHud);
+    }
+
+    private int drawValFromHudVal(double hudVal, double rendererVal) {
+        return (int) (hudVal / 100 * rendererVal);
+    }
+
 }

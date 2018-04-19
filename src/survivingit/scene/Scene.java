@@ -14,7 +14,6 @@ public abstract class Scene {
     protected int height;
 
     protected Player player;
-    protected Camera camera;
 
     private List<GameObject> gameObjects;
     private Tile[][] tiles;
@@ -26,7 +25,6 @@ public abstract class Scene {
     public Scene(final int width, final int height) {
         this.width = width;
         this.height = height;
-        this.camera = camera;
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();

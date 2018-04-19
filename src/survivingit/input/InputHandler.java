@@ -4,8 +4,7 @@ import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.Player;
 import survivingit.gameobjects.Camera;
 
-import survivingit.graphics.Renderer;
-import survivingit.scene.Scene;
+import survivingit.hud.Hud;
 import survivingit.util.Maths;
 
 public class InputHandler {
@@ -18,7 +17,7 @@ public class InputHandler {
         this.mouse = mouse;
     }
 
-    public void handleInput(final Player player, final Camera camera) {
+    public void handleInput(final Player player, final Camera camera, final Hud hud) {
         // Move with WASD. Allow diagonal movement
         if (keyboard.getKey(Input.KEY_A) && keyboard.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP_LEFT);
@@ -45,13 +44,25 @@ public class InputHandler {
             player.attack();
         }
 
-        // Zoom in/out with scroll wheel (!)
-        if(mouse.getScroll() != 0) {
-            camera.zoom(mouse.getScroll());
+        // Switch equipped item with scroll wheel
+        if (mouse.getScroll() != 0) {
+            player.changeEquippedItem(mouse.getScroll());
+        }
+
+        // Toggle HUD elements
+        if (keyboard.getKey(Input.KEY_I) && keyboard.getKeyPressed(Input.KEY_I)) {
+            hud.toggleInvetory();
+            System.out.println("toggle");
+        }
+
+        // Zoom in/out with up/down key press
+        if (keyboard.getKey(Input.KEY_UP)) {
+            camera.zoom(0.5);
+        } else if (keyboard.getKey(Input.KEY_DOWN)) {
+            camera.zoom(-0.5);
         }
 
         // Set camera position to be between player and mouse
-
         camera.setCenterPos(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1),
                 Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)

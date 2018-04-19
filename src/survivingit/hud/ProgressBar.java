@@ -16,7 +16,7 @@ public class ProgressBar extends HudElement {
     private Sprite filled;
 
     public ProgressBar(double x, double y, double width, double height, int min, int max, int current, Sprite filled) {
-        super(x, y, width, height);
+        super(x, y, width, height, true);
         this.min = min;
         this.max = max;
         this.current = current;
@@ -62,6 +62,7 @@ public class ProgressBar extends HudElement {
     public Sprite getEmpty() {
         return this.empty;
     }
+
     public Sprite getFilled() {
         return this.filled;
     }

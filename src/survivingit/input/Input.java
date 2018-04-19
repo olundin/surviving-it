@@ -7,6 +7,10 @@ public enum Input
     KEY_D(68),
     KEY_S(83),
 
+    KEY_I(73),
+    KEY_M(77),
+    KEY_C(67),
+
     KEY_LEFT(37),
     KEY_UP(38),
     KEY_RIGHT(39),
@@ -16,6 +20,7 @@ public enum Input
     KEY_RETURN(10),
     KEY_SHIFT(16),
 
+    ESC(27),
 
     BUTTON_LEFT(1),
     BUTTON_RIGHT(3),
