@@ -11,7 +11,7 @@ public class TestScene extends Scene {
         Player player = new Player(0.5, 0.5);
         for (int i = 0; i < 10; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
-            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
+            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
         }
         this.addPlayer(player);
 

@@ -17,6 +17,10 @@ public abstract class ItemFactory {
 				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
 				return berries;
 			}
+			case BOOTS: {
+				Item boots = new Item(itemType, "Gyllene skor", "Diggiloo diggiley", Sprite.GYLLENE_SKOR);
+				return boots;
+			}
 			case NONE: {
 				throw new IllegalArgumentException("Cannot create item of type NONE");
 			}

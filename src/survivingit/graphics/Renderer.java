@@ -6,7 +6,7 @@ import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.VisibleObject;
 import survivingit.containers.ItemContainer;
 import survivingit.gameobjects.Camera;
-import survivingit.gameobjects.GameVisibleObject;
+import survivingit.gameobjects.VisibleObject;
 import survivingit.hud.EquippedItemContainerHud;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;
@@ -233,7 +233,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
         if (DEBUG) {
             this.drawRect(drawX, drawY, drawValFromHudVal(itemContainerHud.getWidth(), this.width),
-                    drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED);
+                    drawValFromHudVal(itemContainerHud.getHeight(), this.height), Color.RED, false);
         }
 
         int iX = 0;

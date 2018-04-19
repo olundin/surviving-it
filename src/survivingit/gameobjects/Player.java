@@ -29,7 +29,6 @@ public class Player extends Creature implements Observable<Player> {
               3,
               1,
               1);
-              5);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
 	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);

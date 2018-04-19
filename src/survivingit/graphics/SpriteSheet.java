@@ -13,13 +13,14 @@ public class SpriteSheet {
     public static final SpriteSheet MEME_MAN = new SpriteSheet("mememan.png");
     public static final SpriteSheet CAMP_FIRE = new SpriteSheet("campfire.png");
     public static final SpriteSheet HUD = new SpriteSheet("hud.png");
+    public static final SpriteSheet BOOTS = new SpriteSheet("boots.png");
 
     private int width;
     private int height;
     private BufferedImage image;
 
 
-    public SpriteSheet(String path) {
+    private SpriteSheet(String path) {
         // Reads width and height from image itself
         try {
             this.image = ImageIO.read(new File("res/spritesheets/", path));
@@ -30,7 +31,7 @@ public class SpriteSheet {
         }
     }
 
-    public SpriteSheet(String path, int width, int height) {
+    private SpriteSheet(String path, int width, int height) {
         // Take width and height as parameters, to make a spritsheet that only contains part of spritesheet
         try {
             this.image = ImageIO.read(new File("res/spritesheets/", path));

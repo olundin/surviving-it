@@ -1,5 +1,5 @@
 package survivingit.items;
 
 public enum ItemType {
-    NONE, KNIFE, BERRIES
+    NONE, KNIFE, BERRIES, BOOTS
 }

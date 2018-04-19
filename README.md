@@ -37,19 +37,19 @@ Vi har också tänkt modella djuren som simpla finite statemachines, mer info om
 | 2 | Den grundläggande klasshierarkin är klar med scener, spelobjekt och tiles. Alla dessa kan ritas på olika positioner. Vi har ett objekt för spelaren som kan styras av tangentbordet och en pekar input som styrs av musen. | ✅ |
 | 3 | Spelet har kollisionshantering för tiles. Till exempel finns det vissa tiles som man inte kan gå över. Vi testar med hål tiles som spelaren inte kan gå över. | ✅ |
 | 4 | Spelet har kollisionshantering för spelobjekt med hitboxes. Vi testar detta genom att skapa ett trädobjekt som spelaren inte kan gå över. | ✅ |
-| 5 | Items finns i spelet. Dessa kan ligga i “containers” som kistor eller i spelarens ryggsäck. |  |
-| 6 | Andra spelobjekt, såsom djur och fiender, finns i världen som rör sig omkring fritt. Djuren är programmerade som simpla finite statemachines och de använder A* search algoritm för att ta sig runt i världen. |  |
-| 7 | Grundläggande interaktion mellan spelobjekt finns genom meddelande delande. Testas genom att ta skada från något. |  |
-| 8 | Konvertering från items till spelobjekt finns (och viceversa). |  |
-| 9 | Funktionalitet för strid som bygger på interaktion mellan spelobjekt,finns i relevanta spelobjekt som t.ex. i spelaran och i en ny spelobjektstyp björn. Detta kan testas genom att spelaren slåss mot björnen.. |  |
+| 5 | Items finns i spelet. Dessa kan ligga i “containers” som kistor eller i spelarens ryggsäck. | ✅ |
+| 6 | Andra spelobjekt, såsom djur och fiender, finns i världen som rör sig omkring fritt. Djuren är programmerade som simpla finite statemachines och de använder A* search algoritm för att ta sig runt i världen. | ✅ |
+| 7 | Grundläggande interaktion mellan spelobjekt finns genom meddelande delande. Testas genom att ta skada från något. | ✅ |
+| 8 | ~~Konvertering från items till spelobjekt finns (och viceversa).~~ |  |
+| 9 | Funktionalitet för strid som bygger på interaktion mellan spelobjekt,finns i relevanta spelobjekt som t.ex. i spelaran och i en ny spelobjektstyp björn. Detta kan testas genom att spelaren slåss mot björnen.. | ✅ |
 | 10 | Vi skapar ett antal flera varelser (både neutrala och fiender), items och växter som ger spelet djup |  |
 | 11 | Mer survival element som hunger, kyla, ev. mer, läggs till i spelaren. |  |
-| 12 | Grundläggande HUD för hp, hunger, kyla. |  |
-| 13 | Grundläggande HUD för inventory. |  |
-| 14 | Spelaren kan skapa lägereld. |  |
+| 12 | Grundläggande HUD för hp, hunger, kyla... | ✅ |
+| 13 | Grundläggande HUD för inventory. | ✅ |
+| 14 | Spelaren kan skapa lägereld. | ✅ |
 | 15 | Funktionalitet för serialisering av spelobjekten finns för att kunna spara. |  |
 | 16 | Funktionalitet för att kunna ladda sparade spel. |  |
-| 17 | Sprites kan använda animationer. |  |
+| 17 | Sprites kan använda animationer. | ✅ |
 | 18 | Slumpgenererade nivåer med Perlin Noise algorithm. |  |
 | 19 | Mer avancerade jakt mechanics som att man följer fotspår. |  |
 | 20 | Graphics renderas via OpenGL med shapes. |  |

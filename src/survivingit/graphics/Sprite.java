@@ -41,6 +41,8 @@ public class Sprite {
     public static final Sprite ITEM_SLOT = new Sprite(26, 30, 16, 16, SpriteSheet.HUD);
     public static final Sprite ITEM_SLOT_SELECTED = new Sprite(43, 30, 16, 16, SpriteSheet.HUD);
 
+    public static final Sprite GYLLENE_SKOR = new Sprite(0, 0, 400, 257, SpriteSheet.BOOTS);
+
     private int x;
     private int y;
     private int width;

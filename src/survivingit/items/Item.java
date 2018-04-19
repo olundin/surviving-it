@@ -27,7 +27,7 @@ public class Item {
     public void addEffect(Effect effect) {
         EffectType effectType = effect.getEffectType();
         if (!hasEffectType(effectType)) {
-            this.effectsMap.put(effectType, new ArrayList<>());
+            this.effectsMap.put(effectType, new ArrayList<Effect>());
         }
         this.effectsMap.get(effect.getEffectType()).add(effect);
     }
