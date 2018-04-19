@@ -25,6 +25,7 @@ public class Sprite {
     public static final Sprite WATER                = new Sprite(32, 96, 32, 32, SpriteSheet.SNOW_TILES);
 
     public static final Sprite CAMPFIRE = new Sprite(0, 0, 32, 32, SpriteSheet.CAMP_FIRE);
+    public static final Sprite CAMPFIRE_UNLIT = new Sprite(160, 0, 32, 32, SpriteSheet.CAMP_FIRE);
 
     public static final Sprite PROGRESS_BAR_EDGE_LEFT = new Sprite(0, 0, 3, 12, SpriteSheet.HUD);
     public static final Sprite PROGRESS_BAR_EDGE_RIGHT = new Sprite(4, 0, 3, 12, SpriteSheet.HUD);

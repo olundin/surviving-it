@@ -1,5 +1,9 @@
 package survivingit.graphics;
 
+import survivingit.gameobjects.Animal;
+import survivingit.gameobjects.Camera;
+import survivingit.gameobjects.Creature;
+import survivingit.gameobjects.VisibleObject;
 import survivingit.containers.ItemContainer;
 import survivingit.gameobjects.Camera;
 import survivingit.gameobjects.GameVisibleObject;
@@ -11,6 +15,7 @@ import survivingit.items.Item;
 import survivingit.items.ItemType;
 import survivingit.physics.Collider;
 import survivingit.scene.Tile;
+import survivingit.util.Point;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -73,9 +78,22 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         );
     }
 
-    private void drawRect(int x, int y, int width, int height, Color color) {
+    private void drawRect(int x, int y, int width, int height, Color color, boolean fill) {
         graphics.setColor(color);
-        graphics.drawRect(x, y, width, height);
+        if(fill) graphics.fillRect(x, y, width, height);
+        else graphics.drawRect(x, y, width, height);
+    }
+
+    private void drawCircle(int x, int y, int r, Color color, boolean fill) {
+        graphics.setColor(color);
+        if(fill) graphics.fillOval(x - r, y - r, r * 2, r * 2);
+        else graphics.drawOval(x - r, y - r, r * 2, r * 2);
+    }
+
+    private void drawText(int x, int y, String text, int size, Color color) {
+        graphics.setFont(new Font(graphics.getFont().getFontName(), Font.PLAIN, size));
+        graphics.setColor(color);
+        graphics.drawString(text, x, y);
     }
 
     /*
@@ -89,10 +107,19 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int drawWidth = (int)(camera.pixelsPerUnitX() * tile.getSprite().getWidth() / UNIT_SIZE) + 2*TILE_PADDING;
         int drawHeight = (int)(camera.pixelsPerUnitY() * tile.getSprite().getHeight() / UNIT_SIZE) + 2*TILE_PADDING;
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, tile.getSprite());
+
+        if(DEBUG) {
+            // Draw tile edges if it is not passable
+            if(!tile.isPassable()) {
+                this.drawRect(drawX, drawY,
+                         drawWidth - 2*TILE_PADDING, drawHeight - 2*TILE_PADDING,
+                         Color.blue, false);
+            }
+        }
     }
 
-    @Override
-    public void drawObject(final GameVisibleObject object, final Camera camera) {
+    public void drawObject(VisibleObject object, Camera camera) {
+        
         int drawX = camera.worldToScreenX(object.getX());
         int drawY = camera.worldToScreenY(object.getY());
 
@@ -111,12 +138,39 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, sprite);
 
         if(DEBUG) {
+            // Draw object collider
             Collider col = object.getCollider();
-            drawRect(camera.worldToScreenX(col.getWorldX()),
+            this.drawRect(camera.worldToScreenX(col.getWorldX()),
                      camera.worldToScreenY(col.getWorldY()),
                      (int)(col.getWidth() * ppuX),
                      (int)(col.getHeight() * ppuY),
-                     Color.green);
+                     Color.green, false);
+
+            // Draw creature position
+            this.drawText(drawX, drawY,
+                          "pos=(" + Math.floor(object.getX()) + "," + Math.floor(object.getY()) + ")",
+                          10, Color.black);
+
+            if(object instanceof Creature) {
+                // Draw creature health
+                this.drawText(drawX, drawY + 10,
+                              "health=" + ((Creature)object).getCurrentHealth() + "/" + ((Creature)object).getMaxHealth(),
+                              10, Color.red);
+            }
+
+            if(object instanceof Animal) {
+                // Draw animal path
+                for(Point p : ((Animal)object).getPath()) {
+                    int sx = camera.worldToScreenX(p.getX());
+                    int sy = camera.worldToScreenY(p.getY());
+                    this.drawCircle(sx, sy, 4, Color.orange, true);
+                }
+                // Draw view distance
+                double viewDistance = ((Animal)object).getViewDistance();
+                int sx = camera.worldToScreenX(object.getX() - viewDistance/2);
+                int sy = camera.worldToScreenY(object.getY() - viewDistance/2);
+                this.drawRect(sx, sy, (int)(viewDistance*ppuX), (int)(viewDistance*ppuY), Color.gray, false);
+            }
         }
     }
 
@@ -142,10 +196,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getLeftEdge());
 
         // Draw fill
-        double filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
-        double emptyWidth = drawWidth - filledWidth;
-        this.drawSprite(drawX, drawY, (int)filledWidth, drawHeight, progressBar.getFilled());
-        this.drawSprite(drawX + (int)filledWidth, drawY, (int)emptyWidth, drawHeight, progressBar.getEmpty());
+        int filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
+        int emptyWidth = drawWidth - filledWidth;
+        this.drawSprite(drawX, drawY, filledWidth, drawHeight, progressBar.getFilled());
+        this.drawSprite(drawX + filledWidth, drawY, emptyWidth, drawHeight, progressBar.getEmpty());
 
         // Draw right edge
         this.drawSprite(drawX + drawWidth,

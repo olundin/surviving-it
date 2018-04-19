@@ -18,6 +18,10 @@ import survivingit.util.Point;
 public class ManhattanDistance implements AStarHeuristic<Point> {
 
     public double calculate(Point n1, Point n2) {
-        return Math.abs(n1.getX() - n2.getX()) + Math.abs(n1.getY() - n2.getY());
+        return Math.abs(Math.hypot(n1.getX() - n2.getX(), n1.getY() - n2.getY()));
+    }
+
+    public boolean reached(Point src, Point dst) {
+        return Point.areWithin(src, dst, 0.5);
     }
 }

@@ -20,7 +20,6 @@ public abstract class Scene {
 
     private Random random;
 
-    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
     private AStar<Point> astar;
 
     public Scene(final int width, final int height) {
@@ -29,8 +28,7 @@ public abstract class Scene {
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
-        this.gameObjectComparator = new GameObjectComparator();
-        this.astar = new AStar<>(this.toGraph(), new ManhattanDistance());
+        this.astar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
     }
 
     public void addPlayer(Player player) {
@@ -47,11 +45,16 @@ public abstract class Scene {
         gameObject.setScene(this);
     }
 
-    public void update(double dt) {
-        // Sort gameObjects by y position. Makes them render correctly
-        //gameObjects.sort(this.gameObjectComparator);
-        Collections.sort(gameObjects, gameObjectComparator);
+    public boolean tryAdd(GameObject gameObject) {
+        // Makes sure gameObject won't get stuck in tile
+        if(this.getTileAt(gameObject.getX(), gameObject.getY()).isPassable()) {
+            this.add(gameObject);
+            return true;
+        }
+        return false;
+    }
 
+    public void update(double dt) {
         for (GameObject gameObject : gameObjects) {
             gameObject.update(dt);
 	    }
@@ -109,13 +112,20 @@ public abstract class Scene {
         }
     }
 
-    protected Tile[][] randomizeTiles() {
-        for(int y = 0; y < this.height; y++) {
+    protected void randomizeTiles() {
+        for (int y = 0; y < this.height; y++) {
             for(int x = 0; x < this.width; x++) {
                 this.tiles[y][x] = Tile.getTile(random.nextInt(24)); // Higher bound -> less obstacles
             }
         }
-        return tiles;
+    }
+
+    protected void fillTiles(int startX, int startY, int endX, int endY, Tile tile) {
+        for (int x = startX; x < endX; x++) {
+            for (int y = startY; y < endY; y++) {
+                this.tiles[y][x] = tile;
+            }
+        }
     }
 
     public Tile[][] getTiles() {
@@ -126,65 +136,15 @@ public abstract class Scene {
         return x >= 0 && x <= this.width - 1 && y >= 0 && y <= this.height - 1;
     }
 
-    public List<Point> findPath(double x0, double y0, double x1, double y1) {
-        return this.astar.findPath(new Point(x0, y0), new Point(x1, y1));
+    public Stack<Point> findPath(Point from, Point to) {
+        return this.astar.findPath(from, to);
     }
 
-    /**
-     * Convert scene to a graph ready for A* pathfinding.
-     * For each tile, it will check for neighbors which
-     * can be reached and add connections to those in the graph.
-     *
-     * @return A graph representation of this scen ready for A*
-     */
-    public Graph<AStarNode<Point>> toGraph() {
-        Graph<AStarNode<Point>> graph = new Graph<>();
-        Point[] neighbors = {
-            new Point(-1, 0),   // west
-            new Point(0, -1),   // north
-            new Point(1, 0),    // east
-            new Point(0, 1),    // south
-            new Point(-1, -1),  // north-west
-            new Point(1, -1),   // north-east
-            new Point(1, 1),    // south-east
-            new Point(-1, 1)    // south-west
-        };
-
-        for(int y = 0; y < this.height; y++) {
-            for(int x = 0; x < this.width; x++) {
-                // Try to add edges for each neighboring tile which is passable, if this tile is passable
-                if(this.getTileAt(x, y).isPassable()) {
-                    Point current = new Point(x, y);
-
-                    // Check neighbors
-                    for(Point n : neighbors) {
-                        Point neighbor = new Point(current.getX() + n.getX(), current.getY() + n.getY());
-
-                        // Make sure neighbor is passable and in bounds of level
-                        if(!this.getTileAt(neighbor.getX(), neighbor.getY()).isPassable() ||
-                           !this.inBounds(neighbor.getX(), neighbor.getY()))
-                            continue;
-
-                        // Determine if immediate or diagonal
-                        if(n.getX() != 0 && n.getY() != 0) {
-                            // Neighbor is diagonal. Make sure it isn't blocked by immediate neighbors
-                            if(this.getTileAt(current.getX() + n.getX(), current.getY()).isPassable() &&
-                               this.getTileAt(current.getX(), current.getY() + n.getY()).isPassable()) {
-                                // Neighbor can be reached from current. Add edge between nodes in graph
-                                graph.addEdge(new AStarNode<>(current), new AStarNode<>(neighbor), Maths.DIAGONAL_LENGTH);
-                            }
-                        } else {
-                            // Neighbor is immediate, since it is passable it can be added without problems
-                            graph.addEdge(new AStarNode<>(current), new AStarNode<>(neighbor), 1.0);
-                        }
-                    }
-                }
-            }
-        }
-        return graph;
+    public int getWidth() {
+        return this.width;
     }
 
-    protected void updateAStar() {
-        this.astar.setGraph(this.toGraph());
+    public int getHeight() {
+        return this.height;
     }
 }

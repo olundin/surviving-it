@@ -64,7 +64,6 @@ public class Game implements Observer<Window> {
         while(running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
-
             deltaTime = Math.min(deltaTime, maxDelta);   // Set a cap to deltaTime
 
             this.update(deltaTime);

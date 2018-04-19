@@ -39,6 +39,11 @@ public class InputHandler {
             player.setDirection(Direction.NONE);
         }
 
+        // Player attack with left mouse button
+        if(mouse.getButtonPressed(Input.BUTTON_LEFT)) {
+            player.attack();
+        }
+
         // Switch equipped item with scroll wheel
         if (mouse.getScroll() != 0) {
             player.changeEquippedItem(mouse.getScroll());

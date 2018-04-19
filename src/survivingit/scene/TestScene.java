@@ -13,17 +13,13 @@ public class TestScene extends Scene {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
         }
-
         this.addPlayer(player);
 
-        this.add(new Campfire(5, 5));
         this.randomizeTiles();
-        for(int x = 1; x < 32; x += 5) {
-            for(int y = 0; y < 32; y += 5) {
-                if(this.getTileAt(x, y).isPassable()) {
-                    // Add fox if tile is walkable
-                    this.add(new Fox(x + 0.5, y +  0.5));
-                }
+        this.tryAdd(new Campfire(3.5, 3.5));
+        for(int x = 5; x < 32; x += 10) {
+            for(int y = 5; y < 32; y += 10) {
+                this.tryAdd(new Fox(x + 0.5, y + 0.5));
             }
         }
     }

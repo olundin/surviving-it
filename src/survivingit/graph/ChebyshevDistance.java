@@ -24,4 +24,8 @@ public class ChebyshevDistance implements AStarHeuristic<Point> {
         double dy = Math.abs(n1.getY() - n2.getY());
         return (dx + dy) + (Maths.DIAGONAL_LENGTH - 2) * Math.min(dx, dy);
     }
+
+    public boolean reached(Point src, Point dst) {
+        return Point.areWithin(src, dst, 0.5);
+    }
 }

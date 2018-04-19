@@ -3,6 +3,8 @@ package survivingit.gameobjects;
 import survivingit.containers.PlayerInventory;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
+import survivingit.messaging.Message;
+import survivingit.messaging.MessageType;
 import survivingit.items.Item;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
@@ -19,13 +21,14 @@ public class Player extends Creature implements Observable<Player> {
     private List<Observer<Player>> observers;
     private PlayerInventory playerInventory;
 
-    private double timer = 0.0;
-
     public Player(final double x, final double y) {
 	    super(x,
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
+              3,
+              1,
+              1);
               5);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
@@ -35,11 +38,6 @@ public class Player extends Creature implements Observable<Player> {
     @Override
     public void update(double dt) {
         super.update(dt);
-        timer += dt;
-        if(timer >= 1.0) {
-            timer = 0.0;
-            this.takeDamage(1);
-        }
     }
 
     // Functions manipulating health are overridden to update observers
@@ -70,6 +68,34 @@ public class Player extends Creature implements Observable<Player> {
     public void notifyObservers(Player data) {
         for(Observer<Player> o : observers) {
             o.onNotify(this, data);
+        }
+    }
+
+    // TODO: REMOVE! Only a temporary method for testing
+    public void attack() {
+        // Find gameobjects in the area in front of the player (1x1) units
+        List<GameObject> targets = this.scene.getObjectsInArea(this.x -1,
+                                                               this.y - 1,
+                                                               this.x + 1,
+                                                               this.y + 1);
+        for(GameObject target : targets) {
+            if(!target.equals(this)) {
+                target.receiveMessage(new Message(MessageType.ATTACK, this.damage));
+            }
+        }
+    }
+
+    public void receiveMessage(Message msg) {
+        MessageType type = msg.getType();
+        int data = msg.getData();
+        switch(type) {
+            case ATTACK:
+                this.takeDamage(data);
+                break;
+            case ITEM:
+                break;
+            default:
+                break;
         }
     }
 
