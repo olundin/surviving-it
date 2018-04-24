@@ -77,7 +77,6 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     }
 
     // Mouse motion events
-
     public void mouseMoved(MouseEvent e) {
         this.x = e.getX();
         this.y = e.getY();
@@ -102,7 +101,6 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     }
 
     public void mouseClicked(MouseEvent e) {
-
     }
 
     public void mouseEntered(MouseEvent e) { }
@@ -113,7 +111,5 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     public void mouseWheelMoved(MouseWheelEvent e) {
         this.scroll = e.getWheelRotation();
     }
-
-
 
 }
