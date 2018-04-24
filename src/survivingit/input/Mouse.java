@@ -1,9 +1,5 @@
 package survivingit.input;
 
-import survivingit.gameobjects.Camera;
-import survivingit.graphics.Renderer;
-
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
