@@ -4,15 +4,23 @@ import survivingit.graphics.Sprite;
 
 public class Tile {
 
-    public static final Tile SNOW_PLAIN = new Tile(Sprite.SNOW_PLAIN, true);
-    public static final Tile SNOW_BUMPY = new Tile(Sprite.SNOW_BUMPY, true);
-    public static final Tile SNOW_ROCK = new Tile(Sprite.SNOW_ROCK, false);
-    public static final Tile SNOW_BUSH = new Tile(Sprite.SNOW_BUSH, false);
-    public static final Tile SNOW_PUDDLE = new Tile(Sprite.SNOW_PUDDLE, true);
-    public static final Tile SNOW_TRACKS = new Tile(Sprite.SNOW_TRACKS, true);
-    public static final Tile SNOW_BRANCH = new Tile(Sprite.SNOW_BRANCH, true);
-    public static final Tile SNOW_PEBBLES = new Tile(Sprite.SNOW_PEBBLES, true);
-    public static final Tile WATER = new Tile(Sprite.WATER, false);
+    /* Tiles are stored as follows...
+    [
+        top-left, top, top-right,
+        left, center0, right,
+        bottom-left, bottom, bottom-right,
+        center1, center2, center3,
+        center4, center5, center6,
+        center7, center8, center9
+    ]
+    ... where center7 - center9 are not passable
+     */
+    public static final Tile[] SNOW = tileGroup(Sprite.SNOW, new boolean[]{true,true,true,true,true,true,true,true,true,true,false,false,true,true,true,true,true,true});
+    public static final Tile[] ROCK = tileGroup(Sprite.ROCK, new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true});
+    public static final Tile[] ICE = tileGroup(Sprite.ICE, new boolean[]{true,true,true,true,true,true,true,true,true,false,true,true,true,true,true,true,true,true});
+    public static final Tile[] WATER = tileGroup(Sprite.WATER, new boolean[]{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false});
+
+    public static final Tile DEFAULT = new Tile(Sprite.WATER[4], false);
 
     private Sprite sprite;
     private boolean passable;
@@ -20,6 +28,15 @@ public class Tile {
     public Tile(Sprite sprite, boolean passable) {
         this.sprite = sprite;
         this.passable = passable;
+    }
+
+    private static Tile[] tileGroup(Sprite[] sprites, boolean[] passable) {
+        // Creates tile group. Requires sprites[] and passable to be of the size 18
+        Tile[] tiles = new Tile[18];
+        for(int i = 0; i < 18; i++) {
+            tiles[i] = new Tile(sprites[i], passable[i]);
+        }
+        return tiles;
     }
 
     public Sprite getSprite() {
@@ -32,28 +49,5 @@ public class Tile {
 
     public boolean isPassable() {
         return this.passable;
-    }
-
-    public static Tile getTile(int t) {
-        switch(t) {
-            case 0:
-                return Tile.SNOW_PLAIN;
-            case 1:
-                return Tile.SNOW_BUMPY;
-            case 2:
-                return Tile.SNOW_ROCK;
-            case 3:
-                return Tile.SNOW_BUSH;
-            case 4:
-                return Tile.SNOW_PUDDLE;
-            case 5:
-                return Tile.SNOW_TRACKS;
-            case 6:
-                return Tile.SNOW_BRANCH;
-            case 7:
-                return Tile.SNOW_PEBBLES;
-            default:
-                return Tile.SNOW_PLAIN;
-        }
     }
 }

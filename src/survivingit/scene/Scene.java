@@ -64,7 +64,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (!this.inBounds(x, y) || tiles[xInt][yInt] == null) {
-            return Tile.WATER;
+            return Tile.DEFAULT;
         } else {
             return tiles[yInt][xInt];
         }
@@ -109,14 +109,6 @@ public abstract class Scene {
     public void setTileAt(double x, double y, Tile tile) {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             tiles[(int) Math.floor(y)][(int) Math.floor(x)] = tile;
-        }
-    }
-
-    protected void randomizeTiles() {
-        for (int y = 0; y < this.height; y++) {
-            for(int x = 0; x < this.width; x++) {
-                this.tiles[y][x] = Tile.getTile(random.nextInt(24)); // Higher bound -> less obstacles
-            }
         }
     }
 
