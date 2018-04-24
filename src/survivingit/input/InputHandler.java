@@ -19,21 +19,21 @@ public class InputHandler {
 
     public void handleInput(final Player player, final Camera camera, final Hud hud) {
         // Move with WASD. Allow diagonal movement
-        if (keyboard.isKeyPressed(Input.KEY_A) && keyboard.isKeyPressed(Input.KEY_W)) {
+        if (keyboard.getKey(Input.KEY_A) && keyboard.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP_LEFT);
-        } else if (keyboard.isKeyPressed(Input.KEY_W) && keyboard.isKeyPressed(Input.KEY_D)) {
+        } else if (keyboard.getKey(Input.KEY_W) && keyboard.getKey(Input.KEY_D)) {
             player.setDirection(Direction.UP_RIGHT);
-        } else if (keyboard.isKeyPressed(Input.KEY_S) && keyboard.isKeyPressed(Input.KEY_A)) {
+        } else if (keyboard.getKey(Input.KEY_S) && keyboard.getKey(Input.KEY_A)) {
             player.setDirection(Direction.DOWN_LEFT);
-        } else if (keyboard.isKeyPressed(Input.KEY_S) && keyboard.isKeyPressed(Input.KEY_D)) {
+        } else if (keyboard.getKey(Input.KEY_S) && keyboard.getKey(Input.KEY_D)) {
             player.setDirection(Direction.DOWN_RIGHT);
-        } else if (keyboard.isKeyPressed(Input.KEY_A)) {
+        } else if (keyboard.getKey(Input.KEY_A)) {
             player.setDirection(Direction.LEFT);
-        } else if (keyboard.isKeyPressed(Input.KEY_W)) {
+        } else if (keyboard.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP);
-        } else if (keyboard.isKeyPressed(Input.KEY_D)) {
+        } else if (keyboard.getKey(Input.KEY_D)) {
             player.setDirection(Direction.RIGHT);
-        } else if (keyboard.isKeyPressed(Input.KEY_S)) {
+        } else if (keyboard.getKey(Input.KEY_S)) {
             player.setDirection(Direction.DOWN);
         } else {
             player.setDirection(Direction.NONE);
@@ -45,15 +45,15 @@ public class InputHandler {
         }
 
         // Toggle HUD elements
-        if (keyboard.isKeyPressed(Input.KEY_I) && keyboard.isKeyTyped(Input.KEY_I)) {
+        if (keyboard.getKey(Input.KEY_I)) {
             hud.toggleInvetory();
             System.out.println("toggle");
         }
 
         // Zoom in/out with up/down key press
-        if (keyboard.isKeyPressed(Input.KEY_UP)) {
+        if (keyboard.getKey(Input.KEY_UP)) {
             camera.zoom(0.5);
-        } else if (keyboard.isKeyPressed(Input.KEY_DOWN)) {
+        } else if (keyboard.getKey(Input.KEY_DOWN)) {
             camera.zoom(-0.5);
         }
 

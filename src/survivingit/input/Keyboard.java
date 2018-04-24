@@ -2,54 +2,52 @@ package survivingit.input;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Keyboard implements KeyListener {
 
+    private static final int KEYBOARD_SIZE = 512;
 
-    private PlayerController playerController;
-    private HudController hudController;
-    private CameraController cameraController;
+    private boolean[] key;
+    private boolean[] keyPressed;
+    private boolean[] keyReleased;
 
-
-    private Set<Integer> keysDown;
-
-    public Keyboard(PlayerController playerController, HudController hudController, CameraController cameraController) {
-        this.playerController = playerController;
-        this.hudController = hudController;
-        this.cameraController = cameraController;
-
-        keysDown = new HashSet<>();
+    public Keyboard() {
+        key = new boolean[KEYBOARD_SIZE];
+        keyPressed = new boolean[KEYBOARD_SIZE];
+        keyReleased = new boolean[KEYBOARD_SIZE];
     }
 
     public void clear() {
-        keysDown.clear();
+        // Reset temporary variable values
+        for(int k = 0; k < KEYBOARD_SIZE; k++) {
+            keyPressed[k] = false;
+            keyReleased[k] = false;
+        }
     }
 
-    public boolean isKeyDown(Input k) {
-        return keysDown.contains(k.id);
+    public boolean getKey(Input k) {
+        return key[k.id];
     }
 
-    @Override
+    public boolean getKeyPressed(Input k) {
+        return keyPressed[k.id];
+    }
+
+    public boolean getKeyReleased(Input k) {
+        return keyReleased[k.id];
+    }
+
     public void keyPressed(KeyEvent e) {
-        keysDown.add(e.getKeyCode());
-
-        if (e.getKeyCode() == Input.KEY_I.id) {
-            hudController.handle(HudAction.TOGGLE_INVENTORY);
-        }
+        key[e.getKeyCode()] = true;
+        keyPressed[e.getKeyCode()] = true;
+        System.out.println(e.getKeyCode());
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
-        if (!keysDown.contains(e.getKeyCode())) {
-            throw new IllegalStateException("Key released that has not been pressed");
-        }
-        keysDown.remove(e.getKeyCode());
+        key[e.getKeyCode()] = false;
+        keyReleased[e.getKeyCode()] = true;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
 }
