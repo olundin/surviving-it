@@ -14,8 +14,8 @@ public class HealEffect extends UsableEffect {
 	    this.healAmount = healAmount;
     }
 
-    public void use(Creature creature) {
-        creature.heal(this.healAmount);
+    public void use(Creature user) {
+        user.heal(this.healAmount);
     }
 
 }

@@ -10,7 +10,7 @@ public abstract class ItemFactory {
 		switch (itemType) {
 			case KNIFE: {
 				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.CAMPFIRE);
-				knife.addEffect(new AttackEffect(10, 10, knife));
+				knife.addEffect(new MeleeAttackEffect(10, 10, knife));
 				return knife;
 			}
 			case BERRIES: {
@@ -25,7 +25,7 @@ public abstract class ItemFactory {
 				throw new IllegalArgumentException("Cannot create item of type NONE");
 			}
 		}
-		// TODO: Figure out how to get rid of this.
+		// Some unknown enum type.
 		return null;
 	}
 

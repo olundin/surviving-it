@@ -13,5 +13,5 @@ public abstract class UsableEffect extends Effect {
         super(source, EFFECT_TYPE);
     }
 
-    public abstract void use(Creature actor);
+    public abstract void use(Creature user);
 }
