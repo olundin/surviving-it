@@ -4,12 +4,23 @@ import survivingit.gameobjects.Creature;
 
 public abstract class AttackEffect extends Effect {
 
+    /**
+     * The effectType of all objects of the AttackEffect class.
+     */
     public static final EffectType EFFECT_TYPE = EffectType.ATTACK;
 
+    /**
+     * Creates a new AttackEffect object with the entered Item source.
+     * @param source of the AttackEffect.
+     */
     public AttackEffect(Item source) {
         super(source, EFFECT_TYPE);
     }
 
+    /**
+     * Performs an attack from the entered attacker Creature.
+     * @param attacker Creature who's attack method is used.
+     */
     public abstract void attack(Creature attacker);
 
 }

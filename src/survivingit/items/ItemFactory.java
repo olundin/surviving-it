@@ -4,8 +4,16 @@ import survivingit.graphics.Sprite;
 
 public abstract class ItemFactory {
 
+	/**
+	 * Static NONE_ITEM object since no object specific state is needed.
+	 */
 	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.WATER);
 
+	/**
+	 * Creates and returns a new Item object of the entered ItemType.
+	 * @param itemType to be created.
+	 * @return a new Item object of the entered ItemType.
+	 */
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {
 			case KNIFE: {
