@@ -9,7 +9,7 @@ public class TestScene extends Scene {
     public TestScene() {
         super(32, 32);
         Player player = new Player(0.5, 0.5);
-        fillTiles(0, 0, width, height, Tile.SNOW[4]);
+        fillTiles(0, 0, width, height, Tile.SNOW.getCenter());
         for (int i = 0; i < 10; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
