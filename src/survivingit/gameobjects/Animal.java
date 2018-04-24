@@ -78,6 +78,7 @@ public abstract class Animal extends Creature {
         return this.range;
     }
 
+    @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
         int data = msg.getData();

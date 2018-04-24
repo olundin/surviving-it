@@ -38,6 +38,7 @@ public class Campfire extends VisibleObject {
         }
     }
 
+    @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
         int data = msg.getData();
