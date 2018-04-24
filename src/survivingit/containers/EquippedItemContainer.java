@@ -1,7 +1,10 @@
 package survivingit.containers;
 
 import survivingit.gameobjects.Creature;
+import survivingit.items.Effect;
+import survivingit.items.EffectType;
 import survivingit.items.Item;
+import survivingit.items.UsableEffect;
 
 public class EquippedItemContainer extends ItemContainer {
 
@@ -26,5 +29,10 @@ public class EquippedItemContainer extends ItemContainer {
 
     public void useEquippedItem(Creature creature) {
         Item equippedItem = this.getEquippedItem();
+        if (equippedItem.hasEffectType(EffectType.USABLE)) {
+            for (Effect effect : equippedItem.getEffectsOfEffectType(EffectType.USABLE)) {
+                ((UsableEffect) effect).use(creature);
+            }
+        }
     }
 }
