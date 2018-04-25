@@ -8,7 +8,10 @@ import java.util.Set;
 
 /**
  * Used in scene generation to determine what tilegroups to put next to each other.
+ * Used in previous build, might be used later.
  */
+
+@Deprecated
 public class TileGroupGraph implements Graph<TileGroup> {
 
     private Map<TileGroup, Map<TileGroup, Double>> connections;

@@ -8,20 +8,11 @@ public class Sprite {
     //
     //  TILE SPRITES
     //
-    /* Tile sprites are stored as follows
-    [
-        top-left, top, top-right,
-        left, center0, right,
-        bottom-left, bottom, bottom-right,
-        center1, center2, center3,
-        center4, center5, center6,
-        center7, center8, center9
-    ]
-    */
-    public static final Sprite[] SNOW = Sprite.sheetToArray(SpriteSheet.TILES, 0, 0, 32, 32, 3, 6);
-    public static final Sprite[] ROCK = Sprite.sheetToArray(SpriteSheet.TILES, 96, 0, 32, 32, 3, 6);
-    public static final Sprite[] ICE = Sprite.sheetToArray(SpriteSheet.TILES, 192, 0, 32, 32, 3, 6);
-    public static final Sprite[] WATER = Sprite.sheetToArray(SpriteSheet.TILES, 288, 0, 32, 32, 3, 6);
+    public static final Sprite[] SNOW = Sprite.sheetToArray(SpriteSheet.TILES, 0, 0, 32, 32, 3, 3);
+    public static final Sprite[] ROCK = Sprite.sheetToArray(SpriteSheet.TILES, 96, 0, 32, 32, 3, 3);
+    public static final Sprite[] ICE = Sprite.sheetToArray(SpriteSheet.TILES, 192, 0, 32, 32, 3, 3);
+    public static final Sprite[] WATER = Sprite.sheetToArray(SpriteSheet.TILES, 288, 0, 32, 32, 3, 3);
+    public static final Sprite[] VOID = Sprite.sheetToArray(SpriteSheet.TILES, 384, 0, 32, 32, 3, 3);
 
     //
     //  GAMEOBJECT SPRITES

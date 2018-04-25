@@ -7,9 +7,12 @@ import survivingit.items.ItemType;
 public class TestScene extends Scene {
 
     public TestScene() {
-        super(32, 32);
+        super(256, 256);
+
+        SceneGenerator generator = new SceneGenerator(5,1.25,1.25,2.5);
+        tiles = generator.generateTiles(this);
+
         Player player = new Player(0.5, 0.5);
-        fillTiles(0, 0, width, height, Tile.SNOW.getCenter());
         for (int i = 0; i < 10; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));

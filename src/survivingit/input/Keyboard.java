@@ -40,7 +40,6 @@ public class Keyboard implements KeyListener {
     public void keyPressed(KeyEvent e) {
         key[e.getKeyCode()] = true;
         keyPressed[e.getKeyCode()] = true;
-        System.out.println(e.getKeyCode());
     }
 
     public void keyReleased(KeyEvent e) {

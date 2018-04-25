@@ -34,6 +34,12 @@ public class FollowState implements State<Animal> {
         // Target exists, move towards it
         Point pos = new Point(object.getX(), object.getY());
         Point dst = new Point(target.getX(), target.getY());
+
+        if(!Point.areWithin(pos, dst, object.getViewDistance() * 2)) {
+            // Quit following if target is too far away
+            return new IdleState();
+        }
+
         // Update path if necessary
         Stack<Point> path = object.getPath();
         if(path.isEmpty() || !Point.areWithin(path.firstElement(), dst, 1)) {

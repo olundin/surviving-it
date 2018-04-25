@@ -16,7 +16,7 @@ public abstract class Scene {
     protected Player player;
 
     private List<GameObject> gameObjects;
-    private Tile[][] tiles;
+    protected Tile[][] tiles;
 
     private Random random;
 
