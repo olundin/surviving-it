@@ -1,8 +1,7 @@
 package survivingit.messaging;
 
 public enum MessageType {
-
     ITEM,
-    ATTACK
-
+    ATTACK,
+    HEAL
 }

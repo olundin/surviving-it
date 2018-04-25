@@ -93,6 +93,9 @@ public class Player extends Creature implements Observable<Player> {
                 break;
             case ITEM:
                 break;
+            case HEAL:
+                this.heal(data);
+                break;
             default:
                 break;
         }

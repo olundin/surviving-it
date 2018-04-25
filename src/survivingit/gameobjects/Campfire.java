@@ -9,15 +9,22 @@ import survivingit.physics.Collider;
 
 public class Campfire extends VisibleObject {
 
-    private boolean ignited;
+    private boolean lit;
     private AnimatedSprite litSprite;
     private Sprite unlitSprite;
+
+    private double timeSinceLastHeal;
+    private double litTime;
+
+    private static final double HEAL_DELAY = 2.5;
+    private static final double HEAL_RANGE = 2.5;
+    private static final double MAX_LIT_TIME = 10.0;
 
     public Campfire(double x, double y) {
         super(x, y, Sprite.CAMPFIRE);
         this.setCollider(new Collider(-0.4, -0.4, 0.8, 0.4, false, this));
 
-        this.ignited = false;
+        this.lit = false;
         this.litSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE,
                                                  0,
                                                  0,
@@ -27,15 +34,41 @@ public class Campfire extends VisibleObject {
                                                  1,
                                                  0.1);
         this.unlitSprite = Sprite.CAMPFIRE_UNLIT;
+        this.timeSinceLastHeal = 0.0;
+        this.litTime = 0.0;
     }
 
     public void update(double dt) {
-        if(ignited) {
+        if(lit) {
+            // Increase litTime
+            litTime += dt;
+            // Check if fire should be extinguished
+            if(litTime >= MAX_LIT_TIME) {
+                this.lit = false;
+                litTime = 0.0;
+            }
+
+            // Perform healing to objects nearby
+            timeSinceLastHeal += dt;
+            if(timeSinceLastHeal >= HEAL_DELAY) {
+                // A heal should be performed
+                for(GameObject obj : this.scene.getObjectsInArea(
+                        this.x - HEAL_RANGE,
+                        this.y - HEAL_RANGE,
+                        this.x + 2 * HEAL_RANGE,
+                        this.y + 2 * HEAL_RANGE)) {
+                    obj.receiveMessage(new Message(MessageType.HEAL, 1));
+                }
+                timeSinceLastHeal = 0.0;
+            }
+
             litSprite.update(dt);
             this.setSprite(litSprite.getSprite());
         } else {
             this.setSprite(unlitSprite);
         }
+
+
     }
 
     public void receiveMessage(Message msg) {
@@ -43,7 +76,7 @@ public class Campfire extends VisibleObject {
         int data = msg.getData();
         switch(type) {
             case ATTACK:
-                this.ignited = !this.ignited;
+                this.lit = !this.lit;
                 break;
             case ITEM:
                 break;

@@ -20,7 +20,7 @@ public class Camera extends GameObject {
     private static final double ZOOM_MIN = 1.0;
     private static final double ZOOM_MAX = 128.0;
 
-    private static final double EDGE_PADDING = 2; // Padding to be added to edges of viewport when finding visible GameObjects
+    private static final double EDGE_PADDING = 4; // Padding to be added to edges of viewport when finding visible GameObjects
 
     private GameObject target;
     private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering

@@ -14,11 +14,14 @@ public class Sprite {
     public static final Sprite[] WATER = Sprite.sheetToArray(SpriteSheet.TILES, 288, 0, 32, 32, 3, 3);
     public static final Sprite[] VOID = Sprite.sheetToArray(SpriteSheet.TILES, 384, 0, 32, 32, 3, 3);
 
+    public static final Sprite WALL = new Sprite(480, 0, 32, 32, SpriteSheet.TILES);
+
     //
     //  GAMEOBJECT SPRITES
     //
     public static final Sprite CAMPFIRE = new Sprite(0, 0, 32, 32, SpriteSheet.CAMP_FIRE);
     public static final Sprite CAMPFIRE_UNLIT = new Sprite(160, 0, 32, 32, SpriteSheet.CAMP_FIRE);
+    public static final Sprite PINE = new Sprite(0, 0, 86, 166, SpriteSheet.TREES);
 
 
     //

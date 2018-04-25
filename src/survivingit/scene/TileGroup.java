@@ -11,11 +11,11 @@ public class TileGroup {
     private static Random random;
     private int size;
 
-    public TileGroup(Sprite[] sprites, boolean[] passable) {
+    public TileGroup(Sprite[] sprites, boolean[] passable, boolean fertile) {
         this.size = Math.min(sprites.length, passable.length);
         this.tiles = new Tile[size];
         for(int i = 0; i < size; i++) {
-            tiles[i] = new Tile(sprites[i], passable[i]);
+            tiles[i] = new Tile(sprites[i], passable[i], fertile);
         }
         random = new Random();
     }

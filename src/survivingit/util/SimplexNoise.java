@@ -8,14 +8,17 @@ import java.util.Random;
  * @see <a href="http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf">Simplex Noise Demystified</a>
  * @see <a href="http://weber.itn.liu.se/~stegu/simplexnoise/SimplexNoise.java">Simplex Noise (Code)</a>
  */
+
+@Deprecated
 public class SimplexNoise {
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new Random(10);
 
-    private static Grad grad3[] = {
-            new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
-            new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
-            new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)};
+    private static Point grad[] = {
+            new Point(1,1),new Point(-1,1),new Point(1,-1),new Point(-1,-1),
+            new Point(1,0),new Point(-1,0),new Point(1,0),new Point(-1,0),
+            new Point(0,1),new Point(0,-1),new Point(0,1),new Point(0,-1)
+    };
 
     private static short p[] = {
         151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,190,6,148,247,
@@ -95,34 +98,23 @@ public class SimplexNoise {
         if(t0<0) n0 = 0.0;
         else {
             t0 *= t0;
-            n0 = t0 * t0 * Maths.dotProduct(grad3[gi0].x, grad3[gi0].y, x0, y0);  // (x,y) of grad3 used for 2D gradient
+            n0 = t0 * t0 * Maths.dotProduct(grad[gi0].getX(), grad[gi0].getY(), x0, y0);  // (x,y) of grad3 used for 2D gradient
         }
         double t1 = 0.5 - x1*x1-y1*y1;
         if(t1<0) n1 = 0.0;
         else {
             t1 *= t1;
-            n1 = t1 * t1 * Maths.dotProduct(grad3[gi1].x, grad3[gi1].y, x0, y0);
+            n1 = t1 * t1 * Maths.dotProduct(grad[gi1].getX(), grad[gi1].getY(), x0, y0);
         }
         double t2 = 0.5 - x2*x2-y2*y2;
         if(t2<0) n2 = 0.0;
         else {
             t2 *= t2;
-            n2 = t2 * t2 * Maths.dotProduct(grad3[gi2].x, grad3[gi2].y, x0, y0);
+            n2 = t2 * t2 * Maths.dotProduct(grad[gi2].getX(), grad[gi2].getX(), x0, y0);
         }
         // Add contributions from each corner to get the final noise value.
         // The result is scaled to return values in the interval [-1,1].
         return 70.0 * (n0 + n1 + n2);
-    }
-
-    // Inner class to speed upp gradient computations
-    // (In Java, array access is a lot slower than member access)
-    private static class Grad {
-        double x, y, z;
-        Grad(double x, double y, double z) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
     }
 
     private static void regenerateP() {
