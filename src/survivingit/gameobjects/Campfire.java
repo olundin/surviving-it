@@ -25,13 +25,13 @@ public class Campfire extends VisibleObject {
         this.setCollider(new Collider(-0.4, -0.4, 0.8, 0.4, false, this));
 
         this.lit = false;
-        this.litSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE,
+        this.litSprite = new AnimatedSprite(Sprite.sheetToArray(SpriteSheet.CAMP_FIRE,
                                                  0,
                                                  0,
                                                  32,
                                                  32,
                                                  5,
-                                                 1,
+                                                 1),
                                                  0.1);
         this.unlitSprite = Sprite.CAMPFIRE_UNLIT;
         this.timeSinceLastHeal = 0.0;

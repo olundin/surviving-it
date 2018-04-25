@@ -22,7 +22,7 @@ import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
     private static final int TILE_PADDING = 1; // Extra padding to be added to sprite size when rendering tiles

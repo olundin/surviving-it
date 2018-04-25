@@ -10,6 +10,7 @@ import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
+import survivingit.scene.Tile;
 
 public class Game implements Observer<Window> {
 
@@ -88,6 +89,9 @@ public class Game implements Observer<Window> {
     private void update(double dt) {
         inputHandler.handleInput(currentScene.getPlayer(), camera, hud);
         currentScene.update(dt);
+
+        // Update animated tile's sprites
+        Tile.updateAnimated(dt);
 
         keyboard.clear();
         mouse.clear();

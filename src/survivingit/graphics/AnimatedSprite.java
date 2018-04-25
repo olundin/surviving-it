@@ -28,23 +28,17 @@ public class AnimatedSprite {
      * be added to the animated sprite with the size (width, height). This will be done for each row nX times,
      * and repeated during nY rows for a total of nX * ny frames;
      *
-     * @param spriteSheet The spritesheet to use
-     * @param subX X position on spritesheet to start creating frames from
-     * @param subY Y position on spritesheet to start creating frames from
-     * @param spriteWidth Width of each frame
-     * @param spriteHeight Height of each frame
-     * @param nX Amount of frames horizontally
-     * @param nY Amount of frames vertically
+     * @param sprites The sprites to use
      * @param frameLength Length in seconds of each frame
      */
-    public AnimatedSprite(SpriteSheet spriteSheet, int subX, int subY, int spriteWidth, int spriteHeight, int nX, int nY, double frameLength) {
+    public AnimatedSprite(Sprite[] sprites, double frameLength) {
         this.frameIndex = 0;
         this.frameLength = frameLength;
         this.direction = AnimationDirection.FORWARDS;
         this.paused = false;
         this.timer = 0.0;
         this.oscillating = false;
-        this.frames = Sprite.sheetToArray(spriteSheet, subX, subY, spriteWidth, spriteHeight, nX, nY);
+        this.frames = sprites;
     }
 
     public void update(double dt) {

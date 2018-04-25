@@ -91,12 +91,12 @@ public class SceneGenerator {
     }
 
     private Tile tileFromNoise(double noise) {
-        if(noise <= waterRange) return Tile.WATER.getRandom();
+        if(noise <= waterRange) return Tile.WATER;
         else if(noise <= iceRange) return Tile.ICE.getRandom();
         else if(noise <= snowRange) return Tile.SNOW.getRandom();
         else if(noise <= rockRange) return Tile.ROCK.getRandom();
 
-        return Tile.VOID.getRandom();
+        return Tile.VOID;
     }
 
 }
