@@ -23,7 +23,6 @@ public class Sprite {
     public static final Sprite CAMPFIRE_UNLIT = new Sprite(160, 0, 32, 32, SpriteSheet.CAMP_FIRE);
     public static final Sprite PINE = new Sprite(0, 0, 86, 166, SpriteSheet.TREES);
 
-
     //
     //  HUD SPRITES
     //

@@ -10,7 +10,9 @@ public class SpriteSheet {
     public static final SpriteSheet HERO = new SpriteSheet("hero.png", 72, 208);
     public static final SpriteSheet TILES = new SpriteSheet("tiles.png");
     public static final SpriteSheet TREES = new SpriteSheet("trees.png");
-    public static final SpriteSheet FOXES = new SpriteSheet("foxes.png");
+    public static final SpriteSheet FOX = new SpriteSheet("fox.png");
+    public static final SpriteSheet BOAR = new SpriteSheet("boar.png");
+    public static final SpriteSheet PENGUIN = new SpriteSheet("penguin.png");
     public static final SpriteSheet MEME_MAN = new SpriteSheet("mememan.png");
     public static final SpriteSheet CAMP_FIRE = new SpriteSheet("campfire.png");
     public static final SpriteSheet HUD = new SpriteSheet("hud.png");

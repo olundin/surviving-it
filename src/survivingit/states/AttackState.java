@@ -10,9 +10,7 @@ import survivingit.util.Point;
 public class AttackState implements State<Animal> {
 
     public GameObject target; // Setting this is optional. When set, the attack will be performed to this object only
-    private double originalSpeed;
     private boolean targetAttacked;
-    private static final double SPEED_FACTOR = 1.5;
 
     public AttackState(GameObject target) {
         this.target = target;
@@ -20,9 +18,6 @@ public class AttackState implements State<Animal> {
     }
 
     public void enter(Animal object) {
-        // Temporarily increase movespeed
-        originalSpeed = object.getMoveSpeed();
-        object.setMoveSpeed(originalSpeed*SPEED_FACTOR);
     }
 
     public State<Animal> update(double dt, Animal object) {
@@ -61,6 +56,6 @@ public class AttackState implements State<Animal> {
     }
 
     public void exit(Animal object) {
-        object.setMoveSpeed(originalSpeed);
+
     }
 }

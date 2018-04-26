@@ -14,7 +14,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
     private double lastX;
     private double lastY;
 
-    private CreatureSprite sprites;
+    protected CreatureSprite sprites;
 
     public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel) {
 	    super(x, y, sprites.getSprite());

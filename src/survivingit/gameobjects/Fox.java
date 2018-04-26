@@ -8,14 +8,12 @@ import java.util.Random;
 
 public class Fox extends Animal {
 
-    private static Random random = new Random();
-
     public Fox(final double x, final double y) {
         super(x,
               y,
-              new CreatureSprite(SpriteSheet.FOXES, random.nextInt(8) * 129, 0, 43, 40),
+              new CreatureSprite(SpriteSheet.FOX, 0, 0, 43, 40),
               20,
-              2.5,
+              2.0,
               1,
               1,
               10.0,
