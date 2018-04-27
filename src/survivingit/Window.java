@@ -10,6 +10,12 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The window class.
+ *
+ * The Window class is basically a wrapper
+ * for java.awt.Frame, with some extra logic.
+ */
 public class Window extends Frame implements Observable<Window> {
 
     private int width;
@@ -61,6 +67,7 @@ public class Window extends Frame implements Observable<Window> {
 
     public void onClose() {
         this.open = false;
+        // Notify observers when window is closed
         notifyObservers(this);
     }
 

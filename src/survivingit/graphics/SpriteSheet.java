@@ -17,6 +17,7 @@ public class SpriteSheet {
     public static final SpriteSheet CAMP_FIRE = new SpriteSheet("campfire.png");
     public static final SpriteSheet HUD = new SpriteSheet("hud.png");
     public static final SpriteSheet BOOTS = new SpriteSheet("boots.png");
+    public static final SpriteSheet KNIFE = new SpriteSheet("knife.png");
 
     private int width;
     private int height;

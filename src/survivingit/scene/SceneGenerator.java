@@ -1,12 +1,9 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.Campfire;
-import survivingit.gameobjects.Fox;
 import survivingit.gameobjects.Pine;
-import survivingit.gameobjects.Player;
 import survivingit.util.Maths;
 import survivingit.util.PerlinNoise;
-import survivingit.util.SimplexNoise;
 
 import java.util.Random;
 
@@ -23,10 +20,10 @@ public class SceneGenerator {
         double tot = snow + rock + ice + water;
 
         // Calculate ranges
-        this.waterRange = Maths.normalize(water, 0.0, tot, -1.0, 1.0);
-        this.iceRange = Maths.normalize(water + ice, 0.0, tot, -1.0, 1.0);
-        this.snowRange = Maths.normalize(water + ice + snow, 0.0, tot, -1.0, 1.0);
-        this.rockRange = Maths.normalize(water + ice + snow + rock, 0.0, tot, -1.0, 1.0);
+        this.waterRange = Maths.affineTransformation(water, 0.0, tot, -1.0, 1.0);
+        this.iceRange = Maths.affineTransformation(water + ice, 0.0, tot, -1.0, 1.0);
+        this.snowRange = Maths.affineTransformation(water + ice + snow, 0.0, tot, -1.0, 1.0);
+        this.rockRange = Maths.affineTransformation(water + ice + snow + rock, 0.0, tot, -1.0, 1.0);
     }
 
     public void generateScene(Scene scene, boolean generateTiles, boolean generateVegetation, boolean generateStructures) {
