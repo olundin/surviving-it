@@ -77,15 +77,18 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     }
 
     // Mouse motion events
+    @Override
     public void mouseMoved(MouseEvent e) {
         this.x = e.getX();
         this.y = e.getY();
     }
 
+    @Override
     public void mouseDragged(MouseEvent e) { }
 
     // Mouse events
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() < button.length) {
             button[e.getButton()] = true;
@@ -93,6 +96,7 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() < button.length) {
             button[e.getButton()] = false;
@@ -100,14 +104,18 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
         }
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) { }
+    @Override
     public void mouseExited(MouseEvent e) { }
 
     // Mouse wheel events
 
+    @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         this.scroll = e.getWheelRotation();
     }
