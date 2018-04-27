@@ -27,6 +27,9 @@ public class SceneGraph implements Graph<Point> {
         this.scene = scene;
     }
 
+    public boolean addNode(Point node) { return false; }
+    public boolean addEdge(Point from, Point to, double weight) { return false; }
+
     public Set<Point> getNeighbors(Point node) {
         Set<Point> neighbors = new HashSet<>();
 

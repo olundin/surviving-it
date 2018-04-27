@@ -4,10 +4,7 @@ import survivingit.graphics.Sprite;
 
 public abstract class ItemFactory {
 
-	/**
-	 * Static NONE_ITEM object since no object specific state is needed.
-	 */
-	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.WATER);
+	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.CAMPFIRE);
 
 	/**
 	 * Creates and returns a new Item object of the entered ItemType.

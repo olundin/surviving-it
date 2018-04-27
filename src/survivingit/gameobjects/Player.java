@@ -26,7 +26,7 @@ public class Player extends Creature implements Observable<Player> {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              3,
+              10,
               1,
               1);
 	    observers = new ArrayList<>();
@@ -95,6 +95,9 @@ public class Player extends Creature implements Observable<Player> {
                 this.takeDamage(data);
                 break;
             case ITEM:
+                break;
+            case HEAL:
+                this.heal(data);
                 break;
             default:
                 break;

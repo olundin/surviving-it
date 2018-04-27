@@ -62,7 +62,8 @@ public abstract class Animal extends Creature {
             if(object instanceof Creature) {
                 if(object.equals(this)) continue; // Ignore itself
                 // Possible target. Check alpha level
-                if(((Creature)object).getAlphaLevel() <= this.alphaLevel) {
+                Creature creature = (Creature)object;
+                if(creature.getAlphaLevel() <= this.alphaLevel) {
                     return object;
                 }
             }

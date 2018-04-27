@@ -10,13 +10,18 @@ import java.util.Stack;
 public class FollowState implements State<Animal> {
 
     private GameObject target;
+    private double originalSpeed;
+    private static final double SPEED_FACTOR = 2.0;
+
 
     public FollowState(GameObject target) {
         this.target = target;
     }
 
     public void enter(Animal object) {
-
+        // Temporarily increase movespeed
+        originalSpeed = object.getMoveSpeed();
+        object.setMoveSpeed(originalSpeed*SPEED_FACTOR);
     }
 
     public State<Animal> update(double dt, Animal object) {
@@ -34,6 +39,12 @@ public class FollowState implements State<Animal> {
         // Target exists, move towards it
         Point pos = new Point(object.getX(), object.getY());
         Point dst = new Point(target.getX(), target.getY());
+
+        if(!Point.areWithin(pos, dst, object.getViewDistance() * 1.5)) {
+            // Quit following if target is too far away
+            return new IdleState();
+        }
+
         // Update path if necessary
         Stack<Point> path = object.getPath();
         if(path.isEmpty() || !Point.areWithin(path.firstElement(), dst, 1)) {
@@ -51,6 +62,6 @@ public class FollowState implements State<Animal> {
     }
 
     public void exit(Animal object) {
-
+        object.setMoveSpeed(originalSpeed);
     }
 }

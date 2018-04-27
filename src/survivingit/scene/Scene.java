@@ -1,7 +1,6 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.*;
-import survivingit.gameobjects.Camera;
 import survivingit.graph.*;
 import survivingit.physics.Collider;
 import survivingit.util.*;
@@ -16,11 +15,11 @@ public abstract class Scene {
     protected Player player;
 
     private List<GameObject> gameObjects;
-    private Tile[][] tiles;
+    protected Tile[][] tiles;
 
     private Random random;
 
-    private AStar<Point> astar;
+    private AStar<Point> aStar;
 
     public Scene(final int width, final int height) {
         this.width = width;
@@ -28,7 +27,7 @@ public abstract class Scene {
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
-        this.astar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
+        this.aStar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
     }
 
     public void addPlayer(Player player) {
@@ -47,11 +46,20 @@ public abstract class Scene {
 
     public boolean tryAdd(GameObject gameObject) {
         // Makes sure gameObject won't get stuck in tile
-        if(this.getTileAt(gameObject.getX(), gameObject.getY()).isPassable()) {
-            this.add(gameObject);
-            return true;
+        if(!this.getTileAt(gameObject.getX(), gameObject.getY()).isPassable()) {
+            return false;
         }
-        return false;
+        // make sure gameObject won't get stuck in another GameObject
+        Collider objCol = gameObject.getCollider();
+        if(!this.getObjectsInArea(objCol.getWorldX(),
+                                  objCol.getWorldY(),
+                            objCol.getWorldX() + objCol.getWidth(),
+                            objCol.getWorldY() + objCol.getHeight()).isEmpty()) {
+            return false;
+        }
+
+        this.add(gameObject);
+        return true;
     }
 
     public void update(double dt) {
@@ -64,7 +72,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (!this.inBounds(x, y) || tiles[xInt][yInt] == null) {
-            return Tile.WATER;
+            return Tile.VOID;
         } else {
             return tiles[yInt][xInt];
         }
@@ -112,14 +120,6 @@ public abstract class Scene {
         }
     }
 
-    protected void randomizeTiles() {
-        for (int y = 0; y < this.height; y++) {
-            for(int x = 0; x < this.width; x++) {
-                this.tiles[y][x] = Tile.getTile(random.nextInt(24)); // Higher bound -> less obstacles
-            }
-        }
-    }
-
     protected void fillTiles(int startX, int startY, int endX, int endY, Tile tile) {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
@@ -137,7 +137,7 @@ public abstract class Scene {
     }
 
     public Stack<Point> findPath(Point from, Point to) {
-        return this.astar.findPath(from, to);
+        return this.aStar.findPath(from, to);
     }
 
     public int getWidth() {

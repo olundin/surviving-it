@@ -7,20 +7,25 @@ import survivingit.items.ItemType;
 public class TestScene extends Scene {
 
     public TestScene() {
-        super(32, 32);
-        Player player = new Player(0.5, 0.5);
+        super(256, 256);
+
+        // Add player
+        Player player = new Player(Math.floor(width/2) + 0.5, Math.floor(height/2) + 0.5);
         for (int i = 0; i < 10; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
         }
-        this.addPlayer(player);
+        addPlayer(player);
 
-        this.randomizeTiles();
-        this.tryAdd(new Campfire(3.5, 3.5));
-        for(int x = 5; x < 32; x += 10) {
-            for(int y = 5; y < 32; y += 10) {
-                this.tryAdd(new Fox(x + 0.5, y + 0.5));
-            }
-        }
+        // Generate tiles, trees, e.t.c.
+        SceneGenerator generator = new SceneGenerator(2.0,2.0,0.5,3.0);
+        generator.generateScene(this, true, true, true);
+
+        // Try to add some animals
+        tryAdd(new Penguin(Math.floor(width/2) - 10.5, Math.floor(height/2)));
+        tryAdd(new Boar(Math.floor(width/2) + 10.5, Math.floor(height/2)));
+        tryAdd(new Fox(Math.floor(width/2), Math.floor(height/2) + 10.5));
+        add(new Yeti(64, 64));
+        add(new Yeti(80, 80));
     }
 }

@@ -14,7 +14,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
     private double lastX;
     private double lastY;
 
-    private CreatureSprite sprites;
+    protected CreatureSprite sprites;
 
     public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel) {
 	    super(x, y, sprites.getSprite());
@@ -104,6 +104,8 @@ public abstract class Creature extends VisibleObject implements Updateable {
 
     public void heal(int healAmount) {
         // Don't set health to higher to than max.
-        this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0));
+        this.setCurrentHealth(currentHealth + healAmount);
+        if(currentHealth >= maxHealth) currentHealth = maxHealth;
+        //this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0)); // <- Doesn't work?
     }
 }

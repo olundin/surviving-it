@@ -23,48 +23,22 @@ public class AnimatedSprite {
 
     private Sprite[] frames;
 
-    public AnimatedSprite(final Sprite[] frames, final double frameLength) {
-        this.frameIndex = 0;
-        this.frameLength = frameLength;
-        this.direction = AnimationDirection.FORWARDS;
-        this.paused = false;
-        this.timer = 0.0;
-        this.oscillating = false;
-
-        this.frames = frames;
-    }
-
     /**
      * Generates an animated sprite from a spritesheet. Starting at (subX, subY) frames will
      * be added to the animated sprite with the size (width, height). This will be done for each row nX times,
      * and repeated during nY rows for a total of nX * ny frames;
      *
-     * @param spriteSheet The spritesheet to use
-     * @param subX X position on spritesheet to start creating frames from
-     * @param subY Y position on spritesheet to start creating frames from
-     * @param spriteWidth Width of each frame
-     * @param spriteHeight Height of each frame
-     * @param nX Amount of frames horizontally
-     * @param nY Amount of frames vertically
+     * @param sprites The sprites to use
      * @param frameLength Length in seconds of each frame
      */
-    public AnimatedSprite(SpriteSheet spriteSheet, int subX, int subY, int spriteWidth, int spriteHeight, int nX, int nY, double frameLength) {
+    public AnimatedSprite(Sprite[] sprites, double frameLength) {
         this.frameIndex = 0;
         this.frameLength = frameLength;
         this.direction = AnimationDirection.FORWARDS;
         this.paused = false;
         this.timer = 0.0;
         this.oscillating = false;
-
-        Sprite[] frames = new Sprite[nX * nY];
-        // Add all sprites in SpriteSheet to frames
-        for(int y = 0; y < nY; y++) {
-            for(int x = 0; x < nX; x++) {
-                frames[x + y * nX] = new Sprite(x * spriteWidth + subX, y * spriteHeight + subY, spriteWidth, spriteHeight, spriteSheet);
-            }
-
-        }
-        this.frames = frames;
+        this.frames = sprites;
     }
 
     public void update(double dt) {
