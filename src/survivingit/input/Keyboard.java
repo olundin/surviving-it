@@ -37,16 +37,19 @@ public class Keyboard implements KeyListener {
         return keyReleased[k.id];
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
         key[e.getKeyCode()] = true;
         keyPressed[e.getKeyCode()] = true;
     }
 
+    @Override
     public void keyReleased(KeyEvent e) {
         key[e.getKeyCode()] = false;
         keyReleased[e.getKeyCode()] = true;
     }
 
+    @Override
     public void keyTyped(KeyEvent e) {}
 
 }

@@ -60,10 +60,12 @@ public class Player extends Creature implements Observable<Player> {
         this.playerInventory.addItemToFirstAvailable(item);
     }
 
+    @Override
     public void attach(Observer<Player> observer) {
         this.observers.add(observer);
     }
 
+    @Override
     public void notifyObservers(Player data) {
         for(Observer<Player> o : observers) {
             o.onNotify(this, data);
@@ -84,6 +86,7 @@ public class Player extends Creature implements Observable<Player> {
         }
     }
 
+    @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
         int data = msg.getData();

@@ -148,6 +148,7 @@ public class Camera extends GameObject {
         return this.screenHeight / this.height;
     }
 
+    @Override
     public void receiveMessage(Message msg) {}
 
 }
