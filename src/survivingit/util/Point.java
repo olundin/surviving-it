@@ -2,6 +2,11 @@ package survivingit.util;
 
 import java.util.Objects;
 
+/**
+ * A Point contains an x and a y coordinate.
+ * The class also has some helper functions for
+ * math with points.
+ */
 public class Point {
 
     private double x;
@@ -28,6 +33,14 @@ public class Point {
         this.y = y;
     }
 
+    /**
+     * Get angle between two points using Math.atan2.
+     * @see Math#atan2
+     *
+     * @param from Origin
+     * @param to Destination
+     * @return Angle between origin and destination
+     */
     public static double getAngle(Point from, Point to) {
         return Math.atan2(to.x - from.x, to.y - from.y);
     }

@@ -14,7 +14,7 @@ public abstract class ItemFactory {
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {
 			case KNIFE: {
-				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.CAMPFIRE);
+				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.KNIFE);
 				knife.addEffect(new MeleeAttackEffect(10, 10, knife));
 				return knife;
 			}
