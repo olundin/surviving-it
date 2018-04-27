@@ -23,10 +23,12 @@ public abstract class ItemFactory {
 			}
 			case BERRIES: {
 				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
+				berries.addEffect(new HealEffect(25, berries));
 				return berries;
 			}
 			case BOOTS: {
 				Item boots = new Item(itemType, "Gyllene skor", "Diggiloo diggiley", Sprite.GYLLENE_SKOR);
+				boots.addEffect(new MoveSpeedBoostEffect(10, boots));
 				return boots;
 			}
 			case NONE: {

@@ -25,6 +25,7 @@ public class MeleeAttackEffect extends AttackEffect {
      */
     @Override
     public void attack(Creature attacker) {
+        System.out.println("attack  ");
         attacker.performAttack(damage, range);
     }
 

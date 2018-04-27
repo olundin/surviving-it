@@ -26,6 +26,7 @@ public class HealEffect extends UsableEffect {
     @Override
     public void use(Creature user) {
         user.heal(this.healAmount);
+        System.out.println("heal");
     }
 
 }
