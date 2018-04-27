@@ -40,7 +40,9 @@ public class InputHandler {
         }
 
         // Player attack with left mouse button
-        if(mouse.getButtonPressed(Input.BUTTON_LEFT)) {
+        if (mouse.getButtonPressed(Input.BUTTON_LEFT)) {
+            player.useEquippedItem();
+        } else if (mouse.getButtonPressed(Input.BUTTON_RIGHT)) {
             player.attack();
         }
 
@@ -68,4 +70,5 @@ public class InputHandler {
                 Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)
         );
     }
+
 }

@@ -2,19 +2,25 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
-public class AttackEffect extends UsableEffect {
+public abstract class AttackEffect extends Effect {
 
-    private int damage;
-    private int range;
+    /**
+     * The effectType of all objects of the AttackEffect class.
+     */
+    public static final EffectType EFFECT_TYPE = EffectType.ATTACK;
 
-    public AttackEffect(final int damage, final int range, final Item source) {
-        super(source);
-        this.damage = damage;
-        this.range = range;
+    /**
+     * Creates a new AttackEffect object with the entered Item source.
+     * @param source of the AttackEffect.
+     */
+    public AttackEffect(Item source) {
+        super(source, EFFECT_TYPE);
     }
 
-    public void use(Creature creature) {
-        creature.performAttack(damage, range);
-    }
+    /**
+     * Performs an attack from the entered attacker Creature.
+     * @param attacker Creature who's attack method is used.
+     */
+    public abstract void attack(Creature attacker);
 
 }
