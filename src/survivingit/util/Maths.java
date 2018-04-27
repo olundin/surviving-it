@@ -25,11 +25,4 @@ public class Maths {
         return x < xi ? xi - 1 : xi;
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(normalize(1.0, 0, 10, -1.0, 1.0));
-        System.out.println(normalize(1.0 + 2.0, 0, 10, -1.0, 1.0));
-        System.out.println(normalize(1.0 + 2.0 + 3.0, 0, 10, -1.0, 1.0));
-        System.out.println(normalize(1.0 + 2.0 + 3.0 + 4.0, 0, 10, -1.0, 1.0));
-    }
 }

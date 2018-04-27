@@ -2,12 +2,15 @@ package survivingit.scene;
 
 import survivingit.gameobjects.*;
 import survivingit.graph.*;
+import survivingit.graphics.WorldRenderer;
 import survivingit.physics.Collider;
 import survivingit.util.*;
 
 import java.util.*;
 
 public abstract class Scene {
+
+    private Camera camera;
 
     protected int width;
     protected int height;
@@ -21,13 +24,22 @@ public abstract class Scene {
 
     private AStar<Point> aStar;
 
-    public Scene(final int width, final int height) {
+    public Scene(final Camera camera, final int width, final int height) {
+        this.camera = camera;
         this.width = width;
         this.height = height;
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
         this.aStar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
+    }
+
+    public void update(double dt) {
+        this.camera.update(dt, this);
+    }
+
+    public void render(WorldRenderer renderer) {
+        this.camera.render(renderer, this);
     }
 
     public void addPlayer(Player player) {
@@ -60,12 +72,6 @@ public abstract class Scene {
 
         this.add(gameObject);
         return true;
-    }
-
-    public void update(double dt) {
-        for (GameObject gameObject : gameObjects) {
-            gameObject.update(dt);
-	    }
     }
 
     public Tile getTileAt(double x, double y) {

@@ -6,8 +6,8 @@ import survivingit.items.ItemType;
 
 public class TestScene extends Scene {
 
-    public TestScene() {
-        super(256, 256);
+    public TestScene(Camera camera) {
+        super(camera, 256, 256);
 
         // Add player
         Player player = new Player(Math.floor(width/2) + 0.5, Math.floor(height/2) + 0.5);

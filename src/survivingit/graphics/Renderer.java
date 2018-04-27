@@ -1,12 +1,10 @@
 package survivingit.graphics;
 
 import survivingit.gameobjects.Animal;
-import survivingit.gameobjects.Camera;
+import survivingit.scene.Camera;
 import survivingit.gameobjects.Creature;
 import survivingit.gameobjects.VisibleObject;
 import survivingit.containers.ItemContainer;
-import survivingit.gameobjects.Camera;
-import survivingit.gameobjects.VisibleObject;
 import survivingit.hud.EquippedItemContainerHud;
 import survivingit.hud.Icon;
 import survivingit.hud.ItemContainerHud;

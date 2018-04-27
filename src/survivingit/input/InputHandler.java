@@ -2,7 +2,7 @@ package survivingit.input;
 
 import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.Player;
-import survivingit.gameobjects.Camera;
+import survivingit.scene.Camera;
 
 import survivingit.hud.Hud;
 import survivingit.util.Maths;

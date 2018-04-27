@@ -1,6 +1,5 @@
 package survivingit;
 
-import survivingit.gameobjects.Camera;
 import survivingit.graphics.Renderer;
 import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
@@ -8,6 +7,7 @@ import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
+import survivingit.scene.Camera;
 import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 import survivingit.scene.Tile;
@@ -49,8 +49,7 @@ public class Game implements Observer<Window> {
     	renderer.createBufferStrategy(3);
 
         this.camera = new Camera(0, 0, 24, 13.5, 0, 0, WIDTH, HEIGHT);
-        this.currentScene = new TestScene();
-        this.currentScene.add(this.camera);
+        this.currentScene = new TestScene(this.camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
 
@@ -88,6 +87,7 @@ public class Game implements Observer<Window> {
 
     private void update(double dt) {
         inputHandler.handleInput(currentScene.getPlayer(), camera, hud);
+
         currentScene.update(dt);
 
         // Update animated tile's sprites
@@ -101,7 +101,7 @@ public class Game implements Observer<Window> {
         renderer.prepare();
         renderer.clear();
 
-        camera.render(renderer);
+        currentScene.render(renderer);
         hud.render(renderer);
 
         renderer.display();

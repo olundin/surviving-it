@@ -6,6 +6,11 @@ import survivingit.physics.Collider;
 
 public class Boar extends Animal{
 
+    @Override
+    public void update(double dt) {
+        super.update(dt);
+    }
+
     public Boar(final double x, final double y) {
         super(
                 x,

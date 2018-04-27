@@ -23,7 +23,7 @@ public class TileGroup {
     public Tile[] getTiles() {
         return tiles;
     }
-    public Set<Tile> toSet() { return Set.of(tiles); }
+
     public Tile getPlain() { return tiles[0]; }
     public Tile getRandom() {
         int rand = random.nextInt(size*10);

@@ -1,13 +1,20 @@
-package survivingit.gameobjects;
+package survivingit.scene;
 
+import survivingit.gameobjects.GameObject;
+import survivingit.gameobjects.GameObjectComparator;
+import survivingit.gameobjects.VisibleObject;
 import survivingit.graphics.WorldRenderer;
 import survivingit.messaging.Message;
+import survivingit.scene.Scene;
 import survivingit.scene.Tile;
 
 import java.util.Collections;
 import java.util.List;
 
-public class Camera extends GameObject {
+public class Camera {
+
+    private double x;
+    private double y;
 
     private double width;
     private double height;
@@ -26,7 +33,8 @@ public class Camera extends GameObject {
     private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
     public Camera(double x, double y, double width, double height, int screenX, int screenY, int screenWidth, int screenHeight) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
 
@@ -53,7 +61,25 @@ public class Camera extends GameObject {
         this.y += (delta * relation) / 2;
     }
 
-    public void render(WorldRenderer renderer) {
+    public void update(double dt, Scene scene) {
+        List<GameObject> objectsInArea = scene.getObjectsInArea(
+                this.x - EDGE_PADDING,
+                this.y - EDGE_PADDING,
+                this.x + this.width + EDGE_PADDING,
+                this.y + this.height + EDGE_PADDING
+        );
+
+        // Sort gameObjects by y position. Makes them render correctly
+        //objectsInArea.sort(this.gameObjectComparator);
+        Collections.sort(objectsInArea, gameObjectComparator);
+
+        for (GameObject gameObject : objectsInArea) {
+
+            gameObject.update(dt);
+        }
+    }
+
+    public void render(WorldRenderer renderer, Scene scene) {
         // Make sure target is being followed if it exists
         if (hasTarget()) {
             this.setCenterPos(target.getX(), target.getY());
@@ -62,7 +88,7 @@ public class Camera extends GameObject {
         // Render visible Tiles
         for (int tileY = (int)Math.floor(this.y - EDGE_PADDING); tileY < this.y + this.height + EDGE_PADDING; tileY++) {
             for (int tileX = (int)Math.floor(this.x - EDGE_PADDING); tileX < this.x + this.width + EDGE_PADDING; tileX++) {
-                Tile tile = this.scene.getTileAt(tileX, tileY);
+                Tile tile = scene.getTileAt(tileX, tileY);
                 if (tile != null) {
                     // Draw sprite at position relative to camera
                     renderer.drawTile(tileX, tileY, tile, this);
@@ -71,7 +97,7 @@ public class Camera extends GameObject {
         }
 
         // Get objects visible to camera
-        List<GameObject> objectsInArea = this.scene.getObjectsInArea(
+        List<GameObject> objectsInArea = scene.getObjectsInArea(
                 this.x - EDGE_PADDING,
                 this.y - EDGE_PADDING,
                 this.x + this.width + EDGE_PADDING,
@@ -147,8 +173,4 @@ public class Camera extends GameObject {
     public double pixelsPerUnitY() {
         return this.screenHeight / this.height;
     }
-
-    @Override
-    public void receiveMessage(Message msg) {}
-
 }

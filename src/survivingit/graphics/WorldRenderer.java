@@ -1,6 +1,6 @@
 package survivingit.graphics;
 
-import survivingit.gameobjects.Camera;
+import survivingit.scene.Camera;
 import survivingit.gameobjects.VisibleObject;
 import survivingit.scene.Tile;
 
