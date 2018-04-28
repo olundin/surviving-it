@@ -26,9 +26,9 @@ public class Player extends Creature implements Observable<Player> {
               y,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
-              10,
-              Integer.MAX_VALUE,
+                10,
               1,
+                1,
                 1);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));

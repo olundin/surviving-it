@@ -21,8 +21,8 @@ public abstract class GameObject implements Messagable {
     protected double x;
     protected double y;
 
+    protected boolean alive;
     protected Scene scene;
-
     protected Collider collider;
 
     /**
@@ -42,6 +42,7 @@ public abstract class GameObject implements Messagable {
         this.x = x;
         this.y = y;
         this.collider = new Collider(0, 0, 0.0, 0.0, true, this);
+        this.alive = true;
     }
 
     /**
@@ -92,6 +93,11 @@ public abstract class GameObject implements Messagable {
             this.y -= dy;
         }
     }
+
+    public boolean isAlive() {
+        return this.alive;
+    }
+
 
     /**
      * Updates the gameObject with entered dt time value.

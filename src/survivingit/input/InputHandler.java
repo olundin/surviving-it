@@ -6,6 +6,7 @@ import survivingit.scene.Camera;
 
 import survivingit.hud.Hud;
 import survivingit.util.Maths;
+import survivingit.util.Point;
 
 public class InputHandler {
 
@@ -17,7 +18,7 @@ public class InputHandler {
         this.mouse = mouse;
     }
 
-    public void handleInput(final Player player, final Camera camera, final Hud hud) {
+    public void handleInput(double dt, final Player player, final Camera camera, final Hud hud) {
         // Move with WASD. Allow diagonal movement
         if (keyboard.getKey(Input.KEY_A) && keyboard.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP_LEFT);
@@ -58,16 +59,15 @@ public class InputHandler {
 
         // Zoom in/out with up/down key press
         if (keyboard.getKey(Input.KEY_UP)) {
-            camera.zoom(0.5);
+            camera.zoom(20.0 * dt);
         } else if (keyboard.getKey(Input.KEY_DOWN)) {
-            camera.zoom(-0.5);
+            camera.zoom(-20.0 * dt);
         }
 
         // Set camera position to be between player and mouse
-        camera.setCenterPos(
+        camera.setTarget(new Point(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1),
-                Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)
-        );
+                Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)));
     }
 
 }

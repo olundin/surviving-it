@@ -74,8 +74,9 @@ public abstract class Creature extends VisibleObject {
     public void takeDamage(int amount) {
         this.setCurrentHealth(currentHealth - amount);
         if(currentHealth < 0) {
-            // Player dead
+            // Creature dead
             this.setCurrentHealth(0);
+            this.death();
         }
     }
 
@@ -103,7 +104,6 @@ public abstract class Creature extends VisibleObject {
         //TODO:
     }
 
-
     public void heal(int healAmount) {
         // Don't set health to higher to than max.
         int newHealth = currentHealth + healAmount;
@@ -113,6 +113,10 @@ public abstract class Creature extends VisibleObject {
     }
 
     public void igniteFirePlaces() {
-
     }
+
+    public void death() {
+        this.alive = false;
+    }
+
 }

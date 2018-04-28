@@ -12,6 +12,11 @@ import survivingit.scene.Scene;
 import survivingit.scene.TestScene;
 import survivingit.scene.Tile;
 
+/**
+ * Game is the main class.
+ * It contains the game loop and is responsible
+ * for querying updates and renders.
+ */
 public class Game implements Observer<Window> {
 
     public static final int WIDTH = 1920;
@@ -56,9 +61,12 @@ public class Game implements Observer<Window> {
     private void start() {
         running = true;
 
+        // Min allowed delta between updates
         final double targetDelta = 1.0/60.0;
+        // Max allowed delta between updates
         final double maxDelta = 0.05;
         long previousTime = System.nanoTime();
+        // For conversion from nanoseconds to seconds
         final double nanosPerSec = 1_000_000_000.0;
 
         while(running) {
@@ -66,6 +74,7 @@ public class Game implements Observer<Window> {
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
             deltaTime = Math.min(deltaTime, maxDelta);   // Set a cap to deltaTime
 
+            // Update with delta time, then render
             this.update(deltaTime);
             this.render();
 
@@ -86,7 +95,7 @@ public class Game implements Observer<Window> {
     }
 
     private void update(double dt) {
-        inputHandler.handleInput(currentScene.getPlayer(), camera, hud);
+        inputHandler.handleInput(dt, currentScene.getPlayer(), camera, hud);
 
         currentScene.update(dt);
 

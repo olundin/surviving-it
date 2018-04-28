@@ -3,16 +3,26 @@ package survivingit.util;
 import java.util.Random;
 
 /**
- * From the author of the Perlin Noise algorithm.
+ * Utility class for the Perlin Noise function.
+ * Completely copied from the original author of the Perlin Noise.
  *
- * @see <a href="http://mrl.nyu.edu/~perlin/noise/">Perlin Noise</a>
+ * @see <a href="http://mrl.nyu.edu/~perlin/noise/">Perlin Noise (from the creator)</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise (Wikipedia)</a>
  */
 
 public class PerlinNoise {
 
     private static final Random RANDOM = new Random();
 
-    // TODO: Remove 3D functionality(?)
+    /**
+     * Based on a point (x, y, z), return a value between -1 and 1
+     * such that another point (x1, y1, z1) will return a value
+     * close to the first one.
+     * @param x X coordinate of the point
+     * @param y Y coordinate of the point
+     * @param z X coordinate of the point
+     * @return A value between -1 and 1
+     */
     public static double noise(double x, double y, double z) {
         int X = (int)Math.floor(x) & 255,                  // FIND UNIT CUBE THAT
             Y = (int)Math.floor(y) & 255,                  // CONTAINS POINT.
@@ -35,6 +45,7 @@ public class PerlinNoise {
                 lerp(v, lerp(u, grad(p[AA+1], x, y, z-1),  grad(p[BA+1], x-1, y, z-1)),
                 lerp(u, grad(p[AB+1], x, y-1, z-1), grad(p[BB+1], x-1, y-1, z-1))));
     }
+
     private static double fade(double t) { return t * t * t * (t * (t * 6 - 15) + 10); }
     private static double lerp(double t, double a, double b) { return a + t * (b - a); }
     private static double grad(int hash, double x, double y, double z) {

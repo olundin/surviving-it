@@ -9,6 +9,8 @@ import survivingit.physics.Collider;
 
 public class Campfire extends VisibleObject {
 
+    private static final int HEAL_AMOUNT = 1;
+
     private boolean lit;
     private AnimatedSprite litSprite;
     private Sprite unlitSprite;
@@ -53,13 +55,7 @@ public class Campfire extends VisibleObject {
             timeSinceLastHeal += dt;
             if (timeSinceLastHeal >= HEAL_DELAY) {
                 // A heal should be performed
-                for(GameObject obj : this.scene.getObjectsInArea(
-                        this.x - HEAL_RANGE,
-                        this.y - HEAL_RANGE,
-                        this.x + 2 * HEAL_RANGE,
-                        this.y + 2 * HEAL_RANGE)) {
-                    obj.receiveMessage(new Message(MessageType.HEAL, 1));
-                }
+                sendMesageToCreaturesInArea(new Message(MessageType.HEAL, HEAL_AMOUNT), 2, 2);
                 timeSinceLastHeal = 0.0;
             }
 

@@ -11,7 +11,8 @@ public class TestScene extends Scene {
 
         // Add player
         Player player = new Player(Math.floor(width/2) + 0.5, Math.floor(height/2) + 0.5);
-        for (int i = 0; i < 10; i++) {
+        player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.FLINT_AND_STEEL));
+        for (int i = 0; i < 8; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
         }
@@ -25,5 +26,6 @@ public class TestScene extends Scene {
         tryAdd(new Penguin(Math.floor(width/2) - 10.5, Math.floor(height/2)));
         tryAdd(new Boar(Math.floor(width/2) + 10.5, Math.floor(height/2)));
         tryAdd(new Fox(Math.floor(width/2), Math.floor(height/2) + 10.5));
+        add(new Yeti(Math.floor(width/2), Math.floor(height/2)));
     }
 }

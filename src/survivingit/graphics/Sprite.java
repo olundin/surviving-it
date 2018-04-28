@@ -38,6 +38,7 @@ public class Sprite {
     //  ITEM SPRITES
     //
     public static final Sprite GYLLENE_SKOR = new Sprite(0, 0, 400, 257, SpriteSheet.BOOTS);
+    public static final Sprite KNIFE = new Sprite(0, 0, 24, 21, SpriteSheet.KNIFE);
 
     private int x;
     private int y;
