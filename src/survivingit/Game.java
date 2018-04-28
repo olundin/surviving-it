@@ -95,7 +95,7 @@ public class Game implements Observer<Window> {
     }
 
     private void update(double dt) {
-        inputHandler.handleInput(currentScene.getPlayer(), camera, hud);
+        inputHandler.handleInput(dt, currentScene.getPlayer(), camera, hud);
 
         currentScene.update(dt);
 
