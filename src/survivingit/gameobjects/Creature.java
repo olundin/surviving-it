@@ -2,7 +2,7 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
 
-public abstract class Creature extends VisibleObject implements Updateable {
+public abstract class Creature extends VisibleObject {
 
     protected int currentHealth;
     protected int maxHealth;
@@ -10,13 +10,14 @@ public abstract class Creature extends VisibleObject implements Updateable {
     protected int damage; // Attack damage
     protected Direction direction;
     protected int alphaLevel; // Creatures will flee from creatures with higher level and attack creatures with lower alpha level
+    protected double range;
 
     private double lastX;
     private double lastY;
 
     protected CreatureSprite sprites;
 
-    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel) {
+    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double range) {
 	    super(x, y, sprites.getSprite());
 	    this.currentHealth = maxHealth;
 	    this.maxHealth = maxHealth;
@@ -24,6 +25,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
 	    this.damage = damage;
 	    this.direction = Direction.NONE;
 	    this.alphaLevel = alphaLevel;
+	    this.range = range;
 
 	    this.lastX = x;
 	    this.lastY = y;
@@ -108,5 +110,9 @@ public abstract class Creature extends VisibleObject implements Updateable {
         if(newHealth > maxHealth) newHealth = maxHealth;
         this.setCurrentHealth(newHealth);
         //this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0)); // <- Doesn't work?
+    }
+
+    public void igniteFirePlaces() {
+
     }
 }

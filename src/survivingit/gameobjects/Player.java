@@ -27,8 +27,9 @@ public class Player extends Creature implements Observable<Player> {
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
               10,
+              Integer.MAX_VALUE,
               1,
-              1);
+                1);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
 	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);
@@ -74,16 +75,7 @@ public class Player extends Creature implements Observable<Player> {
 
     // TODO: REMOVE! Only a temporary method for testing
     public void attack() {
-        // Find gameobjects in the area in front of the player (1x1) units
-        List<GameObject> targets = this.scene.getObjectsInArea(this.x -1,
-                                                               this.y - 1,
-                                                               this.x + 1,
-                                                               this.y + 1);
-        for(GameObject target : targets) {
-            if(!target.equals(this)) {
-                target.receiveMessage(new Message(MessageType.ATTACK, this.damage));
-            }
-        }
+        sendMesageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
     }
 
     @Override

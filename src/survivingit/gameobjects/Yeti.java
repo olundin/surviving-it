@@ -13,7 +13,7 @@ public class Yeti extends Animal {
                 new CreatureSprite(SpriteSheet.MEME_MAN, 0, 0, 85, 115),
                 1000,
                 10,
-                25,
+                Integer.MAX_VALUE,
                 Integer.MAX_VALUE,
                 50.0,
                 1.0

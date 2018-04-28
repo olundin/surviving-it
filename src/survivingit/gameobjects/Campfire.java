@@ -38,19 +38,20 @@ public class Campfire extends VisibleObject {
         this.litTime = 0.0;
     }
 
+    @Override
     public void update(double dt) {
-        if(lit) {
+        if (lit) {
             // Increase litTime
             litTime += dt;
             // Check if fire should be extinguished
-            if(litTime >= MAX_LIT_TIME) {
+            if (litTime >= MAX_LIT_TIME) {
                 this.lit = false;
                 litTime = 0.0;
             }
 
             // Perform healing to objects nearby
             timeSinceLastHeal += dt;
-            if(timeSinceLastHeal >= HEAL_DELAY) {
+            if (timeSinceLastHeal >= HEAL_DELAY) {
                 // A heal should be performed
                 for(GameObject obj : this.scene.getObjectsInArea(
                         this.x - HEAL_RANGE,
@@ -77,7 +78,6 @@ public class Campfire extends VisibleObject {
         int data = msg.getData();
         switch(type) {
             case ATTACK:
-                this.lit = !this.lit;
                 break;
             case ITEM:
                 break;
