@@ -1,8 +1,13 @@
 package survivingit.gameobjects;
 
+import survivingit.Game;
 import survivingit.messaging.Messagable;
+import survivingit.messaging.Message;
 import survivingit.physics.Collider;
 import survivingit.scene.Scene;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract superclass for all GameObjects.
@@ -11,7 +16,7 @@ import survivingit.scene.Scene;
  * GameObject also has a field for the scene where it exists, which is utilised in subclasses where it is necessary to
  * be aware of their surroundings.
  */
-public abstract class GameObject implements Updateable, Messagable {
+public abstract class GameObject implements Messagable {
 
     protected double x;
     protected double y;
@@ -96,6 +101,37 @@ public abstract class GameObject implements Updateable, Messagable {
      * @param dt double value of the amount of time that has passed.
      */
     public void update(double dt) {} // TODO: Remove
+
+    protected List<GameObject> gameObjectsInArea(final double width, final double height) {
+        List<GameObject> gameObjects =  this.scene.getObjectsInArea(x - width/2, y - height/2,
+                x + width/2, y + height/2);
+        if (gameObjects.contains(this)) {
+            gameObjects.remove(this);
+        }
+        return gameObjects;
+    }
+
+    protected List<Creature> creaturesInArea(final double width, final double height) {
+        List<Creature> creatures = new ArrayList<>();
+        for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            if (gameObject instanceof Creature) {
+                creatures.add((Creature) gameObject);
+            }
+        }
+        return creatures;
+    }
+
+    protected void sendMessageToGameObjectsInArea(final Message message, final double width, final double height) {
+        for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            gameObject.receiveMessage(message);
+        }
+    }
+
+    protected void sendMesageToCreaturesInArea(final Message message, final double width, final double height) {
+        for (Creature creature : creaturesInArea(width, height)) {
+            creature.receiveMessage(message);
+        }
+    }
 
     /**
      * Sets the gameObject's Scene to the entered Scene.
