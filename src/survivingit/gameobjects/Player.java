@@ -27,7 +27,7 @@ public class Player extends Creature implements Observable<Player> {
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
                 10,
-              1,
+              Integer.MAX_VALUE,
                 1,
                 1);
 	    observers = new ArrayList<>();
@@ -102,5 +102,9 @@ public class Player extends Creature implements Observable<Player> {
 
     public void useEquippedItem() {
         this.playerInventory.useEquippedItem(this);
+    }
+
+    private boolean isWeaponEquipped() {
+        return this.playerInventory.isWeaponEquipped();
     }
 }

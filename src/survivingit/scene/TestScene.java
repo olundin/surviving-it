@@ -26,6 +26,6 @@ public class TestScene extends Scene {
         tryAdd(new Penguin(Math.floor(width/2) - 10.5, Math.floor(height/2)));
         tryAdd(new Boar(Math.floor(width/2) + 10.5, Math.floor(height/2)));
         tryAdd(new Fox(Math.floor(width/2), Math.floor(height/2) + 10.5));
-        add(new Yeti(Math.floor(width/2), Math.floor(height/2)));
+        add(new Yeti(Math.floor(0), Math.floor(0)));
     }
 }
