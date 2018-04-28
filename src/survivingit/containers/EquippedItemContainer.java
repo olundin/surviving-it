@@ -60,9 +60,9 @@ public class EquippedItemContainer extends ItemContainer {
      * Reaturns a boolean if the equipped item has a weapon(attack)component.
      * @return if the equipped item is a weapon.
      */
-    public boolean isWeaponEquipped() {
+    public boolean isCarryingWeapon() {
         return this.getEquippedItem().hasEffectType(EffectType.ATTACK);
     }
 
-       
+
 }

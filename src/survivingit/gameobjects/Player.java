@@ -75,6 +75,7 @@ public class Player extends Creature implements Observable<Player> {
 
     // TODO: REMOVE! Only a temporary method for testing
     public void attack() {
+        if (isCarryingWeapon())
         sendMesageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
     }
 
@@ -104,7 +105,7 @@ public class Player extends Creature implements Observable<Player> {
         this.playerInventory.useEquippedItem(this);
     }
 
-    private boolean isWeaponEquipped() {
-        return this.playerInventory.isWeaponEquipped();
+    private boolean isCarryingWeapon() {
+        return this.playerInventory.isCarryingWeapon();
     }
 }
