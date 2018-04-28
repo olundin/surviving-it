@@ -74,8 +74,10 @@ public class Player extends Creature implements Observable<Player> {
     }
 
     // TODO: REMOVE! Only a temporary method for testing
-    public void attack() {
-        if (isCarryingWeapon())
+    public void performAttack() {
+        if (isCarryingWeapon()) {
+            performAttack(1, 1);
+        }
         sendMesageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
     }
 

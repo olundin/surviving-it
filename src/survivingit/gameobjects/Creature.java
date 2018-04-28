@@ -9,7 +9,7 @@ public abstract class Creature extends VisibleObject {
     protected double moveSpeed; // Tiles per second
     protected int damage; // Attack damage
     protected Direction direction;
-    protected int alphaLevel; // Creatures will flee from creatures with higher level and attack creatures with lower alpha level
+    protected int alphaLevel; // Creatures will flee from creatures with higher level and performAttack creatures with lower alpha level
     protected double range;
 
     private double lastX;

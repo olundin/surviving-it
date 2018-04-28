@@ -83,7 +83,7 @@ public class PlayerInventory {
     }
 
     /**
-     * Reaturns a boolean if the equipped item has a weapon(attack)component.
+     * Reaturns a boolean if the equipped item has a weapon(performAttack)component.
      * @return if the equipped item is a weapon.
      */
     public boolean isCarryingWeapon() {

@@ -26,11 +26,11 @@ public abstract class Animal extends Creature {
      * @param sprites Creature sprite of the animal's sprites
      * @param maxHealth int  of the animal's max health.
      * @param moveSpeed double of the animal's initial movement speed.
-     * @param damage int of the animal's attack damage.
+     * @param damage int of the animal's performAttack damage.
      * @param alphaLevel int of the animal's alpha level.
      * @param viewDistance double of the animal's view distance in the form of a square where each side is the
      *                     viewdistance and the center of the square is the animal's position.
-     * @param range double of the animal's attack range.
+     * @param range double of the animal's performAttack range.
      */
     public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double viewDistance, final double range) {
         super(x, y, sprites, maxHealth, moveSpeed, damage, alphaLevel, range);

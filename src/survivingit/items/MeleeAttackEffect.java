@@ -20,8 +20,8 @@ public class MeleeAttackEffect extends AttackEffect {
     }
 
     /**
-     * Performs a melee attack from the entered attacker Creature.
-     * @param attacker Creature who's attack method is used.
+     * Performs a melee performAttack from the entered attacker Creature.
+     * @param attacker Creature who's performAttack method is used.
      */
     @Override
     public void attack(Creature attacker) {

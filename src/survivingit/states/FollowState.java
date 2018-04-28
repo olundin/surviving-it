@@ -52,7 +52,7 @@ public class FollowState implements State<Animal> {
         }
         object.followPath();
 
-        // Check if attack should be performed
+        // Check if performAttack should be performed
         if(Point.areWithin(pos, dst, object.getRange())) {
             // Target reached
             return new AttackState(target);

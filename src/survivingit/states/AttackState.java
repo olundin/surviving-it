@@ -9,7 +9,7 @@ import survivingit.util.Point;
 
 public class AttackState implements State<Animal> {
 
-    public GameObject target; // Setting this is optional. When set, the attack will be performed to this object only
+    public GameObject target; // Setting this is optional. When set, the performAttack will be performed to this object only
     private boolean targetAttacked;
 
     public AttackState(GameObject target) {
@@ -44,7 +44,7 @@ public class AttackState implements State<Animal> {
             object.setDirection(Direction.fromAngle(Point.getAngle(objectPos, targetPos)));
 
             if (Point.areWithin(objectPos, targetPos, object.getRange())) {
-                // Target almost reached. Perform attack. Then back off
+                // Target almost reached. Perform performAttack. Then back off
                 target.receiveMessage(new Message(MessageType.ATTACK, object.getDamage()));
                 targetAttacked = true;
             }
