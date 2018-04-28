@@ -17,9 +17,11 @@ public class AttackState implements State<Animal> {
         targetAttacked = false;
     }
 
+    @Override
     public void enter(Animal object) {
     }
 
+    @Override
     public State<Animal> update(double dt, Animal object) {
         if(target == null) {
             // Target probably dead
@@ -30,18 +32,18 @@ public class AttackState implements State<Animal> {
         Point objectPos = new Point(object.getX(), object.getY());
         Point targetPos = new Point(target.getX(), target.getY());
 
-        if(targetAttacked) {
+        if (targetAttacked) {
             // Target has already been attacked. Back off a bit.
             object.setDirection(Direction.fromAngle(Point.getAngle(targetPos, objectPos)));
             if(!Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Distance between target and object is enough. Go back to following
                 return new FollowState(target);
             }
-        } else if(Point.areWithin(objectPos, targetPos, object.getRange()*3.0)) {
+        } else if (Point.areWithin(objectPos, targetPos, object.getRange()*3.0)) {
             // Target close enough set direction to towards it
             object.setDirection(Direction.fromAngle(Point.getAngle(objectPos, targetPos)));
 
-            if(Point.areWithin(objectPos, targetPos, object.getRange())) {
+            if (Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Target almost reached. Perform attack. Then back off
                 target.receiveMessage(new Message(MessageType.ATTACK, object.getDamage()));
                 targetAttacked = true;
@@ -55,6 +57,7 @@ public class AttackState implements State<Animal> {
         return this;
     }
 
+    @Override
     public void exit(Animal object) {
 
     }
