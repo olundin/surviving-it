@@ -10,8 +10,8 @@ public abstract class GameObject implements Updateable, Messagable {
     protected double x;
     protected double y;
 
+    protected boolean alive;
     protected Scene scene;
-
     protected Collider collider;
 
     public GameObject() {
@@ -23,6 +23,7 @@ public abstract class GameObject implements Updateable, Messagable {
         this.x = x;
         this.y = y;
         this.collider = new Collider(0, 0, 0.0, 0.0, true, this);
+        this.alive = true;
     }
 
     public double getX() {
@@ -51,6 +52,10 @@ public abstract class GameObject implements Updateable, Messagable {
             // Revert movement if collision was detected
             this.y -= dy;
         }
+    }
+
+    public boolean isAlive() {
+        return this.alive;
     }
 
     public void update(double dt) {} // TODO: Remove

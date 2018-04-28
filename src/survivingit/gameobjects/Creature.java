@@ -72,8 +72,9 @@ public abstract class Creature extends VisibleObject implements Updateable {
     public void takeDamage(int amount) {
         this.setCurrentHealth(currentHealth - amount);
         if(currentHealth < 0) {
-            // Player dead
+            // Creature dead
             this.setCurrentHealth(0);
+            this.death();
         }
     }
 
@@ -101,12 +102,15 @@ public abstract class Creature extends VisibleObject implements Updateable {
         //TODO:
     }
 
-
     public void heal(int healAmount) {
         // Don't set health to higher to than max.
         int newHealth = currentHealth + healAmount;
         if(newHealth > maxHealth) newHealth = maxHealth;
         this.setCurrentHealth(newHealth);
         //this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0)); // <- Doesn't work?
+    }
+
+    public void death() {
+        this.alive = false;
     }
 }

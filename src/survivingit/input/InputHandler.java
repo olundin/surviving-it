@@ -6,6 +6,7 @@ import survivingit.scene.Camera;
 
 import survivingit.hud.Hud;
 import survivingit.util.Maths;
+import survivingit.util.Point;
 
 public class InputHandler {
 
@@ -64,10 +65,9 @@ public class InputHandler {
         }
 
         // Set camera position to be between player and mouse
-        camera.setCenterPos(
+        camera.setTarget(new Point(
                 Maths.lerp(player.getX(), camera.screenToWorldX(mouse.getX()), 0.1),
-                Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)
-        );
+                Maths.lerp(player.getY(), camera.screenToWorldY(mouse.getY()), 0.1)));
     }
 
 }
