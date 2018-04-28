@@ -14,7 +14,7 @@ public abstract class ItemFactory {
     public static Item createItem(ItemType itemType) {
 		switch (itemType) {
 			case KNIFE: {
-				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.CAMPFIRE);
+				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.PINE);
 				knife.addEffect(new MeleeAttackEffect(10, 10, knife));
 				return knife;
 			}
@@ -27,6 +27,11 @@ public abstract class ItemFactory {
 				Item boots = new Item(itemType, "Gyllene skor", "Diggiloo diggiley", Sprite.GYLLENE_SKOR);
 				boots.addEffect(new MoveSpeedBoostEffect(10, boots));
 				return boots;
+			}
+			case FLINT_AND_STEEL: {
+				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.CAMPFIRE);
+				flintAndSteel.addEffect(new IgnitionEffect(10, flintAndSteel));
+				return flintAndSteel;
 			}
 			case NONE: {
 				throw new IllegalArgumentException("Cannot create item of type NONE");
