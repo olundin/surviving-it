@@ -6,6 +6,10 @@ import survivingit.gameobjects.GameObject;
 
 import java.util.Random;
 
+/**
+ * Idle state for an animal.
+ * Makes the animal walk around randomly until a possible target is encountered.
+ */
 public class IdleState implements State<Animal> {
 
     protected static Random random = new Random();
@@ -13,14 +17,27 @@ public class IdleState implements State<Animal> {
 
     private boolean walking;
 
+    /**
+     * Creates a new idle state.
+     */
     public IdleState() {
         this.timer = 0.0;
     }
 
+    /**
+     * State entry point.
+     * @param object object that the State is bound to.
+     */
     public void enter(Animal object) {
         object.setDirection(Direction.NONE);
     }
 
+    /**
+     *
+     * @param dt
+     * @param object
+     * @return
+     */
     public State<Animal> update(double dt, Animal object) {
         // Try to find targets
         GameObject target = object.findTarget();

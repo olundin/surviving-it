@@ -35,6 +35,9 @@ public class Game implements Observer<Window> {
 
     private boolean running = false;
 
+    /**
+     * Creates a new Game with the necessary parts.
+     */
     private Game() {
         this.window = new Window(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
@@ -58,6 +61,9 @@ public class Game implements Observer<Window> {
         this.hud = new Hud(currentScene.getPlayer());
     }
 
+    /**
+     * Starts the game.
+     */
     private void start() {
         running = true;
 
@@ -69,6 +75,7 @@ public class Game implements Observer<Window> {
         // For conversion from nanoseconds to seconds
         final double nanosPerSec = 1_000_000_000.0;
 
+        // Game loop
         while(running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
@@ -89,6 +96,9 @@ public class Game implements Observer<Window> {
     }
 
 
+    /**
+     * Stop the game.
+     */
     private void stop() {
         running = false;
         System.exit(0);
@@ -116,12 +126,22 @@ public class Game implements Observer<Window> {
         renderer.display();
     }
 
+    /**
+     * Lets an observable notify this observer
+     * @param object The observed object
+     * @param data The data
+     */
     public void onNotify(Observable<Window> object, Window data) {
         if(!data.isOpen()) {
             this.stop();
         }
     }
 
+    /**
+     * Program entry point.
+     * Creates a new game and starts it
+     * @param args Arguments
+     */
     public static void main(String[] args) {
 	    Game game = new Game();
 	    game.start();

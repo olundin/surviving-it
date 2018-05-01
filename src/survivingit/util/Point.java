@@ -12,23 +12,44 @@ public class Point {
     private double x;
     private double y;
 
+    /**
+     * Creates a new Point
+     * @param x X value of the point
+     * @param y Y value of the point
+     */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Gets the x value of the point
+     * @return X value of the point
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Gets the y value of the point
+     * @return Y value of the point
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * Sets the x value of the point
+     * @param x New x value of point
+     */
     public void setX(double x) {
         this.x = x;
     }
 
+    /**
+     * Sets the y value of the point
+     * @param y New y value of point
+     */
     public void setY(double y) {
         this.y = y;
     }
@@ -45,6 +66,13 @@ public class Point {
         return Math.atan2(to.x - from.x, to.y - from.y);
     }
 
+    /**
+     * Returns true if two points are within a certain range of each other
+     * @param p1 The first point
+     * @param p2 The second point
+     * @param range The allowed range
+     * @return Whether p1 and p2 are within range of each other
+     */
     public static boolean areWithin(Point p1, Point p2, double range) {
         return Math.abs(Math.hypot(p1.x - p2.x, p1.y - p2.y)) <= range;
     }
