@@ -51,9 +51,7 @@ public abstract class Scene {
 
     public void render(WorldRenderer renderer) {
         // Render tiles
-        for(PositionTile posTile : camera.getVisibleTiles(this)) {
-            renderer.drawTile(posTile.getX(), posTile.getY(), posTile.getTile(), camera);
-        }
+        camera.renderVisibleTiles(this, renderer);
 
         // Render gameobjects
         List<GameObject> visibleObjects = camera.getVisibleObjects(this);
@@ -110,16 +108,6 @@ public abstract class Scene {
         for(int y = (int)Math.floor(startY); y < (int)Math.floor(endY) + 1; y++) {
             for(int x = (int)Math.floor(startX); x < (int)Math.floor(endX) + 1; x++) {
                 tilesInArea.add(getTileAt(x, y));
-            }
-        }
-        return tilesInArea;
-    }
-
-    public List<PositionTile> getPositionTilesInArea(double startX, double startY, double endX, double endY) {
-        List<PositionTile> tilesInArea = new ArrayList<>();
-        for(int y = (int)Math.floor(startY); y < (int)Math.floor(endY) + 1; y++) {
-            for(int x = (int)Math.floor(startX); x < (int)Math.floor(endX) + 1; x++) {
-                tilesInArea.add(new PositionTile(x, y, getTileAt(x, y)));
             }
         }
         return tilesInArea;

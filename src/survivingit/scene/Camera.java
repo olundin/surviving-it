@@ -3,6 +3,7 @@ package survivingit.scene;
 import survivingit.gameobjects.GameObject;
 import survivingit.gameobjects.GameObjectComparator;
 import survivingit.gameobjects.VisibleObject;
+import survivingit.graphics.Renderer;
 import survivingit.graphics.WorldRenderer;
 import survivingit.messaging.Message;
 import survivingit.scene.Scene;
@@ -68,13 +69,16 @@ public class Camera {
         );
     }
 
-    public List<PositionTile> getVisibleTiles(Scene scene) {
-        return scene.getPositionTilesInArea(
-                this.x - EDGE_PADDING,
-                this.y - EDGE_PADDING,
-                this.x + this.width + EDGE_PADDING,
-                this.y + this.height + EDGE_PADDING
-        );
+    public void renderVisibleTiles(Scene scene, WorldRenderer renderer) {
+        for (int tileY = (int)Math.floor(this.y - EDGE_PADDING); tileY < this.y + this.height + EDGE_PADDING; tileY++) {
+            for (int tileX = (int)Math.floor(this.x - EDGE_PADDING); tileX < this.x + this.width + EDGE_PADDING; tileX++) {
+                Tile tile = scene.getTileAt(tileX, tileY);
+                if (tile != null) {
+                    // Draw sprite at position relative to camera
+                    renderer.drawTile(tileX, tileY, tile, this);
+                }
+            }
+        }
     }
 
     public void update() {
