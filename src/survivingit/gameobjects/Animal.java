@@ -117,6 +117,13 @@ public abstract class Animal extends Creature {
         return this.viewDistance;
     }
 
+    /**
+     * Receives the entered message and reacts to it.
+     *
+     * The animal receives the message and acts differently based on what type of message it is.
+     * If the entered message is an Attack message then the animal takes damage equal to the message data.
+     * @param msg Message received by the animal.
+     */
     @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
