@@ -39,7 +39,7 @@ public abstract class Animal extends Creature {
      *                     viewdistance and the center of the square is the animal's position.
      * @param range double of the animal's performAttack range.
      */
-    public Animal(final double x, final double y, final Scene scene, final CreatureSprite sprites, final int maxHealth, final double moveSpeed,
+    protected Animal(final double x, final double y, final Scene scene, final CreatureSprite sprites, final int maxHealth, final double moveSpeed,
                   final int damage, final int alphaLevel, final double viewDistance, final double range) {
         super(x, y, scene, sprites, maxHealth, moveSpeed, damage, alphaLevel, range);
         this.path = new Stack<>();
@@ -69,7 +69,7 @@ public abstract class Animal extends Creature {
         }
         Point next = path.peek();
         Point current = new Point(this.x, this.y);
-        if (!Point.areWithin(next, current, 0.1)) {
+        if (!Point.areWithin(next, current, range)) {
             // Set direction to best direction to find target
             this.direction = Direction.fromAngle(Point.getAngle(new Point(this.x, this.y), next));
         } else {

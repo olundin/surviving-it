@@ -10,6 +10,19 @@ import survivingit.scene.Scene;
  */
 public class Penguin extends Animal {
 
+    private static final int MAX_HEALTH = 20;
+    private static final double MOVE_SPEED = 2;
+    private static final double SLIDE_MOVE_SPEED = 3.0;
+    private static final int DAMAGE = 2;
+    private static final int ALPHA_LEVEL = 5;
+    private static final double VIEW_DISTANCE = 10.0;
+    private static final double RANGE = 1.0;
+
+    private static final double COL_X = -0.2;
+    private static final double COL_Y = -0.35;
+    private static final double COL_WIDTH = 0.4;
+    private static final double COL_HEIGHT = 0.35;
+
     private CreatureSprite normal;
     private CreatureSprite sliding;
 
@@ -19,22 +32,21 @@ public class Penguin extends Animal {
      * @param y double val of the y position of the new Penguin object.
      */
     public Penguin(final double x, final double y, final Scene scene) {
-        super(
-                x,
-                y,
-                scene,
-                new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 43, 40),
-                20,
-                2.0,
-                2,
-                5,
-                10.0,
-                1.0
-        );
+        super(x,
+               y,
+               scene,
+               new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 48, 48),
+               MAX_HEALTH,
+               MOVE_SPEED,
+               DAMAGE,
+               ALPHA_LEVEL,
+               VIEW_DISTANCE,
+               RANGE);
+
+        this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
 
         this.normal = new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 48, 48);
         this.sliding = new CreatureSprite(SpriteSheet.PENGUIN, 144, 0, 48, 48);
-        this.setCollider(new Collider(-0.2, -0.35, 0.4, 0.35, false, this));
     }
 
     /**
@@ -47,7 +59,7 @@ public class Penguin extends Animal {
     public void update(double dt) {
         super.update(dt);
         // Set sprite to sliding if movespeed is over certain value
-        if (this.moveSpeed >= 3.0) {
+        if (this.moveSpeed >= SLIDE_MOVE_SPEED) {
             this.sprites = sliding;
         } else {
             this.sprites = normal;

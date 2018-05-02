@@ -17,11 +17,13 @@ import survivingit.util.Point;
  */
 public class ManhattanDistance implements AStarHeuristic<Point> {
 
+    private static final double REACHED_RANGE = 0.5;
+
     public double calculate(Point n1, Point n2) {
         return Math.abs(Math.hypot(n1.getX() - n2.getX(), n1.getY() - n2.getY()));
     }
 
     public boolean reached(Point src, Point dst) {
-        return Point.areWithin(src, dst, 0.5);
+        return Point.areWithin(src, dst, REACHED_RANGE);
     }
 }

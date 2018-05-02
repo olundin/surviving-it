@@ -4,6 +4,10 @@ import survivingit.graphics.Sprite;
 
 import java.util.*;
 
+/**
+ * Class for items.
+ * Items can be held by the player's inventory and have different effects.
+ */
 public class Item {
 
     private final ItemType itemType;

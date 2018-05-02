@@ -19,6 +19,8 @@ import survivingit.util.Point;
  */
 public class ChebyshevDistance implements AStarHeuristic<Point> {
 
+    private static final double REACHED_RANGE = 0.5;
+
     public double calculate(Point n1, Point n2) {
         double dx = Math.abs(n1.getX() - n2.getX());
         double dy = Math.abs(n1.getY() - n2.getY());
@@ -26,6 +28,6 @@ public class ChebyshevDistance implements AStarHeuristic<Point> {
     }
 
     public boolean reached(Point src, Point dst) {
-        return Point.areWithin(src, dst, 0.5);
-    }
+            return Point.areWithin(src, dst, REACHED_RANGE);
+        }
 }

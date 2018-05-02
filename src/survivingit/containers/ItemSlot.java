@@ -4,6 +4,10 @@ import survivingit.items.Item;
 import survivingit.items.ItemFactory;
 import survivingit.items.ItemType;
 
+/**
+ * Item slot class.
+ * Can fit one item.
+ */
 public class ItemSlot {
 
     private final ItemSlotType itemSlotType;
@@ -66,6 +70,6 @@ public class ItemSlot {
      * @return if the itemSlot is empty.
      */
     public boolean isEmpty() {
-        return this.getItem().getItemType() == ItemType.NONE;
+        return this.item.getItemType() == ItemType.NONE;
     }
 }

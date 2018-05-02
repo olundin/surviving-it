@@ -116,7 +116,7 @@ public class ItemContainer {
     /**
      * Returns a boolean if the itemSlot at the entered index is empty
      * @param index int of the
-     * @return
+     * @return Whether item slot is empty or not
      */
     public boolean isSlotEmpty(int index) {
         if (index < 0 || index >= this.size) {
