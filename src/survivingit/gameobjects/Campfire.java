@@ -8,9 +8,8 @@ import survivingit.messaging.MessageType;
 import survivingit.physics.Collider;
 
 /**
- * Class for a camp fire object that can be on fire which then heals gameObjects surrounding it.
- *
- *
+ * Class for a camp fire object that can be on fire which then heals gameObjects surrounding it, inherits from
+ * VisibleObject.
  */
 public class Campfire extends VisibleObject {
 
@@ -27,6 +26,11 @@ public class Campfire extends VisibleObject {
     private static final double HEAL_DELAY = 2.5;
     private static final double HEAL_RANGE = 2.5;
 
+    /**
+     * Creates a new Campfire object with the entered x and y position.
+     * @param x double val of the x position of the new Campfire object.
+     * @param y double val of the y position of the new Campfire object.
+     */
     public Campfire(double x, double y) {
         super(x, y, Sprite.CAMPFIRE);
         this.setCollider(new Collider(-0.4, -0.4, 0.8, 0.4, false, this));
@@ -43,10 +47,18 @@ public class Campfire extends VisibleObject {
         this.unlitSprite = Sprite.CAMPFIRE_UNLIT;
         this.timeSinceLastHeal = 0.0;
         this.litTime = 0.0;
+        this.maxLitTime = 0.0;
     }
 
+    /**
+     * Updates the campfire with the entered amount of passed time.
+     * @param dt double value of the amount of time that has passed.
+     */
     @Override
     public void update(double dt) {
+        if (dt < 0) {
+            throw new IllegalArgumentException("Negative update time entered");
+        }
         if (lit) {
             // Increase litTime
             litTime += dt;
@@ -70,25 +82,33 @@ public class Campfire extends VisibleObject {
             this.setSprite(unlitSprite);
         }
 
-
     }
 
+    /**
+     * Receives the entered message and reacts to it.
+     *
+     * The campfire receives the entered message and depending on the MessageType reacts to it. If the entered message
+     * is of MessageType IGNITE the fireplace is lit on fire with the message data being the amount of time the
+     * fireplace will burn.
+     * @param msg Message which the campfire recieves and reacts to.
+     */
     @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
         int data = msg.getData();
         switch(type) {
             case IGNITE:
-                this.lit = true;
-                this.maxLitTime = data;
-                break;
-            case ATTACK:
-                break;
-            case ITEM:
+                this.lightOnFire(data);
                 break;
             default:
                 break;
         }
+    }
+
+    private void lightOnFire(final int fireTime) {
+        this.lit = true;
+        this.litTime = 0.0;
+        this.maxLitTime = Math.max(this.maxLitTime, fireTime);
     }
 
 }
