@@ -6,6 +6,9 @@ import survivingit.scene.Tile;
 
 import java.util.List;
 
+/**
+ * Collider class. Used for stopping/detecting collisions.
+ */
 public class Collider {
 
     private double x; // deltaX relative to owner
@@ -18,6 +21,15 @@ public class Collider {
 
     private boolean passable; // Determines if collider can be trespassed or not
 
+    /**
+     * Creates a new collider.
+     * @param x Relative x to owner
+     * @param y Relative y to owner
+     * @param width Width of collider
+     * @param height Height of collider
+     * @param passable Is the collider passable?
+     * @param owner The owner of the collider
+     */
     public Collider(double x, double y, double width, double height, boolean passable, GameObject owner) {
         this.x = x;
         this.y = y;
@@ -27,10 +39,20 @@ public class Collider {
         this.owner = owner;
     }
 
+    /**
+     * Returns whether the collider collides with other (non passable)
+     * @param other The other collider
+     * @return Whether the colliders collide
+     */
     public boolean collidesWith(Collider other) {
-        return !this.passable && overlaps(other);
+        return !this.passable && !other.passable && overlaps(other);
     }
 
+    /**
+     * Returns whether the collider overlaps another collider.
+     * @param other The other collider
+     * @return Whether the colliders overlap
+     */
     public boolean overlaps(Collider other) {
         return  this.getWorldX() <= other.getWorldX() + other.width &&
                 other.getWorldX() <= this.getWorldX() + this.width &&
@@ -38,10 +60,20 @@ public class Collider {
                 other.getWorldY() <= this.getWorldY() + this.height;
     }
 
+    /**
+     * Returns whether the collider has a collision in scene
+     * @param scene The scene to check
+     * @return Whether a collision is occurring
+     */
     public boolean hasCollision(Scene scene) {
         return this.hasTileCollision(scene) || this.hasObjectCollision(scene);
     }
 
+    /**
+     * Returns whether the collider collides with any tiles in the scene
+     * @param scene The scene to check
+     * @return Whether a collision is occurring
+     */
     public boolean hasTileCollision(Scene scene) {
         if(this.passable) return false;
         List<Tile> collidingTiles = scene.getTilesInArea(
@@ -56,6 +88,11 @@ public class Collider {
         return false;
     }
 
+    /**
+     * Returns whether the collider collides with any gameobjects in the scene
+     * @param scene The scene to check
+     * @return Whether a collision is occurring
+     */
     public boolean hasObjectCollision(Scene scene) {
        List<GameObject> collidingObjects = scene.getObjectsInArea(
                this.getWorldX(), this.getWorldY(),
@@ -73,39 +110,74 @@ public class Collider {
        return false;
     }
 
-
+    /**
+     * Returns the relative x position of the collider to it's owner.
+     * @return Relative x to owner
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Returns the relative y position of the collider to it's owner.
+     * @return Relative y to owner
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * Returns the world x of the collider
+     * @return The world x of the collider
+     */
     public double getWorldX() {
         return owner.getX() + this.x;
     }
 
+    /**
+     * Returns the world y of the collider
+     * @return The world y of the collider
+     */
     public double getWorldY() {
         return owner.getY() + this.y;
     }
 
+    /**
+     * Returns the width of the collider
+     * @return The Width of the collider
+     */
     public double getWidth() {
         return width;
     }
 
+    /**
+     * Returns the height of the collider
+     * @return The height of the collider
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Returns whether the collider is passable
+     * @return Whether the collider is passable
+     */
     public boolean isPassable() {
         return this.passable;
     }
 
+    /**
+     * Sets the relative x of the collider
+     * @param x new X
+     */
     public void setX(double x) {
         this.x = x;
     }
 
+    /**
+     * Sets the relative y of the collider
+     * @param y new Y
+     */
     public void setY(double y) {
         this.y = y;
     }
