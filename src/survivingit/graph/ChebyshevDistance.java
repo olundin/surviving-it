@@ -42,5 +42,5 @@ public class ChebyshevDistance implements AStarHeuristic<Point> {
     public boolean reached(Point src, Point dst) {
         return Point.areWithin(src, dst, 0.5);
     }
-    
+
 }
