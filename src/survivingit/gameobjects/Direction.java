@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.Game;
 import survivingit.util.Maths;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -68,7 +69,7 @@ public enum Direction {
         this.deltaY = deltaY;
     }
 
-    private static final List<Direction> VALUES = List.of(values());
+    private static final List<Direction> VALUES = Arrays.asList(values());
     private static final int SIZE = VALUES.size();
 
     /**

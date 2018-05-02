@@ -1,8 +1,5 @@
 package survivingit.graphics;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Class for the animated sprites which handles animation.
  *
