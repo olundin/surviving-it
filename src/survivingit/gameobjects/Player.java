@@ -27,7 +27,7 @@ public class Player extends Creature implements Observable<Player> {
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
                 10,
-              Integer.MAX_VALUE,
+              Integer.MAX_VALUE/2,
                 1,
                 2);
 	    observers = new ArrayList<>();
@@ -76,8 +76,8 @@ public class Player extends Creature implements Observable<Player> {
     /**
      * Perform a player attack with either the equipped weapon or just the players bare hands in the direction of the
      * target cords.
-     * @param targetX double of the x position for the attack to be performed in.
-     * @param targetY double of the y position for the attack to be performed in.
+     * @param targetX double of the deltaX position for the attack to be performed in.
+     * @param targetY double of the deltaY position for the attack to be performed in.
      */
     public void playerAttack(final double targetX, final double targetY) {
         double angle = getAngleTo(targetX, targetY);

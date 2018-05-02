@@ -125,7 +125,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         double ppuY = camera.pixelsPerUnitY();
         Sprite sprite = object.getSprite();
 
-        // Object sprites are rendered centered in x and the sprite's bottom is as the objects y
+        // Object sprites are rendered centered in deltaX and the sprite's bottom is as the objects deltaY
         drawX -= (int)(ppuX * sprite.getWidth() / UNIT_SIZE)/2;
         drawY -= (int)(ppuY * sprite.getHeight() / UNIT_SIZE);
 

@@ -2,13 +2,20 @@ package survivingit.items;
 
 import survivingit.graphics.Sprite;
 
+/**
+ * Factory class for Items which creates ItemObjects entered ItemTypes (item IDs), adds the right components to that
+ * specific ItemType and then returns it.
+ */
 public abstract class ItemFactory {
 
+	/**
+	 * Flyweight pointer for NONE_ITEM used for empty item slots. Is stored as a public field to save memory usage.
+	 */
 	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.CAMPFIRE);
 
 	/**
 	 * Creates and returns a new Item object of the entered ItemType.
-	 * @param itemType to be created.
+	 * @param itemType ItemType enum value of which type of item to be created.
 	 * @return a new Item object of the entered ItemType.
 	 */
     public static Item createItem(ItemType itemType) {
@@ -20,7 +27,7 @@ public abstract class ItemFactory {
 			}
 			case BERRIES: {
 				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
-				berries.addEffect(new HealEffect(25, berries));
+				berries.addEffect(new HealEffect(25, 5, berries));
 				return berries;
 			}
 			case BOOTS: {
@@ -30,7 +37,7 @@ public abstract class ItemFactory {
 			}
 			case FLINT_AND_STEEL: {
 				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.CAMPFIRE);
-				flintAndSteel.addEffect(new IgnitionEffect(10, flintAndSteel));
+				flintAndSteel.addEffect(new IgniteEffect(10, 10, 4, 4, flintAndSteel));
 				return flintAndSteel;
 			}
 			case NONE: {

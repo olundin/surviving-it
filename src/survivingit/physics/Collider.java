@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Collider {
 
-    private double x; // x relative to owner
-    private double y; // y relative to owner
+    private double x; // deltaX relative to owner
+    private double y; // deltaY relative to owner
 
     private double width;
     private double height;

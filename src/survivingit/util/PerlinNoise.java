@@ -15,7 +15,7 @@ public class PerlinNoise {
     private static final Random RANDOM = new Random();
 
     /**
-     * Based on a point (x, y, z), return a value between -1 and 1
+     * Based on a point (deltaX, deltaY, z), return a value between -1 and 1
      * such that another point (x1, y1, z1) will return a value
      * close to the first one.
      * @param x X coordinate of the point

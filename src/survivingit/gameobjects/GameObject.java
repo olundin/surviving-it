@@ -1,6 +1,5 @@
 package survivingit.gameobjects;
 
-import survivingit.Game;
 import survivingit.messaging.Messagable;
 import survivingit.messaging.Message;
 import survivingit.physics.Collider;
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Abstract superclass for all GameObjects.
  *
- * Contains functionality and data about movement, positioning, collision which is essential for all game objects.
+ * Contains functionality and data concerning movement, positioning, collision which is essential for all game objects.
  * GameObject also has a field for the scene where it exists, which is utilised in subclasses where it is necessary to
  * be aware of their surroundings.
  */
@@ -34,9 +33,9 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Creates a new GameObject with the entered x and y coord.
-     * @param x double of the gameojects's initial x position.
-     * @param y double of the gameobjects's inital y position.
+     * Creates a new GameObject with the entered deltaX and deltaY coord.
+     * @param x double of the gameojects's initial deltaX position.
+     * @param y double of the gameobjects's inital deltaY position.
      */
     public GameObject(final double x, final double y) {
         this.x = x;
@@ -46,25 +45,25 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Returns a double of the the gameObject's x position.
-     * @return double of the gameObject's x position.
+     * Returns a double of the the gameObject's deltaX position.
+     * @return double of the gameObject's deltaX position.
      */
     public double getX() {
         return this.x;
     }
 
     /**
-     * Returns a double of the the gameObject's x position.
-     * @return double of the gameObject's x position.
+     * Returns a double of the the gameObject's deltaX position.
+     * @return double of the gameObject's deltaX position.
      */
     public double getY() {
         return this.y;
     }
 
     /**
-     * Sets the gameObject's position to the entered x and y coordinate.
-     * @param x double of the x position to be set.
-     * @param y double of the y position to be set.
+     * Sets the gameObject's position to the entered deltaX and deltaY coordinate.
+     * @param x double of the deltaX position to be set.
+     * @param y double of the deltaY position to be set.
      */
     public void setPos(final double x, final double y) {
         this.x = x;
@@ -72,12 +71,12 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Attempts to move the gameObject with the entered dx and dy changes in x and y coordinate.
+     * Attempts to move the gameObject with the entered dx and dy changes in deltaX and deltaY coordinate.
      *
      * If any of the dx and dy changes that are attempted causes a collisions with the gameObject's collider thgen the
      * change is reverted.
-     * @param dx double of the change in x coordinate to be attempted.
-     * @param dy double of the change in y coordinate to be attempted.
+     * @param dx double of the change in deltaX coordinate to be attempted.
+     * @param dy double of the change in deltaY coordinate to be attempted.
      */
     public void move(final double dx, final double dy) {
         // Try horizontal movement
@@ -94,6 +93,10 @@ public abstract class GameObject implements Messagable {
         }
     }
 
+    /**
+     * Returns a boolean if the gameObject is alive.
+     * @return if the gameObject is alive.
+     */
     public boolean isAlive() {
         return this.alive;
     }
@@ -133,7 +136,7 @@ public abstract class GameObject implements Messagable {
         }
     }
 
-    protected void sendMesageToCreaturesInArea(final Message message, final double width, final double height) {
+    protected void sendMessageToCreaturesInArea(final Message message, final double width, final double height) {
         for (Creature creature : creaturesInArea(width, height)) {
             creature.receiveMessage(message);
         }

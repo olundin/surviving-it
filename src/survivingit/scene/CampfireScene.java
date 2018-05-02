@@ -18,11 +18,8 @@ public class CampfireScene extends Scene {
         for(double x = 0.0; x < 50; x += 0.25) {
             for(double y = 0.0; y < 50; y += 0.25) {
                 Campfire campfire = new Campfire(x, y);
-                campfire.setLit(true);
                 this.add(campfire);
-
             }
         }
     }
-
 }
