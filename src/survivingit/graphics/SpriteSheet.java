@@ -77,26 +77,26 @@ public final class SpriteSheet {
      * Creates a new SpriteSheet object with the image of the entered path.
      * @param path String of the path for the image of the new SpriteSheet object.
      */
-    private SpriteSheet(String path) {
+    private SpriteSheet(String fileName) {
         // Reads width and height from image itself
         try {
-            this.image = ImageIO.read(new File("res/spritesheets/", path));
+            this.image = ImageIO.read(SpriteSheet.class.getResource("/resources/" + fileName));
             this.width = image.getWidth();
             this.height = image.getHeight();
         } catch (IOException e)  {
-            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", path);
+            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", fileName);
             System.exit(-1);
         }
     }
 
-    private SpriteSheet(String path, int width, int height) {
+    private SpriteSheet(String fileName, int width, int height) {
         // Take width and height as parameters, to make a spritsheet that only contains part of spritesheet
         try {
-            this.image = ImageIO.read(new File("res/spritesheets/", path));
+            this.image = ImageIO.read(SpriteSheet.class.getResource("/resources/" + fileName));
             this.width = width;
             this.height = height;
         } catch (IOException e)  {
-            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", path);
+            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", fileName);
             System.exit(-1);
         }
     }

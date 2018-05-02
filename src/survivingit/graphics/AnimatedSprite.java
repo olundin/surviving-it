@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * oscillation. Main usage of the AnimatedSprite is the getSprite() method that returns the current Sprite for rendering.
  */
 public class AnimatedSprite {
-    
+
     private enum AnimationDirection {
         FORWARDS(1),
         BACKWARDS(-1);
