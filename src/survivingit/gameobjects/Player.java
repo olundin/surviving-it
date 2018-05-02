@@ -34,7 +34,7 @@ public class Player extends Creature implements Observable<Player> {
     public Player(final double x, final double y) {
 	    super(x,
               y,
-              new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
+              new CreatureSprite(SpriteSheet.PLAYER, 0, 0, 24, 52),
               50,
                 10,
               Integer.MAX_VALUE/2,
