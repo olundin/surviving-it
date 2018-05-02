@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Abstract superclass for all GameObjects.
  *
- * Contains functionality and data concerning movement, positioning, collision which is essential for all game objects.
+ * Contains functionality and data concerning movement, positioning, and collision which is essential for all game objects.
  * GameObject also has a field for the scene where it exists, which is utilised in subclasses where it is necessary to
  * be aware of their surroundings.
  */
@@ -104,37 +104,6 @@ public abstract class GameObject implements Messagable {
      */
     public abstract void update(double dt);
 
-    protected List<GameObject> gameObjectsInArea(final double width, final double height) {
-        List<GameObject> gameObjects =  this.scene.getObjectsInArea(x - width/2, y - height/2,
-                x + width/2, y + height/2);
-        if (gameObjects.contains(this)) {
-            gameObjects.remove(this);
-        }
-        return gameObjects;
-    }
-
-    protected List<Creature> creaturesInArea(final double width, final double height) {
-        List<Creature> creatures = new ArrayList<>();
-        for (GameObject gameObject : gameObjectsInArea(width, height)) {
-            if (gameObject instanceof Creature) {
-                creatures.add((Creature) gameObject);
-            }
-        }
-        return creatures;
-    }
-
-    protected void sendMessageToGameObjectsInArea(final Message message, final double width, final double height) {
-        for (GameObject gameObject : gameObjectsInArea(width, height)) {
-            gameObject.receiveMessage(message);
-        }
-    }
-
-    protected void sendMessageToCreaturesInArea(final Message message, final double width, final double height) {
-        for (Creature creature : creaturesInArea(width, height)) {
-            creature.receiveMessage(message);
-        }
-    }
-
     /**
      * Sets the gameObject's Scene to the entered Scene.
      * @param scene Scene to be set for the gameObject.
@@ -165,5 +134,36 @@ public abstract class GameObject implements Messagable {
      */
     public void setCollider(Collider col) {
         this.collider = col;
+    }
+
+    protected List<GameObject> gameObjectsInArea(final double width, final double height) {
+        List<GameObject> gameObjects =  this.scene.getObjectsInArea(x - width/2, y - height/2,
+                x + width/2, y + height/2);
+        if (gameObjects.contains(this)) {
+            gameObjects.remove(this);
+        }
+        return gameObjects;
+    }
+
+    protected List<Creature> creaturesInArea(final double width, final double height) {
+        List<Creature> creatures = new ArrayList<>();
+        for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            if (gameObject instanceof Creature) {
+                creatures.add((Creature) gameObject);
+            }
+        }
+        return creatures;
+    }
+
+    protected void sendMessageToGameObjectsInArea(final Message message, final double width, final double height) {
+        for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            gameObject.receiveMessage(message);
+        }
+    }
+
+    protected void sendMessageToCreaturesInArea(final Message message, final double width, final double height) {
+        for (Creature creature : creaturesInArea(width, height)) {
+            creature.receiveMessage(message);
+        }
     }
 }

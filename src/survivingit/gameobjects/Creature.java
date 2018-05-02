@@ -10,6 +10,8 @@ import survivingit.scene.Scene;
  *
  * Contains data and functionality concerning health, movement and interaction with other gameObjects/creatures such as
  * performing attacks and igniting fireplaces.
+ *
+ * @see VisibleObject
  */
 public abstract class Creature extends VisibleObject {
 

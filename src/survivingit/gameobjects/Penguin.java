@@ -6,7 +6,11 @@ import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 /**
- * Class for the Penguin animal, inherits from Animal.
+ * Class for the Penguin animal, inherits almost all behaviour from Animal.
+ *
+ * Contains special sliding behaviour which changes the rendering of the Penguin if it reaches a high enough speed.
+ *
+ * @see Animal
  */
 public class Penguin extends Animal {
 
