@@ -1,6 +1,5 @@
 package survivingit.scene;
 
-import survivingit.graphics.AnimatedSprite;
 import survivingit.graphics.Sprite;
 
 /**

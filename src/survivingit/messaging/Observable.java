@@ -2,10 +2,10 @@ package survivingit.messaging;
 
 /**
  * An observable object, observed by an observer.
+ * Follows the observer pattern.
  * @param <T> The object that is observed
  *
  * @see Observer
- * @see java.util.Observable
  */
 public interface Observable<T> {
 

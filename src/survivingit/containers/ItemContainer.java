@@ -40,6 +40,7 @@ public class ItemContainer {
         }
 
         ItemSlot emptySlot = this.getFirstEmptySlot();
+        //noinspection ConstantConditions
         emptySlot.setItem(item);
         usedSlots++;
     }

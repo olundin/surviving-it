@@ -3,8 +3,6 @@ package survivingit.gameobjects;
 import survivingit.Game;
 import survivingit.util.Maths;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

@@ -41,6 +41,7 @@ public class StateMachine<O> {
             currentState.exit(owner);
         }
 
+        //noinspection ConstantConditions
         if(newState != null) {
             newState.enter(owner);
         }

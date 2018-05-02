@@ -10,6 +10,7 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise (Wikipedia)</a>
  */
 
+@SuppressWarnings("ALL")
 public final class PerlinNoise {
 
     private static final Random RANDOM = new Random();

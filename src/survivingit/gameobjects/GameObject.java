@@ -107,9 +107,7 @@ public abstract class GameObject implements Messagable {
     protected List<GameObject> gameObjectsInArea(final double width, final double height) {
         List<GameObject> gameObjects =  this.scene.getObjectsInArea(x - width/2, y - height/2,
                 x + width/2, y + height/2);
-        if (gameObjects.contains(this)) {
-            gameObjects.remove(this);
-        }
+        gameObjects.remove(this);
         return gameObjects;
     }
 
