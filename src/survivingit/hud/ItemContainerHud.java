@@ -33,13 +33,13 @@ public class ItemContainerHud extends HudElement {
 
     /**
      * Creates a new Item container hud element
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param itemContainer
-     * @param itemsPerRow
-     * @param visible
+     * @param x X position of element, percentage of screen size
+     * @param y Y position of element, percentage of screen size
+     * @param width Width of element, percentage of screen size
+     * @param height Height of element, percentage of screen size
+     * @param itemContainer Container
+     * @param itemsPerRow Items per row
+     * @param visible Visible
      */
     public ItemContainerHud(double x, double y, double width, double height, ItemContainer itemContainer,
                             int itemsPerRow, boolean visible) {
@@ -51,8 +51,8 @@ public class ItemContainerHud extends HudElement {
     }
 
     @Override
-    public void render(HudRenderer hudRenderer) {
-        hudRenderer.drawItemContainer(this);
+    public void render(HudRenderer renderer) {
+        renderer.drawItemContainer(this);
     }
 
     public ItemContainer getItemContainer() {

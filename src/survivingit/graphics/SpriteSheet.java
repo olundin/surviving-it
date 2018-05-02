@@ -103,13 +103,13 @@ public class SpriteSheet {
      * @param nY int value of number of relevant Sprites in the y dimension in the SpriteSheet.
      * @return array representation of the relevant Sprites in the SpriteSheet.
      */
-    public static Sprite[] toArray(SpriteSheet spriteSheet, int startX, int startY, int spriteWidth,
+    public Sprite[] toArray(int startX, int startY, int spriteWidth,
                                         int spriteHeight, int nX, int nY) {
         Sprite[] sprites = new Sprite[nX * nY];
         for (int y = 0; y < nY; y++) {
             for (int x = 0; x < nX; x++) {
                 sprites[x + y * nX] = new Sprite(x * spriteWidth + startX, y * spriteHeight + startY,
-                        spriteWidth, spriteHeight, spriteSheet);
+                        spriteWidth, spriteHeight, this);
             }
         }
         return sprites;

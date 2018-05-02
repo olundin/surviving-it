@@ -22,31 +22,31 @@ public class Sprite {
     /**
      * Static array of Sprites for snow tiles.
      */
-    public static final Sprite[] SNOW = SpriteSheet.toArray(SpriteSheet.TILES, 0, 0, 32,
+    public static final Sprite[] SNOW = SpriteSheet.TILES.toArray(0, 0, 32,
             32, 3, 3);
 
     /**
      * Static array of Sprites for rock tiles.
      */
-    public static final Sprite[] ROCK = SpriteSheet.toArray(SpriteSheet.TILES, 96, 0, 32,
+    public static final Sprite[] ROCK = SpriteSheet.TILES.toArray(96, 0, 32,
             32, 3, 3);
 
     /**
      * Static array of Sprites for ice tiles.
      */
-    public static final Sprite[] ICE =  SpriteSheet.toArray(SpriteSheet.TILES, 192, 0, 32,
+    public static final Sprite[] ICE =  SpriteSheet.TILES.toArray(192, 0, 32,
             32, 3, 3);
 
     /**
      * Static array of Sprites for water tiles.
      */
-    public static final Sprite[] WATER = SpriteSheet.toArray(SpriteSheet.TILES, 288, 0, 32,
+    public static final Sprite[] WATER = SpriteSheet.TILES.toArray(288, 0, 32,
             32, 3, 3);
 
     /**
      * Static array of Sprites for void tiles.
      */
-    public static final Sprite[] VOID = SpriteSheet.toArray(SpriteSheet.TILES, 384, 0, 32,
+    public static final Sprite[] VOID = SpriteSheet.TILES.toArray(384, 0, 32,
             32, 3, 3);
 
     /**
