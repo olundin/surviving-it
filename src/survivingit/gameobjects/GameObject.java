@@ -137,7 +137,7 @@ public abstract class GameObject implements Messagable {
         }
     }
 
-    protected void sendMesageToCreaturesInArea(final Message message, final double width, final double height) {
+    protected void sendMessageToCreaturesInArea(final Message message, final double width, final double height) {
         for (Creature creature : creaturesInArea(width, height)) {
             creature.receiveMessage(message);
         }
