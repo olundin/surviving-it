@@ -23,7 +23,7 @@ public class TileGroupGraph implements Graph<TileGroup> {
     public boolean addNode(TileGroup node) {
         if(connections.containsKey(node)) return false;
 
-        connections.put(node, new HashMap<>());
+        connections.put(node, new HashMap<TileGroup, Double>());
         return true;
     }
 

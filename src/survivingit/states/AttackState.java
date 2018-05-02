@@ -7,20 +7,38 @@ import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.util.Point;
 
+/**
+ * Attack state for animals. Given a target, performs an attack on
+ * it and then backs off.
+ */
 public class AttackState implements State<Animal> {
 
     public GameObject target; // Setting this is optional. When set, the performAttack will be performed to this object only
     private boolean targetAttacked;
 
+    /**
+     * Creates a new attack state with given target
+     * @param target The target to attack
+     */
     public AttackState(GameObject target) {
         this.target = target;
         targetAttacked = false;
     }
 
+    /**
+     * Function called when the State is entered by the entered object.
+     * @param object object that the State is bound to.
+     */
     @Override
     public void enter(Animal object) {
     }
 
+    /**
+     * Update function that is called each gametick and updates the State
+     * @param dt Time since last gametick
+     * @param object Object to update with state
+     * @return State to use for next update
+     */
     @Override
     public State<Animal> update(double dt, Animal object) {
         if(target == null) {
@@ -45,6 +63,7 @@ public class AttackState implements State<Animal> {
 
             if (Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Target almost reached. Perform performAttack. Then back off
+                // TODO: Make object attack target using its own method
                 target.receiveMessage(new Message(MessageType.ATTACK, object.getDamage()));
                 targetAttacked = true;
             }
@@ -57,6 +76,10 @@ public class AttackState implements State<Animal> {
         return this;
     }
 
+    /**
+     * Function called when the State is entered by the entered object.
+     * @param object object that the State is bound to.
+     */
     @Override
     public void exit(Animal object) {
 
