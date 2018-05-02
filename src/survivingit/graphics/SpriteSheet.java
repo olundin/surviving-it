@@ -5,7 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SpriteSheet {
+/**
+ * A spritesheet is a larger image that can be clipped by sprites to create smaller ones.
+ */
+public final class SpriteSheet {
 
     /**
      * Static SpriteSheet for Player sprites.

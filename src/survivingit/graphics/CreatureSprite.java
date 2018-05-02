@@ -19,6 +19,8 @@ public class CreatureSprite {
 
     private AnimatedSprite current;
 
+    private static final double INITIAL_FRAME_LENGTH = 0.2;
+
     /**
      * Creates a new CreatureSprite object with the entered SpriteSheet, startX, startY, spriteWidth and spriteHeight.
      * @param spriteSheet SpriteSheet for the CreatureSprite that consists of 3 by 4 sprites each of equal size.
@@ -31,13 +33,13 @@ public class CreatureSprite {
         // spriteSheet is required to consist of 3*4 sprites, where each row contains 3 frames.
         // Row 1 is the animation for walking down, row 2 = left, row 3 = right and row 4 = up
         this.left = new AnimatedSprite(spriteSheet.toArray(startX, startY, spriteWidth, spriteHeight,
-                3, 1), 0.2);
+                3, 1), INITIAL_FRAME_LENGTH);
         this.up = new AnimatedSprite(spriteSheet.toArray(startX, startY + spriteHeight, spriteWidth,
-                spriteHeight, 3, 1), 0.2);
+                spriteHeight, 3, 1), INITIAL_FRAME_LENGTH);
         this.right = new AnimatedSprite(spriteSheet.toArray(startX, startY + 2*spriteHeight,
-                spriteWidth, spriteHeight, 3, 1), 0.2);
+                spriteWidth, spriteHeight, 3, 1), INITIAL_FRAME_LENGTH);
         this.down = new AnimatedSprite(spriteSheet.toArray(startX, startY + 3*spriteHeight,
-                spriteWidth, spriteHeight, 3, 1), 0.2);
+                spriteWidth, spriteHeight, 3, 1), INITIAL_FRAME_LENGTH);
 
         // Make all animated sprites oscillate (for correct walking animation)
         this.left.setOscillating(true);
