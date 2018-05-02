@@ -1,7 +1,5 @@
 package survivingit.graph;
 
-import survivingit.util.Point;
-
 /**
  * Interface for heuristics usable by A* implementation.
  *

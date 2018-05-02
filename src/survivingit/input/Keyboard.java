@@ -1,7 +1,6 @@
 package survivingit.input;
 
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 /**

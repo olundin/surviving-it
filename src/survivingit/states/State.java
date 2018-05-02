@@ -1,7 +1,5 @@
 package survivingit.states;
 
-import survivingit.gameobjects.GameObject;
-
 /**
  * Interface class for a State used in a StateMachine.
  * @param <O> Class for which State is bound to.

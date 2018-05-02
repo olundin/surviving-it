@@ -1,7 +1,6 @@
 package survivingit.states;
 
 import survivingit.gameobjects.Animal;
-import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.GameObject;
 import survivingit.util.Point;
 

@@ -87,7 +87,7 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(Double.valueOf(x), Double.valueOf(y));
     }
 
     @Override

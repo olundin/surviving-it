@@ -39,7 +39,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     private int height;
 
     private BufferStrategy bufferStrategy;
-    private Graphics graphics;
+    private Graphics graphics = null;
 
     /**
      * Creates a new Renderer object with the entered width and height of the Renderer's canvas.

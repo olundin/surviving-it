@@ -3,9 +3,6 @@ package survivingit.scene;
 import survivingit.Game;
 import survivingit.graphics.Sprite;
 
-import java.util.Random;
-import java.util.Set;
-
 /**
  * A group of tiles that belong together.
  * Usually contains a single plain tile that is the normal tile in the group,

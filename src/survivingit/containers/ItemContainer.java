@@ -1,7 +1,6 @@
 package survivingit.containers;
 
 import survivingit.items.Item;
-import survivingit.items.ItemType;
 
 /**
  * Created by AngusLothian on 2018-03-23.

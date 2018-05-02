@@ -67,7 +67,7 @@ public final class SpriteSheet {
 
     private int width;
     private int height;
-    private BufferedImage image;
+    private BufferedImage image = null;
 
     /*
      * Creates a new SpriteSheet object with the image of the entered path.

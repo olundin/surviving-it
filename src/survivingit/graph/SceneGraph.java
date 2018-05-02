@@ -1,7 +1,6 @@
 package survivingit.graph;
 
 import survivingit.scene.Scene;
-import survivingit.util.Maths;
 import survivingit.util.Point;
 
 import java.util.HashSet;

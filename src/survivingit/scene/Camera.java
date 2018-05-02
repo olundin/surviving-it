@@ -4,7 +4,6 @@ import survivingit.gameobjects.GameObject;
 import survivingit.graphics.WorldRenderer;
 import survivingit.util.Point;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

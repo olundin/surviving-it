@@ -12,7 +12,7 @@ import java.util.List;
  * Stores deltaX and deltaY in the enum values for more readable code.
  */
 public enum Direction {
-
+    
     LEFT(-1, 0),
     UP_LEFT(-Maths.DIAGONAL_SPEED, -Maths.DIAGONAL_SPEED),
     UP(0, -1),
@@ -43,7 +43,7 @@ public enum Direction {
         this.deltaY = deltaY;
     }
 
-    private static final List<Direction> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final List<Direction> VALUES = List.of(values());
     private static final int SIZE = VALUES.size();
 
     /**

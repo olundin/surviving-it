@@ -23,14 +23,14 @@ public class TileGroupGraph implements Graph<TileGroup> {
     public boolean addNode(TileGroup node) {
         if(connections.containsKey(node)) return false;
 
-        connections.put(node, new HashMap<TileGroup, Double>());
+        connections.put(node, new HashMap<>());
         return true;
     }
 
     public boolean addEdge(TileGroup from, TileGroup to, double weight) {
         if(!connections.containsKey(from) || !connections.containsKey(to)) return false;
 
-        connections.get(from).put(to, weight);
+        connections.get(from).put(to, Double.valueOf(weight));
         return false;
     }
 
