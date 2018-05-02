@@ -1,5 +1,11 @@
 package survivingit.graphics;
 
+/**
+ * Class for the animated sprites which handles animation.
+ *
+ * Contains data and functionality for changing the flow of the animation by pausing, playing, restarting and allowing
+ * oscillation. Main usage of the AnimatedSprite is the getSprite() method that returns the current Sprite for rendering.
+ */
 public class AnimatedSprite {
 
     private enum AnimationDirection {
@@ -41,6 +47,10 @@ public class AnimatedSprite {
         this.frames = sprites;
     }
 
+    /**
+     * Updates the AnimatedSprite object by the entered amount of passed time.
+     * @param dt double val of passed time.
+     */
     public void update(double dt) {
         timer += dt;
 
@@ -70,35 +80,67 @@ public class AnimatedSprite {
         }
     }
 
+    /**
+     * Starts the AnimatedSprites object's animation.
+     */
     public void start() {
         this.paused = false;
     }
 
+    /**
+     * Stops the AnimatedSprites objects's animation.
+     */
     public void stop() {
         this.paused = true;
     }
 
+    /**
+     * Restarts the AnimatedSprites object's animation.
+     */
     public void restart() {
         this.paused = false;
         this.frameIndex = 0;
     }
 
+    /**
+     * Sets the AnimatedSprites object's animation direction.
+     * @param forwards boolean if the animation direction is to be set forwards.
+     */
     public void setDirection(boolean forwards) {
         this.direction = forwards ? AnimationDirection.FORWARDS : AnimationDirection.BACKWARDS;
     }
 
+    /**
+     * Returns the current Sprite of the AnimatedSprite.
+     * @return the current Sprite of the AnimatedSprite.
+     */
     public Sprite getSprite() {
         return frames[frameIndex];
     }
 
+    /**
+     * Sets if the AnimatedSprite is oscillating or not.
+     * @param oscillating boolean to set if the AnimatedSprite is oscillating or not.
+     */
     public void setOscillating(boolean oscillating) {
         this.oscillating = oscillating;
     }
 
+    /**
+     * Sets the current frame index to the entered value.
+     * @param frame int value to set the frameIndex to.
+     */
     public void setFrame(int frame) {
+        if (frame < 0 || frame >= frames.length) {
+            throw new IllegalArgumentException("Entered frame index out of bound.");
+        }
         this.frameIndex = frame;
     }
 
+    /**
+     * Sets the frame length to the value.
+     * @param frameLength double value to set the frame length to.
+     */
     public void setFrameLength(double frameLength) {
         this.frameLength = frameLength;
     }
