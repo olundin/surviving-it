@@ -126,11 +126,11 @@ public abstract class Scene {
 
     private boolean isObjectInArea(GameObject gameObject, double startX, double startY, double endX, double endY) {
         // Returns true if object's collider is within area
-        Collider col = gameObject.getCollider();
-        double x1 = col.getWorldX();
-        double y1 = col.getWorldY();
-        double x2 = x1 + col.getWidth();
-        double y2 = y1 + col.getHeight();
+        Collider collider = gameObject.getCollider();
+        double x1 = collider.getWorldX();
+        double y1 = collider.getWorldY();
+        double x2 = x1 + collider.getWidth();
+        double y2 = y1 + collider.getHeight();
 
         return x1 <= endX && startX <= x2 && y1 <= endY && startY <= y2;
     }

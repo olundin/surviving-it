@@ -24,8 +24,8 @@ public class MeleeAttackEffect extends AttackEffect {
      * @param attacker Creature who's performAttack method is used.
      */
     @Override
-    public void attack(Creature attacker) {
-        attacker.performAttack(damage, range);
+    public void attack(Creature attacker, double angle) {
+        attacker.performAttack(attacker.getDamage() + damage, Math.max(attacker.getRange(), this.range), angle);
     }
 
 }
