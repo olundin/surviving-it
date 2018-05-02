@@ -7,6 +7,11 @@ import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.physics.Collider;
 
+/**
+ * Class for a camp fire object that can be on fire which then heals gameObjects surrounding it.
+ *
+ *
+ */
 public class Campfire extends VisibleObject {
 
     private static final int HEAL_AMOUNT = 1;
@@ -17,10 +22,10 @@ public class Campfire extends VisibleObject {
 
     private double timeSinceLastHeal;
     private double litTime;
+    private double maxLitTime;
 
     private static final double HEAL_DELAY = 2.5;
     private static final double HEAL_RANGE = 2.5;
-    private static final double MAX_LIT_TIME = 10.0;
 
     public Campfire(double x, double y) {
         super(x, y, Sprite.CAMPFIRE);
@@ -46,7 +51,7 @@ public class Campfire extends VisibleObject {
             // Increase litTime
             litTime += dt;
             // Check if fire should be extinguished
-            if (litTime >= MAX_LIT_TIME) {
+            if (litTime >= maxLitTime) {
                 this.lit = false;
                 litTime = 0.0;
             }
@@ -55,7 +60,7 @@ public class Campfire extends VisibleObject {
             timeSinceLastHeal += dt;
             if (timeSinceLastHeal >= HEAL_DELAY) {
                 // A heal should be performed
-                sendMesageToCreaturesInArea(new Message(MessageType.HEAL, HEAL_AMOUNT), 2, 2);
+                sendMessageToCreaturesInArea(new Message(MessageType.HEAL, HEAL_AMOUNT), HEAL_RANGE, HEAL_RANGE);
                 timeSinceLastHeal = 0.0;
             }
 
@@ -73,6 +78,10 @@ public class Campfire extends VisibleObject {
         MessageType type = msg.getType();
         int data = msg.getData();
         switch(type) {
+            case IGNITE:
+                this.lit = true;
+                this.maxLitTime = data;
+                break;
             case ATTACK:
                 break;
             case ITEM:

@@ -27,7 +27,7 @@ public class Player extends Creature implements Observable<Player> {
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
                 10,
-              Integer.MAX_VALUE,
+              Integer.MAX_VALUE/2,
                 1,
                 2);
 	    observers = new ArrayList<>();

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Abstract superclass for all GameObjects.
  *
- * Contains functionality and data about movement, positioning, collision which is essential for all game objects.
+ * Contains functionality and data concerning movement, positioning, collision which is essential for all game objects.
  * GameObject also has a field for the scene where it exists, which is utilised in subclasses where it is necessary to
  * be aware of their surroundings.
  */
