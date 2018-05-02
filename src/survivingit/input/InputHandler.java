@@ -8,6 +8,7 @@ import survivingit.hud.Hud;
 import survivingit.util.Maths;
 import survivingit.util.Point;
 
+
 public class InputHandler {
 
     private Keyboard keyboard;
