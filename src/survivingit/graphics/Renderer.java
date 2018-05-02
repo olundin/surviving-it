@@ -91,10 +91,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                 y,
                 x + width,
                 y + height,
-                sprite.getX(),
-                sprite.getY(),
-                sprite.getX() + sprite.getWidth(),
-                sprite.getY() + sprite.getHeight(),
+                sprite.getStartX(),
+                sprite.getStartY(),
+                sprite.getStartX() + sprite.getWidth(),
+                sprite.getStartY() + sprite.getHeight(),
                 null
         );
     }
