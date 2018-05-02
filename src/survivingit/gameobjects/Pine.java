@@ -12,6 +12,7 @@ public class Pine extends VisibleObject {
         this.setCollider(new Collider(-0.3, -1.0, 0.6, 1.0, false, this));
     }
 
+    @Override
     public void receiveMessage(Message msg) {
         MessageType type = msg.getType();
         int data = msg.getData();

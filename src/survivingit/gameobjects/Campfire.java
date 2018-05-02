@@ -82,4 +82,8 @@ public class Campfire extends VisibleObject {
         }
     }
 
+    public void setLit(boolean lit) {
+        this.lit = lit;
+    }
+
 }

@@ -7,10 +7,7 @@ import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
-import survivingit.scene.Camera;
-import survivingit.scene.Scene;
-import survivingit.scene.TestScene;
-import survivingit.scene.Tile;
+import survivingit.scene.*;
 
 /**
  * Game is the main class.

@@ -7,23 +7,42 @@ import survivingit.util.Point;
 
 import java.util.Stack;
 
+/**
+ * Follow state for animals.
+ * Makes the animal follow given target around.
+ */
 public class FollowState implements State<Animal> {
 
     private GameObject target;
     private double originalSpeed;
     private static final double SPEED_FACTOR = 2.0;
 
-
+    /**
+     * Creates a new FollowState with given target
+     * @param target The GameObject to follow
+     */
     public FollowState(GameObject target) {
         this.target = target;
     }
 
+    /**
+     * Function called when the State is entered by the entered object.
+     * @param object object that the State is bound to.
+     */
+    @Override
     public void enter(Animal object) {
         // Temporarily increase movespeed
         originalSpeed = object.getMoveSpeed();
         object.setMoveSpeed(originalSpeed*SPEED_FACTOR);
     }
 
+    /**
+     * Update function that is called each gametick and updates the State
+     * @param dt Time since last gametick
+     * @param object Object to update with state
+     * @return State to use for next update
+     */
+    @Override
     public State<Animal> update(double dt, Animal object) {
 
         if(target == null) {
@@ -61,6 +80,11 @@ public class FollowState implements State<Animal> {
         return this;
     }
 
+    /**
+     * Function called when the State is entered by the entered object.
+     * @param object object that the State is bound to.
+     */
+    @Override
     public void exit(Animal object) {
         object.setMoveSpeed(originalSpeed);
     }

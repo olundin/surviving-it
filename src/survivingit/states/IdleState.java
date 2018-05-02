@@ -28,16 +28,18 @@ public class IdleState implements State<Animal> {
      * State entry point.
      * @param object object that the State is bound to.
      */
+    @Override
     public void enter(Animal object) {
         object.setDirection(Direction.NONE);
     }
 
     /**
-     *
+     * Update function that is called each gametick and updates the State
      * @param dt
      * @param object
      * @return
      */
+    @Override
     public State<Animal> update(double dt, Animal object) {
         // Try to find targets
         GameObject target = object.findTarget();
@@ -66,6 +68,11 @@ public class IdleState implements State<Animal> {
         return this;
     }
 
+    /**
+     * Function called when the State is entered by the entered object.
+     * @param object object that the State is bound to.
+     */
+    @Override
     public void exit(Animal object) {
 
     }

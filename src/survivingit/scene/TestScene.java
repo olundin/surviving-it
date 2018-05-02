@@ -4,8 +4,17 @@ import survivingit.gameobjects.*;
 import survivingit.items.ItemFactory;
 import survivingit.items.ItemType;
 
+/**
+ * Scene used for testing.
+ *
+ * @see Scene
+ */
 public class TestScene extends Scene {
 
+    /**
+     * Creates a new test scene with the given camera.
+     * @param camera The camera to see the scene.
+     */
     public TestScene(Camera camera) {
         super(camera, 256, 256);
 
@@ -16,7 +25,7 @@ public class TestScene extends Scene {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
         }
-        addPlayer(player);
+        setPlayer(player);
 
         // Generate tiles, trees, e.t.c.
         SceneGenerator generator = new SceneGenerator(2.0,2.0,0.5,3.0);
