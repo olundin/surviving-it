@@ -17,6 +17,8 @@ import survivingit.util.Point;
  */
 public class ManhattanDistance implements AStarHeuristic<Point> {
 
+    private static final double REACHED_RANGE = 0.5;
+
     /**
      * Calculates and returns the Manhattan distance value between two Point objects.
      * @param n1 Point object to calculate the Manhattan distance from.
@@ -36,6 +38,7 @@ public class ManhattanDistance implements AStarHeuristic<Point> {
      */
     @Override
     public boolean reached(Point src, Point dst) {
-        return Point.areWithin(src, dst, 0.5);
+        return Point.areWithin(src, dst, REACHED_RANGE);
     }
+    
 }

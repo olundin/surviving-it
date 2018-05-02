@@ -52,6 +52,9 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.width = width;
         this.height = height;
 
+        this.bufferStrategy = this.getBufferStrategy();
+
+
         this.setSize(width, height);
         this.setVisible(true);
         this.setFocusable(false);

@@ -56,7 +56,8 @@ public final class PerlinNoise {
                 v = h<4 ? y : h==12||h==14 ? x : z;
         return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
     }
-    private static final int p[] = new int[512], permutation[] = { 151,160,137,91,90,15,
+    private static final int[] p = new int[512];
+    private static final int[] PERMUTATION = new int[] { 151,160,137,91,90,15,
     131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
     190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
     88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
@@ -72,12 +73,15 @@ public final class PerlinNoise {
     };
     static {
         regeneratePermutation();
-        for (int i=0; i < 256 ; i++) p[256+i] = p[i] = permutation[i];
+        for (int i=0; i < 256 ; i++) {
+            p[256+i] = p[i];
+            p[i] = PERMUTATION[i];
+        }
     }
 
     private static void regeneratePermutation() {
         for(int i = 0; i < 256; i++) {
-            permutation[i] = (short)RANDOM.nextInt(255);
+            PERMUTATION[i] = (short)RANDOM.nextInt(255);
         }
     }
 

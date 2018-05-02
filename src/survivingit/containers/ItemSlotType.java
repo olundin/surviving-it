@@ -6,5 +6,8 @@ package survivingit.containers;
  * type ANY.
  */
 public enum ItemSlotType {
+    /**
+     * Item slot type for all items
+     */
     ANY
 }

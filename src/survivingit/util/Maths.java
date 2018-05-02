@@ -63,7 +63,7 @@ public final class Maths {
 
     /**
      * Floors a double and casts it to int.
-     * @param x The value to floor
+     * @param val The value to floor
      * @return Input value floored as an int
      */
     public static int fastFloor(double val) {

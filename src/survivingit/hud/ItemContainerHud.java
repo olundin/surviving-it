@@ -50,19 +50,35 @@ public class ItemContainerHud extends HudElement {
         this.itemSlotSprite = Sprite.ITEM_SLOT;
     }
 
+    /**
+     * Render item container
+     * @param renderer render to use
+     */
     @Override
     public void render(HudRenderer renderer) {
         renderer.drawItemContainer(this);
     }
 
+    /**
+     * Returns the item container of the hud element
+     * @return the item container
+     */
     public ItemContainer getItemContainer() {
         return itemContainer;
     }
 
+    /**
+     * Get number of items per row
+     * @return number of items per row
+     */
     public int getItemsPerRow() {
         return itemsPerRow;
     }
 
+    /**
+     * Returns sprite used for item slots
+     * @return Sprite of an item slots
+     */
     public Sprite getItemSlotSprite() {
         return this.itemSlotSprite;
     }

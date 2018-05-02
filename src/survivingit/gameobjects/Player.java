@@ -21,6 +21,17 @@ import java.util.List;
  */
 public class Player extends Creature implements Observable<Player> {
 
+    private static final int MAX_HEALTH = 50;
+    private static final double MOVE_SPEED = 10.0;
+    private static final int DAMAGE = Integer.MAX_VALUE/2;
+    private static final int ALPHA_LEVEL = 1;
+    private static final double RANGE = 2.0;
+
+    private static final double COL_X = -0.2;
+    private static final double COL_Y = -0.5;
+    private static final double COL_WIDTH = 0.4;
+    private static final double COL_HEIGHT = 0.5;
+
     private static final int PASSIVE_STORAGE_SIZE = 15;
     private static final int EQUIPPABLE_STORAGE_SIZE = 5;
 
@@ -33,17 +44,19 @@ public class Player extends Creature implements Observable<Player> {
      * @param y double val of the y position of the new Player object.
      */
     public Player(final double x, final double y, Scene scene) {
-	    super(x,
+        super(x,
               y,
               scene,
               new CreatureSprite(SpriteSheet.PLAYER, 0, 0, 24, 52),
-              50,
-                10,
-              Integer.MAX_VALUE/2,
-                1,
-                2);
-	    observers = new ArrayList<>();
-	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
+              MAX_HEALTH,
+              MOVE_SPEED,
+              DAMAGE,
+              ALPHA_LEVEL,
+              RANGE);
+
+        this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
+
+        observers = new ArrayList<>();
 	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);
     }
 
@@ -81,7 +94,7 @@ public class Player extends Creature implements Observable<Player> {
 
     /**
      * Adds the entered item to the first available spot in the PlayerInventory.
-     * @param item
+     * @param item Item to add
      */
     public void addItemToFirstAvailable(Item item) {
         this.playerInventory.addItemToFirstAvailable(item);

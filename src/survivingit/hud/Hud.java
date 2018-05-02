@@ -7,11 +7,19 @@ import survivingit.graphics.Sprite;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Hud is a container for hud elements.
+ * It creates the elements with correct data and positions.
+ */
 public class Hud {
 
     private List<HudElement> elements;
     private ItemContainerHud inventoryHud;
 
+    /**
+     * Creates a new hud
+     * @param player player to set data from
+     */
     public Hud(Player player) {
         this.elements = new ArrayList<>();
         this.add(new HealthBar(5, 90, 15, 5, player));
@@ -26,6 +34,10 @@ public class Hud {
         this.elements.add(element);
     }
 
+    /**
+     * Renders all hud elements
+     * @param renderer Renderer to use
+     */
     public void render(HudRenderer renderer) {
         for (HudElement element : elements) {
             if (element.isVisible()) {
@@ -37,6 +49,9 @@ public class Hud {
         }
     }
 
+    /**
+     * Toggle inventory visibility
+     */
     public void toggleInvetory() {
         this.inventoryHud.toggleVisible();
     }

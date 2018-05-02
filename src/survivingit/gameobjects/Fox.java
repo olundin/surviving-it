@@ -17,6 +17,11 @@ public class Fox extends Animal {
     private static final double VIEW_DISTANCE = 10.0;
     private static final double RANGE = 1.0;
 
+    private static final double COL_X = -0.2;
+    private static final double COL_Y = -0.2;
+    private static final double COL_WIDTH = 0.4;
+    private static final double COL_HEIGHT = 0.35;
+
     /**
      * Creates a new Fox object with the entered x and y position.
      * @param x double val of the x position of the new Fox object.
@@ -34,7 +39,7 @@ public class Fox extends Animal {
               VIEW_DISTANCE,
               RANGE);
 
-        this.setCollider(new Collider(-0.2, -0.35, 0.4, 0.35, false, this));
+        this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
     }
 
 }

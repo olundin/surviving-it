@@ -6,6 +6,11 @@ import survivingit.items.EffectType;
 import survivingit.items.Item;
 import survivingit.items.UsableEffect;
 
+/**
+ * Item container that can be equipped
+ *
+ * @see ItemContainer
+ */
 public class EquippedItemContainer extends ItemContainer {
 
     private int equippedIndex;

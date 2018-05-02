@@ -19,6 +19,9 @@ import survivingit.util.Point;
  */
 public class ChebyshevDistance implements AStarHeuristic<Point> {
 
+    private static final double REACHED_RANGE = 0.5;
+
+
     /**
      * Calculates and returns the Chebyshev distance value between two Point objects.
      * @param n1 Point object to calculate Chebyshev distance from.
@@ -40,7 +43,7 @@ public class ChebyshevDistance implements AStarHeuristic<Point> {
      */
     @Override
     public boolean reached(Point src, Point dst) {
-        return Point.areWithin(src, dst, 0.5);
+        return Point.areWithin(src, dst, REACHED_RANGE);
     }
 
 }
