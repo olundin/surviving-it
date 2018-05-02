@@ -3,10 +3,12 @@ package survivingit.scene;
 import survivingit.gameobjects.GameObject;
 import survivingit.gameobjects.GameObjectComparator;
 import survivingit.gameobjects.VisibleObject;
+import survivingit.graphics.Renderer;
 import survivingit.graphics.WorldRenderer;
 import survivingit.messaging.Message;
 import survivingit.scene.Scene;
 import survivingit.scene.Tile;
+import survivingit.util.Point;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,8 +31,7 @@ public class Camera {
 
     private static final double EDGE_PADDING = 4; // Padding to be added to edges of viewport when finding visible GameObjects
 
-    private GameObject target;
-    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
+    private Point target;
 
     public Camera(double x, double y, double width, double height, int screenX, int screenY, int screenWidth, int screenHeight) {
         this.x = x;
@@ -42,11 +43,9 @@ public class Camera {
         this.screenY = screenY;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-
-        this.gameObjectComparator = new GameObjectComparator();
     }
 
-    public void setTarget(GameObject target) {
+    public void setTarget(Point target) {
         this.target = target;
     }
 
@@ -61,31 +60,16 @@ public class Camera {
         this.y += (delta * relation) / 2;
     }
 
-    public void update(double dt, Scene scene) {
-        List<GameObject> objectsInArea = scene.getObjectsInArea(
+    public List<GameObject> getVisibleObjects(Scene scene) {
+        return scene.getObjectsInArea(
                 this.x - EDGE_PADDING,
                 this.y - EDGE_PADDING,
                 this.x + this.width + EDGE_PADDING,
                 this.y + this.height + EDGE_PADDING
         );
-
-        // Sort gameObjects by y position. Makes them render correctly
-        //objectsInArea.sort(this.gameObjectComparator);
-        Collections.sort(objectsInArea, gameObjectComparator);
-
-        for (GameObject gameObject : objectsInArea) {
-
-            gameObject.update(dt);
-        }
     }
 
-    public void render(WorldRenderer renderer, Scene scene) {
-        // Make sure target is being followed if it exists
-        if (hasTarget()) {
-            this.setCenterPos(target.getX(), target.getY());
-        }
-
-        // Render visible Tiles
+    public void renderVisibleTiles(Scene scene, WorldRenderer renderer) {
         for (int tileY = (int)Math.floor(this.y - EDGE_PADDING); tileY < this.y + this.height + EDGE_PADDING; tileY++) {
             for (int tileX = (int)Math.floor(this.x - EDGE_PADDING); tileX < this.x + this.width + EDGE_PADDING; tileX++) {
                 Tile tile = scene.getTileAt(tileX, tileY);
@@ -95,25 +79,12 @@ public class Camera {
                 }
             }
         }
+    }
 
-        // Get objects visible to camera
-        List<GameObject> objectsInArea = scene.getObjectsInArea(
-                this.x - EDGE_PADDING,
-                this.y - EDGE_PADDING,
-                this.x + this.width + EDGE_PADDING,
-                this.y + this.height + EDGE_PADDING
-        );
-
-        // Sort gameObjects by y position. Makes them render correctly
-        //objectsInArea.sort(this.gameObjectComparator);
-        Collections.sort(objectsInArea, gameObjectComparator);
-
-        for (GameObject gameObject : objectsInArea) {
-
-            if (gameObject instanceof VisibleObject) {
-                // Draw sprite at position relative to camera
-                renderer.drawObject((VisibleObject)gameObject, this);
-            }
+    public void update() {
+        // Make sure target is being followed if it exists
+        if (hasTarget()) {
+            this.setCenterPos(target.getX(), target.getY());
         }
     }
 

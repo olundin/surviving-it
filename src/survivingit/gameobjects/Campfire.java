@@ -9,6 +9,8 @@ import survivingit.physics.Collider;
 
 public class Campfire extends VisibleObject {
 
+    private static final int HEAL_AMOUNT = 1;
+
     private boolean lit;
     private AnimatedSprite litSprite;
     private Sprite unlitSprite;
@@ -38,27 +40,22 @@ public class Campfire extends VisibleObject {
         this.litTime = 0.0;
     }
 
+    @Override
     public void update(double dt) {
-        if(lit) {
+        if (lit) {
             // Increase litTime
             litTime += dt;
             // Check if fire should be extinguished
-            if(litTime >= MAX_LIT_TIME) {
+            if (litTime >= MAX_LIT_TIME) {
                 this.lit = false;
                 litTime = 0.0;
             }
 
             // Perform healing to objects nearby
             timeSinceLastHeal += dt;
-            if(timeSinceLastHeal >= HEAL_DELAY) {
+            if (timeSinceLastHeal >= HEAL_DELAY) {
                 // A heal should be performed
-                for(GameObject obj : this.scene.getObjectsInArea(
-                        this.x - HEAL_RANGE,
-                        this.y - HEAL_RANGE,
-                        this.x + 2 * HEAL_RANGE,
-                        this.y + 2 * HEAL_RANGE)) {
-                    obj.receiveMessage(new Message(MessageType.HEAL, 1));
-                }
+                sendMesageToCreaturesInArea(new Message(MessageType.HEAL, HEAL_AMOUNT), 2, 2);
                 timeSinceLastHeal = 0.0;
             }
 
@@ -77,7 +74,6 @@ public class Campfire extends VisibleObject {
         int data = msg.getData();
         switch(type) {
             case ATTACK:
-                this.lit = !this.lit;
                 break;
             case ITEM:
                 break;

@@ -27,6 +27,11 @@ public class Window extends Frame implements Observable<Window> {
 
     private List<Observer<Window>> observers;
 
+    /**
+     * Creates a new window.
+     * @param width The width in pixels of the window.
+     * @param height The height in pixels of the window.
+     */
     public Window(int width, int height) {
         super(TITLE);
 
@@ -55,22 +60,34 @@ public class Window extends Frame implements Observable<Window> {
         });
     }
 
+    /**
+     * Attaches an observer to this object.
+     * @param observer observer to attach.
+     */
     public void attach(Observer<Window> observer) {
         this.observers.add(observer);
     }
 
+    /**
+     * Notifies attached observers.
+     * @param data The object to notify with.
+     */
     public void notifyObservers(Window data) {
         for(Observer<Window> o : observers) {
             o.onNotify(this, data);
         }
     }
 
-    public void onClose() {
+    private void onClose() {
         this.open = false;
         // Notify observers when window is closed
         notifyObservers(this);
     }
 
+    /**
+     * Returns whether or not the window is open
+     * @return window open status
+     */
     public boolean isOpen() {
         return this.open;
     }

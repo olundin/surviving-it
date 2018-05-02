@@ -7,9 +7,14 @@ package survivingit.util;
 public class Maths {
 
     // Constant definitions
+    /**
+     * The speed to move with diagonally
+     */
     public static final double DIAGONAL_SPEED = Math.sqrt(1.0/2.0); // Units per second to move diagonally
+    /**
+     * The length of a diagonal movement (dx = dy = 1)
+     */
     public static final double DIAGONAL_LENGTH = Math.sqrt(2.0); // Distance of moving one unit on both x and y-axis
-
 
     /**
      * Linear interpolation.

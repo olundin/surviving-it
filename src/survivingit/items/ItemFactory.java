@@ -28,6 +28,11 @@ public abstract class ItemFactory {
 				boots.addEffect(new MoveSpeedBoostEffect(10, boots));
 				return boots;
 			}
+			case FLINT_AND_STEEL: {
+				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.CAMPFIRE);
+				flintAndSteel.addEffect(new IgnitionEffect(10, flintAndSteel));
+				return flintAndSteel;
+			}
 			case NONE: {
 				throw new IllegalArgumentException("Cannot create item of type NONE");
 			}

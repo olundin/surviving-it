@@ -81,4 +81,12 @@ public class PlayerInventory {
     public void useEquippedItem(Creature creature) {
         this.equippedItemContainer.useEquippedItem(creature);
     }
+
+    /**
+     * Reaturns a boolean if the equipped item has a weapon(performAttack)component.
+     * @return if the equipped item is a weapon.
+     */
+    public boolean isCarryingWeapon() {
+        return this.equippedItemContainer.isCarryingWeapon();
+    }
 }

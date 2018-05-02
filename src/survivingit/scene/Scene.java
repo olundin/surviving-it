@@ -21,6 +21,7 @@ public abstract class Scene {
     protected Tile[][] tiles;
 
     private Random random;
+    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
 
     private AStar<Point> aStar;
 
@@ -31,15 +32,33 @@ public abstract class Scene {
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.random = new Random();
+        this.gameObjectComparator = new GameObjectComparator();
         this.aStar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
     }
 
     public void update(double dt) {
-        this.camera.update(dt, this);
+        camera.update();
+
+        for (GameObject gameObject : camera.getVisibleObjects(this)) {
+            gameObject.update(dt);
+
+            if(!gameObject.isAlive()) {
+                // GameObject should be removed from list
+                gameObjects.remove(gameObject);
+            }
+        }
     }
 
     public void render(WorldRenderer renderer) {
-        this.camera.render(renderer, this);
+        // Render tiles
+        camera.renderVisibleTiles(this, renderer);
+
+        // Render gameobjects
+        List<GameObject> visibleObjects = camera.getVisibleObjects(this);
+        visibleObjects.sort(gameObjectComparator); // Sort visible objects by Y value to ensure correct rendering
+        for(GameObject object : visibleObjects) {
+            renderer.drawObject((VisibleObject)object, camera);
+        }
     }
 
     public void addPlayer(Player player) {

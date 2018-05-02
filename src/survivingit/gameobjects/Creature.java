@@ -2,21 +2,22 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
 
-public abstract class Creature extends VisibleObject implements Updateable {
+public abstract class Creature extends VisibleObject {
 
     protected int currentHealth;
     protected int maxHealth;
     protected double moveSpeed; // Tiles per second
     protected int damage; // Attack damage
     protected Direction direction;
-    protected int alphaLevel; // Creatures will flee from creatures with higher level and attack creatures with lower alpha level
+    protected int alphaLevel; // Creatures will flee from creatures with higher level and performAttack creatures with lower alpha level
+    protected double range;
 
     private double lastX;
     private double lastY;
 
     protected CreatureSprite sprites;
 
-    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel) {
+    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double range) {
 	    super(x, y, sprites.getSprite());
 	    this.currentHealth = maxHealth;
 	    this.maxHealth = maxHealth;
@@ -24,6 +25,7 @@ public abstract class Creature extends VisibleObject implements Updateable {
 	    this.damage = damage;
 	    this.direction = Direction.NONE;
 	    this.alphaLevel = alphaLevel;
+	    this.range = range;
 
 	    this.lastX = x;
 	    this.lastY = y;
@@ -72,8 +74,9 @@ public abstract class Creature extends VisibleObject implements Updateable {
     public void takeDamage(int amount) {
         this.setCurrentHealth(currentHealth - amount);
         if(currentHealth < 0) {
-            // Player dead
+            // Creature dead
             this.setCurrentHealth(0);
+            this.death();
         }
     }
 
@@ -101,7 +104,6 @@ public abstract class Creature extends VisibleObject implements Updateable {
         //TODO:
     }
 
-
     public void heal(int healAmount) {
         // Don't set health to higher to than max.
         int newHealth = currentHealth + healAmount;
@@ -109,4 +111,12 @@ public abstract class Creature extends VisibleObject implements Updateable {
         this.setCurrentHealth(newHealth);
         //this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0)); // <- Doesn't work?
     }
+
+    public void igniteFirePlaces() {
+    }
+
+    public void death() {
+        this.alive = false;
+    }
+
 }
