@@ -6,7 +6,9 @@ import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 /**
- * Class for the Boar animal, inherits from Animal.
+ * Class for the Boar animal, inherits all behaviour from Animal.
+ *
+ * @see Animal
  */
 public class Boar extends Animal{
 

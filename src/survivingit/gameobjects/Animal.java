@@ -16,6 +16,8 @@ import java.util.Stack;
  *
  * Contains data and behaviour that is common for all animals such ass path to follow, target finding based on the
  * animal's viewing distance and a StateMachine for animal behaviour.
+ *
+ * @see Creature
  */
 public abstract class Animal extends Creature {
 

@@ -18,6 +18,9 @@ import java.util.List;
  * Class for the Player, inherits from Creature and implemens Observable.
  *
  * Contains functionality for inventory/Item usage and maintenance, and has observers for health updating.
+ *
+ * @see Creature
+ * @see Observable
  */
 public class Player extends Creature implements Observable<Player> {
 

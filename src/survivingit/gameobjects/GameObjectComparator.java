@@ -4,7 +4,10 @@ import java.util.Comparator;
 
 /**
  * Comparator for GameObject class that compares gameObjects based on their deltaY position.
- * Implements the Comparator class.
+ *
+ * Implements the java Comparator interface.
+ *
+ * @see Comparator
  */
 public class GameObjectComparator implements Comparator<GameObject> {
 

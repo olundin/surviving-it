@@ -11,6 +11,8 @@ import survivingit.scene.Scene;
 /**
  * Class for a camp fire object that can be on fire which then heals gameObjects surrounding it, inherits from
  * VisibleObject.
+ *
+ * @see VisibleObject
  */
 public class Campfire extends VisibleObject {
 

@@ -8,6 +8,10 @@ import survivingit.scene.Scene;
 
 /**
  * Class for pine trees, inherits from Visible object.
+ *
+ * Contains no special behaviour at the moment, is more of a decoration in the game.
+ *
+ * @see VisibleObject
  */
 public class Pine extends VisibleObject {
 
@@ -21,6 +25,7 @@ public class Pine extends VisibleObject {
         this.setCollider(new Collider(-0.3, -1.0, 0.6, 1.0, false, this));
     }
 
+    @Override
     public void update(double dt) {}
 
     /**

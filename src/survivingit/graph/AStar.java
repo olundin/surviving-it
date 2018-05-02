@@ -24,7 +24,7 @@ public class AStar<T> {
     private Map<T, Double> gCosts = new HashMap<>();
     private Map<T, Double> hCosts = new HashMap<>();
 
-    private Comparator<T> comparator = new Comparator<>() {
+    private Comparator<T> comparator = new Comparator<T>() {
         /**
          * Compares the two entered T objects and returns -1 if the first T object has the lower gCost + hCost,
          * 0 if the two T objects has the same gCost + hCost, or 1 if the first T object has the higher gCost + hCost.

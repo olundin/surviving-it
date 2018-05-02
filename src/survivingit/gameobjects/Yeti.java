@@ -6,7 +6,9 @@ import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 /**
- * The Yeti animal class, inherits from Animal.
+ * The Yeti animal class, inherits all behaviour from Animal.
+ *
+ * @see Animal
  */
 public class Yeti extends Animal {
 
