@@ -12,7 +12,7 @@ import java.util.List;
  * Stores deltaX and deltaY in the enum values for more readable code.
  */
 public enum Direction {
-    
+
     LEFT(-1, 0),
     UP_LEFT(-Maths.DIAGONAL_SPEED, -Maths.DIAGONAL_SPEED),
     UP(0, -1),
