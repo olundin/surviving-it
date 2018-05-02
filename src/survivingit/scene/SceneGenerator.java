@@ -1,8 +1,7 @@
 package survivingit.scene;
 
 import survivingit.Game;
-import survivingit.gameobjects.Campfire;
-import survivingit.gameobjects.Pine;
+import survivingit.gameobjects.*;
 import survivingit.util.Maths;
 import survivingit.util.PerlinNoise;
 
@@ -21,6 +20,7 @@ public class SceneGenerator {
 
     private static final int MIN_PINE_DISTANCE = 50;
     private static final int CAMPFIRE_GRID_SIZE = 20;
+    private static final int ANIMAL_GRID_SIZE = 15;
 
     /**
      * Creates a new scene generator with the given tile group occurrences.
@@ -47,10 +47,11 @@ public class SceneGenerator {
      * @param generateVegetation Should vegetation be generated?
      * @param generateStructures Should structures be generated?
      */
-    public void generateScene(Scene scene, boolean generateTiles, boolean generateVegetation, boolean generateStructures) {
+    public void generateScene(Scene scene, boolean generateTiles, boolean generateVegetation, boolean generateStructures, boolean generateCreatures) {
         if(generateTiles) generateTiles(scene);
         if(generateVegetation) generateVegetation(scene);
         if(generateStructures) generateStructures(scene);
+        if(generateCreatures) generateCreatures(scene);
     }
 
     /**
@@ -87,7 +88,7 @@ public class SceneGenerator {
                 Tile placedOn = scene.getTileAt(x, y);
                 if(placedOn.isPassable() && placedOn.isFertile()) {
                     tilesSincePlaced++;
-                    if(Game.RANDOM.nextInt(tilesSincePlaced) >= MIN_PINE_DISTANCE && scene.tryAdd(new Pine(x, y, scene))) {
+                    if(Game.RANDOM.nextInt(tilesSincePlaced) >= MIN_PINE_DISTANCE && scene.tryAdd(new Pine(x+0.5, y+0.5, scene))) {
                         tilesSincePlaced = 0;
                     }
                 }
@@ -104,7 +105,35 @@ public class SceneGenerator {
             for(int x = 0; x < scene.getWidth(); x++) {
                 // Generate some campfires
                 if(x % CAMPFIRE_GRID_SIZE == 0 && y % CAMPFIRE_GRID_SIZE == 0) {
-                    scene.tryAdd(new Campfire(x, y, scene));
+                    scene.tryAdd(new Campfire(x+0.5, y+0.5, scene));
+                }
+            }
+        }
+    }
+
+    /**
+     * Generates some animals in the scene
+     * @param scene The scene to fill with animals
+     */
+    private void generateCreatures(Scene scene) {
+        for(int y = 0; y < scene.getHeight(); y++) {
+            for(int x = 0; x < scene.getWidth(); x++) {
+                // Generate some campfires
+                if(x % ANIMAL_GRID_SIZE == 0 && y % ANIMAL_GRID_SIZE == 0) {
+                    int animal = Game.RANDOM.nextInt(3);
+                    switch(animal) {
+                        case 0:
+                            scene.tryAdd(new Fox(x, y, scene));
+                            break;
+                        case 1:
+                            scene.tryAdd(new Penguin(x, y, scene));
+                            break;
+                        case 2:
+                            scene.tryAdd(new Boar(x, y, scene));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -120,7 +149,7 @@ public class SceneGenerator {
      */
     private double[][] generateNoise(int width, int height) {
         double[][] noise = new double[height][width];
-        double frequency = 10 / (double)width;
+        double frequency = 5 / (double)width;
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {

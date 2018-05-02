@@ -12,8 +12,8 @@ import survivingit.util.Maths;
  */
 public class TestScene extends Scene {
 
-    private static final int WIDTH = 256;
-    private static final int HEIGHT = 256;
+    private static final int WIDTH = 128;
+    private static final int HEIGHT = 128;
 
     private static final double SNOW_OCCURRENCE = 2.0;
     private static final double ROCK_OCCURRENCE = 2.0;
@@ -38,6 +38,6 @@ public class TestScene extends Scene {
 
         // Generate tiles, trees, e.t.c.
         SceneGenerator generator = new SceneGenerator(SNOW_OCCURRENCE,ROCK_OCCURRENCE,ICE_OCCURRENCE,WATER_OCCURRENCE);
-        generator.generateScene(this, true, true, true);
+        generator.generateScene(this, true, true, true, true);
     }
 }
