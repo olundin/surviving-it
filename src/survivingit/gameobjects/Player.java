@@ -9,6 +9,7 @@ import survivingit.messaging.MessageType;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,10 @@ public class Player extends Creature implements Observable<Player> {
      * @param x double val of the x position of the new Player object.
      * @param y double val of the y position of the new Player object.
      */
-    public Player(final double x, final double y) {
+    public Player(final double x, final double y, Scene scene) {
 	    super(x,
               y,
+              scene,
               new CreatureSprite(SpriteSheet.HERO, 0, 0, 24, 52),
               50,
                 10,

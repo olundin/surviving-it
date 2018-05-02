@@ -4,6 +4,7 @@ import survivingit.graphics.Sprite;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * Class for pine trees, inherits from Visible object.
@@ -15,10 +16,12 @@ public class Pine extends VisibleObject {
      * @param x double val of the x position of the new Pine object.
      * @param y double val of the y postion of the new Pine object.
      */
-    public Pine(double x, double y) {
-        super(x, y, Sprite.PINE);
+    public Pine(double x, double y, Scene scene) {
+        super(x, y, scene, Sprite.PINE);
         this.setCollider(new Collider(-0.3, -1.0, 0.6, 1.0, false, this));
     }
+
+    public void update(double dt) {}
 
     /**
      * Receives and reacts to the entered message.

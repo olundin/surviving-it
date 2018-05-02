@@ -12,19 +12,31 @@ import survivingit.graphics.Sprite;
  */
 public class Tile {
 
-    // Snow tile group
+    /**
+     * Snow tile group
+     */
     public static final TileGroup SNOW = new TileGroup(Sprite.SNOW, new boolean[]{true,false,false,true,true,true,true,true,true}, true);
-    // Rock tile group
+    /**
+     * Rock tile group
+     */
     public static final TileGroup ROCK = new TileGroup(Sprite.ROCK, new boolean[]{true,true,true,true,true,true,true,true,true}, false);
-    // Ice tile group
+    /**
+     * Ice tile group
+     */
     public static final TileGroup ICE = new TileGroup(Sprite.ICE, new boolean[]{true,true,true,true,true,true,true,true,true}, false);
 
-    // Water tile (animated). Is updated from the main game loop.
+    /**
+     * Water tile, animated. Is updated in the main game loop.
+     */
     public static final AnimatedTile WATER = new AnimatedTile(new AnimatedSprite(Sprite.WATER, 0.2), false, false);
-    // Void tile (animated). Is updated from the main game loop.
+    /**
+     * Void tile, animated. Is updated in the main game loop.
+     */
     public static final AnimatedTile VOID = new AnimatedTile(new AnimatedSprite(Sprite.VOID, 0.5), false, false);
 
-    // Wall tile. A plain tile to.
+    /**
+     * Wall tile
+     */
     public static final Tile WALL = new Tile(Sprite.WALL, false, false);
 
     private Sprite sprite;

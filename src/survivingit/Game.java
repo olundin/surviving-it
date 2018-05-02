@@ -9,19 +9,37 @@ import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.scene.*;
 
+import java.util.Random;
+
 /**
  * Game is the main class.
  * It contains the game loop and is responsible
  * for querying updates and renders.
  */
-public class Game implements Observer<Window> {
+public final class Game implements Observer<GameWindow> {
 
+    /**
+     * Width of game window, e.t.c.
+     */
     public static final int WIDTH = 1920;
+    /**
+     * Height of game window, e.t.c.
+     */
     public static final int HEIGHT = 1080;
+    /**
+     * Should the window be fullscreen
+     */
     public static final boolean FULLSCREEN = true;
 
+    /**
+     * Global random to ensure THE BEST random quality in the world
+     */
+    public static final Random RANDOM = new Random();
+
+    private static final double CAMERA_WORLD_WIDTH = 24;
+    private static final double CAMERA_WORLD_HEIGHT = 13.5;
+
     private Renderer renderer;
-    private Window window;
     private Keyboard keyboard;
     private Mouse mouse;
     private InputHandler inputHandler;
@@ -36,7 +54,7 @@ public class Game implements Observer<Window> {
      * Creates a new Game with the necessary parts.
      */
     private Game() {
-        this.window = new Window(WIDTH, HEIGHT);
+        GameWindow window = new GameWindow(WIDTH, HEIGHT);
         this.renderer = new Renderer(WIDTH, HEIGHT);
         this.keyboard = new Keyboard();
         this.mouse = new Mouse();
@@ -53,7 +71,7 @@ public class Game implements Observer<Window> {
 
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, 24, 13.5, 0, 0, WIDTH, HEIGHT);
+        this.camera = new Camera(0, 0, CAMERA_WORLD_WIDTH, CAMERA_WORLD_HEIGHT, 0, 0, WIDTH, HEIGHT);
         this.currentScene = new TestScene(this.camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
@@ -128,7 +146,7 @@ public class Game implements Observer<Window> {
      * @param object The observed object
      * @param data The data
      */
-    public void onNotify(Observable<Window> object, Window data) {
+    public void onNotify(Observable<GameWindow> object, GameWindow data) {
         if(!data.isOpen()) {
             this.stop();
         }

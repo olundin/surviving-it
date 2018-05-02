@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * The Yeti animal class, inherits from Animal.
@@ -14,10 +15,11 @@ public class Yeti extends Animal {
      * @param x double val of the x position of the new Yeti object.
      * @param y double val of the y position of the new Yeti object.
      */
-    public Yeti(final double x, final double y) {
+    public Yeti(final double x, final double y, final Scene scene) {
         super(
                 x,
                 y,
+                scene,
                 new CreatureSprite(SpriteSheet.MEME_MAN, 0, 0, 85, 115),
                 1000,
                 10,

@@ -1,11 +1,11 @@
 package survivingit.gameobjects;
 
+import survivingit.Game;
 import survivingit.util.Maths;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Enum class used for movement in different Directions.
@@ -45,14 +45,13 @@ public enum Direction {
 
     private static final List<Direction> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int SIZE = VALUES.size();
-    private static final Random RANDOM = new Random();
 
     /**
      * Returns a random enum Direction value.
      * @return a random enum Diretcion value.
      */
     public static Direction random() {
-        return VALUES.get(RANDOM.nextInt(SIZE));
+        return VALUES.get(Game.RANDOM.nextInt(SIZE));
     }
 
     /**
@@ -68,14 +67,14 @@ public enum Direction {
             else if(angle < Math.PI*(9.0/16)) return RIGHT;
             else if(angle < Math.PI*(15.0/16)) return UP_RIGHT;
             else return UP;
-        } else if(angle < 0){
+        } else {
+            // angle < 0
             if(angle >= -Math.PI*(-1.0)/16) return DOWN;
             else if(angle >= Math.PI*(-7.0/16)) return DOWN_LEFT;
             else if(angle >= Math.PI*(-9.0/16)) return LEFT;
             else if(angle >= Math.PI*(-15.0/16)) return UP_LEFT;
             else return UP;
         }
-        return NONE;
     }
 
 }

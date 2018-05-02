@@ -27,7 +27,6 @@ public abstract class Scene {
     private List<GameObject> gameObjects;
     protected Tile[][] tiles;
 
-    private Random random;
     private GameObjectComparator gameObjectComparator; // Sorts objects by deltaY value for correct rendering
 
     private AStar<Point> aStar;
@@ -38,13 +37,13 @@ public abstract class Scene {
      * @param width The width of the scene
      * @param height The height of the scene
      */
-    public Scene(final Camera camera, final int width, final int height) {
+    protected Scene(final Camera camera, final int width, final int height) {
         this.camera = camera;
         this.width = width;
         this.height = height;
+        this.player = null;
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
-        this.random = new Random();
         this.gameObjectComparator = new GameObjectComparator();
         this.aStar = new AStar<>(new SceneGraph(this), new ChebyshevDistance());
     }
@@ -76,8 +75,7 @@ public abstract class Scene {
 
         // Render gameobjects
         List<GameObject> visibleObjects = camera.getVisibleObjects(this);
-        //visibleObjects.sort(gameObjectComparator); // Sort visible objects by Y value to ensure correct rendering
-        Collections.sort(visibleObjects, gameObjectComparator);
+        visibleObjects.sort(gameObjectComparator); // Sort visible objects by Y value to ensure correct rendering
         for(GameObject object : visibleObjects) {
             renderer.drawObject((VisibleObject)object, camera);
         }

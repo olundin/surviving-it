@@ -18,6 +18,8 @@ public class StateMachine<O> {
      */
     public StateMachine(O owner, State<O> initialState) {
         this.owner = owner;
+        this.currentState = null;
+        this.previousState = null;
         setState(initialState);
     }
 

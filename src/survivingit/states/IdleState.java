@@ -1,10 +1,9 @@
 package survivingit.states;
 
+import survivingit.Game;
 import survivingit.gameobjects.Animal;
 import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.GameObject;
-
-import java.util.Random;
 
 /**
  * Idle state for an animal.
@@ -12,7 +11,6 @@ import java.util.Random;
  */
 public class IdleState implements State<Animal> {
 
-    protected static Random random = new Random();
     private double timer;
 
     private boolean walking;
@@ -35,9 +33,9 @@ public class IdleState implements State<Animal> {
 
     /**
      * Update function that is called each gametick and updates the State
-     * @param dt
-     * @param object
-     * @return
+     * @param dt Time since last game tick
+     * @param object Object to update
+     * @return Possible new state. Returns itself otherwise
      */
     @Override
     public State<Animal> update(double dt, Animal object) {
@@ -54,7 +52,7 @@ public class IdleState implements State<Animal> {
                 object.setDirection(Direction.NONE);
                 walking = false;
             } else {
-                if(random.nextDouble()*5 <= timer) {
+                if(Game.RANDOM.nextDouble()*5 <= timer) {
                     object.setDirection(Direction.random());
                     walking = true;
                     timer = 0.0;

@@ -1,12 +1,13 @@
 package survivingit.input;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 /**
  * Data structure for all relevant keyboard data.
  */
-public class Keyboard implements KeyListener {
+public class Keyboard extends KeyAdapter {
 
     private static final int KEYBOARD_SIZE = 512;
 
@@ -81,12 +82,5 @@ public class Keyboard implements KeyListener {
         key[e.getKeyCode()] = false;
         keyReleased[e.getKeyCode()] = true;
     }
-
-    /**
-     * Automatically called when a key has been held down for a while
-     * @param e The event
-     */
-    @Override
-    public void keyTyped(KeyEvent e) {}
 
 }

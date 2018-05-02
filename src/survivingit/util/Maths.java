@@ -4,25 +4,27 @@ package survivingit.util;
  * Utility class for some of the Math used in the game.
  * Named Maths to not interfere with the Java Math class.
  */
-public class Maths {
+public final class Maths {
 
     // Constant definitions
     /**
-     * The speed to move with diagonally
+     * The speed to move with diagonally.
      */
     public static final double DIAGONAL_SPEED = Math.sqrt(1.0/2.0); // Units per second to move diagonally
     /**
-     * The length of a diagonal movement (dx = dy = 1)
+     * The length of a diagonal movement (dx = dy = 1).
      */
     public static final double DIAGONAL_LENGTH = Math.sqrt(2.0); // Distance of moving one unit on both deltaX and deltaY-axis
+
+    private Maths() {}
 
     /**
      * Linear interpolation.
      *
-     * @param v0 Lowest
-     * @param v1
-     * @param t
-     * @return
+     * @param v0 Point 1.
+     * @param v1 Point 2.
+     * @param t Percentage between points.
+     * @return Point at position between v0 and v1.
      */
     public static double lerp(double v0, double v1, double t) {
         // Return value at t between v0 and v1
@@ -30,12 +32,12 @@ public class Maths {
     }
 
     /**
-     * Returns the dot product of vector (ax, ay) and (bx, by)
-     * @param ax
-     * @param ay
-     * @param bx
-     * @param by
-     * @return
+     * Returns the dot product of vector (ax, ay) and (bx, by).
+     * @param ax Vector 1 x.
+     * @param ay Vector 1 y.
+     * @param bx Vector 2 x.
+     * @param by Vector 2 y.
+     * @return Dot product of (ax, ay) and (bx, by).
      */
     public static double dotProduct(double ax, double ay, double bx, double by) {
         return ax*bx + ay*by;
@@ -64,11 +66,11 @@ public class Maths {
      * @param x The value to floor
      * @return Input value floored as an int
      */
-    public static int fastFloor(double x) {
+    public static int fastFloor(double val) {
         // A little bit faster than (int)Math.floor(deltaX)
         // (Based on time comparisons
-        int xi = (int)x;
-        return x < xi ? xi - 1 : xi;
+        int valInt = (int)val;
+        return val < valInt ? valInt - 1 : valInt;
     }
 
 }

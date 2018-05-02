@@ -1,6 +1,7 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
+import survivingit.scene.Scene;
 
 /**
  * Abstract superclass for all visible game objects, inherits from GameObject.
@@ -17,8 +18,8 @@ public abstract class VisibleObject extends GameObject {
      * @param y double of the initial deltaX coordinate for the VisibleObject.
      * @param sprite Sprite with the rendering data for the VisibleObject.
      */
-    public VisibleObject(final double x, final double y, final Sprite sprite) {
-	    super(x, y);
+    protected VisibleObject(final double x, final double y, final Scene scene, final Sprite sprite) {
+	    super(x, y, scene);
 	    this.sprite = sprite;
     }
 

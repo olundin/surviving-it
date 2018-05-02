@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
+import survivingit.scene.Scene;
 import survivingit.states.IdleState;
 import survivingit.states.StateMachine;
 import survivingit.util.Point;
@@ -38,9 +39,9 @@ public abstract class Animal extends Creature {
      *                     viewdistance and the center of the square is the animal's position.
      * @param range double of the animal's performAttack range.
      */
-    public Animal(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed,
+    public Animal(final double x, final double y, final Scene scene, final CreatureSprite sprites, final int maxHealth, final double moveSpeed,
                   final int damage, final int alphaLevel, final double viewDistance, final double range) {
-        super(x, y, sprites, maxHealth, moveSpeed, damage, alphaLevel, range);
+        super(x, y, scene, sprites, maxHealth, moveSpeed, damage, alphaLevel, range);
         this.path = new Stack<>();
         this.viewDistance = viewDistance;
         this.behaviour = new StateMachine<>(this, new IdleState());

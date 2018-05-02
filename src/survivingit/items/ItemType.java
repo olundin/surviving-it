@@ -5,5 +5,24 @@ package survivingit.items;
  * Works as a more readable version of Item ID.
  */
 public enum ItemType {
-    NONE, KNIFE, BERRIES, BOOTS, FLINT_AND_STEEL
+    /**
+     * None item type
+     */
+    NONE,
+    /**
+     * Knife item type
+     */
+    KNIFE,
+    /**
+     * Berry item type
+     */
+    BERRY,
+    /**
+     * Boots item type
+     */
+    BOOTS,
+    /**
+     * Flint and steel item type
+     */
+    FLINT_AND_STEEL
 }

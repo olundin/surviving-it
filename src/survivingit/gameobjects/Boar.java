@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * Class for the Boar animal, inherits from Animal.
@@ -14,10 +15,11 @@ public class Boar extends Animal{
      * @param x double val of the x position of the new Boar object.
      * @param y double val of the y position of the new Boar object.
      */
-    public Boar(final double x, final double y) {
+    public Boar(final double x, final double y, final Scene scene) {
         super(
                 x,
                 y,
+                scene,
                 new CreatureSprite(SpriteSheet.BOAR, 0, 0, 48, 48),
                 20,
                 2.5,

@@ -15,8 +15,8 @@ public class AnimatedTile extends Tile {
     /**
      * Creates a new animated tile
      * @param sprite The animated sprite to use
-     * @param passable
-     * @param fertile
+     * @param passable Is the tile passable
+     * @param fertile Is the tile fertile
      */
     public AnimatedTile(AnimatedSprite sprite, boolean passable, boolean fertile) {
         super(sprite.getSprite(), passable, fertile);

@@ -50,7 +50,7 @@ public class FollowState implements State<Animal> {
             return new IdleState();
         }
 
-        if(object.getCurrentHealth() <= 3.0) {
+        if(object.getCurrentHealth() <= object.getMaxHealth() / 10) {
             // Flee if object health too low
             return new EscapeState(target);
         }
@@ -59,7 +59,7 @@ public class FollowState implements State<Animal> {
         Point pos = new Point(object.getX(), object.getY());
         Point dst = new Point(target.getX(), target.getY());
 
-        if(!Point.areWithin(pos, dst, object.getViewDistance() * 1.5)) {
+        if(!Point.areWithin(pos, dst, object.getViewDistance())) {
             // Quit following if target is too far away
             return new IdleState();
         }

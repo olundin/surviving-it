@@ -1,11 +1,10 @@
 package survivingit.scene;
 
+import survivingit.Game;
 import survivingit.gameobjects.Campfire;
 import survivingit.gameobjects.Pine;
 import survivingit.util.Maths;
 import survivingit.util.PerlinNoise;
-
-import java.util.Random;
 
 /**
  * Class used to generate scenes.
@@ -18,7 +17,8 @@ public class SceneGenerator {
     private double iceRange;
     private double waterRange;
 
-    private static final Random RANDOM = new Random();
+    private static final int MIN_PINE_DISTANCE = 50;
+    private static final int CAMPFIRE_GRID_SIZE = 20;
 
     /**
      * Creates a new scene generator with the given tile group occurrences.
@@ -85,7 +85,7 @@ public class SceneGenerator {
                 Tile placedOn = scene.getTileAt(x, y);
                 if(placedOn.isPassable() && placedOn.isFertile()) {
                     tilesSincePlaced++;
-                    if(RANDOM.nextInt(tilesSincePlaced) >= 50 && scene.tryAdd(new Pine(x + 0.5, y + 0.75))) {
+                    if(Game.RANDOM.nextInt(tilesSincePlaced) >= MIN_PINE_DISTANCE && scene.tryAdd(new Pine(x, y, scene))) {
                         tilesSincePlaced = 0;
                     }
                 }
@@ -95,14 +95,14 @@ public class SceneGenerator {
 
     /**
      * Generates structures in given scene.
-     * @param scene
+     * @param scene The scene to fill with structures
      */
     private void generateStructures(Scene scene) {
         for(int y = 0; y < scene.getHeight(); y++) {
             for(int x = 0; x < scene.getWidth(); x++) {
                 // Generate some campfires
-                if(x % 20 == 0 && y % 20 == 0) {
-                    scene.tryAdd(new Campfire(x + 0.5, y + 0.5));
+                if(x % CAMPFIRE_GRID_SIZE == 0 && y % CAMPFIRE_GRID_SIZE == 0) {
+                    scene.tryAdd(new Campfire(x, y, scene));
                 }
             }
         }
@@ -118,7 +118,7 @@ public class SceneGenerator {
      */
     private double[][] generateNoise(int width, int height) {
         double[][] noise = new double[height][width];
-        double frequency = 10.0 / (double)width;
+        double frequency = 10 / (double)width;
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {

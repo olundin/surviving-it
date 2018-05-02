@@ -2,6 +2,9 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
+/**
+ * Item effect for melee attacks.
+ */
 public class MeleeAttackEffect extends AttackEffect {
 
     private int damage;

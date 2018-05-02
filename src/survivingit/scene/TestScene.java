@@ -3,6 +3,7 @@ package survivingit.scene;
 import survivingit.gameobjects.*;
 import survivingit.items.ItemFactory;
 import survivingit.items.ItemType;
+import survivingit.util.Maths;
 
 /**
  * Scene used for testing.
@@ -11,30 +12,32 @@ import survivingit.items.ItemType;
  */
 public class TestScene extends Scene {
 
+    private static final int WIDTH = 256;
+    private static final int HEIGHT = 256;
+
+    private static final double SNOW_OCCURRENCE = 2.0;
+    private static final double ROCK_OCCURRENCE = 2.0;
+    private static final double ICE_OCCURRENCE = 0.5;
+    private static final double WATER_OCCURRENCE = 3.0;
+
     /**
      * Creates a new test scene with the given camera.
      * @param camera The camera to see the scene.
      */
     public TestScene(Camera camera) {
-        super(camera, 256, 256);
+        super(camera, WIDTH, HEIGHT);
 
         // Add player
-        Player player = new Player(Math.floor(width/2) + 0.5, Math.floor(height/2) + 0.5);
-        player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.FLINT_AND_STEEL));
+        Player player = new Player(Maths.fastFloor(width/(double)2), Maths.fastFloor(height/(double)2), this);
+        player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.FLINT_AND_STEEL));
         for (int i = 0; i < 8; i++) {
-            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
-            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
+            player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.BERRY));
+            player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.KNIFE));
         }
         setPlayer(player);
 
         // Generate tiles, trees, e.t.c.
-        SceneGenerator generator = new SceneGenerator(2.0,2.0,0.5,3.0);
+        SceneGenerator generator = new SceneGenerator(SNOW_OCCURRENCE,ROCK_OCCURRENCE,ICE_OCCURRENCE,WATER_OCCURRENCE);
         generator.generateScene(this, true, true, true);
-
-        // Try to add some animals
-        tryAdd(new Penguin(Math.floor(width/2) - 10.5, Math.floor(height/2)));
-        tryAdd(new Boar(Math.floor(width/2) + 10.5, Math.floor(height/2)));
-        tryAdd(new Fox(Math.floor(width/2), Math.floor(height/2) + 10.5));
-        add(new Yeti(Math.floor(0), Math.floor(0)));
     }
 }

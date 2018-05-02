@@ -1,16 +1,12 @@
 package survivingit.input;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.*;
 
 /**
  * Mouse class, basically a data structure containing all relevant information
  * about the current state of the mouse
  */
-public class Mouse implements MouseListener, MouseWheelListener, MouseMotionListener {
+public class Mouse extends MouseAdapter {
 
     private static final int MOUSE_SIZE = 4;
 
@@ -125,14 +121,6 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
     }
 
     /**
-     * Called automatically when the mouse is dragged
-     * @param e The event
-     */
-    @Override
-    public void mouseDragged(MouseEvent e) { }
-
-
-    /**
      * Called automatically when a mouse button is pressed
      * @param e The event
      */
@@ -155,28 +143,6 @@ public class Mouse implements MouseListener, MouseWheelListener, MouseMotionList
             buttonReleased[e.getButton()] = true;
         }
     }
-
-    /**
-     * Called automatically when the mouse is clicked (can be multiple times)
-     * @param e The event
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    /**
-     * Called automatically when the mouse enters the object that is listening
-     * @param e The event
-     */
-    @Override
-    public void mouseEntered(MouseEvent e) { }
-
-    /**
-     * Called automatically when the mouse leaves the object that is listening
-     * @param e
-     */
-    @Override
-    public void mouseExited(MouseEvent e) { }
 
     /**
      * Called automatically when the mouse wheel changes state.

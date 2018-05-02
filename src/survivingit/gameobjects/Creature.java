@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
+import survivingit.scene.Scene;
 
 /**
  * Abstract superclass for all Creatures, inherits from VisibleObject.
@@ -37,8 +38,8 @@ public abstract class Creature extends VisibleObject {
      * @param alphaLevel int of the creature's alpha level.
      * @param range double of the creature's performAttack range.
      */
-    public Creature(final double x, final double y, final CreatureSprite sprites, final int maxHealth, final double moveSpeed, final int damage, final int alphaLevel, final double range) {
-	    super(x, y, sprites.getSprite());
+    protected Creature(double x, double y, Scene scene, CreatureSprite sprites, int maxHealth, double moveSpeed, int damage, int alphaLevel, double range) {
+	    super(x, y, scene, sprites.getSprite());
 	    this.currentHealth = maxHealth;
 	    this.maxHealth = maxHealth;
 	    this.moveSpeed = moveSpeed;
@@ -125,7 +126,7 @@ public abstract class Creature extends VisibleObject {
 
     /**
      * The creature takes the entered amount of damage.
-     * @param amount
+     * @param amount Amount of damage to take
      */
     public void takeDamage(int amount) {
         if (amount < 0) {
@@ -147,6 +148,14 @@ public abstract class Creature extends VisibleObject {
      */
     public void setMoveSpeed(final double moveSpeed) {
 	    this.moveSpeed = moveSpeed;
+    }
+
+    /**
+     * Increase/decrease creature's movespeed
+     * @param deltaSpeed movespeed delta
+     */
+    public void changeMoveSpeed(final double deltaSpeed) {
+        this.moveSpeed += deltaSpeed;
     }
 
     /**

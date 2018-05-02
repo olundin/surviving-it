@@ -1,5 +1,8 @@
 package survivingit.items;
 
+/**
+ * Effect class
+ */
 public abstract class Effect {
 
     private EffectType effectType;
@@ -8,10 +11,10 @@ public abstract class Effect {
 
     /**
      * Creates a new Effect object with the entered Item source and effectType.
-     * @param source
-     * @param effectType
+     * @param source Effect source
+     * @param effectType Effect type
      */
-    public Effect(Item source, EffectType effectType) {
+    protected Effect(Item source, EffectType effectType) {
        this.source = source;
        this.effectType = effectType;
     }
@@ -26,7 +29,7 @@ public abstract class Effect {
 
     /**
      * Returns the effectType of the effect.
-     * @return
+     * @return the effect type
      */
     public EffectType getEffectType() {
         return this.effectType;

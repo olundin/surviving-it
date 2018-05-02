@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * Class for the Fox animal, inherits fom Animal.
@@ -21,9 +22,10 @@ public class Fox extends Animal {
      * @param x double val of the x position of the new Fox object.
      * @param y double val of the y position of the new Fox object.
      */
-    public Fox(final double x, final double y) {
+    public Fox(final double x, final double y, final Scene scene) {
         super(x,
               y,
+              scene,
               new CreatureSprite(SpriteSheet.FOX, 0, 0, 43, 40),
               MAX_HEALTH,
               MOVE_SPEED,

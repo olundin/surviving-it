@@ -1,6 +1,5 @@
 package survivingit;
 
-import survivingit.gameobjects.Player;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 
@@ -13,30 +12,24 @@ import java.util.List;
 /**
  * The window class.
  *
- * The Window class is basically a wrapper
+ * The GameWindow class is basically a wrapper
  * for java.awt.Frame, with some extra logic.
  */
-public class Window extends Frame implements Observable<Window> {
-
-    private int width;
-    private int height;
+public class GameWindow extends Frame implements Observable<GameWindow> {
 
     private static final String TITLE = "Surviving it";
 
     private boolean open; // Is the window open?
 
-    private List<Observer<Window>> observers;
+    private List<Observer<GameWindow>> observers;
 
     /**
      * Creates a new window.
      * @param width The width in pixels of the window.
      * @param height The height in pixels of the window.
      */
-    public Window(int width, int height) {
+    public GameWindow(int width, int height) {
         super(TITLE);
-
-        this.width = width;
-        this.height = height;
 
         this.setSize(width, height);
         this.setResizable(false);
@@ -64,7 +57,7 @@ public class Window extends Frame implements Observable<Window> {
      * Attaches an observer to this object.
      * @param observer observer to attach.
      */
-    public void attach(Observer<Window> observer) {
+    public void attach(Observer<GameWindow> observer) {
         this.observers.add(observer);
     }
 
@@ -72,8 +65,8 @@ public class Window extends Frame implements Observable<Window> {
      * Notifies attached observers.
      * @param data The object to notify with.
      */
-    public void notifyObservers(Window data) {
-        for(Observer<Window> o : observers) {
+    public void notifyObservers(GameWindow data) {
+        for(Observer<GameWindow> o : observers) {
             o.onNotify(this, data);
         }
     }

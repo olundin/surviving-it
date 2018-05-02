@@ -10,9 +10,11 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise (Wikipedia)</a>
  */
 
-public class PerlinNoise {
+public final class PerlinNoise {
 
     private static final Random RANDOM = new Random();
+
+    private PerlinNoise() {}
 
     /**
      * Based on a point (deltaX, deltaY, z), return a value between -1 and 1

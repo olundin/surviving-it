@@ -1,5 +1,6 @@
 package survivingit.scene;
 
+import survivingit.Game;
 import survivingit.graphics.Sprite;
 
 import java.util.Random;
@@ -15,7 +16,6 @@ import java.util.Set;
 public class TileGroup {
 
     private Tile[] tiles;
-    private static Random random;
     private int size;
 
     /**
@@ -30,7 +30,6 @@ public class TileGroup {
         for(int i = 0; i < size; i++) {
             tiles[i] = new Tile(sprites[i], passable[i], fertile);
         }
-        random = new Random();
     }
 
     /**
@@ -50,11 +49,11 @@ public class TileGroup {
     /**
      * Returns a random tile from the group.
      * The first tile in the group (the plain tile) will be more likely than the rest
-     * @return
+     * @return Random tile from the group.
      */
     public Tile getRandom() {
         // 10 is just a number that works good
-        int rand = random.nextInt(size*10);
+        int rand = Game.RANDOM.nextInt(size*10);
         if(rand >= size) return tiles[0];
         else return tiles[rand];
     }

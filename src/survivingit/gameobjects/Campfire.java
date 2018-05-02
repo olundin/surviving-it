@@ -6,6 +6,7 @@ import survivingit.graphics.SpriteSheet;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * Class for a camp fire object that can be on fire which then heals gameObjects surrounding it, inherits from
@@ -31,8 +32,8 @@ public class Campfire extends VisibleObject {
      * @param x double val of the x position of the new Campfire object.
      * @param y double val of the y position of the new Campfire object.
      */
-    public Campfire(double x, double y) {
-        super(x, y, Sprite.CAMPFIRE);
+    public Campfire(double x, double y, Scene scene) {
+        super(x, y, scene, Sprite.CAMPFIRE);
         this.setCollider(new Collider(-0.4, -0.4, 0.8, 0.4, false, this));
 
         this.lit = false;

@@ -25,23 +25,16 @@ public abstract class GameObject implements Messagable {
     protected Collider collider;
 
     /**
-     * Creates a new GameObject object with the initial position of 0, 0.
-     */
-    public GameObject() {
-        this.x = 0;
-        this.y = 0;
-    }
-
-    /**
      * Creates a new GameObject with the entered deltaX and deltaY coord.
      * @param x double of the gameojects's initial deltaX position.
      * @param y double of the gameobjects's inital deltaY position.
      */
-    public GameObject(final double x, final double y) {
+    protected GameObject(final double x, final double y, Scene scene) {
         this.x = x;
         this.y = y;
         this.collider = new Collider(0, 0, 0.0, 0.0, true, this);
         this.alive = true;
+        this.scene = scene;
     }
 
     /**
@@ -109,7 +102,7 @@ public abstract class GameObject implements Messagable {
      * in how gameObjects relate to the game. This method is usually overwritten in sub classes.
      * @param dt double value of the amount of time that has passed.
      */
-    public void update(double dt) {} // TODO: Remove
+    public abstract void update(double dt);
 
     protected List<GameObject> gameObjectsInArea(final double width, final double height) {
         List<GameObject> gameObjects =  this.scene.getObjectsInArea(x - width/2, y - height/2,

@@ -1,13 +1,7 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.GameObject;
-import survivingit.gameobjects.GameObjectComparator;
-import survivingit.gameobjects.VisibleObject;
-import survivingit.graphics.Renderer;
 import survivingit.graphics.WorldRenderer;
-import survivingit.messaging.Message;
-import survivingit.scene.Scene;
-import survivingit.scene.Tile;
 import survivingit.util.Point;
 
 import java.util.Collections;
@@ -58,6 +52,8 @@ public class Camera {
         this.screenY = screenY;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+
+        this.target = null;
     }
 
     /**

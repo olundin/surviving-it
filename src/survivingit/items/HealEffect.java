@@ -2,6 +2,9 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
+/**
+ * Item effect for healong
+ */
 public class HealEffect extends UsableEffect {
 
     private int healAmount;
@@ -20,7 +23,7 @@ public class HealEffect extends UsableEffect {
 	    } else if (uses < 0) {
             throw new IllegalArgumentException("Negative use amount not allowed");
         }
-	    this.healAmount = healAmount;
+        this.healAmount = healAmount;
         this.uses = uses;
     }
 

@@ -3,6 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
+import survivingit.scene.Scene;
 
 /**
  * Class for the Penguin animal, inherits from Animal.
@@ -17,10 +18,11 @@ public class Penguin extends Animal {
      * @param x double val of the x position of the new Penguin object.
      * @param y double val of the y position of the new Penguin object.
      */
-    public Penguin(final double x, final double y) {
+    public Penguin(final double x, final double y, final Scene scene) {
         super(
                 x,
                 y,
+                scene,
                 new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 43, 40),
                 20,
                 2.0,

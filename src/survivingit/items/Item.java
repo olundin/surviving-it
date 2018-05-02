@@ -2,10 +2,7 @@ package survivingit.items;
 
 import survivingit.graphics.Sprite;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Item {
 
@@ -28,7 +25,7 @@ public class Item {
         this.name = name;
         this.description = description;
         this.sprite = sprite;
-        this.effectsMap = new HashMap<>();
+        this.effectsMap = new EnumMap<>(EffectType.class);
     }
 
     /**
@@ -38,7 +35,7 @@ public class Item {
     public void addEffect(Effect effect) {
         EffectType effectType = effect.getEffectType();
         if (!hasEffectType(effectType)) {
-            this.effectsMap.put(effectType, new ArrayList<Effect>());
+            this.effectsMap.put(effectType, new ArrayList<>());
         }
         this.effectsMap.get(effect.getEffectType()).add(effect);
     }

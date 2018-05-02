@@ -2,6 +2,9 @@ package survivingit.items;
 
 import survivingit.gameobjects.Creature;
 
+/**
+ * Effect for attacks
+ */
 public abstract class AttackEffect extends Effect {
 
     /**
@@ -13,7 +16,7 @@ public abstract class AttackEffect extends Effect {
      * Creates a new AttackEffect object with the entered Item source.
      * @param source of the AttackEffect.
      */
-    public AttackEffect(Item source) {
+    protected AttackEffect(Item source) {
         super(source, EFFECT_TYPE);
     }
 
