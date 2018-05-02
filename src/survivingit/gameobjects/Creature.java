@@ -24,7 +24,7 @@ public abstract class Creature extends VisibleObject {
     protected CreatureSprite sprites;
 
     /**
-     * Creates a new Creature object with the entered x and y position, creaturesprites, max health, movement speed,
+     * Creates a new Creature object with the entered x and y position, creature sprites, max health, movement speed,
      * damage, alphalevel and range.
      * @param x double of the creature's inital deltaX coordinate.
      * @param y double of the creature's inital deltaX coordinate.
