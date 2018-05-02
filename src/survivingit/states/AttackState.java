@@ -10,6 +10,8 @@ import survivingit.util.Point;
 /**
  * Attack state for animals. Given a target, performs an attack on
  * it and then backs off.
+ *
+ * @see State
  */
 public class AttackState implements State<Animal> {
 

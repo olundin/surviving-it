@@ -7,7 +7,9 @@ import survivingit.util.Point;
 
 /**
  * Escape state for animals.
- * When entered, sets direction
+ * When entered, sets direction away from object to flee from
+ *
+ * @see State
  */
 public class EscapeState implements State<Animal> {
 

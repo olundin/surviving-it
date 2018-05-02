@@ -140,7 +140,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (!this.inBounds(x, y) || tiles[xInt][yInt] == null) {
-            return Tile.VOID;
+            return AnimatedTile.VOID;
         } else {
             return tiles[yInt][xInt];
         }

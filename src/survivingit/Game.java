@@ -124,8 +124,8 @@ public final class Game implements Observer<GameWindow> {
 
         currentScene.update(dt);
 
-        // Update animated tile's sprites
-        Tile.updateAnimated(dt);
+        // Update animated tile's sprites (static)
+        AnimatedTile.updateAll(dt);
 
         keyboard.clear();
         mouse.clear();

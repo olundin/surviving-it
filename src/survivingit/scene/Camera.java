@@ -9,6 +9,8 @@ import java.util.List;
 /**
  * The camera is responsible for "seeing" the scene
  * It has a world position and size, and a screen position and size.
+ *
+ * @see Scene
  */
 public class Camera {
 

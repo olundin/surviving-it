@@ -9,6 +9,8 @@ import survivingit.util.PerlinNoise;
 /**
  * Class used to generate scenes.
  * This means filling them with tiles, animals, structures, e.t.c.
+ *
+ * @see Scene
  */
 public class SceneGenerator {
 
@@ -138,12 +140,12 @@ public class SceneGenerator {
      * @see PerlinNoise
      */
     private Tile tileFromNoise(double noise) {
-        if(noise <= waterRange) return Tile.WATER;
+        if(noise <= waterRange) return AnimatedTile.WATER;
         else if(noise <= iceRange) return Tile.ICE.getRandom();
         else if(noise <= snowRange) return Tile.SNOW.getRandom();
         else if(noise <= rockRange) return Tile.ROCK.getRandom();
 
-        return Tile.VOID;
+        return AnimatedTile.VOID;
     }
 
 }

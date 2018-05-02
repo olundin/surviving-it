@@ -9,6 +9,8 @@ import java.util.Stack;
 /**
  * Follow state for animals.
  * Makes the animal follow given target around.
+ *
+ * @see State
  */
 public class FollowState implements State<Animal> {
 
