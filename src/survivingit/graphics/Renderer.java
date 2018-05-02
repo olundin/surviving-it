@@ -18,11 +18,21 @@ import survivingit.util.Point;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+/**
+ * Render class that handles both WorldRendering and HudRendering in the Game.
+ *
+ * Extends the java.awt.Canvas class and all rendering is done by drawing using the
+ * java.awt.BufferStrategy.getDrawGraphics() method which allows us to draw directly on the canvas, which gives us
+ * control over how graphics are handled. This is why we decide to use the java.awt package for this project.
+ *
+ * @see WorldRenderer
+ * @see HudRenderer
+ */
 public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
     private static final boolean DEBUG = false;
 
-    public static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
+    private static final int UNIT_SIZE = 32; // Size of 1 game unit in pixels on image
     private static final int TILE_PADDING = 1; // Extra padding to be added to sprite size when rendering tiles
 
     private int width;
@@ -31,6 +41,11 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
 
+    /**
+     * Creates a new Renderer object with the entered width and height of the Renderer's canvas.
+     * @param width int value of the new Renderer object's width.
+     * @param height int value of the new Renderer object's height.
+     */
     public Renderer(int width, int height) {
         super();
 
@@ -42,16 +57,25 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.setFocusable(false);
     }
 
+    /**
+     * Prepares the Renderer to render a new frame.
+     */
     public void prepare() {
         bufferStrategy = this.getBufferStrategy();
         graphics = bufferStrategy.getDrawGraphics();
     }
 
+    /**
+     * Clears the Renderer's canvas.
+     */
     public void clear() {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, width, height);
     }
 
+    /**
+     * Displays the Renderer's BufferStrategy object's contents.
+     */
     public void display() {
         graphics.dispose(); // Release system resources
 	    bufferStrategy.show();
@@ -60,7 +84,6 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
     /*
      *  PRIMITIVE DRAWING FUNCTIONS
      */
-
     private void drawSprite(int x, int y, int width, int height, final Sprite sprite) {
         graphics.drawImage(
                 sprite.getImage(),
@@ -68,10 +91,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                 y,
                 x + width,
                 y + height,
-                sprite.getX(),
-                sprite.getY(),
-                sprite.getX() + sprite.getWidth(),
-                sprite.getY() + sprite.getHeight(),
+                sprite.getStartX(),
+                sprite.getStartY(),
+                sprite.getStartX() + sprite.getWidth(),
+                sprite.getStartY() + sprite.getHeight(),
                 null
         );
     }
@@ -98,6 +121,13 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  WORLD RENDERER
      */
 
+    /**
+     * Draws the entered Tile at the relative position to the camera and the entered x, y position.
+     * @param x int value of x position of where to draw the entered Tile.
+     * @param y int value of y position of where to draw the entered Tile.
+     * @param tile Tile to be drawn.
+     * @param camera Camera in relation to which the Tile is drawn.
+     */
     @Override
     public void drawTile(int x, int y, final Tile tile, final Camera camera) {
         int drawX = camera.worldToScreenX(x) - TILE_PADDING;
@@ -106,16 +136,21 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int drawHeight = (int)(camera.pixelsPerUnitY() * tile.getSprite().getHeight() / UNIT_SIZE) + 2*TILE_PADDING;
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, tile.getSprite());
 
-        if(DEBUG) {
+        if (DEBUG) {
             // Draw tile edges if it is not passable
-            if(!tile.isPassable()) {
+            if (!tile.isPassable()) {
                 this.drawRect(drawX, drawY,
-                         drawWidth - 2*TILE_PADDING, drawHeight - 2*TILE_PADDING,
-                         Color.blue, false);
+                         drawWidth - 2*TILE_PADDING, drawHeight - 2*TILE_PADDING, Color.blue, false);
             }
         }
     }
 
+    /**
+     * Draws the entered VisibleObject object in relation to the entered Camera object.
+     * @param object VisibleObject to be drawn.
+     * @param camera Camera in which the VisibleObject is drawn.
+     */
+    @Override
     public void drawObject(VisibleObject object, Camera camera) {
         
         int drawX = camera.worldToScreenX(object.getX());
@@ -135,7 +170,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
 
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, sprite);
 
-        if(DEBUG) {
+        if (DEBUG) {
             // Draw object collider
             Collider col = object.getCollider();
             this.drawRect(camera.worldToScreenX(col.getWorldX()),
@@ -149,16 +184,16 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                           "pos=(" + Math.floor(object.getX()) + "," + Math.floor(object.getY()) + ")",
                           10, Color.black);
 
-            if(object instanceof Creature) {
+            if (object instanceof Creature) {
                 // Draw creature health
                 this.drawText(drawX, drawY + 10,
                               "health=" + ((Creature)object).getCurrentHealth() + "/" + ((Creature)object).getMaxHealth(),
                               10, Color.red);
             }
 
-            if(object instanceof Animal) {
+            if (object instanceof Animal) {
                 // Draw animal path
-                for(Point p : ((Animal)object).getPath()) {
+                for (Point p : ((Animal)object).getPath()) {
                     int sx = camera.worldToScreenX(p.getX());
                     int sy = camera.worldToScreenY(p.getY());
                     this.drawCircle(sx, sy, 4, Color.orange, true);
@@ -176,6 +211,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      *  HUD RENDERER
      */
 
+    /**
+     * Draws the entered ProgressBar object.
+     * @param progressBar ProgressBar to be drawn.
+     */
     @Override
     public void drawProgressBar(final ProgressBar progressBar) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
@@ -207,6 +246,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getRightEdge());
     }
 
+    /**
+     * Draws the entered Icon.
+     * @param icon Icon to be drawn.
+     */
     @Override
     public void drawIcon(final Icon icon) {
         // Convert element position and size (percentage 0 - 100) to screen position and size
@@ -219,6 +262,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         this.drawSprite(drawX, drawY, drawWidth, drawHeight, icon.getSprite());
     }
 
+    /**
+     * Draws the entered ItemContainerHud.
+     * @param itemContainerHud ItemContainerHud to be drawn.
+     */
     @Override
     public void drawItemContainer(final ItemContainerHud itemContainerHud) {
         final ItemContainer itemContainer = itemContainerHud.getItemContainer();
@@ -257,6 +304,10 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         }
     }
 
+    /**
+     * Draws the entered EquippedItemContainerHud.
+     * @param equippedItemContainerHud EquippedItemContainerHud to be drawn.
+     */
     public void drawEquippedInventory(EquippedItemContainerHud equippedItemContainerHud) {
         int drawX = drawValFromHudVal(equippedItemContainerHud.getX(), this.width) +
                 equippedItemContainerHud.getEquippedItemContainer().getEquippedIndex() *
