@@ -81,6 +81,9 @@ public enum Input
      */
     BUTTON_SCROLL(2);
 
+    /**
+     * Identifier of key
+     */
     public final int id;
 
     Input(int id) {

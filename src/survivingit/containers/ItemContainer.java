@@ -38,6 +38,7 @@ public class ItemContainer {
         if (this.isFull()) {
             throw new IllegalStateException("Attempted add item to full inventory");
         }
+
         ItemSlot emptySlot = this.getFirstEmptySlot();
         emptySlot.setItem(item);
         usedSlots++;

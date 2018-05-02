@@ -3,7 +3,7 @@ package survivingit.util;
 import java.util.Objects;
 
 /**
- * A Point contains an deltaX and a deltaY coordinate.
+ * A Point contains an x and a y position.
  * The class also has some helper functions for
  * math with points.
  */

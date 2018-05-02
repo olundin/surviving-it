@@ -8,8 +8,7 @@ public class StateMachine<O> {
 
     private O owner;
 
-    private State<O> previousState;
-    private State<O> currentState;
+    private State<O> currentState = null;
 
     /**
      * Creates a new state machine.
@@ -18,8 +17,6 @@ public class StateMachine<O> {
      */
     public StateMachine(O owner, State<O> initialState) {
         this.owner = owner;
-        this.currentState = null;
-        this.previousState = null;
         setState(initialState);
     }
 
@@ -38,16 +35,16 @@ public class StateMachine<O> {
      * @param newState The new state to go to.
      */
     public void setState(State<O> newState) {
-        if(newState == currentState) return;
+        if(newState.equals(currentState)) return;
 
-        previousState = currentState;
         if(currentState != null) {
             currentState.exit(owner);
         }
 
-        currentState = newState;
-        if(currentState != null) {
-            currentState.enter(owner);
+        if(newState != null) {
+            newState.enter(owner);
         }
+
+        currentState = newState;
     }
 }

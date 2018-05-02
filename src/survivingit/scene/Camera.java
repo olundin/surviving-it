@@ -28,7 +28,7 @@ public class Camera {
 
     private static final double EDGE_PADDING = 4; // Padding to be added to edges of viewport when finding visible GameObjects
 
-    private Point target;
+    private Point target = null;
 
     /**
      * Creates a new camera with the given properties
@@ -51,8 +51,6 @@ public class Camera {
         this.screenY = screenY;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-
-        this.target = null;
     }
 
     /**
