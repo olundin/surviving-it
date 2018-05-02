@@ -4,8 +4,16 @@ import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
 
+/**
+ * The Yeti animal class, inherits from Animal.
+ */
 public class Yeti extends Animal {
 
+    /**
+     * Creates a new Yeti object with the entered position.
+     * @param x double val of the x position of the new Yeti object.
+     * @param y double val of the y position of the new Yeti object.
+     */
     public Yeti(final double x, final double y) {
         super(
                 x,
