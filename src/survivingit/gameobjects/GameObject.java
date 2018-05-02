@@ -1,6 +1,5 @@
 package survivingit.gameobjects;
 
-import survivingit.Game;
 import survivingit.messaging.Messagable;
 import survivingit.messaging.Message;
 import survivingit.physics.Collider;
