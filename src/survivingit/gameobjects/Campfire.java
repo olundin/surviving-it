@@ -52,6 +52,8 @@ public class Campfire extends VisibleObject {
 
     /**
      * Updates the campfire with the entered amount of passed time.
+     *
+     * If the campfire is on fire it increases it's time on fire and heals the creatures surrounding it.
      * @param dt double value of the amount of time that has passed.
      */
     @Override
