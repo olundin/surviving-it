@@ -5,7 +5,6 @@ package survivingit.messaging;
  * Follows the observer pattern.
  *
  * @param <T> Observed type
- * @see java.util.Observer
  */
 public interface Observer<T> {
 

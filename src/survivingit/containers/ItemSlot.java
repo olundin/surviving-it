@@ -11,7 +11,7 @@ import survivingit.items.ItemType;
 public class ItemSlot {
 
     private final ItemSlotType itemSlotType;
-    private Item item;
+    private Item item = null;
 
     /**
      * Creates a new empty ItemSlot object of itemSlotType ANY.

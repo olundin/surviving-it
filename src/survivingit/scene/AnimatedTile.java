@@ -1,6 +1,7 @@
 package survivingit.scene;
 
 import survivingit.graphics.AnimatedSprite;
+import survivingit.graphics.Sprite;
 
 /**
  * Animated tile class.
@@ -9,6 +10,15 @@ import survivingit.graphics.AnimatedSprite;
  * @see Tile
  */
 public class AnimatedTile extends Tile {
+
+    /**
+     * Water tile, animated. Is updated in the main game loop.
+     */
+    public static final AnimatedTile WATER = new AnimatedTile(new AnimatedSprite(Sprite.WATER, 0.2), false, false);
+    /**
+     * Void tile, animated. Is updated in the main game loop.
+     */
+    public static final AnimatedTile VOID = new AnimatedTile(new AnimatedSprite(Sprite.VOID, 0.5), false, false);
 
     private AnimatedSprite sprite;
 
@@ -30,6 +40,15 @@ public class AnimatedTile extends Tile {
     public void update(double dt) {
         sprite.update(dt);
         this.setSprite(sprite.getSprite());
+    }
+
+    /**
+     * Updates the animated tiles.
+     * @param dt Time since last game tick
+     */
+    public static void updateAll(double dt) {
+        WATER.update(dt);
+        VOID.update(dt);
     }
 
 }

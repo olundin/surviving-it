@@ -22,7 +22,7 @@ public abstract class Scene {
     protected int width;
     protected int height;
 
-    protected Player player;
+    protected Player player = null;
 
     private List<GameObject> gameObjects;
     protected Tile[][] tiles;
@@ -41,7 +41,6 @@ public abstract class Scene {
         this.camera = camera;
         this.width = width;
         this.height = height;
-        this.player = null;
         this.gameObjects = new ArrayList<>();
         this.tiles = new Tile[this.height][this.width];
         this.gameObjectComparator = new GameObjectComparator();
@@ -141,7 +140,7 @@ public abstract class Scene {
         int xInt = (int)Math.floor(x);
         int yInt = (int)Math.floor(y);
         if (!this.inBounds(x, y) || tiles[xInt][yInt] == null) {
-            return Tile.VOID;
+            return AnimatedTile.VOID;
         } else {
             return tiles[yInt][xInt];
         }

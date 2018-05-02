@@ -1,6 +1,5 @@
 package survivingit.scene;
 
-import survivingit.graphics.AnimatedSprite;
 import survivingit.graphics.Sprite;
 
 /**
@@ -26,15 +25,6 @@ public class Tile {
     public static final TileGroup ICE = new TileGroup(Sprite.ICE, new boolean[]{true,true,true,true,true,true,true,true,true}, false);
 
     /**
-     * Water tile, animated. Is updated in the main game loop.
-     */
-    public static final AnimatedTile WATER = new AnimatedTile(new AnimatedSprite(Sprite.WATER, 0.2), false, false);
-    /**
-     * Void tile, animated. Is updated in the main game loop.
-     */
-    public static final AnimatedTile VOID = new AnimatedTile(new AnimatedSprite(Sprite.VOID, 0.5), false, false);
-
-    /**
      * Wall tile
      */
     public static final Tile WALL = new Tile(Sprite.WALL, false, false);
@@ -53,15 +43,6 @@ public class Tile {
         this.sprite = sprite;
         this.passable = passable;
         this.fertile = fertile;
-    }
-
-    /**
-     * Updates the animated tiles.
-     * @param dt Time since last game tick
-     */
-    public static void updateAnimated(double dt) {
-        WATER.update(dt);
-        VOID.update(dt);
     }
 
     /**

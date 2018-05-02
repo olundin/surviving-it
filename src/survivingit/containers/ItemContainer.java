@@ -1,7 +1,6 @@
 package survivingit.containers;
 
 import survivingit.items.Item;
-import survivingit.items.ItemType;
 
 /**
  * Created by AngusLothian on 2018-03-23.
@@ -39,7 +38,9 @@ public class ItemContainer {
         if (this.isFull()) {
             throw new IllegalStateException("Attempted add item to full inventory");
         }
+
         ItemSlot emptySlot = this.getFirstEmptySlot();
+        //noinspection ConstantConditions
         emptySlot.setItem(item);
         usedSlots++;
     }

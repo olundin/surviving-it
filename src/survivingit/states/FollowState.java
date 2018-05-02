@@ -1,7 +1,6 @@
 package survivingit.states;
 
 import survivingit.gameobjects.Animal;
-import survivingit.gameobjects.Direction;
 import survivingit.gameobjects.GameObject;
 import survivingit.util.Point;
 
@@ -10,6 +9,8 @@ import java.util.Stack;
 /**
  * Follow state for animals.
  * Makes the animal follow given target around.
+ *
+ * @see State
  */
 public class FollowState implements State<Animal> {
 

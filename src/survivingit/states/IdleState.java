@@ -8,6 +8,8 @@ import survivingit.gameobjects.GameObject;
 /**
  * Idle state for an animal.
  * Makes the animal walk around randomly until a possible target is encountered.
+ *
+ * @see State
  */
 public class IdleState implements State<Animal> {
 

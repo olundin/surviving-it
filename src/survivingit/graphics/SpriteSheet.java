@@ -4,11 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A spritesheet is a larger image that can be clipped by sprites to create smaller ones.
  */
 public final class SpriteSheet {
+
+    private static final Logger LOGGER = Logger.getLogger(SpriteSheet.class.getName());
 
     /**
      * Static SpriteSheet for Player sprites.
@@ -67,7 +71,7 @@ public final class SpriteSheet {
 
     private int width;
     private int height;
-    private BufferedImage image;
+    private BufferedImage image = null;
 
     /*
      * Creates a new SpriteSheet object with the image of the entered path.
@@ -81,7 +85,8 @@ public final class SpriteSheet {
             this.height = image.getHeight();
         } catch (IOException e)  {
             System.out.println("Error reading image " + path);
-
+            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", path);
+            System.exit(-1);
         }
     }
 
@@ -92,7 +97,8 @@ public final class SpriteSheet {
             this.width = width;
             this.height = height;
         } catch (IOException e)  {
-            System.out.println("Error reading image " + path);
+            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", path);
+            System.exit(-1);
         }
     }
 

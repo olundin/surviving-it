@@ -5,6 +5,8 @@ import survivingit.gameobjects.Player;
 
 /**
  * Creates a scene filled with campfires.
+ *
+ * @see Scene
  */
 public class CampfireScene extends Scene {
 

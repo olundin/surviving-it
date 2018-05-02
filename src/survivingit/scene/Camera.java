@@ -4,12 +4,13 @@ import survivingit.gameobjects.GameObject;
 import survivingit.graphics.WorldRenderer;
 import survivingit.util.Point;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * The camera is responsible for "seeing" the scene
  * It has a world position and size, and a screen position and size.
+ *
+ * @see Scene
  */
 public class Camera {
 
@@ -29,7 +30,7 @@ public class Camera {
 
     private static final double EDGE_PADDING = 4; // Padding to be added to edges of viewport when finding visible GameObjects
 
-    private Point target;
+    private Point target = null;
 
     /**
      * Creates a new camera with the given properties
@@ -52,8 +53,6 @@ public class Camera {
         this.screenY = screenY;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-
-        this.target = null;
     }
 
     /**
