@@ -5,21 +5,29 @@ import survivingit.gameobjects.Creature;
 /**
  * Created by AngusLothian on 2018-04-27.
  */
-public class IgnitionEffect extends UsableEffect {
+public class IgniteEffect extends UsableEffect {
 
     private int uses;
+    private int fireTime;
+    private double ignitionWidth;
+    private double ignitionHeight;
 
-    public IgnitionEffect(final int uses, final Item source) {
+    public IgniteEffect(final int uses, final int fireTime, final double ignitionWidth, final double ignitionHeight,
+                        final Item source) {
         super(source);
         this.uses = uses;
+        this.fireTime = fireTime;
+        this.ignitionWidth = ignitionWidth;
+        this.ignitionHeight = ignitionHeight;
     }
 
     @Override
     public void use(Creature user) {
         if (uses > 0) {
-            user.igniteFirePlaces();
+            user.igniteFirePlaces(this.fireTime, this.ignitionWidth, this.ignitionHeight);
             uses--;
+        } else {
+            System.out.println("Out of uses!");
         }
-        System.out.println(uses);
     }
 }
