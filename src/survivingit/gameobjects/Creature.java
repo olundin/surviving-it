@@ -5,8 +5,10 @@ import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 
 /**
- * Abstract superclass for all Creatures which contains data and functionality concerning health, movement and interaction
- * with other gameObjects/creatures such as performing attacks, igniting fireplaces.
+ * Abstract superclass for all Creatures, inherits from VisibleObject.
+ *
+ * Contains data and functionality concerning health, movement and interaction with other gameObjects/creatures such as
+ * performing attacks and igniting fireplaces.
  */
 public abstract class Creature extends VisibleObject {
 

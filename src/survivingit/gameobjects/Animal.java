@@ -11,11 +11,10 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Abstract super class for all animals.
+ * Abstract super class for all animals, inherits from Creature.
  *
  * Contains data and behaviour that is common for all animals such ass path to follow, target finding based on the
  * animal's viewing distance and a StateMachine for animal behaviour.
- *
  */
 public abstract class Animal extends Creature {
 

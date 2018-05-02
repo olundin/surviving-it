@@ -4,6 +4,9 @@ import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
 import survivingit.physics.Collider;
 
+/**
+ * Class for the Boar animal.
+ */
 public class Boar extends Animal{
 
     @Override

@@ -3,7 +3,7 @@ package survivingit.gameobjects;
 import survivingit.graphics.Sprite;
 
 /**
- * Abstract superclass for all visible game objects.
+ * Abstract superclass for all visible game objects, inherits from GameObject.
  *
  * Contains data and handling for rendering information which is stored in the Sprite.
  */
