@@ -1,5 +1,8 @@
 package survivingit.graphics;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Class for the animated sprites which handles animation.
  *
@@ -7,7 +10,7 @@ package survivingit.graphics;
  * oscillation. Main usage of the AnimatedSprite is the getSprite() method that returns the current Sprite for rendering.
  */
 public class AnimatedSprite {
-
+    
     private enum AnimationDirection {
         FORWARDS(1),
         BACKWARDS(-1);
