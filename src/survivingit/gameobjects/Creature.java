@@ -1,6 +1,8 @@
 package survivingit.gameobjects;
 
 import survivingit.graphics.CreatureSprite;
+import survivingit.messaging.Message;
+import survivingit.messaging.MessageType;
 
 public abstract class Creature extends VisibleObject {
 
@@ -100,16 +102,25 @@ public abstract class Creature extends VisibleObject {
         return this.alphaLevel;
     }
 
-    public void performAttack(int damage, int range) {
-        //TODO:
-    }
-
     public void heal(int healAmount) {
         // Don't set health to higher to than max.
         int newHealth = currentHealth + healAmount;
         if(newHealth > maxHealth) newHealth = maxHealth;
         this.setCurrentHealth(newHealth);
         //this.setCurrentHealth(currentHealth + Math.max(healAmount - maxHealth, 0)); // <- Doesn't work?
+    }
+
+    public double getRange() {
+        return this.range;
+    }
+
+    public void performAttack(final int damage, final double range, final double angle) {
+        sendMesageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
+        System.out.println("attack");
+    }
+
+    public double getAngleTo(final double targetX, final double targetY) {
+        return Math.atan2(targetY - this.y, targetX - this.x);
     }
 
     public void igniteFirePlaces() {

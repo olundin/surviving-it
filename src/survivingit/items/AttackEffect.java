@@ -21,6 +21,6 @@ public abstract class AttackEffect extends Effect {
      * Performs an attack from the entered attacker Creature.
      * @param attacker Creature who's attack method is used.
      */
-    public abstract void attack(Creature attacker);
+    public abstract void attack(Creature attacker, double angle);
 
 }

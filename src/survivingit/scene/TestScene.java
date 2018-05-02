@@ -23,7 +23,7 @@ public class TestScene extends Scene {
         player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.FLINT_AND_STEEL));
         for (int i = 0; i < 8; i++) {
             player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BERRIES));
-            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.BOOTS));
+            player.addItemToFirstAvilable(ItemFactory.createItem(ItemType.KNIFE));
         }
         setPlayer(player);
 

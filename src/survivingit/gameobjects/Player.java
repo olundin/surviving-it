@@ -3,9 +3,9 @@ package survivingit.gameobjects;
 import survivingit.containers.PlayerInventory;
 import survivingit.graphics.CreatureSprite;
 import survivingit.graphics.SpriteSheet;
+import survivingit.items.*;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
-import survivingit.items.Item;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.physics.Collider;
@@ -29,7 +29,7 @@ public class Player extends Creature implements Observable<Player> {
                 10,
               Integer.MAX_VALUE,
                 1,
-                1);
+                2);
 	    observers = new ArrayList<>();
 	    this.setCollider(new Collider(-0.2, -0.5, 0.4, 0.5, false, this));
 	    this.playerInventory = new PlayerInventory(PASSIVE_STORAGE_SIZE, EQUIPPABLE_STORAGE_SIZE);
@@ -73,12 +73,25 @@ public class Player extends Creature implements Observable<Player> {
         }
     }
 
-    // TODO: REMOVE! Only a temporary method for testing
-    public void performAttack() {
+    /**
+     * Perform a player attack with either the equipped weapon or just the players bare hands in the direction of the
+     * target cords.
+     * @param targetX double of the x position for the attack to be performed in.
+     * @param targetY double of the y position for the attack to be performed in.
+     */
+    public void playerAttack(final double targetX, final double targetY) {
+        double angle = getAngleTo(targetX, targetY);
         if (isCarryingWeapon()) {
-            performAttack(1, 1);
+            List<Effect> attackEffects = playerInventory.getEquippedItemContainer().getEquippedItem().getEffectsOfEffectType(EffectType.ATTACK);
+            for (Effect effect : attackEffects) {
+                if (effect instanceof MeleeAttackEffect) {
+                    MeleeAttackEffect meleeAttackEffect = (MeleeAttackEffect) effect;
+                    meleeAttackEffect.attack(this, angle);
+                }
+            }
+        } else {
+            performAttack(this.damage, this.range, angle);
         }
-        sendMesageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
     }
 
     @Override

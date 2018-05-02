@@ -44,7 +44,7 @@ public class InputHandler {
         if (mouse.getButtonPressed(Input.BUTTON_LEFT)) {
             player.useEquippedItem();
         } else if (mouse.getButtonPressed(Input.BUTTON_RIGHT)) {
-            player.performAttack();
+            player.playerAttack(camera.screenToWorldX(mouse.getX()), camera.screenToWorldY(mouse.getY()));
         }
 
         // Switch equipped item with scroll wheel
