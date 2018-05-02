@@ -81,6 +81,7 @@ public final class SpriteSheet {
             this.height = image.getHeight();
         } catch (IOException e)  {
             System.out.println("Error reading image " + path);
+
         }
     }
 

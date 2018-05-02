@@ -7,7 +7,7 @@ import survivingit.items.Item;
 import survivingit.items.UsableEffect;
 
 /**
- * Item container that can be equipped
+ * Item container that can be equipped.
  *
  * @see ItemContainer
  */
