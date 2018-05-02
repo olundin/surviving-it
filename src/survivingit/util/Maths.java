@@ -14,7 +14,7 @@ public class Maths {
     /**
      * The length of a diagonal movement (dx = dy = 1)
      */
-    public static final double DIAGONAL_LENGTH = Math.sqrt(2.0); // Distance of moving one unit on both x and y-axis
+    public static final double DIAGONAL_LENGTH = Math.sqrt(2.0); // Distance of moving one unit on both deltaX and deltaY-axis
 
     /**
      * Linear interpolation.
@@ -65,7 +65,7 @@ public class Maths {
      * @return Input value floored as an int
      */
     public static int fastFloor(double x) {
-        // A little bit faster than (int)Math.floor(x)
+        // A little bit faster than (int)Math.floor(deltaX)
         // (Based on time comparisons
         int xi = (int)x;
         return x < xi ? xi - 1 : xi;

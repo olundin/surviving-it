@@ -21,7 +21,7 @@ public abstract class Scene {
     protected Tile[][] tiles;
 
     private Random random;
-    private GameObjectComparator gameObjectComparator; // Sorts objects by y value for correct rendering
+    private GameObjectComparator gameObjectComparator; // Sorts objects by deltaY value for correct rendering
 
     private AStar<Point> aStar;
 

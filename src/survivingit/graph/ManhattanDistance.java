@@ -5,7 +5,7 @@ import survivingit.util.Point;
 /**
  * ManhattanDistance, for use in AStar with Point as Node id:s.
  * Calculates absolute distance between two points by adding
- * difference in x and difference in y together.
+ * difference in deltaX and difference in deltaY together.
  *
  * Efficient for 2-dimensional grids with 4 directions of movement
  *

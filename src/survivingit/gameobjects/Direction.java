@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Enum class used for movement in different Directions.
+ * Stores deltaX and deltaY in the enum values for more readable code.
+ */
 public enum Direction {
 
     LEFT(-1, 0),
@@ -19,22 +23,43 @@ public enum Direction {
     DOWN_LEFT(-Maths.DIAGONAL_SPEED, Maths.DIAGONAL_SPEED),
     NONE(0, 0);
 
-    public final double x;
-    public final double y;
+    /**
+     * Double value of the deltaX the Direction has.
+     */
+    public final double deltaX;
 
-    Direction(final double x, final double y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * Double value of the deltaY the Direction has.
+     */
+    public final double deltaY;
+
+    /**
+     * Creates a new enum value with the entered deltaX and deltaY values.
+     * @param deltaX double of the deltaX for the enum value.
+     * @param deltaY double of the deltaY for the enum value.
+     */
+    Direction(final double deltaX, final double deltaY) {
+        this.deltaX = deltaX;
+        this.deltaY = deltaY;
     }
 
     private static final List<Direction> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
+    /**
+     * Returns a random enum Direction value.
+     * @return a random enum Diretcion value.
+     */
     public static Direction random() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
 
+    /**
+     * Returns the Direction value closest to the entered angle.
+     * @param angle to get the closest enum value for.
+     * @return the Direction value closest to the enterd angle.
+     */
     public static Direction fromAngle(double angle) {
         angle %= 2 * Math.PI;
         if(angle >= 0) {

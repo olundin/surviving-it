@@ -37,7 +37,7 @@ public abstract class Creature extends VisibleObject {
 
     public void update(double dt) {
         if(this.direction != Direction.NONE) {
-            this.move(this.direction.x * this.moveSpeed * dt, this.direction.y * this.moveSpeed * dt);
+            this.move(this.direction.deltaX * this.moveSpeed * dt, this.direction.deltaY * this.moveSpeed * dt);
         }
 
         // Update sprites

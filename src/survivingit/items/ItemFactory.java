@@ -4,6 +4,9 @@ import survivingit.graphics.Sprite;
 
 public abstract class ItemFactory {
 
+	/**
+	 * Flyweight pointer for NONE_ITEM used for empty item slots. Is stored as a public field to save memory usage.
+	 */
 	public final static Item NONE_ITEM = new Item(ItemType.NONE, "None", "None", Sprite.CAMPFIRE);
 
 	/**

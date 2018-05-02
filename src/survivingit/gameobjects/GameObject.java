@@ -34,9 +34,9 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Creates a new GameObject with the entered x and y coord.
-     * @param x double of the gameojects's initial x position.
-     * @param y double of the gameobjects's inital y position.
+     * Creates a new GameObject with the entered deltaX and deltaY coord.
+     * @param x double of the gameojects's initial deltaX position.
+     * @param y double of the gameobjects's inital deltaY position.
      */
     public GameObject(final double x, final double y) {
         this.x = x;
@@ -46,25 +46,25 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Returns a double of the the gameObject's x position.
-     * @return double of the gameObject's x position.
+     * Returns a double of the the gameObject's deltaX position.
+     * @return double of the gameObject's deltaX position.
      */
     public double getX() {
         return this.x;
     }
 
     /**
-     * Returns a double of the the gameObject's x position.
-     * @return double of the gameObject's x position.
+     * Returns a double of the the gameObject's deltaX position.
+     * @return double of the gameObject's deltaX position.
      */
     public double getY() {
         return this.y;
     }
 
     /**
-     * Sets the gameObject's position to the entered x and y coordinate.
-     * @param x double of the x position to be set.
-     * @param y double of the y position to be set.
+     * Sets the gameObject's position to the entered deltaX and deltaY coordinate.
+     * @param x double of the deltaX position to be set.
+     * @param y double of the deltaY position to be set.
      */
     public void setPos(final double x, final double y) {
         this.x = x;
@@ -72,12 +72,12 @@ public abstract class GameObject implements Messagable {
     }
 
     /**
-     * Attempts to move the gameObject with the entered dx and dy changes in x and y coordinate.
+     * Attempts to move the gameObject with the entered dx and dy changes in deltaX and deltaY coordinate.
      *
      * If any of the dx and dy changes that are attempted causes a collisions with the gameObject's collider thgen the
      * change is reverted.
-     * @param dx double of the change in x coordinate to be attempted.
-     * @param dy double of the change in y coordinate to be attempted.
+     * @param dx double of the change in deltaX coordinate to be attempted.
+     * @param dy double of the change in deltaY coordinate to be attempted.
      */
     public void move(final double dx, final double dy) {
         // Try horizontal movement
@@ -94,6 +94,10 @@ public abstract class GameObject implements Messagable {
         }
     }
 
+    /**
+     * Returns a boolean if the gameObject is alive.
+     * @return if the gameObject is alive.
+     */
     public boolean isAlive() {
         return this.alive;
     }

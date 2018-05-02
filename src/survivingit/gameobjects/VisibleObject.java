@@ -12,9 +12,9 @@ public abstract class VisibleObject extends GameObject {
     protected Sprite sprite;
 
     /**
-     * Creates a new VisibleObject sprite with the entered x, y cords, and sprite.
-     * @param x double of the initial x coordinate for the VisibleObject.
-     * @param y double of the initial x coordinate for the VisibleObject.
+     * Creates a new VisibleObject sprite with the entered deltaX, deltaY cords, and sprite.
+     * @param x double of the initial deltaX coordinate for the VisibleObject.
+     * @param y double of the initial deltaX coordinate for the VisibleObject.
      * @param sprite Sprite with the rendering data for the VisibleObject.
      */
     public VisibleObject(final double x, final double y, final Sprite sprite) {
