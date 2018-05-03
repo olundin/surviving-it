@@ -50,7 +50,7 @@ Vi har också tänkt modella djuren som simpla finite statemachines, mer info om
 | 15 | Funktionalitet för serialisering av spelobjekten finns för att kunna spara. |  |
 | 16 | Funktionalitet för att kunna ladda sparade spel. |  |
 | 17 | Sprites kan använda animationer. | ✅ |
-| 18 | Slumpgenererade nivåer med Perlin Noise algorithm. |  |
+| 18 | Slumpgenererade nivåer med Perlin Noise algorithm. | ✅  |
 | 19 | Mer avancerade jakt mechanics som att man följer fotspår. |  |
 | 20 | Graphics renderas via OpenGL med shapes. |  |
 
