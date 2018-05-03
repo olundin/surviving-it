@@ -25,8 +25,8 @@ import java.util.List;
 public class Player extends Creature implements Observable<Player> {
 
     private static final int MAX_HEALTH = 50;
-    private static final double MOVE_SPEED = 10.0;
-    private static final int DAMAGE = Integer.MAX_VALUE/2;
+    private static final double MOVE_SPEED = 5.0;
+    private static final int DAMAGE = 5;
     private static final int ALPHA_LEVEL = 1;
     private static final double RANGE = 2.0;
 
