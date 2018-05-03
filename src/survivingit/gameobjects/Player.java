@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for the Player, inherits from Creature and implemens Observable.
+ * Class for the Player, inherits from Creature and implements Observable.
  *
- * Contains functionality for inventory/Item usage and maintenance, and has observers for health updating.
+ * Contains functionality for inventory/Item usage and maintenance, and has observers for health HUD updating.
  *
  * @see Creature
  * @see Observable

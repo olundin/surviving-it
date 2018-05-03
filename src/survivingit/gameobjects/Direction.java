@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Enum class used for movement in different Directions.
+ *
  * Stores deltaX and deltaY in the enum values for more readable code.
  */
 public enum Direction {
