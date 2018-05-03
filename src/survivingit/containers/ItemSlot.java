@@ -11,6 +11,7 @@ import survivingit.items.ItemType;
  * a general ItemSlotType (ANY) which can hold any type of Item.
  *
  * @see Item
+ * @see ItemSlotType
  */
 public class ItemSlot {
 
