@@ -7,7 +7,10 @@ import survivingit.items.Item;
 import survivingit.items.UsableEffect;
 
 /**
- * Item container that can be equipped.
+ * Item container class that can be equipped and that has a specific Item that is equipped, extends and gets
+ * most of it's behaviour form ItemContainer.
+ *
+ * Has an equipped item index and methods for handling the equipped Item.
  *
  * @see ItemContainer
  */

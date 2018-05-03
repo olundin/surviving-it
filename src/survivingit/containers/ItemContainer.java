@@ -3,7 +3,12 @@ package survivingit.containers;
 import survivingit.items.Item;
 
 /**
- * Created by AngusLothian on 2018-03-23.
+ * Base Item container that can hold items.
+ *
+ * Consists of a collection of ItemSlots which can store individual Item objects. Contains methods for adding and
+ * removing items from the container.
+ *
+ * @see ItemSlot
  */
 public class ItemContainer {
 

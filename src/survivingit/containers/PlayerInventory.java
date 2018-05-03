@@ -4,7 +4,13 @@ import survivingit.gameobjects.Creature;
 import survivingit.items.Item;
 
 /**
- * Created by AngusLothian on 2018-03-24.
+ * Class for PlayerInventory which consists of an EquippedItemContainer and a regular ItemContainer used by the Player.
+ *
+ * Contains methods for interacting with both the EquippedItemContainer and the regular ItemContainer through delegation
+ * pattern.
+ *
+ * @see EquippedItemContainer
+ * @see ItemContainer
  */
 public class PlayerInventory {
 

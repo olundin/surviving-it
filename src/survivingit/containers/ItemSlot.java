@@ -5,8 +5,12 @@ import survivingit.items.ItemFactory;
 import survivingit.items.ItemType;
 
 /**
- * Item slot class.
- * Can fit one item.
+ * Item slot class that can hold a single Item.
+ *
+ * An ItemSlot object can be of a specific ItemSlotType and can then only store items that fit that ItemSlotType, or of
+ * a general ItemSlotType (ANY) which can hold any type of Item.
+ *
+ * @see Item
  */
 public class ItemSlot {
 
