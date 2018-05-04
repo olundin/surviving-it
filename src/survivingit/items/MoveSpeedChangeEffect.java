@@ -37,6 +37,6 @@ public class MoveSpeedChangeEffect extends UsableEffect {
         } else {
             System.out.println("out of uses");
         }
-
     }
+
 }
