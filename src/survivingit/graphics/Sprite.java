@@ -121,9 +121,18 @@ public class Sprite {
     public static final Sprite GYLLENE_SKOR = new Sprite(0, 0, 400, 257, SpriteSheet.BOOTS);
 
     /**
+     * Static Sprite for a berries Item icon.
+     */
+    public static final Sprite BERRIES = new Sprite(0, 0, 32, 32, SpriteSheet.ITEMS);
+    /**
+     * Static Sprite for a flint and steel Item icon.
+     */
+    public static final Sprite FLINT_AND_STEEL = new Sprite(32, 0, 32, 32, SpriteSheet.ITEMS);
+    /**
      * Static Sprite for a knife Item icon.
      */
-    public static final Sprite KNIFE = new Sprite(0, 0, 24, 24, SpriteSheet.KNIFE);
+    public static final Sprite KNIFE = new Sprite(0, 32, 32, 32, SpriteSheet.ITEMS);
+
 
     private int startX;
     private int startY;

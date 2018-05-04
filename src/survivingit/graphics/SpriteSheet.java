@@ -64,9 +64,9 @@ public final class SpriteSheet {
     public static final SpriteSheet BOOTS = new SpriteSheet("boots.png");
 
     /**
-     * Static SpriteSheet for Knife sprites.
+     * Static SpriteSheet for item sprites.
      */
-    public static final SpriteSheet KNIFE = new SpriteSheet("knife.png");
+    public static final SpriteSheet ITEMS = new SpriteSheet("items.png");
 
     private int width;
     private int height;

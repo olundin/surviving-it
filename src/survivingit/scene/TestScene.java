@@ -29,11 +29,10 @@ public class TestScene extends Scene {
 
         // Add player
         Player player = new Player(Maths.fastFloor(width/(double)2), Maths.fastFloor(height/(double)2), this);
+        player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.KNIFE));
+        player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.BERRY));
         player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.FLINT_AND_STEEL));
-        for (int i = 0; i < 8; i++) {
-            player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.BERRY));
-            player.addItemToFirstAvailable(ItemFactory.createItem(ItemType.KNIFE));
-        }
+
         setPlayer(player);
 
         // Generate tiles, trees, e.t.c.
