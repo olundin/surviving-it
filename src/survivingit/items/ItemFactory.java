@@ -24,9 +24,12 @@ public final class ItemFactory {
 		switch (itemType) {
 			case KNIFE:
 				Item knife = new Item(itemType, "Knife", "Stabby stabby", Sprite.KNIFE);
-				knife.addEffect(new MeleeAttackEffect(10, 10, knife));
+				knife.addEffect(new MeleeAttackEffect(10, 4, knife));
 				return knife;
-
+			case SPEAR:
+				Item spear = new Item(itemType, "Spear", "Long stabby stabby", Sprite.SPEAR);
+				spear.addEffect(new MeleeAttackEffect(4, 10, spear));
+				return spear;
 			case BERRY:
 				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
 				berries.addEffect(new HealEffect(25, 5, berries));

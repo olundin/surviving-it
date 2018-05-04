@@ -4,6 +4,8 @@ import survivingit.gameobjects.Creature;
 
 /**
  * Item effect for melee attacks.
+ *
+ * @see AttackEffect
  */
 public class MeleeAttackEffect extends AttackEffect {
 
@@ -23,12 +25,14 @@ public class MeleeAttackEffect extends AttackEffect {
     }
 
     /**
-     * Performs a melee performAttack from the entered attacker Creature.
+     * Performs a melee performAttack from the entered attacker Creature with the additional MeleeAttackEffects danage
+     * and range.
+     *
      * @param attacker Creature who's performAttack method is used.
      */
     @Override
     public void attack(Creature attacker, double angle) {
-        attacker.performAttack(attacker.getDamage() + damage, Math.max(attacker.getRange(), this.range), angle);
+        attacker.performAttack(attacker.getDamage() + damage, attacker.getRange() + this.range, angle);
     }
 
 }

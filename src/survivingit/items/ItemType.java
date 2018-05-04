@@ -14,6 +14,10 @@ public enum ItemType {
      */
     KNIFE,
     /**
+     * Spear item type
+     */
+    SPEAR,
+    /**
      * Berry item type
      */
     BERRY,
@@ -25,4 +29,5 @@ public enum ItemType {
      * Flint and steel item type
      */
     FLINT_AND_STEEL
+
 }
