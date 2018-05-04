@@ -125,6 +125,11 @@ public class Sprite {
      */
     public static final Sprite KNIFE = new Sprite(0, 0, 24, 24, SpriteSheet.KNIFE);
 
+    /**
+     * Static Sprite for a spear Item icon.
+     */
+    public static final Sprite SPEAR = new Sprite(0, 0, 395, 395, SpriteSheet.SPEAR);
+
     private int startX;
     private int startY;
     private int width;

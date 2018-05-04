@@ -68,6 +68,11 @@ public final class SpriteSheet {
      */
     public static final SpriteSheet KNIFE = new SpriteSheet("knife.png");
 
+    /**
+     * Static SpriteSheet for Spear sprites.
+     */
+    public static final SpriteSheet SPEAR = new SpriteSheet("spear.png");
+
     private int width;
     private int height;
     private BufferedImage image = null;
