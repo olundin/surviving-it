@@ -67,6 +67,13 @@ public class InputHandler {
             player.changeEquippedItem(mouse.getScroll());
         }
 
+        // Switch equipped item with left/right arrow keys
+        if (keyboard.getKey(Input.KEY_LEFT)) {
+            player.changeEquippedItem(-1);
+        } else if (keyboard.getKey(Input.KEY_RIGHT)) {
+            player.changeEquippedItem(1);
+        }
+
         // Toggle HUD elements
         if (keyboard.getKey(Input.KEY_I) && keyboard.getKeyPressed(Input.KEY_I)) {
             hud.toggleInvetory();

@@ -20,7 +20,7 @@ public class SceneGenerator {
 
     private static final int MIN_PINE_DISTANCE = 50;
     private static final int CAMPFIRE_GRID_SIZE = 20;
-    private static final int ANIMAL_GRID_SIZE = 15;
+    private static final int ANIMAL_GRID_SIZE = 10;
 
     /**
      * Creates a new scene generator with the given tile group occurrences.
@@ -137,6 +137,9 @@ public class SceneGenerator {
                 }
             }
         }
+        double yetiX = Game.RANDOM.nextDouble()*scene.getWidth();
+        double yetiY = Game.RANDOM.nextDouble()*scene.getHeight();
+        scene.add(new Yeti(yetiX, yetiY, scene));
     }
 
     /**

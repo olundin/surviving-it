@@ -5,6 +5,8 @@ package survivingit.graphics;
  *
  * Contains data and functionality for changing the flow of the animation by pausing, playing, restarting and allowing
  * oscillation. Main usage of the AnimatedSprite is the getSprite() method that returns the current Sprite for rendering.
+ *
+ * @see Sprite
  */
 public class AnimatedSprite {
 

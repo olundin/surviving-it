@@ -88,8 +88,9 @@ public final class SpriteSheet {
         }
     }
 
+    // ignored inspection warning
     private SpriteSheet(String fileName, int width, int height) {
-        // Take width and height as parameters, to make a spritsheet that only contains part of spritesheet
+        // Take width and height as parameters, to make a spritesheet that only contains part of spritesheet
         try {
             this.image = ImageIO.read(SpriteSheet.class.getResource("/resources/" + fileName));
             this.width = width;

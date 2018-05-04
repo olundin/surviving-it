@@ -7,7 +7,9 @@ import survivingit.scene.Tile;
 import java.util.List;
 
 /**
- * Collider class. Used for stopping/detecting collisions.
+ * Collider class used for stopping and detecting collision.
+ *
+ * All Colliders has the shapes of a rectangle.
  */
 public class Collider {
 
