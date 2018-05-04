@@ -34,7 +34,7 @@ public final class ItemFactory {
 
 			case BOOTS:
 				Item boots = new Item(itemType, "Gyllene skor", "Diggiloo diggiley", Sprite.GYLLENE_SKOR);
-				boots.addEffect(new MoveSpeedChangeEffect(10, boots));
+				boots.addEffect(new MoveSpeedChangeEffect(5, 1, boots));
 				return boots;
 
 			case FLINT_AND_STEEL:
