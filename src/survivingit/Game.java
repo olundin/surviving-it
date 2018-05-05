@@ -45,7 +45,6 @@ public final class Game implements Observer<GameWindow> {
     private InputHandler inputHandler;
 
     private Scene currentScene;
-    private Camera camera;
     private Hud hud;
 
     private boolean running = false;
@@ -71,8 +70,8 @@ public final class Game implements Observer<GameWindow> {
 
     	renderer.createBufferStrategy(3);
 
-        this.camera = new Camera(0, 0, CAMERA_WORLD_WIDTH, CAMERA_WORLD_HEIGHT, 0, 0, WIDTH, HEIGHT);
-        this.currentScene = new TestScene(this.camera);
+        Camera camera = new Camera(0, 0, CAMERA_WORLD_WIDTH, CAMERA_WORLD_HEIGHT, 0, 0, WIDTH, HEIGHT);
+        this.currentScene = new TestScene(camera);
         this.hud = new Hud(currentScene.getPlayer());
     }
 
@@ -91,7 +90,7 @@ public final class Game implements Observer<GameWindow> {
         final double nanosPerSec = 1_000_000_000.0;
 
         // Game loop
-        while(running) {
+        while (running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
             deltaTime = Math.min(deltaTime, maxDelta);   // Set a cap to deltaTime
@@ -103,7 +102,7 @@ public final class Game implements Observer<GameWindow> {
             previousTime = currentTime;
 
             double frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
-            while(targetDelta - frameTime > 0) {
+            while (targetDelta - frameTime > 0) {
                 // Make sure we aren't updating too often
                 frameTime = (System.nanoTime() - currentTime) / nanosPerSec;
             }
@@ -120,7 +119,7 @@ public final class Game implements Observer<GameWindow> {
     }
 
     private void update(double dt) {
-        inputHandler.handleInput(dt, currentScene.getPlayer(), camera, hud);
+        inputHandler.handleInput(dt, currentScene.getPlayer(), currentScene.getCamera(), hud);
 
         currentScene.update(dt);
 
@@ -147,7 +146,7 @@ public final class Game implements Observer<GameWindow> {
      * @param data The data
      */
     public void onNotify(Observable<GameWindow> object, GameWindow data) {
-        if(!data.isOpen()) {
+        if (!data.isOpen()) {
             this.stop();
         }
     }
