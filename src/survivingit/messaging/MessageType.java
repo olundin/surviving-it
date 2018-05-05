@@ -7,13 +7,9 @@ package survivingit.messaging;
  */
 public enum MessageType {
     /**
-     * Receive item message type
-     */
-    ITEM,
-    /**
      * Attack message type
      */
-    ATTACK,
+    DAMAGE,
     /**
      * Heal message type
      */

@@ -221,7 +221,7 @@ public abstract class Creature extends VisibleObject {
      */
     public void performAttack(final int damage, final double range, final double angle) {
         System.out.println(damage);
-        sendMessageToCreaturesInArea(new Message(MessageType.ATTACK, damage), range, range);
+        sendMessageToCreaturesInArea(new Message(MessageType.DAMAGE, damage), range, range);
     }
 
     protected double getAngleTo(final double targetX, final double targetY) {

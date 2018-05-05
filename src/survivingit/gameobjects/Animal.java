@@ -124,18 +124,18 @@ public abstract class Animal extends Creature {
     }
 
     /**
-     * Receives the entered message and reacts to it.
+     * Receives and reacts to the entered Message.
      *
      * The animal receives the message and acts differently based on what type of message it is.
-     * If the entered message is an Attack message then the animal takes damage equal to the message data.
-     * @param msg Message received by the animal.
+     * If the entered message is a Damage message then the animal takes damage equal to the message data.
+     * @param message Message object to react to.
      */
     @Override
-    public void receiveMessage(Message msg) {
-        MessageType type = msg.getType();
-        int data = msg.getData();
+    public void receiveMessage(Message message) {
+        MessageType type = message.getType();
+        int data = message.getData();
         switch(type) {
-            case ATTACK:
+            case DAMAGE:
                 this.takeDamage(data);
                 break;
             default:

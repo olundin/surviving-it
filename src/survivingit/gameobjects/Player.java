@@ -63,30 +63,6 @@ public class Player extends Creature implements Observable<Player> {
     }
 
     /**
-     * Sets the current health of the player to the entered amount.
-     *
-     * Also notifies the player's observers.
-     * @param currentHealth int value to set the players's current health to.
-     */
-    @Override
-    public void setCurrentHealth(final int currentHealth) {
-        super.setCurrentHealth(currentHealth);
-        this.notifyObservers(this);
-    }
-
-    /**
-     * Sets the max health of the player to the entered amount.
-     *
-     * Also notifies the player's observers.
-     * @param maxHealth int value to set the players's max health to.
-     */
-    @Override
-    public void setMaxHealth(final int maxHealth) {
-        super.setMaxHealth(maxHealth);
-        this.notifyObservers(this);
-    }
-
-    /**
      * Returns the player's inventory.
      * @return PlayerInventory of the player.
      */
@@ -100,26 +76,6 @@ public class Player extends Creature implements Observable<Player> {
      */
     public void addItemToFirstAvailable(Item item) {
         this.playerInventory.addItemToFirstAvailable(item);
-    }
-
-    /**
-     * Attaches the entered player observer to the player.
-     * @param observer Observer to be attatched.
-     */
-    @Override
-    public void attach(Observer<Player> observer) {
-        this.observers.add(observer);
-    }
-
-    /**
-     * Notifies the player's observers with the entered data.
-     * @param data Player data to notify the observers with.
-     */
-    @Override
-    public void notifyObservers(Player data) {
-        for(Observer<Player> o : observers) {
-            o.onNotify(this, data);
-        }
     }
 
     /**
@@ -144,28 +100,6 @@ public class Player extends Creature implements Observable<Player> {
     }
 
     /**
-     * Receives and reacts to the entered Message.
-     * @param msg Message to react to.
-     */
-    @Override
-    public void receiveMessage(Message msg) {
-        MessageType type = msg.getType();
-        int data = msg.getData();
-        switch(type) {
-            case ATTACK:
-                this.takeDamage(data);
-                break;
-            case ITEM:
-                break;
-            case HEAL:
-                this.heal(data);
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
      * Changes the equipped item index of the player with the entered number of spaces.
      * @param i int value of number of spaces to change the equipped index with.
      */
@@ -182,5 +116,72 @@ public class Player extends Creature implements Observable<Player> {
 
     private boolean isCarryingWeapon() {
         return this.playerInventory.isCarryingWeapon();
+    }
+
+    /**
+     * Sets the current health of the player to the entered amount.
+     *
+     * Also notifies the player's observers.
+     * @param currentHealth int value to set the players's current health to.
+     */
+    @Override
+    public void setCurrentHealth(final int currentHealth) {
+        super.setCurrentHealth(currentHealth);
+        this.notifyObservers(this);
+    }
+    /**
+     * Sets the max health of the player to the entered amount.
+     *
+     * Also notifies the player's observers.
+     * @param maxHealth int value to set the players's max health to.
+     */
+    @Override
+    public void setMaxHealth(final int maxHealth) {
+        super.setMaxHealth(maxHealth);
+        this.notifyObservers(this);
+    }
+
+    /**
+     * Attaches the entered player observer to the player.
+     * @param observer Observer to be attatched.
+     */
+    @Override
+    public void attach(Observer<Player> observer) {
+        this.observers.add(observer);
+    }
+
+    /**
+     * Notifies the player's observers with the entered data.
+     * @param data Player data to notify the observers with.
+     */
+    @Override
+    public void notifyObservers(Player data) {
+        for(Observer<Player> o : observers) {
+            o.onNotify(this, data);
+        }
+    }
+
+    /**
+     * Receives and reacts to the entered Message.
+     *
+     * The player receives the message and acts differently based on what type of message it is.
+     * If the entered message is a Damage message then the animal takes damage equal to the message data.
+     * If the entered message is a Heal message then the animal heals hp equal to the message data
+     * @param message Message object to react to.
+     */
+    @Override
+    public void receiveMessage(Message message) {
+        MessageType type = message.getType();
+        int data = message.getData();
+        switch(type) {
+            case DAMAGE:
+                this.takeDamage(data);
+                break;
+            case HEAL:
+                this.heal(data);
+                break;
+            default:
+                break;
+        }
     }
 }
