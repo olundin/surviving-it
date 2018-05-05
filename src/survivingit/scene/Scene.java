@@ -3,7 +3,7 @@ package survivingit.scene;
 import survivingit.gameobjects.*;
 import survivingit.graph.*;
 import survivingit.graphics.WorldRenderer;
-import survivingit.physics.Collider;
+import survivingit.gameobjects.Collider;
 import survivingit.util.*;
 
 import java.util.*;

@@ -1,6 +1,5 @@
-package survivingit.physics;
+package survivingit.gameobjects;
 
-import survivingit.gameobjects.GameObject;
 import survivingit.scene.Scene;
 import survivingit.scene.Tile;
 

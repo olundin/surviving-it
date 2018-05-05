@@ -8,7 +8,6 @@ import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
-import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 import java.util.ArrayList;

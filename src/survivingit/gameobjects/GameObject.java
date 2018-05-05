@@ -2,7 +2,6 @@ package survivingit.gameobjects;
 
 import survivingit.messaging.Messagable;
 import survivingit.messaging.Message;
-import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 import java.util.ArrayList;
