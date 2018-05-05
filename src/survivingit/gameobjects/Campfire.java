@@ -26,7 +26,7 @@ public class Campfire extends VisibleObject {
     private double litTime;
     private double maxLitTime;
 
-    private static final double HEAL_DELAY = 2.5;
+    private static final double HEAL_DELAY = 1;
     private static final double HEAL_RANGE = 2.5;
 
     private static final double FRAME_LENGTH = 0.1;

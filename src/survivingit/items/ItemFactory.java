@@ -5,6 +5,8 @@ import survivingit.graphics.Sprite;
 /**
  * Factory class for Items which creates ItemObjects entered ItemTypes (item IDs), adds the right components to that
  * specific ItemType and then returns it.
+ *
+ * @see Item
  */
 public final class ItemFactory {
 
@@ -32,7 +34,7 @@ public final class ItemFactory {
 				return spear;
 			case BERRY:
 				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.BERRIES);
-				berries.addEffect(new HealEffect(25, 5, berries));
+				berries.addEffect(new HealEffect(25, 100, berries));
 				return berries;
 
 			case BOOTS:
@@ -42,7 +44,7 @@ public final class ItemFactory {
 
 			case FLINT_AND_STEEL:
 				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.FLINT_AND_STEEL);
-				flintAndSteel.addEffect(new IgniteEffect(10, 10, 4, 4, flintAndSteel));
+				flintAndSteel.addEffect(new IgniteEffect(100, 10, 4, 4, flintAndSteel));
 				return flintAndSteel;
 
 			case NONE:
