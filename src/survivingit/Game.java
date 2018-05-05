@@ -91,7 +91,6 @@ public final class Game implements Observer<GameWindow> {
         final double nanosPerSec = 1_000_000_000.0;
 
         // Game loop
-        //noinspection WhileLoopSpinsOnField
         while(running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;

@@ -52,8 +52,6 @@ public abstract class Scene {
      * @param dt Time since last game tick
      */
     public void update(double dt) {
-        camera.update();
-
         for (GameObject gameObject : camera.getVisibleObjects(this)) {
             gameObject.update(dt);
 
@@ -62,6 +60,8 @@ public abstract class Scene {
                 gameObjects.remove(gameObject);
             }
         }
+
+        camera.update();
     }
 
     /**
@@ -281,5 +281,13 @@ public abstract class Scene {
      */
     public int getHeight() {
         return this.height;
+    }
+
+    /**
+     * Returns the current camera of the scene.
+     * @return the current camera of the scene.
+     */
+    public Camera getCamera() {
+        return camera;
     }
 }

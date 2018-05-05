@@ -31,7 +31,7 @@ public final class ItemFactory {
 				spear.addEffect(new MeleeAttackEffect(4, 5, spear));
 				return spear;
 			case BERRY:
-				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.ICON_HEART);
+				Item berries = new Item(itemType, "Berries", "Delicious", Sprite.BERRIES);
 				berries.addEffect(new HealEffect(25, 5, berries));
 				return berries;
 
@@ -41,7 +41,7 @@ public final class ItemFactory {
 				return boots;
 
 			case FLINT_AND_STEEL:
-				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.CAMPFIRE);
+				Item flintAndSteel = new Item(itemType, "Flint and steel", "Lit", Sprite.FLINT_AND_STEEL);
 				flintAndSteel.addEffect(new IgniteEffect(10, 10, 4, 4, flintAndSteel));
 				return flintAndSteel;
 
