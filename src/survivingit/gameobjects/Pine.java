@@ -3,7 +3,6 @@ package survivingit.gameobjects;
 import survivingit.graphics.Sprite;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
-import survivingit.physics.Collider;
 import survivingit.scene.Scene;
 
 /**

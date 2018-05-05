@@ -11,7 +11,7 @@ import survivingit.hud.ItemContainerHud;
 import survivingit.hud.ProgressBar;
 import survivingit.items.Item;
 import survivingit.items.ItemType;
-import survivingit.physics.Collider;
+import survivingit.gameobjects.Collider;
 import survivingit.scene.Tile;
 import survivingit.util.Point;
 
