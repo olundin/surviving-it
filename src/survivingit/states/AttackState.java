@@ -43,11 +43,10 @@ public class AttackState implements State<Animal> {
      */
     @Override
     public State<Animal> update(double dt, Animal object) {
-        if(target == null) {
-            // Target probably dead
+        if (!target.isAlive()) {
+            // Target died
             return new IdleState();
         }
-
 
         Point objectPos = new Point(object.getX(), object.getY());
         Point targetPos = new Point(target.getX(), target.getY());
@@ -55,7 +54,7 @@ public class AttackState implements State<Animal> {
         if (targetAttacked) {
             // Target has already been attacked. Back off a bit.
             object.setDirection(Direction.fromAngle(Point.getAngle(targetPos, objectPos)));
-            if(!Point.areWithin(objectPos, targetPos, object.getRange())) {
+            if (!Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Distance between target and object is enough. Go back to following
                 return new FollowState(target);
             }
@@ -66,7 +65,7 @@ public class AttackState implements State<Animal> {
             if (Point.areWithin(objectPos, targetPos, object.getRange())) {
                 // Target almost reached. Perform performAttack. Then back off
                 // TODO: Make object attack target using its own method
-                target.receiveMessage(new Message(MessageType.ATTACK, object.getDamage()));
+                target.receiveMessage(new Message(MessageType.DAMAGE, object.getDamage()));
                 targetAttacked = true;
             }
         } else {

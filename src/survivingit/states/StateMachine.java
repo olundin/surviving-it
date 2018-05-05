@@ -25,7 +25,7 @@ public class StateMachine<O> {
      * @param dt Time between last update and this one.
      */
     public void update(double dt) {
-        if(currentState != null) {
+        if (currentState != null) {
             setState(currentState.update(dt, owner));
         }
     }
@@ -35,9 +35,9 @@ public class StateMachine<O> {
      * @param newState The new state to go to.
      */
     public void setState(State<O> newState) {
-        if(newState.equals(currentState)) return;
+        if (newState.equals(currentState)) return;
 
-        if(currentState != null) {
+        if (currentState != null) {
             currentState.exit(owner);
         }
 
