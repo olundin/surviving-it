@@ -16,10 +16,9 @@ public class MeleeAttackEffect extends AttackEffect {
      * Creates a new MeleeAttackEffect object with the entered damage, entered range and entered source.
      * @param damage of the new MeleeAttackEffect object.
      * @param range of the new MeleeAttackEffect object.
-     * @param source of the new MeleeAttackEffect object.
      */
-    public MeleeAttackEffect(final int damage, final int range, final Item source) {
-        super(source);
+    public MeleeAttackEffect(final int damage, final int range) {
+        super();
         this.damage = damage;
         this.range = range;
     }
@@ -30,9 +29,8 @@ public class MeleeAttackEffect extends AttackEffect {
      *
      * @param attacker Creature who's performAttack method is used.
      */
-    @Override
-    public void attack(Creature attacker, double angle) {
-        attacker.performAttack(attacker.getDamage() + damage, attacker.getRange() + this.range, angle);
+    public void attack(Creature attacker) {
+        attacker.performAttack(attacker.getDamage() + damage, attacker.getRange() + this.range);
     }
 
 }

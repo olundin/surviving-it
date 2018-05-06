@@ -1,7 +1,6 @@
 package survivingit.scene;
 
 import survivingit.gameobjects.*;
-import survivingit.items.Item;
 import survivingit.items.ItemFactory;
 import survivingit.items.ItemType;
 import survivingit.util.Maths;

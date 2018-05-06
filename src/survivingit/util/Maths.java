@@ -32,18 +32,6 @@ public final class Maths {
     }
 
     /**
-     * Returns the dot product of vector (ax, ay) and (bx, by).
-     * @param ax Vector 1 x.
-     * @param ay Vector 1 y.
-     * @param bx Vector 2 x.
-     * @param by Vector 2 y.
-     * @return Dot product of (ax, ay) and (bx, by).
-     */
-    public static double dotProduct(double ax, double ay, double bx, double by) {
-        return ax*bx + ay*by;
-    }
-
-    /**
      * Converts number from one range to another, keeping relation.
      * For example, a number X in range (A,B), will be converted to
      * a number Y in range (C,D), where the relation between X-A and
@@ -57,6 +45,7 @@ public final class Maths {
      * @return input value converted to output range
      */
     public static double affineTransformation(double in, double inMin, double inMax, double outMin, double outMax) {
+        // Warning ignored since splitting up expression into smaller parts wouldn't really make the method clearer.
         //noinspection OverlyComplexArithmeticExpression
         return ((in - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
     }

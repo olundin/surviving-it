@@ -12,7 +12,6 @@ import survivingit.util.Point;
  *
  * @see AStar
  * @see AStarHeuristic
- * @see ManhattanDistance
  * @see Point
  *
  * @see <a href="https://en.wikipedia.org/wiki/Chebyshev_distance">Chebyshev Distance (Wikipedia)</a>
@@ -20,7 +19,6 @@ import survivingit.util.Point;
 public class ChebyshevDistance implements AStarHeuristic<Point> {
 
     private static final double REACHED_RANGE = 0.5;
-
 
     /**
      * Calculates and returns the Chebyshev distance value between two Point objects.

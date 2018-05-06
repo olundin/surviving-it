@@ -13,6 +13,27 @@ import java.util.List;
  */
 public class Hud {
 
+    private static final double HEALTHBAR_X = 5;
+    private static final double HEALTHBAR_Y = 90;
+    private static final double HEALTHBAR_WIDTH = 15;
+    private static final double HEALTHBAR_HEIGHT = 5;
+
+    private static final double HEART_ICON_X = 21;
+    private static final double HEART_ICON_Y = 90;
+    private static final double HEART_ICON_WIDTH = 2.5;
+    private static final double HEART_ICON_HEIGHT = 5;
+
+    private static final double EQUIPPED_INVENTORY_X = 80;
+    private static final double EQUIPPED_INVENTORY_Y = 90;
+    private static final double EQUIPPED_INVENTORY_WIDTH = 15;
+    private static final double EQUIPPED_INVENTORY_HEIGHT = 5;
+
+    private static final double INVENTORY_X = 80;
+    private static final double INVENTORY_Y = 70;
+    private static final double INVENTORY_WIDTH = 15;
+    private static final double INVENTORY_HEIGHT = 20;
+
+
     private List<HudElement> elements;
     private ItemContainerHud inventoryHud;
 
@@ -22,11 +43,11 @@ public class Hud {
      */
     public Hud(Player player) {
         this.elements = new ArrayList<>();
-        this.add(new HealthBar(5, 90, 15, 5, player));
-        this.add(new Icon(21, 90, 2.5, 5, Sprite.ICON_HEART));
-        this.add(new EquippedItemContainerHud(80, 90, 15, 5,
+        this.add(new HealthBar(HEALTHBAR_X, HEALTHBAR_Y, HEALTHBAR_WIDTH, HEALTHBAR_HEIGHT, player));
+        this.add(new Icon(HEART_ICON_X, HEART_ICON_Y, HEART_ICON_WIDTH, HEART_ICON_HEIGHT, Sprite.ICON_HEART));
+        this.add(new EquippedItemContainerHud(EQUIPPED_INVENTORY_X, EQUIPPED_INVENTORY_Y, EQUIPPED_INVENTORY_WIDTH, EQUIPPED_INVENTORY_HEIGHT,
                 player.getPlayerInventory().getEquippedItemContainer(), 5));
-        this.inventoryHud = new ItemContainerHud(80, 70, 15, 20,
+        this.inventoryHud = new ItemContainerHud(INVENTORY_X, INVENTORY_Y, INVENTORY_WIDTH, INVENTORY_HEIGHT,
                 player.getPlayerInventory().getPassiveStorage(), 5, true);
     }
 

@@ -2,7 +2,6 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.AnimatedSprite;
 import survivingit.graphics.Sprite;
-import survivingit.graphics.SpriteSheet;
 import survivingit.messaging.Message;
 import survivingit.messaging.MessageType;
 import survivingit.scene.Scene;
@@ -28,7 +27,6 @@ public class Campfire extends VisibleObject {
     private static final double HEAL_DELAY = 1;
     private static final double HEAL_RANGE = 2.5;
 
-    private static final double FRAME_LENGTH = 0.1;
 
     private static final double COL_X = -0.4;
     private static final double COL_Y = -0.4;
@@ -45,14 +43,7 @@ public class Campfire extends VisibleObject {
         this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
 
         this.lit = false;
-        this.litSprite = new AnimatedSprite(SpriteSheet.CAMP_FIRE.toArray(
-                                                 0,
-                                                 0,
-                                                 32,
-                                                 32,
-                                                 5,
-                                                 1),
-                                                 FRAME_LENGTH);
+        this.litSprite = AnimatedSprite.CAMPFIRE_LIT;
         this.unlitSprite = Sprite.CAMPFIRE_UNLIT;
         this.timeSinceLastHeal = 0.0;
         this.litTime = 0.0;

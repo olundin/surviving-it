@@ -39,22 +39,6 @@ public class Point {
     }
 
     /**
-     * Sets the deltaX value of the point
-     * @param x New deltaX value of point
-     */
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    /**
-     * Sets the deltaY value of the point
-     * @param y New deltaY value of point
-     */
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    /**
      * Get angle between two points using Math.atan2.
      * @see Math#atan2
      *
@@ -87,6 +71,8 @@ public class Point {
 
     @Override
     public int hashCode() {
+        // Warning ignored since it is difficult to not instantiate objects in hashcode. This is the automatically
+        // generated method (by IntelliJ IDEA).
         //noinspection AutoBoxing,ObjectInstantiationInEqualsHashCode
         return Objects.hash(x, y);
     }

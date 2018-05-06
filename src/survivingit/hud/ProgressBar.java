@@ -74,22 +74,6 @@ public class ProgressBar extends HudElement {
     }
 
     /**
-     * Returns whether the progress bar is empty
-     * @return Whether the progress bar is empty
-     */
-    public boolean isEmpty() {
-        return this.current == this.min;
-    }
-
-    /**
-     * Returns whether the progress bar is full
-     * @return Whether the progress bar is full
-     */
-    public boolean isFull() {
-        return this.current == this.max;
-    }
-
-    /**
      * Get left edge sprite of bar
      * @return Left edge sprite
      */

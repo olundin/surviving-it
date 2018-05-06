@@ -10,6 +10,13 @@ package survivingit.graphics;
  */
 public class AnimatedSprite {
 
+    /**
+     * Animated sprite for lit campfires.
+     */
+    public static final AnimatedSprite CAMPFIRE_LIT = new AnimatedSprite(
+            SpriteSheet.CAMP_FIRE.toArray(0, 0, 32, 32, 5, 1),
+            0.1);
+
     private enum AnimationDirection {
         FORWARDS(1),
         BACKWARDS(-1);
@@ -25,7 +32,6 @@ public class AnimatedSprite {
     private int frameIndex; // Current frame
     private double frameLength; // Length in seconds of each frame
     private AnimationDirection direction; // Direction to play in, forwards = 1, backwards = -1
-    private boolean paused; // If true, pause animation at current frame
     private double timer; // Keep track of time, in seconds
     private boolean oscillating; // If true, bounce back and forth between frames (e.g. 0, 1, 2, 1, 0, 1...)
 
@@ -43,7 +49,6 @@ public class AnimatedSprite {
         this.frameIndex = 0;
         this.frameLength = frameLength;
         this.direction = AnimationDirection.FORWARDS;
-        this.paused = false;
         this.timer = 0.0;
         this.oscillating = false;
         this.frames = sprites;
@@ -80,36 +85,6 @@ public class AnimatedSprite {
                 }
             }
         }
-    }
-
-    /**
-     * Starts the AnimatedSprites object's animation.
-     */
-    public void start() {
-        this.paused = false;
-    }
-
-    /**
-     * Stops the AnimatedSprites objects's animation.
-     */
-    public void stop() {
-        this.paused = true;
-    }
-
-    /**
-     * Restarts the AnimatedSprites object's animation.
-     */
-    public void restart() {
-        this.paused = false;
-        this.frameIndex = 0;
-    }
-
-    /**
-     * Sets the AnimatedSprites object's animation direction.
-     * @param forwards boolean if the animation direction is to be set forwards.
-     */
-    public void setDirection(boolean forwards) {
-        this.direction = forwards ? AnimationDirection.FORWARDS : AnimationDirection.BACKWARDS;
     }
 
     /**

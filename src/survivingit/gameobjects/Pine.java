@@ -2,7 +2,6 @@ package survivingit.gameobjects;
 
 import survivingit.graphics.Sprite;
 import survivingit.messaging.Message;
-import survivingit.messaging.MessageType;
 import survivingit.scene.Scene;
 
 /**
@@ -14,6 +13,11 @@ import survivingit.scene.Scene;
  */
 public class Pine extends VisibleObject {
 
+    private static final double COL_X = -0.3;
+    private static final double COL_Y = -1.0;
+    private static final double COL_WIDTH = 0.6;
+    private static final double COL_HEIGHT = 1.0;
+
     /**
      * Creates a new Pine object with the entered x and y position.
      * @param x double val of the x position of the new Pine object.
@@ -21,7 +25,7 @@ public class Pine extends VisibleObject {
      */
     public Pine(double x, double y, Scene scene) {
         super(x, y, scene, Sprite.PINE);
-        this.setCollider(new Collider(-0.3, -1.0, 0.6, 1.0, false, this));
+        this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
     }
 
     @Override
@@ -34,13 +38,6 @@ public class Pine extends VisibleObject {
      * @param msg Message for the pine tree to react to.
      */
     @Override
-    public void receiveMessage(Message msg) {
-        MessageType type = msg.getType();
-        int data = msg.getData();
-        switch(type) {
-            default:
-                break;
-        }
-    }
+    public void receiveMessage(Message msg) { }
 
 }

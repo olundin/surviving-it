@@ -12,7 +12,6 @@ public class Mouse extends MouseAdapter {
 
     private boolean[] button;
     private boolean[] buttonPressed;
-    private boolean[] buttonReleased;
 
     private int x;
     private int y;
@@ -25,7 +24,6 @@ public class Mouse extends MouseAdapter {
     public Mouse() {
         this.button = new boolean[MOUSE_SIZE];
         this.buttonPressed = new boolean[MOUSE_SIZE];
-        this.buttonReleased = new boolean[MOUSE_SIZE];
 
         this.x = 0;
         this.y = 0;
@@ -41,7 +39,6 @@ public class Mouse extends MouseAdapter {
         // Reset temporary variable values
         for(int b = 0; b < MOUSE_SIZE; b++) {
             buttonPressed[b] = false;
-            buttonReleased[b] = false;
         }
 
         this.scroll = 0;
@@ -72,19 +69,6 @@ public class Mouse extends MouseAdapter {
     }
 
     /**
-     * Returns the state of the given button. Either down or up
-     * @param b The button to check
-     * @return the state of button b
-     */
-    public boolean getButton(Input b) {
-        if(b.id < button.length) {
-            return button[b.id];
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Returns true if the mouse button went from up to down this tick.
      * @param b The button to check
      * @return Whether the button was pressed this tick
@@ -92,19 +76,6 @@ public class Mouse extends MouseAdapter {
     public boolean getButtonPressed(Input b) {
         if(b.id < buttonPressed.length) {
             return buttonPressed[b.id];
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Returns true if the mouse went from down to up this tick.
-     * @param b The button to check
-     * @return Whether the button was released this tick
-     */
-    public boolean getButtonReleased(Input b) {
-        if(b.id < buttonReleased.length) {
-            return buttonReleased[b.id];
         } else {
             return false;
         }
@@ -140,7 +111,6 @@ public class Mouse extends MouseAdapter {
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() < button.length) {
             button[e.getButton()] = false;
-            buttonReleased[e.getButton()] = true;
         }
     }
 

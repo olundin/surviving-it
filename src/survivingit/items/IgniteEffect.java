@@ -12,9 +12,8 @@ public class IgniteEffect extends UsableEffect {
     private double ignitionWidth;
     private double ignitionHeight;
 
-    public IgniteEffect(final int uses, final int fireTime, final double ignitionWidth, final double ignitionHeight,
-                        final Item source) {
-        super(source);
+    public IgniteEffect(final int uses, final int fireTime, final double ignitionWidth, final double ignitionHeight) {
+        super();
         this.uses = uses;
         this.fireTime = fireTime;
         this.ignitionWidth = ignitionWidth;

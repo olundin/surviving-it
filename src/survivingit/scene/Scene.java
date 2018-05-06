@@ -3,7 +3,6 @@ package survivingit.scene;
 import survivingit.gameobjects.*;
 import survivingit.graph.*;
 import survivingit.graphics.WorldRenderer;
-import survivingit.gameobjects.Collider;
 import survivingit.util.*;
 
 import java.util.*;
@@ -204,14 +203,6 @@ public abstract class Scene {
     }
 
     /**
-     * Returns whether the scene has a player or not
-     * @return Whether the scene has a player.
-     */
-    public boolean hasPlayer() {
-        return player != null;
-    }
-
-    /**
      * Sets the tile at the given position
      * @param x The x position
      * @param y The y position
@@ -221,30 +212,6 @@ public abstract class Scene {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             tiles[Maths.fastFloor(y)][Maths.fastFloor(x)] = tile;
         }
-    }
-
-    /**
-     * Fills the given area with the given tiles.
-     * @param startX Start x of the area
-     * @param startY Start y of the area
-     * @param endX End x of the area
-     * @param endY End y of the area
-     * @param tile The tile type to fill with
-     */
-    protected void fillTiles(int startX, int startY, int endX, int endY, Tile tile) {
-        for (int x = startX; x < endX; x++) {
-            for (int y = startY; y < endY; y++) {
-                this.tiles[y][x] = tile;
-            }
-        }
-    }
-
-    /**
-     * Returns the scene's tiles
-     * @return The tiles
-     */
-    public Tile[][] getTiles() {
-        return this.tiles;
     }
 
     /**

@@ -45,57 +45,10 @@ public class ItemContainer {
         }
 
         ItemSlot emptySlot = this.getFirstEmptySlot();
+        // Warning ignored since it seemed to be an error.
         //noinspection ConstantConditions
         emptySlot.setItem(item);
         usedSlots++;
-    }
-
-    /**
-     * Adds the entered item to the entered index in the ItemContainer.
-     * If the entered index is out of bounds an IllegalArgumentException is thrown.
-     * If the entered index in the ItemContainer isn't empty an IllegalStateException is thrown as this should have
-     * been chacked beforehand.
-     * @param item to add to the ItemContainer.
-     * @param index of where to add the item to the ItemContainer.
-     */
-    public void addItemToIndex(Item item, int index) {
-        if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("Index out of bounds.");
-        }
-        if (!itemSlots[index].isEmpty()) {
-            throw new IllegalStateException("Attempted to add item to none empty slot");
-        }
-        itemSlots[index].setItem(item);
-        usedSlots++;
-    }
-
-    /**
-     * Returns and removes the item at the entered index in the ItemContainer.
-     * Throws an IllegalArgumentException if the entered index is out of bounds.
-     * Throws an IllegalStateException if the spot at the entered index in the ItemContainer is empty.
-     * @param index of the item to be popped.
-     * @return the item removed from the ItemContainer.
-     */
-    public Item popItemAt(int index) {
-        if (index < 0 || index >= this.size) {
-            throw new IllegalArgumentException("Index ouut of bounds");
-        }
-        if (itemSlots[index].isEmpty()) {
-            throw new IllegalStateException("Attempt to remove item from empty itemslot");
-        }
-        Item item = itemSlots[index].getItem();
-        itemSlots[index].clearItem();
-        return item;
-    }
-
-    /**
-     * Removes the item at the entered index in the ItemContainer.
-     * Throws an IllegalArgumentException if the entered index is out of bounds.
-     * Throws an IllegalStateException if the spot at the entered index in the ItemContainer is empty.
-     * @param index of the item to be removed.
-     */
-    public void removeItemAt(int index) {
-        popItemAt(index);
     }
 
     /**
@@ -117,18 +70,6 @@ public class ItemContainer {
      */
     public int getSize() {
         return this.size;
-    }
-
-    /**
-     * Returns a boolean if the itemSlot at the entered index is empty
-     * @param index int of the
-     * @return Whether item slot is empty or not
-     */
-    public boolean isSlotEmpty(int index) {
-        if (index < 0 || index >= this.size) {
-            throw new IllegalArgumentException("Index out of bounds.");
-        }
-        return this.itemSlots[index].isEmpty();
     }
 
     /**

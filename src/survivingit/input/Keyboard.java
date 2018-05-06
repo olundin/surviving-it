@@ -12,7 +12,6 @@ public class Keyboard extends KeyAdapter {
 
     private boolean[] key;
     private boolean[] keyPressed;
-    private boolean[] keyReleased;
 
     /**
      * Creates a new keyboard.
@@ -20,7 +19,6 @@ public class Keyboard extends KeyAdapter {
     public Keyboard() {
         key = new boolean[KEYBOARD_SIZE];
         keyPressed = new boolean[KEYBOARD_SIZE];
-        keyReleased = new boolean[KEYBOARD_SIZE];
     }
 
     /**
@@ -31,7 +29,6 @@ public class Keyboard extends KeyAdapter {
         // Reset temporary variable values
         for(int k = 0; k < KEYBOARD_SIZE; k++) {
             keyPressed[k] = false;
-            keyReleased[k] = false;
         }
     }
 
@@ -53,14 +50,6 @@ public class Keyboard extends KeyAdapter {
         return keyPressed[k.id];
     }
 
-    /**
-     * Returns true if the given key was released this tick
-     * @param k The key to check
-     * @return True if the key was released this tick
-     */
-    public boolean getKeyReleased(Input k) {
-        return keyReleased[k.id];
-    }
 
     /**
      * Automatically called when a key is pressed
@@ -79,7 +68,6 @@ public class Keyboard extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
         key[e.getKeyCode()] = false;
-        keyReleased[e.getKeyCode()] = true;
     }
 
 }

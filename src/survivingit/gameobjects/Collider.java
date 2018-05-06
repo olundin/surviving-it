@@ -112,22 +112,6 @@ public class Collider {
     }
 
     /**
-     * Returns the relative x position of the collider to it's owner.
-     * @return Relative x to owner
-     */
-    public double getX() {
-        return x;
-    }
-
-    /**
-     * Returns the relative y position of the collider to it's owner.
-     * @return Relative y to owner
-     */
-    public double getY() {
-        return y;
-    }
-
-    /**
      * Returns the world x of the collider
      * @return The world x of the collider
      */
@@ -159,27 +143,4 @@ public class Collider {
         return height;
     }
 
-    /**
-     * Returns whether the collider is passable
-     * @return Whether the collider is passable
-     */
-    public boolean isPassable() {
-        return this.passable;
-    }
-
-    /**
-     * Sets the relative x of the collider
-     * @param x new X
-     */
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    /**
-     * Sets the relative y of the collider
-     * @param y new Y
-     */
-    public void setY(double y) {
-        this.y = y;
-    }
 }

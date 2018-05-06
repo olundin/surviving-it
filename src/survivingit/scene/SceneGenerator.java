@@ -22,6 +22,8 @@ public class SceneGenerator {
     private static final int CAMPFIRE_GRID_SIZE = 20;
     private static final int ANIMAL_GRID_SIZE = 10;
 
+    private static final double OBJECT_PLACEMENT_OFFSET = 0.5;
+
     /**
      * Creates a new scene generator with the given tile group occurrences.
      * The parameters can be any value above zero.
@@ -88,7 +90,7 @@ public class SceneGenerator {
                 Tile placedOn = scene.getTileAt(x, y);
                 if(placedOn.isPassable() && placedOn.isFertile()) {
                     tilesSincePlaced++;
-                    if(Game.RANDOM.nextInt(tilesSincePlaced) >= MIN_PINE_DISTANCE && scene.tryAdd(new Pine(x+0.5, y+0.5, scene))) {
+                    if(Game.RANDOM.nextInt(tilesSincePlaced) >= MIN_PINE_DISTANCE && scene.tryAdd(new Pine(x+OBJECT_PLACEMENT_OFFSET, y+OBJECT_PLACEMENT_OFFSET, scene))) {
                         tilesSincePlaced = 0;
                     }
                 }
@@ -105,7 +107,7 @@ public class SceneGenerator {
             for(int x = 0; x < scene.getWidth(); x++) {
                 // Generate some campfires
                 if(x % CAMPFIRE_GRID_SIZE == 0 && y % CAMPFIRE_GRID_SIZE == 0) {
-                    scene.tryAdd(new Campfire(x+0.5, y+0.5, scene));
+                    scene.tryAdd(new Campfire(x+OBJECT_PLACEMENT_OFFSET, y+OBJECT_PLACEMENT_OFFSET, scene));
                 }
             }
         }

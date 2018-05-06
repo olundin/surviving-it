@@ -11,10 +11,9 @@ public abstract class UsableEffect extends Effect {
 
     /**
      * Creates a new UsableEffect object with the entered source Item.
-     * @param source Item of the new UsableEffect object.
      */
-    protected UsableEffect(Item source) {
-        super(source, EFFECT_TYPE);
+    protected UsableEffect() {
+        super(EFFECT_TYPE);
     }
 
     /**

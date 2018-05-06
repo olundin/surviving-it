@@ -16,7 +16,7 @@ public final class SpriteSheet {
     /**
      * Static SpriteSheet for Player sprites.
      */
-    public static final SpriteSheet PLAYER = new SpriteSheet("hero.png", 72, 208);
+    public static final SpriteSheet PLAYER = new SpriteSheet("hero.png");
 
     /**
      * Static SpriteSheet for tiles sprites.
@@ -73,33 +73,15 @@ public final class SpriteSheet {
      */
     public static final SpriteSheet SPEAR = new SpriteSheet("spear.png");
 
-    private int width;
-    private int height;
     private BufferedImage image = null;
 
-    /*
+    /**
      * Creates a new SpriteSheet object with the image of the entered path.
-     * @param path String of the path for the image of the new SpriteSheet object.
+     * @param fileName String of the path for the image of the new SpriteSheet object.
      */
     private SpriteSheet(String fileName) {
-        // Reads width and height from image itself
         try {
             this.image = ImageIO.read(SpriteSheet.class.getResource("/resources/" + fileName));
-            this.width = image.getWidth();
-            this.height = image.getHeight();
-        } catch (IOException e)  {
-            LOGGER.log(Level.SEVERE, "Loading image from {0} failed", fileName);
-            System.exit(-1);
-        }
-    }
-
-    // ignored inspection warning
-    private SpriteSheet(String fileName, int width, int height) {
-        // Take width and height as parameters, to make a spritesheet that only contains part of spritesheet
-        try {
-            this.image = ImageIO.read(SpriteSheet.class.getResource("/resources/" + fileName));
-            this.width = width;
-            this.height = height;
         } catch (IOException e)  {
             LOGGER.log(Level.SEVERE, "Loading image from {0} failed", fileName);
             System.exit(-1);
@@ -127,22 +109,6 @@ public final class SpriteSheet {
             }
         }
         return sprites;
-    }
-
-    /**
-     * Returns the width of the spriteSheet.
-     * @return int value of the width of the SpriteSheet.
-     */
-    public int getWidth() {
-	    return width;
-    }
-
-    /**
-     * Returns the height of the spriteSheet.
-     * @return int value of the height of the spriteSheet.
-     */
-    public int getHeight() {
-	    return height;
     }
 
     /**

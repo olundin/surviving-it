@@ -30,20 +30,6 @@ public class TileGroup {
     }
 
     /**
-     * Returns the tiles of the group
-     * @return group tiles
-     */
-    public Tile[] getTiles() {
-        return tiles;
-    }
-
-    /**
-     * Returns the most basic tile in the group
-     * @return the plain tile
-     */
-    public Tile getPlain() { return tiles[0]; }
-
-    /**
      * Returns a random tile from the group.
      * The first tile in the group (the plain tile) will be more likely than the rest
      * @return Random tile from the group.

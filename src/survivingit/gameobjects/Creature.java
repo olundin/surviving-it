@@ -100,14 +100,6 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * Returns the creature's direction.
-     * @return Enum value of the creature's direction.
-     */
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    /**
      * Sets the creature's current health to the entered value.
      * @param currentHealth int value to set the creature's current health to.
      */
@@ -116,14 +108,6 @@ public abstract class Creature extends VisibleObject {
             throw new IllegalArgumentException("Negative or above max health entered");
         }
 	    this.currentHealth = currentHealth;
-    }
-
-    /**
-     * Sets the creature's max health to the entered value.
-     * @param maxHealth int value to set the creature's max health to.
-     */
-    public void setMaxHealth(final int maxHealth) {
-        this.maxHealth = maxHealth;
     }
 
     /**
@@ -173,7 +157,7 @@ public abstract class Creature extends VisibleObject {
      * @return if the creature is moving or not.
      */
     public boolean isMoving() {
-        return Math.abs(this.x - this.lastX) > 0.00001 || Math.abs(this.y - this.lastY) > 0.00001;
+        return Double.compare(this.x, this.lastX) != 0 || Double.compare(this.y, this.lastY) != 0;
     }
 
     /**
@@ -217,15 +201,10 @@ public abstract class Creature extends VisibleObject {
      * The creature performs an attack with the entered damage, range and angle.
      * @param damage int value of the damage of the attack.
      * @param range double value of the range of the attack.
-     * @param angle double value of the angle of the attack from the creature.
      */
-    public void performAttack(final int damage, final double range, final double angle) {
+    public void performAttack(final int damage, final double range) {
         System.out.println(damage);
         sendMessageToCreaturesInArea(new Message(MessageType.DAMAGE, damage), range, range);
-    }
-
-    protected double getAngleTo(final double targetX, final double targetY) {
-        return Math.atan2(targetY - this.y, targetX - this.x);
     }
 
     /**

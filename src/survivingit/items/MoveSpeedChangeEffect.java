@@ -17,10 +17,9 @@ public class MoveSpeedChangeEffect extends UsableEffect {
      * Creates a new MoveSpeedChangeEffect object with the entered speedDelta, uses and Item source.
      * @param speedDelta double value of the speed change that the new MoveSpeedChangeEffect object will have on use.
      * @param uses int value of the number of uses which the new MoveSpeedChangeEffect will have.
-     * @param source Item source that holds the effect.
      */
-    public MoveSpeedChangeEffect(double speedDelta, int uses, Item source) {
-        super(source);
+    public MoveSpeedChangeEffect(double speedDelta, int uses) {
+        super();
         this.speedDelta = speedDelta;
         this.uses = uses;
     }

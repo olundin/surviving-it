@@ -5,7 +5,6 @@ import survivingit.hud.Hud;
 import survivingit.input.InputHandler;
 import survivingit.input.Keyboard;
 import survivingit.input.Mouse;
-import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 import survivingit.scene.*;
 
@@ -90,6 +89,9 @@ public final class Game implements Observer<GameWindow> {
         final double nanosPerSec = 1_000_000_000.0;
 
         // Game loop
+        // Inspection warning ignored since it is false. The loop does not spin on field since it is changed in
+        // Game.stop(). This method is called from the GameWindow class.
+        //noinspection WhileLoopSpinsOnField
         while (running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;
@@ -143,10 +145,10 @@ public final class Game implements Observer<GameWindow> {
     /**
      * Lets an observable notify this observer
      * @param object The observed object
-     * @param data The data
      */
-    public void onNotify(Observable<GameWindow> object, GameWindow data) {
-        if (!data.isOpen()) {
+    @Override
+    public void onNotify(GameWindow object) {
+        if (!object.isOpen()) {
             this.stop();
         }
     }

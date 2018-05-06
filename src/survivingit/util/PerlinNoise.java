@@ -10,6 +10,7 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise (Wikipedia)</a>
  */
 
+// Inspection warnings suppressed since the class was not written by us. Some warnings have however been fixed.
 @SuppressWarnings("ALL")
 public final class PerlinNoise {
 

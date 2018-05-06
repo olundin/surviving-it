@@ -57,24 +57,25 @@ public class GameWindow extends Frame implements Observable<GameWindow> {
      * Attaches an observer to this object.
      * @param observer observer to attach.
      */
+    @Override
     public void attach(Observer<GameWindow> observer) {
         this.observers.add(observer);
     }
 
     /**
      * Notifies attached observers.
-     * @param data The object to notify with.
      */
-    public void notifyObservers(GameWindow data) {
+    @Override
+    public void notifyObservers() {
         for(Observer<GameWindow> o : observers) {
-            o.onNotify(this, data);
+            o.onNotify(this);
         }
     }
 
     private void onClose() {
         this.open = false;
         // Notify observers when window is closed
-        notifyObservers(this);
+        notifyObservers();
     }
 
     /**

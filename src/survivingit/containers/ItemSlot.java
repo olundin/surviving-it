@@ -11,27 +11,15 @@ import survivingit.items.ItemType;
  * a general ItemSlotType (ANY) which can hold any type of Item.
  *
  * @see Item
- * @see ItemSlotType
  */
 public class ItemSlot {
 
-    private final ItemSlotType itemSlotType;
     private Item item = null;
 
     /**
      * Creates a new empty ItemSlot object of itemSlotType ANY.
      */
     public ItemSlot() {
-        this.itemSlotType = ItemSlotType.ANY;
-        this.clearItem();
-    }
-
-    /**
-     * Creates a new empty ItemSlot object of the entered itemSlotType.
-     * @param itemSlotType of tbe new ItemSlot object.
-     */
-    public ItemSlot(final ItemSlotType itemSlotType) {
-        this.itemSlotType = itemSlotType;
         this.clearItem();
     }
 
@@ -48,14 +36,6 @@ public class ItemSlot {
      */
     public Item getItem() {
         return this.item;
-    }
-
-    /**
-     * Returns the itemSlotType of the itemSlot.
-     * @return the itemSlotType of the itemSlot.
-     */
-    public ItemSlotType getItemSlotType() {
-        return itemSlotType;
     }
 
     /**

@@ -11,23 +11,6 @@ import java.util.Set;
 public interface Graph<T> {
 
     /**
-     * Attempts to add the entered T object node to the Graph, returns a boolean if it was able to.
-     * @param node T object to be added to the graph.
-     * @return a boolean if it was able in adding the node to the graph.
-     */
-    boolean addNode(T node);
-
-    /**
-     * Attempts to add an edge from the entered from to the entered to with the entered weight, returns a boolean if it
-     * was able to.
-     * @param from T object to add the edge from.
-     * @param to T object to add the edge to.
-     * @param weight double value of the cost of the edge.
-     * @return a boolean if it was able in adding the node to the graph.
-     */
-    boolean addEdge(T from, T to, double weight);
-
-    /**
      * Returns a Set of the neighbors of the entered T node.
      * @param node T object whose neighbors are requested.
      * @return a Set of T objects with contains the neighbors of the entered T node.

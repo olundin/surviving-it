@@ -34,6 +34,14 @@ public class InputHandler {
      * @param hud Hud
      */
     public void handleInput(double dt, final Player player, final Camera camera, final Hud hud) {
+
+        handlePlayerMovement(player);
+        handlePlayerItems(player, hud);
+        handleCameraMovement(dt, player, camera);
+
+    }
+
+    private void handlePlayerMovement(Player player) {
         // Move with WASD. Allow diagonal movement
         if (keyboard.getKey(Input.KEY_A) && keyboard.getKey(Input.KEY_W)) {
             player.setDirection(Direction.UP_LEFT);
@@ -54,12 +62,15 @@ public class InputHandler {
         } else {
             player.setDirection(Direction.NONE);
         }
+    }
+
+    private void handlePlayerItems(Player player, Hud hud) {
 
         // Player performAttack with left mouse button
         if (mouse.getButtonPressed(Input.BUTTON_LEFT)) {
             player.useEquippedItem();
         } else if (mouse.getButtonPressed(Input.BUTTON_RIGHT)) {
-            player.playerAttack(camera.screenToWorldX(mouse.getX()), camera.screenToWorldY(mouse.getY()));
+            player.playerAttack();
         }
 
         // Switch equipped item with scroll wheel
@@ -78,7 +89,9 @@ public class InputHandler {
         if (keyboard.getKey(Input.KEY_I) && keyboard.getKeyPressed(Input.KEY_I)) {
             hud.toggleInvetory();
         }
+    }
 
+    private void handleCameraMovement(double dt, Player player, Camera camera) {
         // Zoom in/out with up/down key press
         if (keyboard.getKey(Input.KEY_UP)) {
             camera.zoom(ZOOM_SPEED * dt);

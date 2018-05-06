@@ -37,6 +37,9 @@ public class Player extends Creature implements Observable<Player> {
     private static final int PASSIVE_STORAGE_SIZE = 15;
     private static final int EQUIPPABLE_STORAGE_SIZE = 5;
 
+    private static final int SPRITE_WIDTH = 24;
+    private static final int SPRITE_HEIGHT = 52;
+
     private List<Observer<Player>> observers;
     private PlayerInventory playerInventory;
 
@@ -49,7 +52,7 @@ public class Player extends Creature implements Observable<Player> {
         super(x,
               y,
               scene,
-              new CreatureSprite(SpriteSheet.PLAYER, 0, 0, 24, 52),
+              new CreatureSprite(SpriteSheet.PLAYER, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
               MAX_HEALTH,
               MOVE_SPEED,
               DAMAGE,
@@ -79,23 +82,22 @@ public class Player extends Creature implements Observable<Player> {
     }
 
     /**
-     * Perform a player attack with either the equipped weapon or just the players bare hands in the direction of the
-     * target cords.
-     * @param targetX double of the deltaX position for the attack to be performed in.
-     * @param targetY double of the deltaY position for the attack to be performed in.
+     * Perform a player attack with either the equipped weapon or just the players bare hands around the player.
      */
-    public void playerAttack(final double targetX, final double targetY) {
-        double angle = getAngleTo(targetX, targetY);
+    public void playerAttack() {
         if (isCarryingWeapon()) {
             List<Effect> attackEffects = playerInventory.getEquippedItemContainer().getEquippedItem().getEffectsOfEffectType(EffectType.ATTACK);
             for (Effect effect : attackEffects) {
+                // Inspection  warning ignored since this solution is the most effective one for our solution.
+                // The item system is component based and therefore difficult to abstractify.
+                //noinspection InstanceofConcreteClass
                 if (effect instanceof MeleeAttackEffect) {
                     MeleeAttackEffect meleeAttackEffect = (MeleeAttackEffect) effect;
-                    meleeAttackEffect.attack(this, angle);
+                    meleeAttackEffect.attack(this);
                 }
             }
         } else {
-            performAttack(this.damage, this.range, angle);
+            performAttack(this.damage, this.range);
         }
     }
 
@@ -127,18 +129,7 @@ public class Player extends Creature implements Observable<Player> {
     @Override
     public void setCurrentHealth(final int currentHealth) {
         super.setCurrentHealth(currentHealth);
-        this.notifyObservers(this);
-    }
-    /**
-     * Sets the max health of the player to the entered amount.
-     *
-     * Also notifies the player's observers.
-     * @param maxHealth int value to set the players's max health to.
-     */
-    @Override
-    public void setMaxHealth(final int maxHealth) {
-        super.setMaxHealth(maxHealth);
-        this.notifyObservers(this);
+        this.notifyObservers();
     }
 
     /**
@@ -152,12 +143,11 @@ public class Player extends Creature implements Observable<Player> {
 
     /**
      * Notifies the player's observers with the entered data.
-     * @param data Player data to notify the observers with.
      */
     @Override
-    public void notifyObservers(Player data) {
+    public void notifyObservers() {
         for(Observer<Player> o : observers) {
-            o.onNotify(this, data);
+            o.onNotify(this);
         }
     }
 
@@ -167,12 +157,12 @@ public class Player extends Creature implements Observable<Player> {
      * The player receives the message and acts differently based on what type of message it is.
      * If the entered message is a Damage message then the animal takes damage equal to the message data.
      * If the entered message is a Heal message then the animal heals hp equal to the message data
-     * @param message Message object to react to.
+     * @param msg Message object to react to.
      */
     @Override
-    public void receiveMessage(Message message) {
-        MessageType type = message.getType();
-        int data = message.getData();
+    public void receiveMessage(Message msg) {
+        MessageType type = msg.getType();
+        int data = msg.getData();
         switch(type) {
             case DAMAGE:
                 this.takeDamage(data);

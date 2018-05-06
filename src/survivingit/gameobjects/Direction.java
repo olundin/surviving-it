@@ -86,6 +86,9 @@ public enum Direction {
      * @param angle to get the closest enum value for.
      * @return the Direction value closest to the enterd angle.
      */
+    // CODE INSPECTION WARNINGS IGNORED:
+    // Storing these as variables is messy and unnecessary.
+    @SuppressWarnings("MagicNumber")
     public static Direction fromAngle(double angle) {
         angle %= 2 * Math.PI;
         if(angle >= 0) {

@@ -2,7 +2,6 @@ package survivingit.hud;
 
 import survivingit.gameobjects.Player;
 import survivingit.graphics.Sprite;
-import survivingit.messaging.Observable;
 import survivingit.messaging.Observer;
 
 /**
@@ -25,13 +24,12 @@ public class HealthBar extends ProgressBar implements Observer<Player> {
 
     /**
      * Called by  player when it's health changes.
-     * @param object The observable object
-     * @param data It's data (the object itself)
+     * @param object The observed object
      */
     @Override
-    public void onNotify(Observable<Player> object, Player data) {
-        this.max = data.getMaxHealth();
-        this.current = data.getCurrentHealth();
+    public void onNotify(Player object) {
+        this.max = object.getMaxHealth();
+        this.current = object.getCurrentHealth();
     }
 
 }

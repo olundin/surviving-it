@@ -40,24 +40,6 @@ public class SceneGraph implements Graph<Point> {
     }
 
     /**
-     * Returns false and does nothing as SceneGraph shouldn't store nodes in itself.
-     * @param node Point object to be added to the graph.
-     * @return false.
-     */
-    @Override
-    public boolean addNode(Point node) { return false; }
-
-    /**
-     * Returns false and does nothing as SceneGraph shouldn't store edges in itself.
-     * @param from Point object to add the edge from.
-     * @param to Point object to add the edge to.
-     * @param weight double value of the cost of the edge.
-     * @return false.
-     */
-    @Override
-    public boolean addEdge(Point from, Point to, double weight) { return false; }
-
-    /**
      * Returns a Set of the neighbors of the entered Point node.
      * @param node Point object whose neighbors are requested.
      * @return a Set of Point objects with contains the neighbors of the entered Point node.

@@ -124,22 +124,6 @@ public class Camera {
     }
 
     /**
-     * Gets camera world width
-     * @return The camera's world width
-     */
-    public double getWidth() {
-        return this.width;
-    }
-
-    /**
-     * Gets camera world height
-     * @return The camera's world heights
-     */
-    public double getHeight() {
-        return this.height;
-    }
-
-    /**
      * Sets the center position of the camera
      */
     public void setCenterPos(double x, double y) {

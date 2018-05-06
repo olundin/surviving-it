@@ -14,10 +14,9 @@ public class HealEffect extends UsableEffect {
      * Creates a new HealEffect object with the entered healAmount, uses and source Item.
      * @param healAmount int value of the heal amount of the new HealEffect object.
      * @param uses int value of the number of uses of the new HealEffect object
-     * @param source Item that is the source of the new HealEffect object.
      */
-    public HealEffect(final int healAmount, final int uses, final Item source) {
-        super(source);
+    public HealEffect(final int healAmount, final int uses) {
+        super();
         if (healAmount < 0) {
             throw new IllegalArgumentException("Negative heal amount not allowed");
 	    } else if (uses < 0) {

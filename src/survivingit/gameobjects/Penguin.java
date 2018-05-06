@@ -29,6 +29,9 @@ public class Penguin extends Animal {
     private CreatureSprite normal;
     private CreatureSprite sliding;
 
+    private static final int SPRITE_WIDTH = 48;
+    private static final int SPRITE_HEIGHT = 48;
+
     /**
      * Creates a new Penguin object with the entered x and y position.
      * @param x double val of the x position of the new Penguin object.
@@ -38,7 +41,7 @@ public class Penguin extends Animal {
         super(x,
                y,
                scene,
-               new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 48, 48),
+               new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
                MAX_HEALTH,
                MOVE_SPEED,
                DAMAGE,
@@ -48,8 +51,8 @@ public class Penguin extends Animal {
 
         this.setCollider(new Collider(COL_X, COL_Y, COL_WIDTH, COL_HEIGHT, false, this));
 
-        this.normal = new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, 48, 48);
-        this.sliding = new CreatureSprite(SpriteSheet.PENGUIN, 144, 0, 48, 48);
+        this.normal = new CreatureSprite(SpriteSheet.PENGUIN, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
+        this.sliding = new CreatureSprite(SpriteSheet.PENGUIN, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
     }
 
     /**

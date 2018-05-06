@@ -114,21 +114,4 @@ public class AStar<T> {
 
         return path;
     }
-
-    /**
-     * Sets the graph of the AStar object to the entered graph.
-     * @param graph Graph of T objects for the AStar to be run on.
-     */
-    public void setGraph(Graph<T> graph) {
-        this.graph = graph;
-    }
-
-    /**
-     * Sets the heuristic of the AStar object to the entered heuristic.
-     * @param heuristic AStarHeuristic of T object to set the AStar heuristic to.
-     */
-    public void setHeuristic(AStarHeuristic<T> heuristic) {
-        this.heuristic = heuristic;
-    }
-
 }

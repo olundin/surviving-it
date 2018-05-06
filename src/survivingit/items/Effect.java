@@ -7,24 +7,12 @@ public abstract class Effect {
 
     private EffectType effectType;
 
-    private final Item source;
-
     /**
      * Creates a new Effect object with the entered Item source and effectType.
-     * @param source Effect source
      * @param effectType Effect type
      */
-    protected Effect(Item source, EffectType effectType) {
-       this.source = source;
+    protected Effect(EffectType effectType) {
        this.effectType = effectType;
-    }
-
-    /**
-     * Returns the source item of the effect.
-     * @return the source item of the effect.
-     */
-    public Item getSource() {
-       return this.source;
     }
 
     /**

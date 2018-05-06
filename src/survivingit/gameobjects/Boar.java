@@ -23,6 +23,9 @@ public class Boar extends Animal{
     private static final double COL_WIDTH = 0.4;
     private static final double COL_HEIGHT = 0.35;
 
+    private static final int SPRITE_WIDTH = 48;
+    private static final int SPRITE_HEIGHT = 48;
+
     /**
      * Creates a new Boar object with the entered x and y position.
      * @param x double val of the x position of the new Boar object.
@@ -32,7 +35,7 @@ public class Boar extends Animal{
         super(x,
               y,
               scene,
-              new CreatureSprite(SpriteSheet.BOAR, 0, 0, 48, 48),
+              new CreatureSprite(SpriteSheet.BOAR, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
               MAX_HEALTH,
               MOVE_SPEED,
               DAMAGE,

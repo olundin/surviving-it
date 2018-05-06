@@ -52,15 +52,17 @@ public abstract class GameObject implements Messagable {
         return this.y;
     }
 
-    /**
-     * Sets the gameObject's position to the entered deltaX and deltaY coordinate.
-     * @param x double of the deltaX position to be set.
-     * @param y double of the deltaY position to be set.
-     */
-    public void setPos(final double x, final double y) {
-        this.x = x;
-        this.y = y;
-    }
+// --Commented out by Inspection START (2018-05-06 14:15):
+//    /**
+//     * Sets the gameObject's position to the entered deltaX and deltaY coordinate.
+//     * @param x double of the deltaX position to be set.
+//     * @param y double of the deltaY position to be set.
+//     */
+//    public void setPos(final double x, final double y) {
+//        this.x = x;
+//        this.y = y;
+//    }
+// --Commented out by Inspection STOP (2018-05-06 14:15)
 
     /**
      * Attempts to move the gameObject with the entered dx and dy changes in deltaX and deltaY coordinate.
@@ -145,6 +147,9 @@ public abstract class GameObject implements Messagable {
     protected List<Creature> creaturesInArea(final double width, final double height) {
         List<Creature> creatures = new ArrayList<>();
         for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            // This inspection warning hasbeen ignored since instanceof + casting
+            // seemed to be the best solution to our problem.
+            //noinspection InstanceofConcreteClass
             if (gameObject instanceof Creature) {
                 creatures.add((Creature) gameObject);
             }

@@ -10,9 +10,8 @@ public interface Observer<T> {
 
     /**
      * The observable will call this method to notify the observer
-     * @param object The observable object
-     * @param data It's data (the object itself)
+     * @param object The observed object
      */
-    public void onNotify(Observable<T> object, T data);
+    public void onNotify(T object);
 
 }

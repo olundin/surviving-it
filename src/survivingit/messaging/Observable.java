@@ -13,12 +13,14 @@ public interface Observable<T> {
      * Attaches an observer to the observable
      * @param observer The observer to attach
      */
+    // Unused (as the pointer to the object using it is never Observable<T>, but still kept since removing it would
+    // defeat the purpose of the interface.
+    @SuppressWarnings("unused")
     public void attach(Observer<T> observer);
 
     /**
      * Function called by the observable when notifying its observers
-     * @param data The data to notify with (itself)
      */
-    public void notifyObservers(T data);
+    public void notifyObservers();
 
 }

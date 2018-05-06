@@ -23,6 +23,9 @@ public class Fox extends Animal {
     private static final double COL_WIDTH = 0.4;
     private static final double COL_HEIGHT = 0.35;
 
+    private static final int SPRITE_WIDTH = 43;
+    private static final int SPRITE_HEIGHT = 40;
+
     /**
      * Creates a new Fox object with the entered x and y position.
      * @param x double val of the x position of the new Fox object.
@@ -32,7 +35,7 @@ public class Fox extends Animal {
         super(x,
               y,
               scene,
-              new CreatureSprite(SpriteSheet.FOX, 0, 0, 43, 40),
+              new CreatureSprite(SpriteSheet.FOX, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
               MAX_HEALTH,
               MOVE_SPEED,
               DAMAGE,

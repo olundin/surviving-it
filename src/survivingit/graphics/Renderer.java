@@ -153,6 +153,8 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      * @param object VisibleObject to be drawn.
      * @param camera Camera in which the VisibleObject is drawn.
      */
+    // The warnings regarding the chain of instance checks have been ignored since they are only used when debugging.
+    @SuppressWarnings({"ChainOfInstanceofChecks", "InstanceofConcreteClass"})
     @Override
     public void drawObject(VisibleObject object, Camera camera) {
         
@@ -226,7 +228,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
         int drawWidth = drawValFromHudVal(progressBar.getWidth(), this.width);
         int drawHeight = (int) (progressBar.getHeight() / 100 * this.height);
 
-        int pixelsPerStep = drawWidth / progressBar.getMax();
+        int pixelsPerStep = drawWidth / (progressBar.getMax() - progressBar.getMin());
 
         // Draw left edge
         this.drawSprite(drawX - progressBar.getLeftEdge().getWidth() * pixelsPerStep,
@@ -236,7 +238,7 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                         progressBar.getLeftEdge());
 
         // Draw fill
-        int filledWidth = drawWidth * progressBar.getCurrent() / progressBar.getMax();
+        int filledWidth = drawWidth * progressBar.getCurrent() / (progressBar.getMax() - progressBar.getMin());
         int emptyWidth = drawWidth - filledWidth;
         this.drawSprite(drawX, drawY, filledWidth, drawHeight, progressBar.getFilled());
         this.drawSprite(drawX + filledWidth, drawY, emptyWidth, drawHeight, progressBar.getEmpty());

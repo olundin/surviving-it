@@ -26,14 +26,6 @@ public enum Input
      */
     KEY_I(73),
     /**
-     * 'M' key's code
-     */
-    KEY_M(77),
-    /**
-     * 'C' key's code
-     */
-    KEY_C(67),
-    /**
      * 'LEFT' key's code
      */
     KEY_LEFT(37),
@@ -49,25 +41,6 @@ public enum Input
      * 'DOWN' key's code
      */
     KEY_DOWN(40),
-
-    /**
-     * 'SPACE' key's code
-     */
-    KEY_SPACE(32),
-    /**
-     * 'RETURN' key's code
-     */
-    KEY_RETURN(10),
-    /**
-     * 'SHIFT' key's code
-     */
-    KEY_SHIFT(16),
-
-    /**
-     * 'ESC' key's code
-     */
-    ESC(27),
-
     /**
      * 'LEFT' mouse button's code
      */
@@ -75,11 +48,7 @@ public enum Input
     /**
      * 'RIGHT' mouse button's code
      */
-    BUTTON_RIGHT(3),
-    /**
-     * 'SCROLL' mouse button's code
-     */
-    BUTTON_SCROLL(2);
+    BUTTON_RIGHT(3);
 
     /**
      * Identifier of key
