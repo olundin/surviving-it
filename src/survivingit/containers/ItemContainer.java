@@ -45,10 +45,10 @@ public class ItemContainer {
         }
 
         ItemSlot emptySlot = this.getFirstEmptySlot();
-        // Warning ignored since it seemed to be an error.
-        //noinspection ConstantConditions
-        emptySlot.setItem(item);
-        usedSlots++;
+        if(emptySlot != null) {
+            emptySlot.setItem(item);
+            usedSlots++;
+        }
     }
 
     /**

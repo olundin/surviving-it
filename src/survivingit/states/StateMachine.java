@@ -41,8 +41,8 @@ public class StateMachine<O> {
             currentState.exit(owner);
         }
 
+        // IGNORED INSPECTION WARNING
         // Warning has been ignored since it seems to be a bug in IntelliJ IDEA.
-        //noinspection ConstantConditions
         if(newState != null) {
             newState.enter(owner);
         }

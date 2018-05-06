@@ -45,8 +45,8 @@ public final class Maths {
      * @return input value converted to output range
      */
     public static double affineTransformation(double in, double inMin, double inMax, double outMin, double outMax) {
+        // IGNORED INSPECTION WARNING
         // Warning ignored since splitting up expression into smaller parts wouldn't really make the method clearer.
-        //noinspection OverlyComplexArithmeticExpression
         return ((in - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
     }
 

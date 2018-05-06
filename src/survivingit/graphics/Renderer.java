@@ -153,8 +153,6 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
      * @param object VisibleObject to be drawn.
      * @param camera Camera in which the VisibleObject is drawn.
      */
-    // The warnings regarding the chain of instance checks have been ignored since they are only used when debugging.
-    @SuppressWarnings({"ChainOfInstanceofChecks", "InstanceofConcreteClass"})
     @Override
     public void drawObject(VisibleObject object, Camera camera) {
         
@@ -189,6 +187,8 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                           "pos=(" + Math.floor(object.getX()) + "," + Math.floor(object.getY()) + ")",
                           10, Color.black);
 
+            // IGNORED INSPECTION WARNING
+            // The warnings regarding the chain of instance checks have been ignored since they are only used when debugging.
             if (object instanceof Creature) {
                 // Draw creature health
                 this.drawText(drawX, drawY + 10,
@@ -196,6 +196,8 @@ public class Renderer extends Canvas implements WorldRenderer, HudRenderer {
                               10, Color.red);
             }
 
+            // IGNORED INSPECTION WARNING
+            // The warnings regarding the chain of instance checks have been ignored since they are only used when debugging.
             if (object instanceof Animal) {
                 // Draw animal path
                 for (Point p : ((Animal)object).getPath()) {

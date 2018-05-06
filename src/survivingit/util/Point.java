@@ -71,9 +71,9 @@ public class Point {
 
     @Override
     public int hashCode() {
+        // IGNORED INSPECTION WARNING
         // Warning ignored since it is difficult to not instantiate objects in hashcode. This is the automatically
         // generated method (by IntelliJ IDEA).
-        //noinspection AutoBoxing,ObjectInstantiationInEqualsHashCode
         return Objects.hash(x, y);
     }
 

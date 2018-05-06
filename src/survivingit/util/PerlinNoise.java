@@ -10,8 +10,8 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise (Wikipedia)</a>
  */
 
+// IGNORED INSPECTION WARNINGS
 // Inspection warnings suppressed since the class was not written by us. Some warnings have however been fixed.
-@SuppressWarnings("ALL")
 public final class PerlinNoise {
 
     private static final Random RANDOM = new Random();

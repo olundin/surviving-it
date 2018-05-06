@@ -147,9 +147,9 @@ public abstract class GameObject implements Messagable {
     protected List<Creature> creaturesInArea(final double width, final double height) {
         List<Creature> creatures = new ArrayList<>();
         for (GameObject gameObject : gameObjectsInArea(width, height)) {
+            // IGNORED INSPECTION WARNING
             // This inspection warning hasbeen ignored since instanceof + casting
             // seemed to be the best solution to our problem.
-            //noinspection InstanceofConcreteClass
             if (gameObject instanceof Creature) {
                 creatures.add((Creature) gameObject);
             }

@@ -89,9 +89,9 @@ public final class Game implements Observer<GameWindow> {
         final double nanosPerSec = 1_000_000_000.0;
 
         // Game loop
+        // IGNORED INSPECTION WARNING
         // Inspection warning ignored since it is false. The loop does not spin on field since it is changed in
         // Game.stop(). This method is called from the GameWindow class.
-        //noinspection WhileLoopSpinsOnField
         while (running) {
             long currentTime = System.nanoTime();
             double deltaTime = (currentTime - previousTime) / nanosPerSec;

@@ -88,9 +88,9 @@ public class Player extends Creature implements Observable<Player> {
         if (isCarryingWeapon()) {
             List<Effect> attackEffects = playerInventory.getEquippedItemContainer().getEquippedItem().getEffectsOfEffectType(EffectType.ATTACK);
             for (Effect effect : attackEffects) {
+                // IGNORED INSPECTION WARNING
                 // Inspection  warning ignored since this solution is the most effective one for our solution.
                 // The item system is component based and therefore difficult to abstractify.
-                //noinspection InstanceofConcreteClass
                 if (effect instanceof MeleeAttackEffect) {
                     MeleeAttackEffect meleeAttackEffect = (MeleeAttackEffect) effect;
                     meleeAttackEffect.attack(this);
