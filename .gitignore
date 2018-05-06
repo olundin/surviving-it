@@ -9,7 +9,7 @@
 *.log
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.ear
 *.zip
