@@ -35,8 +35,6 @@ public class HealEffect extends UsableEffect {
         if (this.uses > 0 ) {
             user.heal(this.healAmount);
             uses--;
-        } else {
-            System.out.println("Out of uses!");
         }
     }
 

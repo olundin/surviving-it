@@ -203,7 +203,6 @@ public abstract class Creature extends VisibleObject {
      * @param range double value of the range of the attack.
      */
     public void performAttack(final int damage, final double range) {
-        System.out.println(damage);
         sendMessageToCreaturesInArea(new Message(MessageType.DAMAGE, damage), range, range);
     }
 

@@ -25,8 +25,6 @@ public class IgniteEffect extends UsableEffect {
         if (uses > 0) {
             user.igniteFirePlaces(this.fireTime, this.ignitionWidth, this.ignitionHeight);
             uses--;
-        } else {
-            System.out.println("Out of uses!");
         }
     }
 }

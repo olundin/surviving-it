@@ -33,8 +33,6 @@ public class MoveSpeedChangeEffect extends UsableEffect {
         if (uses > 0) {
             user.changeMoveSpeed(speedDelta);
             uses--;
-        } else {
-            System.out.println("out of uses");
         }
     }
 
