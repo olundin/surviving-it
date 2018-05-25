@@ -1,4 +1,4 @@
-# Surviving It with Yuri Doroshenko
+# Surviving It
 
 Surviving it is a game written in pure Java, with a focus on expandability and clean, readable code.
 The game is, or will eventually be, about survival and exploration. As of now it is still under heavy development.
